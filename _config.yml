@@ -52,7 +52,7 @@ url: "https://IlievskiV.github.io/"
 baseurl: ""
 teaser: # path of fallback teaser image, e.g. "/assets/images/500x300.png"
 logo: # path of logo image to display in the masthead, e.g. "/assets/images/88x88.png"
-masthead_title: " Bla Bla " # overrides the website title displayed in the masthead, use " " for no title
+masthead_title: "" # overrides the website title displayed in the masthead, use " " for no title
 words_per_minute: 200
 
 # Searching the website
@@ -65,7 +65,7 @@ google:
   instant_search         : # false (default), true
 
 # SEO Related
-google_site_verification : "WkO5PFtgHgVvrsY_iwISUHFzKmiblYoC4YFKZoJFzF8"
+google_site_verification : WkO5PFtgHgVvrsY_iwISUHFzKmiblYoC4YFKZoJFzF8
 
 # Social Sharing
 twitter:
