@@ -65,6 +65,8 @@ algolia:
   search_only_api_key    : d9a9b2f80545fe78d8817888d4dcbb30 # YOUR_SEARCH_ONLY_API_KEY
   powered_by             : true # true (default), false
 
+exclude: [vendor]
+
 # SEO Related
 google_site_verification : WkO5PFtgHgVvrsY_iwISUHFzKmiblYoC4YFKZoJFzF8
 
