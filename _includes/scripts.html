@@ -12,6 +12,10 @@
   <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
 {% endif %}
 
+{% if site.search == true or page.layout == "search" %}
+  {% include_cached search/algolia-search-scripts.html %}
+{% endif %}
+
 {% include analytics.html %}
 {% include /comments-providers/scripts.html %}
 
