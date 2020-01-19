@@ -42,18 +42,24 @@ minimal_mistakes_skin: "contrast"
 
 # Site Settings
 locale: "en-US"
-title: Vladimir Ilievski AI blog
+title: Iliev.ski
 title_separator: "|"
 subtitle: ""
 name: "Vladimir Ilievski"
 description: >- # this means to ignore newlines until "baseurl:"
-  AI blog
+  Personal website of Vladimir Ilievski, an EPFL graduate working in deep learning for NLP and
+  speech.
+
 url: "https://IlievskiV.github.io/"
 baseurl: ""
 teaser: # path of fallback teaser image, e.g. "/assets/images/500x300.png"
 logo: # path of logo image to display in the masthead, e.g. "/assets/images/88x88.png"
-masthead_title: "" # overrides the website title displayed in the masthead, use " " for no title
+masthead_title: "Iliev.ski" # overrides the website title displayed in the masthead, use " " for no title
 words_per_minute: 200
+comments:
+  provider               : "disqus" # false (default), "disqus", "discourse", "facebook", "staticman_v2", "staticman", "utterances", "custom"
+  disqus:
+    shortname            : "https-ilievskiv-github-io"
 
 # Searching the website
 search                   : true # true, false (default)
@@ -123,6 +129,8 @@ footer:
     - label: "LinkedIn"
       icon: "fab fa-fw fa-linkedin"
       url: "https://www.linkedin.com/in/vilievski/"
+
+include: ["_pages"]
 
 # Reading Files
 include:
@@ -226,6 +234,8 @@ compress_html:
   ignore:
     envs: development
 
+
+
 # Defaults
 defaults:
   # _posts
@@ -236,6 +246,6 @@ defaults:
       layout: single
       author_profile: true
       read_time: true
-      comments: # true
+      comments: true # true
       share: true
       related: true

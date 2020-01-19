@@ -1,7 +1,8 @@
 ---
-layout:     single
+layout: single
 title:      "Google Summer of Code '17"
 subtitle:   "Accepted for GSoC '17 under the mentorship of CERN-HSF"
+excerpt:    "Announcement of acceptance for the Google Summer of Code for CERN-HSF foundation"
 date:       2017-05-06 12:00:00
 header:
     teaser: "assets/images/gsoc17.png"
