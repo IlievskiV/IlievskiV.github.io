@@ -3,6 +3,7 @@ layout:     single
 title:      "Intro to Goal-Oriented (GO) Dialogue Systems"
 subtitle:   "Demystifying GO Chatbots"
 date:       2017-10-15 12:00:00
+classes: wide
 header:
     teaser: "assets/images/chatbot-front.jpg"
     image: "assets/images/chatbot-front.jpg"
@@ -11,7 +12,6 @@ tags: NLP chatbots
 ---
 
 <h2> Before the Intro </h2>
-
 <p>I recently started my final Master Thesis Project in
 <a href="https://www.swisscom.ch/en/business/enterprise/news/digital-lab.html" target="_blank"> Swisscom Digital Lab </a>,
 which is located in the <a href="https://epfl-innovationpark.ch" target="_blank"> EPFL Innovation Park </a> in Lausanne,

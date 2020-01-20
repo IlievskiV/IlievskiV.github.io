@@ -3,6 +3,7 @@ layout:     single
 title:      "Deep Learning Module in TMVA"
 subtitle:   "The development of a Deep Learning Module in TMVA, submodule of CERN's data analysis tool, ROOT"
 date:       2017-08-20 12:00:00
+classes: wide
 header:
     teaser: "assets/images/gsoc17.png"
     image: "assets/images/gsoc17.png"

@@ -3,6 +3,7 @@ layout:     single
 title:      "GSoC Final Submission"
 subtitle:   "Final Submission description for GSoC 2017"
 date:       2017-08-23 12:00:00
+classes: wide
 header:
     teaser: "assets/images/gsoc17.png"
     image: "assets/images/gsoc17.png"

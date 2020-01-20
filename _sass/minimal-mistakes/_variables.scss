@@ -6,14 +6,14 @@
    Typography
    ========================================================================== */
 
-$doc-font-size: 14 !default;
+$doc-font-size: 16 !default;
 
 /* paragraph indention */
 $paragraph-indent: false !default; // true, false (default)
 $indent-var: 1.3em !default;
 
 /* system typefaces */
-$serif: Georgia, Times, serif !default;
+$serif: "Quattrocento", Georgia, Times, serif !default;
 $sans-serif: -apple-system, BlinkMacSystemFont, "Roboto", "Segoe UI",
   "Helvetica Neue", "Lucida Grande", Arial, sans-serif !default;
 $monospace: Monaco, Consolas, "Lucida Console", monospace !default;
@@ -23,15 +23,20 @@ $sans-serif-narrow: $sans-serif !default;
 $helvetica: Helvetica, "Helvetica Neue", Arial, sans-serif !default;
 
 /* serif typefaces */
+$calisto-mt-font-stack: "Calisto MT", "Bookman Old Style", Bookman, "Goudy Old Style", Garamond, "Hoefler Text", "Bitstream Charter", Georgia, serif !default;
+$charter-regular: "Charter ITC Std", serif !default;
 $georgia: Georgia, serif !default;
 $times: Times, serif !default;
 $bodoni: "Bodoni MT", serif !default;
 $calisto: "Calisto MT", serif !default;
 $garamond: Garamond, serif !default;
+$open-sans: "Open Sans", sans-serif !default;
+$raleway: "Raleway", sans-serif !default;
+$montserrat: "Montserrat", sans-serif !default;
 
-$global-font-family: $bodoni !default;
-$header-font-family: $times !default;
-$caption-font-family: $times !default;
+$global-font-family: $montserrat !default;
+$header-font-family: $montserrat !default;
+$caption-font-family: $montserrat !default;
 
 /* type scale */
 $type-size-1: 2.441em !default; // ~39.056px
