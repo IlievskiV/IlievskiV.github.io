@@ -1,14 +1,12 @@
 ---
 layout:     single
 title:      "Intro to Goal-Oriented (GO) Dialogue Systems"
-subtitle:   "Demystifying GO Chatbots"
+excerpt:    "Demystifying GO Chatbots"
 date:       2017-10-15 12:00:00
-classes: wide
+classes:    wide
 header:
     teaser: "assets/images/chatbot-front.jpg"
     image: "assets/images/chatbot-front.jpg"
-categories: blog AI
-tags: NLP chatbots
 ---
 
 <h2> Before the Intro </h2>
@@ -32,7 +30,8 @@ An example of such systems are the popular <a href="https://www.apple.com/ios/si
 
 <center>
 <img src="{{ site.baseurl }}/assets/images/what-are-chatbots.jpg" alt="">
-<span class="caption text-muted">The user is trying to get a help from the chatbot</span>
+<br/>
+<span class="caption text-muted"><i>The user is trying to get a help from the chatbot</i></span>
 </center>
 
 <p>There are two different types of chatbots, depending on the conversation's nature. Therefore, there are
@@ -75,13 +74,13 @@ such that, it can produce more meaningful answers. This composition is shown in 
 
 <center>
 <img src="{{ site.baseurl }}/assets/images/Dialogue_System.png" alt="">
-<span class="caption text-muted">Dialogue System modeled as a Partially Observable Markov Decision Process.</span>
+<span class="caption text-muted"><i>Dialogue System modeled as a Partially Observable Markov Decision Process.</i></span>
 </center>
 
 The user utterance is parsed by the NLU unit producing a dialogue act understandable for the system.
 In the Dialogue Manager, the state tracker is estimating the state such that the RL agent could take the
 ideal action. This action is further passed to the NLG unit and finally presented to the user in a human
-readable form.</span>
+readable form.
 
 
 <h3> Natural Language Understanding Unit </h3>

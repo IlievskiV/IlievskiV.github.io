@@ -3,6 +3,6 @@ main:
   - title: "whoami"
     url: /whoami/
   - title: "Blog"
-    url: /blog/
+    url: /portfolio/
   - title: "Contact me"
     url: /contactme/

@@ -1,15 +1,13 @@
 ---
 layout:     single
 title:      "GSoC Final Submission"
-subtitle:   "Final Submission description for GSoC 2017"
+excerpt:    "GSoC '17 has ended. Time for the last submission."
 date:       2017-08-23 12:00:00
 classes: wide
 header:
     teaser: "assets/images/gsoc17.png"
     image: "assets/images/gsoc17.png"
     image_description: "Google Summer of Code 2017 logo"
-categories: blog technology
-tags: gsoc open-source
 ---
 
 <h2> Intro </h2>
@@ -19,8 +17,8 @@ More about this project can be find
 <a href="https://hepsoftwarefoundation.org/gsoc/2017/proposal_TMVAconvolutional.html" target="_blank">here</a>. </p>
 
 <h2>Current state of the work</h2>
-<p>Until now, I have written one <a href="{{ site.baseurl }}{% link _posts/2017-05-05-gsoc-start.markdown %}" target="_blank">introductory blog post</a>
-for the Convolutional Neural Networks, and one <a href="{{ site.baseurl }}{% link _posts/2017-08-20-deep-learning-module-tmva.markdown %}" target="_blank">blog post</a>
+<p>Until now, I have written one <a href="{{ site.baseurl }}{% link _portfolio/2017-05-05-gsoc-start.markdown %}" target="_blank">introductory blog post</a>
+for the Convolutional Neural Networks, and one <a href="{{ site.baseurl }}{% link _portfolio/2017-08-20-deep-learning-module-tmva.markdown %}" target="_blank">blog post</a>
 describing the entire Deep Learning project.</p>
 
 <p>The current state of the work includes an entire Deep Learning Framework that can be easily extended with new types

@@ -1,16 +1,13 @@
 ---
-layout: single
+layout:     single
 title:      "Google Summer of Code '17"
-subtitle:   "Accepted for GSoC '17 under the mentorship of CERN-HSF"
-excerpt:    "Announcement of acceptance for the Google Summer of Code for CERN-HSF foundation"
+excerpt:    "Accepted for the Google Summer of Code '17 for CERN-HSF"
 date:       2017-05-06 12:00:00
-classes: wide
+classes:    wide
 header:
     teaser: "assets/images/gsoc17.png"
     image: "assets/images/gsoc17.png"
     image_description: "Google Summer of Code 2017 logo"
-categories: blog technology
-tags: gsoc open-source
 ---
 
 <h2> Intro </h2>
@@ -47,10 +44,11 @@ consisted of the following layers: Convolutional layer (CONV), Pooling layer (PO
 If used for classification, the outputs of the network are the class assignment probabilities of the input.
 One example of a CNN is given in the figure below.</p>
 
-
+<center>
 <img src="{{ site.baseurl }}/assets/images/conv-net-bird.png" alt="">
-<span class="caption text-muted">An example of a CNN which should learn that there is a bird on the picture</span>
-
+<br/>
+<span class="caption text-muted"><i>An example of a CNN which should learn that there is a bird on the picture</i></span>
+</center>
 
 
 <p>The CONV layer can be seen as a cube of neurons, where the cube is having a predefined number of identical rectangular

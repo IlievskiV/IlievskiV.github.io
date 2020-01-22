@@ -1,12 +1,10 @@
 ---
 layout:     single
 title:      "Dialogue State Tracking "
-subtitle:   "Demystifying GO Chatbots"
+excerpt:    "Demystifying GO Chatbots"
 date:       2017-10-15 12:00:00
-classes: wide
+classes:    wide
 header:
     teaser: "assets/images/chatbot-front.jpg"
     image: "assets/images/chatbot-front.jpg"
-categories: blog AI
-tags: NLP chatbots
 ---

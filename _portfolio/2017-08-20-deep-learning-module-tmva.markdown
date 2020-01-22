@@ -1,15 +1,13 @@
 ---
 layout:     single
 title:      "Deep Learning Module in TMVA"
-subtitle:   "The development of a Deep Learning Module in TMVA, submodule of CERN's data analysis tool, ROOT"
+excerpt:    "The development of a Deep Learning Module in TMVA"
 date:       2017-08-20 12:00:00
 classes: wide
 header:
     teaser: "assets/images/gsoc17.png"
     image: "assets/images/gsoc17.png"
     image_description: "Google Summer of Code 2017 logo"
-categories: blog technology
-tags: gsoc open-source
 ---
 
 <h2> Intro </h2>
@@ -42,8 +40,8 @@ complex and sophisticated solutions on top of it. The blog, describing his proje
 so let me give you a more detailed view. </p>
 
 <center>
-<img src="{{ site.baseurl }}/assets/images/TMVA_DL_General.png" alt="">
-<span class="caption text-muted">An overview of the Deep Learning Module in TMVA</span>
+<img src="{{ site.baseurl }}/assets/images/TMVA_DL_General.png" alt=""><br/>
+<span class="caption text-muted"><i>An overview of the Deep Learning Module in TMVA</i></span>
 </center>
 
 <h3> Layers </h3>
@@ -69,7 +67,7 @@ to be generic. We can see the main methods and attributes of this class in the i
 <center>
 <img src="{{ site.baseurl }}/assets/images/General_Layer.png" alt="">
 <br/>
-<span class="caption text-muted">General Layer class</span>
+<span class="caption text-muted"><i>General Layer class</i></span>
 </center>
 
 <p>Thus, the generic <i>Deep Net</i> class contains a vector of pointers to <i>General Layer</i>

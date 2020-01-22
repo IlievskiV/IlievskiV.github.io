@@ -27,7 +27,6 @@ plugins:
   - jekyll-feed
   - jekyll-remote-theme
   - jekyll-include-cache
-  - jekyll-archives
 
 # mimic GitHub Pages with --safe
 whitelist:
@@ -37,7 +36,6 @@ whitelist:
   - jekyll-feed
   - jekyll-remote-theme
   - jekyll-include-cache
-  - jekyll-archives
 
 github: [metadata]
 minimal_mistakes_skin: "contrast"
@@ -212,22 +210,22 @@ timezone: Europe/Zurich
 #  - <base_path>/categories/my-awesome-category/index.html ~> path: /categories/
 #  - <base_path>/my-awesome-category/index.html ~> path: /
 category_archive:
-  type: jekyll-archives
+  type: liquid
   path: /categories/
 tag_archive:
-  type: jekyll-archives
+  type: liquid
   path: /tags/
 # https://github.com/jekyll/jekyll-archives
-jekyll-archives:
-  enabled:
-    - categories
-    - tags
-  layouts:
-    category: archive-taxonomy
-    tag: archive-taxonomy
-  permalinks:
-    category: /categories/:name/
-    tag: /tags/:name/
+#jekyll-archives:
+#  enabled:
+#    - categories
+#    - tags
+#  layouts:
+#    category: archive-taxonomy
+#    tag: archive-taxonomy
+#  permalinks:
+#    category: /categories/:name/
+#    tag: /tags/:name/
 
 # HTML Compression
 # - https://jch.penibelst.de/
@@ -236,6 +234,10 @@ compress_html:
   ignore:
     envs: development
 
+collections:
+  portfolio:
+    output: true
+    permalink: /:collection/:path/
 
 
 # Defaults
@@ -250,4 +252,15 @@ defaults:
       read_time: true
       comments: true # true
       share: true
+      related: true
+  # _portfolio
+  - scope:
+      path: ""
+      type: portfolio
+    values:
+      layout: single
+      author_profile: true
+      read_time: true
+      share: true
+      comments: true
       related: true
