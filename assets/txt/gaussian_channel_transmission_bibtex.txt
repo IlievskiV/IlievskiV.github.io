@@ -1,0 +1,10 @@
+@article{bakeva2019gaussian,
+  title={Gaussian channel transmission of images and audio files using cryptcoding},
+  author={Bakeva, Verica and Popovska-Mitrovikj, Aleksandra and Mechkaroska, Daniela and Dimitrova, Vesna and Jakimovski, Boro and Ilievski, Vladimir},
+  journal={Iet Communications},
+  volume={13},
+  number={11},
+  pages={1625--1632},
+  year={2019},
+  publisher={IET}
+}

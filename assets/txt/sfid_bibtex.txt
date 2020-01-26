@@ -1,0 +1,12 @@
+@inproceedings{ijcai2018-559,
+  title     = {Submodularity-Inspired Data Selection for Goal-Oriented Chatbot Training Based on Sentence Embeddings },
+  author    = {Mladen Dimovski and Claudiu Musat and Vladimir Ilievski and Andreea Hossman and Michael Baeriswyl},
+  booktitle = {Proceedings of the Twenty-Seventh International Joint Conference on
+               Artificial Intelligence, {IJCAI-18}},
+  publisher = {International Joint Conferences on Artificial Intelligence Organization},             
+  pages     = {4019--4025},
+  year      = {2018},
+  month     = {7},
+  doi       = {10.24963/ijcai.2018/559},
+  url       = {https://doi.org/10.24963/ijcai.2018/559},
+}

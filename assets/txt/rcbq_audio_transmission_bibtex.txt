@@ -1,0 +1,8 @@
+@inproceedings{popovska2015performances,
+  title={Performances of random codes based on Quasigroups for transmission of audio files},
+  author={Popovska-Mitrovikj, Aleksandra and Ilievski, Vladimir and Bakeva, Verica},
+  booktitle={2015 23rd Telecommunications Forum Telfor (TELFOR)},
+  pages={305--308},
+  year={2015},
+  organization={IEEE}
+}
