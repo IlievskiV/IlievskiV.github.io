@@ -1,0 +1,366 @@
+---
+layout:     single
+title:      "The importance of interactive data visualization"
+excerpt:    "Hands-on experience with D3.js to create a Parallel Coordinates plot"
+date:       2020-02-08 09:00:00
+classes:    wide
+header:
+    teaser: "assets/images/interactive_visualization_teaser.jpg"
+    image: "assets/images/interactive_visualization_teaser.jpg"
+    caption: "Photo credit: [**Observable**](https://observablehq.com/@d3/radial-stacked-bar-chart)"
+---
+<script src="https://d3js.org/d3.v4.js"></script>
+<script src="https://bl.ocks.org/syntagmatic/raw/3341641/render-queue.js"></script>
+<link rel="stylesheet" href="{{ site.baseurl }}/assets/css/custom/parallel_coordinates_laptops.css"></link>
+
+<p>In this blog post, we will see how to make interactive visualizations using the popular <i>JavaScript</i> library
+    <a href="https://d3js.org/" target="_blank">D3.</a> We will go through the different visualization techniques,
+    before coding an interactive plot called <i>Parallel Coordinates</i>. The <strong>goal</strong> is to demonstrate
+    the effectiveness of the interactive visualization to convey the message hidden in the data, especially for high
+    dimensional data.
+</p>
+
+<h2>Why interactive visualization is important</h2>
+<p>
+    We perceive most of the information visually. We have the capability to instantly recognize and localize objects.
+    We group them in the same category regardless of their shape, size, color, distance, cluttered or not. Most of the
+    time, in order to understand some concepts it is always easier to make a sketch. This is due to the immense
+    sophistication of the human <a href="https://en.wikipedia.org/wiki/Visual_cortex" target="_blank">visual cortex.</a>
+    That means it is in our nature to comfortably consume and understand visuals.
+</p>
+<p>
+    The same principles hold when we interpret tabular and highly-structured data. We draw <i>2D</i> or <i>3D plots</i>,
+    <i>histograms</i>, <i>scatter plots</i>, <i>heat maps</i>, etc. We do this because it is not straightforward to
+    understand the tabular representation of the data. On top of this, to make the experience more immersive,
+    we make the plots interactive. However, we are <i>cursed</i> to perceive the information up to 3 dimensions.
+    Representing data with more than 3 dimensions is a challenging task and we need different strategies.
+</p>
+
+<p>
+    For this reason, in this blog post, I will show techniques on how to escape the three dimensions married with
+    interactivity for even better perception, by using <a href="https://d3js.org/" target="_blank">D3</a>.
+    Stay tuned!
+</p>
+
+<h2>The visualization zoo</h2>
+
+<p>
+    We can better understand the world and transfer a clear message by plotting the data we have because a plot
+    is the most convenient and intuitive means to do that. In addition, we can easily upgrade the plots and make them
+    interactive. In this way, the human-computer interaction is more immersive and the results are more interpretable.
+    For instance, just take a look at the amazing interactive plots from
+    <a href="https://ourworldindata.org/" target="_blank">Our World in Data</a>. With a simple and yet non-biased and
+    profound analysis and interactive visualization of many open-access data sets, we can clearly comprehend a plethora
+    of the world's phenomena.
+</p>
+
+<p>
+    Depending on the aspects and the findings to express, we use different types of plots. The most commonly used
+    plots are nicely summarized in the paper
+    <a href="https://dl.acm.org/doi/pdf/10.1145/1743546.1743567" target="_blank">A Tour Through the Visualization Zoo.</a>
+    Generally, they are divided into five categories: <i>Time-Series</i>, <i>Statistical Distributions</i>,
+    <i>Maps</i>, <i>Hierarchies</i>, and <i>Networks</i>. To find out the most recent developments and application
+    of these visualization techniques, follow the work of the
+    <a href="http://idl.cs.washington.edu/" target="_blank">Interactive Data Lab</a> at the
+    <a href="https://www.washington.edu/" target="_blank">University of Washington</a>.
+</p>
+
+<center>
+    <img src="{{ site.url }}{{ site.baseurl }}/assets/images/visualization_zoo.png" alt="Visualization Zoo">
+    <span class="caption text-muted"><i>Figure 1. Credits: <a href="https://d3js.org/" target="_blank">D3</a>.
+        Find the full gallery <a href="https://github.com/d3/d3/wiki/Gallery" target="_blank">here</a>.</i>
+    </span>
+</center>
+
+<p>
+    There are plenty of tools to generate interactive visualizations. They range from very low-level, customizable
+    and hard to automate tools to high-level automatic tools. In the open-source domain, we have the well established
+    low-level <i>JavaScript</i> library <a href="https://d3js.org/" target="_blank">D3.</a> The main advantage of <i>D3</i>
+    is that we can create very specific and custom plots. Furthermore, we have more high-level visualization tools,
+    <a href="https://vega.github.io/vega/" target="_blank">Vega</a> and
+    <a href="https://vega.github.io/vega-lite/" target="_blank">Vega-Lite</a>, both open-source. <i>Vega</i> is built
+    on top of <i>D3</i> and its aim is to provide a better and faster way to create high-quality graphics only by using
+    JSON syntax. <i>Vega-Lite</i> is even more lightweight and enables quick production of the common statistical plots.
+    On top of this ecosystem, is <a href="https://github.com/vega/voyager" target="_blank">Voyager</a>, a tool
+    that automates the generation of interactive charts. <i>Voyager</i> is inspired by
+    <a href="https://www.tableau.com/" target="_blank">Tableau</a>, a commercialized and industry adopted tool.
+    This list is not exhaustive of course, there are numerous other tools and libraries, which I include in the Appendix.
+</p>
+
+<h2>Plotting high-dimensional data</h2>
+
+<p>
+    Plotting and understanding <i>2D</i> and <i>3D</i> data are simple since we live in a three-dimensional world. For
+    this purpose, we use <i>histograms</i> to plot distributions and <i>line charts</i> to draw relations. Reaching more
+    than 3D is difficult. For this reason we might use different shapes, sizes, colors, and text if some of the data is
+    discrete and finite. For instance, we can use a
+    <a href="https://en.wikipedia.org/wiki/Bubble_chart" target="_blank">Bubble Chart</a>, like the one depicted in the
+    figure below.
+</p>
+
+<center>
+    <img src="{{ site.url }}{{ site.baseurl }}/assets/images/co-emissions-per-capita-vs-gdp-per-capita-international-.png" alt="CO2 emissions per capita vs GDP per capita">
+    <span class="caption text-muted"><i>Figure 2. Credits: Our World in Data. Find the interactive visualization
+        <a href="https://ourworldindata.org/grapher/co-emissions-per-capita-vs-gdp-per-capita-international-" target="_blank">here</a></i>
+    </span>
+</center>
+
+<p>
+    In fact, we have a five-dimensional data consisting of two continuous dimensions (GDP and CO2 emissions per capita)
+    and three categorical dimensions (country, population, and geo-location). With a simple trick, we represent each
+    country with a circle labeled with the country name, the total population with the size of the diameter, and the
+    geo-location with a color schema.
+</p>
+
+<p>
+    So far so good! However, this type of plotting has its limitations. We can't represent a considerably high number of
+    dimensions by using these tricks, especially if they are all continuous. For this reason, we have to use some other
+    means to communicate the data. As mentioned in the paper <i>A Tour Through the Visualization Zoo</i>, we can use
+    a plot called <i>Parallel Coordinates.</i>
+</p>
+
+<p>
+    The <a href="https://en.wikipedia.org/wiki/Parallel_coordinates" target="_blank">Parallel Coordinates</a> plot
+    enables us to explore and find patterns in high-dimensional data. Each dimension is represented as a vertical
+    line parallel to the others where the range of values is distributed. Thus, one point in the high-dimensional
+    space is represented as a poly-line connecting the corresponding values on the parallel axes. Additionally, we
+    can select a subset of values in one or multiple axes to filter out the entries. An example is shown
+    in the figure below, which is a visualization of car characteristics.
+</p>
+
+
+<center>
+    <img src="{{ site.url }}{{ site.baseurl }}/assets/images/parallel_coordinates_example.png" alt="Parallel Coordinates Example plot">
+    <span class="caption text-muted"><i>Figure 3. Credits: <a href="https://bl.ocks.org/" target="_blank">Blocks</a>.
+        Find the interactive visualization <a href="https://bl.ocks.org/jasondavies/raw/1341281/" target="_blank">here</a>.</i>
+    </span>
+</center>
+
+<h2>Hands-on Parallel Coordinates with D3</h2>
+
+<p>
+    The main goal of this post is to demonstrate the effectiveness of the interactive visualization, in particular the
+    <i>Parallel Coordinates</i> plot. For this reason, we will show how to give a visual interpretation of a given
+    problem.
+</p>
+
+<h3>Problem Statement</h3>
+
+<p>
+    Suppose we want to buy a laptop with certain characteristics that well suits our needs. Usually, we do not have a
+    clue about all the possible options. To read the specifications and compare the different offers, we might get a huge
+    table that resembles like the table below:
+</p>
+
+<center>
+    <table style="width: 100%; table-layout: fixed; overflow: hidden;">
+        <thead>
+            <tr>
+                <th>Company</th>
+                <th>Model Name</th>
+                <th>Operating System</th>
+                <th>Screen Size</th>
+                <th>Screen Resolution</th>
+                <th>RAM Memory</th>
+                <th>SSD Memory</th>
+                <th>HDD Memory</th>
+                <th>CPU Model</th>
+                <th>CPU Clock Rate</th>
+                <th>GPU Model</th>
+                <th>Weight</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Apple</td>
+                <td>MacBook Pro</td>
+                <td>Mac OS</td>
+                <td>13.3 in.</td>
+                <td>2560x1600</td>
+                <td>8 GB</td>
+                <td>128 GB</td>
+                <td>0 GB</td>
+                <td>Intel Core i5</td>
+                <td>2.3 GHz</td>
+                <td>Intel Iris</td>
+                <td>1.37 kg</td>
+                <td>1339 Eur.</td>
+            </tr>
+            <tr>
+                <td>Dell</td>
+                <td>Inspiron 3567</td>
+                <td>Windows 10</td>
+                <td>15.6 in.</td>
+                <td>1920x1080</td>
+                <td>8 GB</td>
+                <td>256 GB</td>
+                <td>0 GB</td>
+                <td>Intel Core i7</td>
+                <td>2.7 GHz</td>
+                <td>AMD Radeon</td>
+                <td>2.2 kg</td>
+                <td>745 Eur.</td>
+            </tr>
+            <tr>
+                <td>Acer</td>
+                <td>Aspire 7</td>
+                <td>Linux</td>
+                <td>15.6 in.</td>
+                <td>1920x1080</td>
+                <td>8 GB</td>
+                <td>0 GB</td>
+                <td>1024 GB</td>
+                <td>Intel Core i7</td>
+                <td>2.8 GHz</td>
+                <td>Nvidia GeForce</td>
+                <td>2.4 kg</td>
+                <td>779 Eur.</td>
+            </tr>
+            <tr>
+                <td>MSI</td>
+                <td>GE63VR 7RF</td>
+                <td>Windows 10</td>
+                <td>15.6 in.</td>
+                <td>1920x1080</td>
+                <td>16 GB</td>
+                <td>256 GB</td>
+                <td>1024 GB</td>
+                <td>Intel Core i7</td>
+                <td>2.8 GHz</td>
+                <td>Nvidia GeForce</td>
+                <td>2.8 kg</td>
+                <td>2099 Eur.</td>
+            </tr>
+            <tr>
+                <td>Lenovo</td>
+                <td>ThinkPad P70</td>
+                <td>Windows 7</td>
+                <td>17.3 in.</td>
+                <td>3840x2160</td>
+                <td>16 GB</td>
+                <td>512 GB</td>
+                <td>0 GB</td>
+                <td>Intel Core i7</td>
+                <td>2.7 GHz</td>
+                <td>Nvidia Quadro</td>
+                <td>2.4 kg</td>
+                <td>2968 Eur.</td>
+            </tr>
+        </tbody>
+    </table>
+    <span class="caption text-muted"><i>Table 1: Tabular representation of the Laptop Prices data set.</i></span>
+</center>
+
+
+Although it is nicely formatted and summarizes the laptops neatly, we might easily get lost once we scale to a few hundred
+rows. There are 12 different axes to compare at the same time which poses a major problem to keep track of. Instead, we
+can visualize all entries in the table using the <i>Parallel Coordinates</i> plot and query them interactively.
+
+<h3>Demo</h3>
+
+<p>
+    For the purpose of the demo, we use the <i>Laptop Prices</i> data set from <i>Kaggle</i> which you can find it
+    <a href="https://www.kaggle.com/ionaskel/laptop-prices" target="_blank">here.</a> It contains 1300 entries with the
+    following 13 columns: <i>Company</i>, <i>Product</i>, <i>Type</i>, <i>Inches</i>, <i>Screen Resolution</i>,
+    <i>CPU</i>, <i>RAM</i>, <i>Memory</i>, <i>GPU</i>, <i>Operating System</i>, <i>Weight</i>, <i>Price</i>.
+
+</p>
+
+<p>
+    First, we pre-process the data set in order to clean it and adjust it for plotting, using
+    <a href="https://github.com/IlievskiV/Amusive-Blogging-N-Coding/blob/master/Interactive%20Dataviz/preprocess_laptop_dataset.ipynb" target="_blank">this</a>
+    <i>Jupyter Notebook</i>. We split the column <i>Memory</i> into two columns <i>SSD Memory</i> and <i>HDD Memory</i>
+    and express the quantities only in <i>Gigabytes</i>. Similarly, we split the column <i>CPU</i> into two other columns,
+    <i>CPU Model Name</i> and <i>CPU Clock Rate</i>. The former contains the model of the CPU, while the latter its
+    clock rate expressed in <i>GHz</i>. For the <i>GPU</i> column, we only take the part containing the model name.
+    Furthermore, the values in the column named <i>Ram</i> contain the suffix <i>GB</i>, which is redundant, thus we
+    remove it. Finally, for the <i>Screen Resolution</i> column, we only take the part containing the screen resolution
+    in pixels, discarding the rest of the description. In the end, the data set format is like the one shown in Table 1.
+</p>
+
+<p>
+    Using the transformed data set we create the <i>Parallel Coordinates</i> plot. For convenience reasons, we only use
+    10 columns, assigning each one a vertical axis in the plot. Every axis has a description on top of it and a range
+    of values depending on the type of data it holds: 1. <i>numeric</i> or 2. <i>string</i>. In the case of numeric data,
+    the range is from the minimum to the maximum, separated with equidistant ticks ascending from bottom to top.
+    In the case of strings, the range is from the first to the last alphabetically sorted string, each represented with
+    one tick. Thus, one laptop is fully specified with one poly-line stretching from the most left to the most right
+    axis. The poly-lines are colored according to the <i>Company</i> value in order to distinguish them easily.
+</p>
+
+<p>
+    The plot is interactive, such that, on each axis, we can select a subset of values in which we are interested,
+    by dragging the mouse pointer over it. In addition, we can slide this range over the axis. Automatically, not
+    selected values are filtered out. To augment the search, the table below the plot dynamically updates with the
+    5 cheapest laptops in the current selection. To restart the selection, click out of the selected range.
+</p>
+
+<p>
+    Now, the laptop search is much easier and intuitive. We can set different constraints for every column and
+    notice the changes and compare the fewer options. <strong>Try it out yourself below!</strong>
+</p>
+
+<script src="{{ site.baseurl }}/assets/js/custom/parallel_coordinates_laptops.js" type="text/javascript"></script>
+
+<p>
+    The main advantage of this plot is that we can intuitively understand and plot multi-dimensional data. However,
+    if the number of dimensions is very big, we can't plot all of them, since the plot will be too condensed and
+    confusing. Moreover, it is not well suited for categorical data. The number of categories must be sufficiently
+    small in order to place them all on one of the axes.
+</p>
+
+<p>
+    The full code to run this interactive visualization can be found
+    <a href="https://github.com/IlievskiV/Amusive-Blogging-N-Coding/tree/master/Interactive%20Dataviz" target="_blank">here.</a>
+</p>
+
+<h2>Conclusion</h2>
+<p>
+    In this blog post, we understand the importance of interactive visualization to understand our data better
+    and make our searches faster. There are many different types of plots depending on the data nature and the
+    task to perform. One of them is the <i>Parallel Coordinates</i> plot that enables us to scale easily to more
+    than 3 dimensions. Out of the many existing tools for plotting, we use <i>D3</i> for a hands-on experience
+    to create a <i>Parallel Coordinates</i> interactive plot augmented with a dynamic table in the laptop searching domain.
+    This plot has many potential uses and next time we will see how to apply in the domain of <strong>Machine Learning</strong>.
+</p>
+
+<h2>Appendix</h2>
+
+
+<h3>JavaScript libraries</h3>
+
+<p>The following list includes popular open-source <i>JavaScript</i> libraries and tools for visualization</p>
+
+<ul>
+    <li><a href="https://www.chartjs.org/" target="_blank">Chart JS:</a> it offers 8 fully responsive charts for mobile and web developers</li>
+    <li><a href="http://crossfilter.github.io/crossfilter/" target="_blank">Crossfilter:</a> a library optimized for loading and exploring huge data sets, with millions of entries</li>
+    <li><a href="https://github.com/dc-js/dc.js" target="_blank">DC.js:</a> used to create multiple charts on the same data set that update dynamically together</li>
+    <li><a href="https://plot.ly/javascript/" target="_blank">Plotly.js:</a> built on top of <i>D3</i>, it offers more than 40 charts</li>
+    <li><a href="https://ialab.it.monash.edu/webcola/" target="_blank">Cola.js:</a> for plotting graph-based data</li>
+    <li><a href="https://leafletjs.com/" target="_blank">Leaflet:</a> for plotting mobile-friendly interactive maps </li>
+    <li><a href="https://metricsgraphicsjs.org/" target="_blank">MetricsGraphics.js:</a> optimized for plotting time-series data</li>
+</ul>
+
+<h3>Python Libraries</h3>
+
+<p>The following list includes popular open-source <i>Python</i> libraries and tools for visualization</p>
+
+<ul>
+    <li><a href="https://matplotlib.org/" target="_blank">Matplotlib:</a> mainly and mostly used for scientific plotting</li>
+    <li><a href="https://seaborn.pydata.org/" target="_blank">Seaborn:</a> based on Matplotlib for drawing more appealing chars</li>
+    <li><a href="https://docs.bokeh.org/en/latest/" target="_blank">Bokeh:</a> interactive visualizations mainly used for web applications</li>
+    <li><a href="https://altair-viz.github.io/" target="_blank">Altair:</a> a Python variant of the Vega-Lite visualization grammar</li>
+    <li><a href="https://plot.ly/python/" target="_blank">Plotly:</a> the Python wrapper of Plotly.js</li>
+</ul>
+
+<h3>Learning Resources</h3>
+
+<p>The following list contains an awesome set of resources to learn to plot with <i>D3</i> </p>
+
+<ul>
+    <li><a href="https://github.com/d3/d3/wiki/Gallery" target="_blank">D3 Gallery</a></li>
+    <li><a href="https://bl.ocks.org/" target="_blank">Blocks</a></li>
+    <li><a href="https://observablehq.com/explore" target="_blank">Observable</a></li>
+    <li><a href="https://www.d3-graph-gallery.com/" target="_blank">D3 Graph Gallery</a></li>
+</ul>

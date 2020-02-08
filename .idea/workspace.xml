@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="42f99e3b-b831-48f1-963b-fc13c41f2966" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_pages/whoami.html" afterPath="$PROJECT_DIR$/_pages/whoami.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_layouts/single.html" afterPath="$PROJECT_DIR$/_layouts/single.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -14,257 +15,81 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="_config.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/_config.yml">
+      <file leaf-file-name="parallel_coordinates_laptops.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/assets/js/custom/parallel_coordinates_laptops.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="206">
-              <caret line="106" column="72" lean-forward="false" selection-start-line="106" selection-start-column="72" selection-end-line="106" selection-end-column="72" />
+            <state relative-caret-position="-1952">
+              <caret line="305" column="19" lean-forward="false" selection-start-line="305" selection-start-column="14" selection-end-line="305" selection-end-column="19" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="whoami.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/_pages/whoami.html">
+      <file leaf-file-name="2020-02-08-interactive-dataviz.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/_portfolio/2020-02-08-interactive-dataviz.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="229">
-              <caret line="254" column="119" lean-forward="false" selection-start-line="254" selection-start-column="119" selection-end-line="254" selection-end-column="119" />
+            <state relative-caret-position="68">
+              <caret line="4" column="22" lean-forward="false" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
               <folding>
-                <element signature="n#style#0;n#h2#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#table#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#1;n#tr#0;n#table#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#ul#0;n#td#1;n#tr#0;n#table#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#0;n#ul#0;n#td#1;n#tr#0;n#table#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#img#0;n#li#0;n#ul#0;n#td#1;n#tr#0;n#table#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#1;n#ul#0;n#td#1;n#tr#0;n#table#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#img#0;n#li#1;n#ul#0;n#td#1;n#tr#0;n#table#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#2;n#ul#0;n#td#1;n#tr#0;n#table#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#img#0;n#li#2;n#ul#0;n#td#1;n#tr#0;n#table#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#3;n#ul#0;n#td#1;n#tr#0;n#table#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#img#0;n#li#3;n#ul#0;n#td#1;n#tr#0;n#table#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#0;n#tr#1;n#table#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#ul#0;n#td#0;n#tr#1;n#table#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#0;n#ul#0;n#td#0;n#tr#1;n#table#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#1;n#ul#0;n#td#0;n#tr#1;n#table#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#2;n#ul#0;n#td#0;n#tr#1;n#table#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#3;n#ul#0;n#td#0;n#tr#1;n#table#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#4;n#ul#0;n#td#0;n#tr#1;n#table#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#table#1;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#0;n#tr#0;n#table#1;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#1;n#tr#0;n#table#1;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#ul#0;n#td#1;n#tr#0;n#table#1;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#0;n#ul#0;n#td#1;n#tr#0;n#table#1;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#img#0;n#li#0;n#ul#0;n#td#1;n#tr#0;n#table#1;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#1;n#ul#0;n#td#1;n#tr#0;n#table#1;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#img#0;n#li#1;n#ul#0;n#td#1;n#tr#0;n#table#1;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#2;n#ul#0;n#td#1;n#tr#0;n#table#1;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#img#0;n#li#2;n#ul#0;n#td#1;n#tr#0;n#table#1;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#3;n#ul#0;n#td#1;n#tr#0;n#table#1;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#img#0;n#li#3;n#ul#0;n#td#1;n#tr#0;n#table#1;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#0;n#tr#1;n#table#1;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#ul#0;n#td#0;n#tr#1;n#table#1;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#0;n#ul#0;n#td#0;n#tr#1;n#table#1;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#1;n#ul#0;n#td#0;n#tr#1;n#table#1;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#2;n#ul#0;n#td#0;n#tr#1;n#table#1;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#3;n#ul#0;n#td#0;n#tr#1;n#table#1;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#0;n#tr#2;n#table#1;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#1;n#tr#2;n#table#1;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#ul#0;n#td#1;n#tr#2;n#table#1;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#0;n#ul#0;n#td#1;n#tr#2;n#table#1;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#img#0;n#li#0;n#ul#0;n#td#1;n#tr#2;n#table#1;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#1;n#ul#0;n#td#1;n#tr#2;n#table#1;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#img#0;n#li#1;n#ul#0;n#td#1;n#tr#2;n#table#1;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#2;n#ul#0;n#td#1;n#tr#2;n#table#1;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#img#0;n#li#2;n#ul#0;n#td#1;n#tr#2;n#table#1;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#3;n#ul#0;n#td#1;n#tr#2;n#table#1;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#img#0;n#li#3;n#ul#0;n#td#1;n#tr#2;n#table#1;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#0;n#tr#3;n#table#1;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#ul#0;n#td#0;n#tr#3;n#table#1;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#0;n#ul#0;n#td#0;n#tr#3;n#table#1;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#0;n#ul#0;n#ul#0;n#td#0;n#tr#3;n#table#1;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#1;n#ul#0;n#td#0;n#tr#3;n#table#1;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#2;n#ul#0;n#td#0;n#tr#3;n#table#1;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#3;n#ul#0;n#td#0;n#tr#3;n#table#1;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#h2#2;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#table#2;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#0;n#tr#0;n#table#2;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#1;n#tr#0;n#table#2;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#ul#0;n#td#1;n#tr#0;n#table#2;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#0;n#ul#0;n#td#1;n#tr#0;n#table#2;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#img#0;n#li#0;n#ul#0;n#td#1;n#tr#0;n#table#2;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#1;n#ul#0;n#td#1;n#tr#0;n#table#2;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#img#0;n#li#1;n#ul#0;n#td#1;n#tr#0;n#table#2;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#2;n#ul#0;n#td#1;n#tr#0;n#table#2;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#img#0;n#li#2;n#ul#0;n#td#1;n#tr#0;n#table#2;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#3;n#ul#0;n#td#1;n#tr#0;n#table#2;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#img#0;n#li#3;n#ul#0;n#td#1;n#tr#0;n#table#2;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#0;n#tr#1;n#table#2;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#ul#0;n#td#0;n#tr#1;n#table#2;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#0;n#ul#0;n#td#0;n#tr#1;n#table#2;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#1;n#ul#0;n#td#0;n#tr#1;n#table#2;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#2;n#ul#0;n#td#0;n#tr#1;n#table#2;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#3;n#ul#0;n#td#0;n#tr#1;n#table#2;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#0;n#tr#2;n#table#2;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#1;n#tr#2;n#table#2;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#ul#0;n#td#1;n#tr#2;n#table#2;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#0;n#ul#0;n#td#1;n#tr#2;n#table#2;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#img#0;n#li#0;n#ul#0;n#td#1;n#tr#2;n#table#2;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#1;n#ul#0;n#td#1;n#tr#2;n#table#2;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#img#0;n#li#1;n#ul#0;n#td#1;n#tr#2;n#table#2;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#2;n#ul#0;n#td#1;n#tr#2;n#table#2;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#img#0;n#li#2;n#ul#0;n#td#1;n#tr#2;n#table#2;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#3;n#ul#0;n#td#1;n#tr#2;n#table#2;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#img#0;n#li#3;n#ul#0;n#td#1;n#tr#2;n#table#2;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#0;n#tr#3;n#table#2;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#ul#0;n#td#0;n#tr#3;n#table#2;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#0;n#ul#0;n#td#0;n#tr#3;n#table#2;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#1;n#ul#0;n#td#0;n#tr#3;n#table#2;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#2;n#ul#0;n#td#0;n#tr#3;n#table#2;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#3;n#ul#0;n#td#0;n#tr#3;n#table#2;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#ul#1;n#td#0;n#tr#3;n#table#2;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#0;n#ul#1;n#td#0;n#tr#3;n#table#2;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#1;n#ul#1;n#td#0;n#tr#3;n#table#2;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#table#3;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#0;n#tr#0;n#table#3;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#1;n#tr#0;n#table#3;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#ul#0;n#td#1;n#tr#0;n#table#3;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#0;n#ul#0;n#td#1;n#tr#0;n#table#3;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#img#0;n#li#0;n#ul#0;n#td#1;n#tr#0;n#table#3;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#1;n#ul#0;n#td#1;n#tr#0;n#table#3;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#img#0;n#li#1;n#ul#0;n#td#1;n#tr#0;n#table#3;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#2;n#ul#0;n#td#1;n#tr#0;n#table#3;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#img#0;n#li#2;n#ul#0;n#td#1;n#tr#0;n#table#3;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#3;n#ul#0;n#td#1;n#tr#0;n#table#3;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#img#0;n#li#3;n#ul#0;n#td#1;n#tr#0;n#table#3;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#0;n#tr#1;n#table#3;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#ul#0;n#td#0;n#tr#1;n#table#3;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#0;n#ul#0;n#td#0;n#tr#1;n#table#3;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#1;n#ul#0;n#td#0;n#tr#1;n#table#3;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#2;n#ul#0;n#td#0;n#tr#1;n#table#3;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#0;n#tr#2;n#table#3;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#1;n#tr#2;n#table#3;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#ul#0;n#td#1;n#tr#2;n#table#3;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#0;n#ul#0;n#td#1;n#tr#2;n#table#3;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#img#0;n#li#0;n#ul#0;n#td#1;n#tr#2;n#table#3;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#1;n#ul#0;n#td#1;n#tr#2;n#table#3;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#img#0;n#li#1;n#ul#0;n#td#1;n#tr#2;n#table#3;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#2;n#ul#0;n#td#1;n#tr#2;n#table#3;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#img#0;n#li#2;n#ul#0;n#td#1;n#tr#2;n#table#3;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#3;n#ul#0;n#td#1;n#tr#2;n#table#3;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#img#0;n#li#3;n#ul#0;n#td#1;n#tr#2;n#table#3;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#0;n#tr#3;n#table#3;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#ul#0;n#td#0;n#tr#3;n#table#3;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#0;n#ul#0;n#td#0;n#tr#3;n#table#3;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#1;n#ul#0;n#td#0;n#tr#3;n#table#3;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#2;n#ul#0;n#td#0;n#tr#3;n#table#3;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#0;n#tr#4;n#table#3;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#1;n#tr#4;n#table#3;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#ul#0;n#td#1;n#tr#4;n#table#3;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#0;n#ul#0;n#td#1;n#tr#4;n#table#3;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#img#0;n#li#0;n#ul#0;n#td#1;n#tr#4;n#table#3;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#1;n#ul#0;n#td#1;n#tr#4;n#table#3;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#img#0;n#li#1;n#ul#0;n#td#1;n#tr#4;n#table#3;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#2;n#ul#0;n#td#1;n#tr#4;n#table#3;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#img#0;n#li#2;n#ul#0;n#td#1;n#tr#4;n#table#3;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#3;n#ul#0;n#td#1;n#tr#4;n#table#3;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#img#0;n#li#3;n#ul#0;n#td#1;n#tr#4;n#table#3;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#0;n#tr#5;n#table#3;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#ul#0;n#td#0;n#tr#5;n#table#3;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#0;n#ul#0;n#td#0;n#tr#5;n#table#3;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#li#1;n#ul#0;n#td#0;n#tr#5;n#table#3;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#table#4;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#0;n#tr#0;n#table#4;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#0;n#tr#1;n#table#4;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#0;n#tr#2;n#table#4;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#0;n#tr#3;n#table#4;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#table#5;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#0;n#tr#0;n#table#5;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#table#6;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#0;n#tr#0;n#table#6;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#p#0;n#td#0;n#tr#0;n#table#6;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#1;n#tr#0;n#table#6;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#0;n#tr#1;n#table#6;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#p#0;n#td#0;n#tr#1;n#table#6;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#1;n#tr#1;n#table#6;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#0;n#tr#2;n#table#6;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#p#0;n#td#0;n#tr#2;n#table#6;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#1;n#tr#2;n#table#6;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#0;n#tr#3;n#table#6;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#p#0;n#td#0;n#tr#3;n#table#6;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#1;n#tr#3;n#table#6;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#0;n#tr#4;n#table#6;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#p#0;n#td#0;n#tr#4;n#table#6;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#1;n#tr#4;n#table#6;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#table#7;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#0;n#tr#0;n#table#7;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#0;n#tr#1;n#table#7;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#0;n#tr#2;n#table#7;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#0;n#tr#3;n#table#7;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#table#0;n#center#3;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="2017-08-20-final-submission.markdown" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/_portfolio/2017-08-20-final-submission.markdown">
+      <file leaf-file-name="2017-05-05-gsoc-start.markdown" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/_portfolio/2017-05-05-gsoc-start.markdown">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="287">
-              <caret line="20" column="74" lean-forward="false" selection-start-line="20" selection-start-column="74" selection-end-line="20" selection-end-column="141" />
+            <state relative-caret-position="136">
+              <caret line="8" column="37" lean-forward="false" selection-start-line="8" selection-start-column="37" selection-end-line="8" selection-end-column="37" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
+      <file leaf-file-name="blog.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/_pages/blog.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="85">
+              <caret line="5" column="20" lean-forward="false" selection-start-line="5" selection-start-column="20" selection-end-line="5" selection-end-column="20" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.scss" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/assets/css/main.scss">
+      <file leaf-file-name="parallel_coordinates_laptops.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/assets/css/custom/parallel_coordinates_laptops.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="44" lean-forward="false" selection-start-line="7" selection-start-column="44" selection-end-line="7" selection-end-column="44" />
+            <state relative-caret-position="34">
+              <caret line="2" column="14" lean-forward="false" selection-start-line="2" selection-start-column="14" selection-end-line="2" selection-end-column="14" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="_reset.scss" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/_sass/minimal-mistakes/_reset.scss">
+      <file leaf-file-name="whoami.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/_pages/whoami.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="25" column="18" lean-forward="false" selection-start-line="25" selection-start-column="18" selection-end-line="25" selection-end-column="18" />
-              <folding />
+            <state relative-caret-position="320">
+              <caret line="206" column="23" lean-forward="false" selection-start-line="206" selection-start-column="23" selection-end-line="206" selection-end-column="23" />
+              <folding>
+                <element signature="n#style#0;n#table#3;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#0;n#tr#0;n#table#3;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#1;n#tr#0;n#table#3;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#ul#0;n#td#1;n#tr#0;n#table#3;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#li#0;n#ul#0;n#td#1;n#tr#0;n#table#3;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#1;n#tr#4;n#table#3;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/index.html">
+      <file leaf-file-name="single.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/_layouts/single.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="544">
-              <caret line="32" column="21" lean-forward="false" selection-start-line="32" selection-start-column="21" selection-end-line="32" selection-end-column="28" />
+            <state relative-caret-position="595">
+              <caret line="35" column="47" lean-forward="false" selection-start-line="35" selection-start-column="47" selection-end-line="35" selection-end-column="47" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="2020-01-24-why-doing-hackathons.md" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/_portfolio/2020-01-24-why-doing-hackathons.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-            <state split_layout="SPLIT">
-              <first_editor relative-caret-position="374">
-                <caret line="22" column="51" lean-forward="false" selection-start-line="22" selection-start-column="51" selection-end-line="22" selection-end-column="51" />
-                <folding />
-              </first_editor>
-              <second_editor />
             </state>
           </provider>
         </entry>
@@ -272,8 +97,8 @@
       <file leaf-file-name="2017-10-14-go-chatbots-intro.markdown" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/_portfolio/2017-10-14-go-chatbots-intro.markdown">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1275">
-              <caret line="75" column="24" lean-forward="false" selection-start-line="75" selection-start-column="24" selection-end-line="75" selection-end-column="24" />
+            <state relative-caret-position="1258">
+              <caret line="74" column="0" lean-forward="false" selection-start-line="74" selection-start-column="0" selection-end-line="77" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -290,36 +115,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>.sing</find>
-      <find>.singl</find>
-      <find>.single</find>
-      <find>color</find>
-      <find>jekyll-archives</find>
-      <find>data-sitekey</find>
-      <find>phone</find>
-      <find>Dialogue System modeled</find>
-      <find>collections</find>
-      <find>l</find>
-      <find>link</find>
-      <find>link:</find>
-      <find>category_archive</find>
-      <find>_posts</find>
-      <find>C</find>
-      <find>Cate</find>
-      <find>Category:</find>
-      <find>Category</find>
-      <find>Categor</find>
-      <find>Categori</find>
-      <find>Categorie</find>
-      <find>Categories</find>
-      <find>plugins</find>
-      <find>An example of a CNN which should learn that there is a bird on the picture</find>
-      <find>img</find>
-      <find>author</find>
-      <find>Markup: HTML Tags and Formatting</find>
-      <find>&lt;table</find>
-      <find>Projects</find>
-      <find>Machine Le</find>
+      <find>output</find>
+      <find>canvas</find>
+      <find>ctx</find>
+      <find>devicePixelRatio</find>
+      <find>innerHeight</find>
+      <find>draw</find>
+      <find>twitter</find>
+      <find>render(data)</find>
+      <find>easily</find>
+      <find>parcoords</find>
+      <find>express</find>
+      <find>numerous</find>
+      <find>brush</find>
+      <find>dimensions</find>
+      <find>xscale</find>
+      <find>function f</find>
+      <find>function f(</find>
+      <find>pcoord_plot</find>
+      <find>pcoord_plotF</find>
+      <find>yAxis</find>
+      <find>project</find>
+      <find>domain</find>
+      <find>laptops_d3.css</find>
+      <find>globalAlpha</find>
+      <find>laptops_</find>
+      <find>JavaScript</find>
+      <find>dataset</find>
+      <find>find</find>
+      <find>Additionally</find>
+      <find>table</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -328,12 +153,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/index.markdown" />
-        <option value="$PROJECT_DIR$/_site/index.html" />
-        <option value="$PROJECT_DIR$/_site/404.html" />
-        <option value="$PROJECT_DIR$/_posts/2020-01-17-welcome-to-jekyll.markdown" />
-        <option value="$PROJECT_DIR$/about.markdown" />
         <option value="$PROJECT_DIR$/_includes/analytics-providers/google-universal.html" />
         <option value="$PROJECT_DIR$/_includes/analytics.html" />
         <option value="$PROJECT_DIR$/_includes/seo.html" />
@@ -361,7 +180,6 @@
         <option value="$PROJECT_DIR$/_posts/2017-11-5-dst-and-agent.markdown" />
         <option value="$PROJECT_DIR$/Gemfile" />
         <option value="$PROJECT_DIR$/_pages/category-archive.html" />
-        <option value="$PROJECT_DIR$/_layouts/single.html" />
         <option value="$PROJECT_DIR$/_pages/blog.html" />
         <option value="$PROJECT_DIR$/_data/navigation.yml" />
         <option value="$PROJECT_DIR$/_portfolio/2017-11-5-dst-and-agent.markdown" />
@@ -373,9 +191,19 @@
         <option value="$PROJECT_DIR$/_portfolio/2017-05-05-gsoc-start.markdown" />
         <option value="$PROJECT_DIR$/_portfolio/2020-01-24-why-doing-hackathons.md" />
         <option value="$PROJECT_DIR$/index.html" />
-        <option value="$PROJECT_DIR$/_config.yml" />
         <option value="$PROJECT_DIR$/_includes/head/custom.html" />
+        <option value="$PROJECT_DIR$/_layouts/default.html" />
+        <option value="$PROJECT_DIR$/_config.yml" />
+        <option value="$PROJECT_DIR$/assets/js/custom/parallel_coordinates.js" />
+        <option value="$PROJECT_DIR$/_layouts/single.html" />
         <option value="$PROJECT_DIR$/_pages/whoami.html" />
+        <option value="$PROJECT_DIR$/assets/js/vendor/jetpack/d3-jetpack.js" />
+        <option value="$PROJECT_DIR$/_site/portfolio/try_d3/index.html" />
+        <option value="$PROJECT_DIR$/assets/css/custom/laptops_d3.css" />
+        <option value="$PROJECT_DIR$/_portfolio/try_d3.html" />
+        <option value="$PROJECT_DIR$/assets/js/custom/parallel_coordinates_laptops.js" />
+        <option value="$PROJECT_DIR$/assets/css/custom/parallel_coordinates_laptops.css" />
+        <option value="$PROJECT_DIR$/_portfolio/2020-02-08-interactive-dataviz.html" />
       </list>
     </option>
   </component>
@@ -435,57 +263,119 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="IlievskiV.github.io" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="IlievskiV.github.io" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vendor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="IlievskiV.github.io" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="IlievskiV.github.io" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="custom" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="IlievskiV.github.io" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="IlievskiV.github.io" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="datasets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="IlievskiV.github.io" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="IlievskiV.github.io" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="css" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="IlievskiV.github.io" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="IlievskiV.github.io" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="_portfolio" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="IlievskiV.github.io" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="IlievskiV.github.io" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="_pages" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="IlievskiV.github.io" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="IlievskiV.github.io" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="_includes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="IlievskiV.github.io" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="IlievskiV.github.io" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="_includes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="search" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="IlievskiV.github.io" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="IlievskiV.github.io" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="_includes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="head" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -510,21 +400,14 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
-    <property name="last_opened_file_path" value="$USER_HOME$/anaconda/envs/vincent-env/bin/python" />
     <property name="FullScreen" value="true" />
-    <property name="DefaultHtmlFileTemplate" value="HTML File" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/assets/images" />
+      <recent name="$PROJECT_DIR$/assets/js/custom" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/_layouts" />
-      <recent name="$PROJECT_DIR$/_posts" />
-      <recent name="$PROJECT_DIR$/_pages" />
-      <recent name="$PROJECT_DIR$/_portfolio" />
-      <recent name="$PROJECT_DIR$/_includes" />
+      <recent name="$PROJECT_DIR$/assets/js/custom" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -619,31 +502,27 @@
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
   </component>
-  <component name="SvnConfiguration">
-    <configuration />
-  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="42f99e3b-b831-48f1-963b-fc13c41f2966" name="Default" comment="" />
-      <created>1579293517009</created>
+      <created>1580856495603</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1579293517009</updated>
+      <updated>1580856495603</updated>
     </task>
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1440" height="900" extended-state="6" />
-    <editor active="true" />
+    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22317597" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21745351" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.36691543" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2636816" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -652,7 +531,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329602" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -664,97 +543,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/_includes/category-list.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_includes/documents-collection.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_includes/masthead.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_includes/feature_row">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_includes/page__hero_video.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_includes/page__taxonomy.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_includes/paginator.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_includes/post_pagination.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_includes/head.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="38" column="11" lean-forward="false" selection-start-line="38" selection-start-column="11" selection-end-line="38" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_includes/posts-category.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_includes/posts-tag.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_includes/read-time.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_includes/skip-links.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/_includes/tag-list.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -801,13 +589,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="311">
           <caret line="81" column="25" lean-forward="false" selection-start-line="81" selection-start-column="25" selection-end-line="81" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/js/_main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="23" column="18" lean-forward="false" selection-start-line="23" selection-start-column="18" selection-end-line="24" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -860,13 +641,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_pages/blog.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="12" lean-forward="false" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/_includes/author-profile.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="385">
@@ -881,10 +655,45 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_layouts/single.html">
+    <entry file="file://$PROJECT_DIR$/_portfolio/2017-08-20-deep-learning-module-tmva.markdown">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="17" lean-forward="false" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
+        <state relative-caret-position="314">
+          <caret line="67" column="24" lean-forward="false" selection-start-line="67" selection-start-column="24" selection-end-line="67" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="32" column="21" lean-forward="false" selection-start-line="32" selection-start-column="21" selection-end-line="32" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_sass/minimal-mistakes/_reset.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="25" column="18" lean-forward="false" selection-start-line="25" selection-start-column="18" selection-end-line="25" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_portfolio/2017-08-20-final-submission.markdown">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="20" column="74" lean-forward="false" selection-start-line="20" selection-start-column="74" selection-end-line="20" selection-end-column="141" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_includes/head.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="227">
+          <caret line="29" column="23" lean-forward="false" selection-start-line="29" selection-start-column="11" selection-end-line="29" selection-end-column="23" />
         </state>
       </provider>
     </entry>
@@ -895,272 +704,160 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_portfolio/2017-10-14-go-chatbots-intro.markdown">
+    <entry file="file://$PROJECT_DIR$/_layouts/default.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1275">
-          <caret line="75" column="24" lean-forward="false" selection-start-line="75" selection-start-column="24" selection-end-line="75" selection-end-column="24" />
-          <folding />
+        <state relative-caret-position="-71">
+          <caret line="7" column="34" lean-forward="false" selection-start-line="7" selection-start-column="34" selection-end-line="7" selection-end-column="34" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_portfolio/2017-08-20-deep-learning-module-tmva.markdown">
+    <entry file="file://$PROJECT_DIR$/assets/favicons/favicon-32x32.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/images/artificial_intelligence.jpg">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_config.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="67" column="24" lean-forward="false" selection-start-line="67" selection-start-column="24" selection-end-line="67" selection-end-column="24" />
+        <state relative-caret-position="1581">
+          <caret line="93" column="46" lean-forward="false" selection-start-line="93" selection-start-column="46" selection-end-line="93" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_includes/head/custom.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="25" lean-forward="false" selection-start-line="0" selection-start-column="25" selection-end-line="0" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/js/_main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="17" lean-forward="false" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/js/main.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/js/plugins/jquery.fitvids.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-512">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/_portfolio/2020-01-24-why-doing-hackathons.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="374">
-            <caret line="22" column="51" lean-forward="false" selection-start-line="22" selection-start-column="51" selection-end-line="22" selection-end-column="51" />
-            <folding />
+          <first_editor relative-caret-position="884">
+            <caret line="52" column="10" lean-forward="false" selection-start-line="52" selection-start-column="10" selection-end-line="52" selection-end-column="50" />
           </first_editor>
           <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="32" column="21" lean-forward="false" selection-start-line="32" selection-start-column="21" selection-end-line="32" selection-end-column="28" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/css/main.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
-          <caret line="7" column="44" lean-forward="false" selection-start-line="7" selection-start-column="44" selection-end-line="7" selection-end-column="44" />
-          <folding />
+          <caret line="7" column="44" lean-forward="true" selection-start-line="7" selection-start-column="44" selection-end-line="7" selection-end-column="44" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_sass/minimal-mistakes/_reset.scss">
+    <entry file="file://$PROJECT_DIR$/_layouts/single.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="25" column="18" lean-forward="false" selection-start-line="25" selection-start-column="18" selection-end-line="25" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_portfolio/2017-08-20-final-submission.markdown">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="287">
-          <caret line="20" column="74" lean-forward="false" selection-start-line="20" selection-start-column="74" selection-end-line="20" selection-end-column="141" />
+        <state relative-caret-position="595">
+          <caret line="35" column="47" lean-forward="false" selection-start-line="35" selection-start-column="47" selection-end-line="35" selection-end-column="47" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/_portfolio/2017-05-05-gsoc-start.markdown">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="4" lean-forward="false" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="4" />
+        <state relative-caret-position="136">
+          <caret line="8" column="37" lean-forward="false" selection-start-line="8" selection-start-column="37" selection-end-line="8" selection-end-column="37" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_includes/head/custom.html">
+    <entry file="file://$PROJECT_DIR$/_pages/blog.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="75" lean-forward="false" selection-start-line="12" selection-start-column="75" selection-end-line="12" selection-end-column="75" />
+        <state relative-caret-position="85">
+          <caret line="5" column="20" lean-forward="false" selection-start-line="5" selection-start-column="20" selection-end-line="5" selection-end-column="20" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_config.yml">
+    <entry file="file://$PROJECT_DIR$/_portfolio/2017-10-14-go-chatbots-intro.markdown">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
-          <caret line="106" column="72" lean-forward="false" selection-start-line="106" selection-start-column="72" selection-end-line="106" selection-end-column="72" />
+        <state relative-caret-position="1258">
+          <caret line="74" column="0" lean-forward="false" selection-start-line="74" selection-start-column="0" selection-end-line="77" selection-end-column="9" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/js/custom/jetpack/d3-jetpack.js" />
+    <entry file="file://$PROJECT_DIR$/_site/portfolio/try_d3/index.html" />
+    <entry file="file://$PROJECT_DIR$/assets/js/custom/parallel_coordinates_cars.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="14" lean-forward="false" selection-start-line="13" selection-start-column="14" selection-end-line="13" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_site/portfolio/2020-02-08-interactive-dataviz/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5916">
+          <caret line="348" column="48" lean-forward="false" selection-start-line="348" selection-start-column="48" selection-end-line="348" selection-end-column="48" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/_pages/whoami.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="229">
-          <caret line="254" column="119" lean-forward="false" selection-start-line="254" selection-start-column="119" selection-end-line="254" selection-end-column="119" />
+        <state relative-caret-position="320">
+          <caret line="206" column="23" lean-forward="false" selection-start-line="206" selection-start-column="23" selection-end-line="206" selection-end-column="23" />
           <folding>
-            <element signature="n#style#0;n#h2#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#table#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#1;n#tr#0;n#table#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#ul#0;n#td#1;n#tr#0;n#table#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#0;n#ul#0;n#td#1;n#tr#0;n#table#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#li#0;n#ul#0;n#td#1;n#tr#0;n#table#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#1;n#ul#0;n#td#1;n#tr#0;n#table#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#li#1;n#ul#0;n#td#1;n#tr#0;n#table#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#2;n#ul#0;n#td#1;n#tr#0;n#table#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#li#2;n#ul#0;n#td#1;n#tr#0;n#table#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#3;n#ul#0;n#td#1;n#tr#0;n#table#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#li#3;n#ul#0;n#td#1;n#tr#0;n#table#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#0;n#tr#1;n#table#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#ul#0;n#td#0;n#tr#1;n#table#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#0;n#ul#0;n#td#0;n#tr#1;n#table#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#1;n#ul#0;n#td#0;n#tr#1;n#table#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#2;n#ul#0;n#td#0;n#tr#1;n#table#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#3;n#ul#0;n#td#0;n#tr#1;n#table#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#4;n#ul#0;n#td#0;n#tr#1;n#table#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#table#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#0;n#tr#0;n#table#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#1;n#tr#0;n#table#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#ul#0;n#td#1;n#tr#0;n#table#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#0;n#ul#0;n#td#1;n#tr#0;n#table#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#li#0;n#ul#0;n#td#1;n#tr#0;n#table#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#1;n#ul#0;n#td#1;n#tr#0;n#table#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#li#1;n#ul#0;n#td#1;n#tr#0;n#table#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#2;n#ul#0;n#td#1;n#tr#0;n#table#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#li#2;n#ul#0;n#td#1;n#tr#0;n#table#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#3;n#ul#0;n#td#1;n#tr#0;n#table#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#li#3;n#ul#0;n#td#1;n#tr#0;n#table#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#0;n#tr#1;n#table#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#ul#0;n#td#0;n#tr#1;n#table#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#0;n#ul#0;n#td#0;n#tr#1;n#table#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#1;n#ul#0;n#td#0;n#tr#1;n#table#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#2;n#ul#0;n#td#0;n#tr#1;n#table#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#3;n#ul#0;n#td#0;n#tr#1;n#table#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#0;n#tr#2;n#table#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#1;n#tr#2;n#table#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#ul#0;n#td#1;n#tr#2;n#table#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#0;n#ul#0;n#td#1;n#tr#2;n#table#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#li#0;n#ul#0;n#td#1;n#tr#2;n#table#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#1;n#ul#0;n#td#1;n#tr#2;n#table#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#li#1;n#ul#0;n#td#1;n#tr#2;n#table#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#2;n#ul#0;n#td#1;n#tr#2;n#table#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#li#2;n#ul#0;n#td#1;n#tr#2;n#table#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#3;n#ul#0;n#td#1;n#tr#2;n#table#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#li#3;n#ul#0;n#td#1;n#tr#2;n#table#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#0;n#tr#3;n#table#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#ul#0;n#td#0;n#tr#3;n#table#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#0;n#ul#0;n#td#0;n#tr#3;n#table#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#0;n#ul#0;n#ul#0;n#td#0;n#tr#3;n#table#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#1;n#ul#0;n#td#0;n#tr#3;n#table#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#2;n#ul#0;n#td#0;n#tr#3;n#table#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#3;n#ul#0;n#td#0;n#tr#3;n#table#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#h2#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#table#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#0;n#tr#0;n#table#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#1;n#tr#0;n#table#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#ul#0;n#td#1;n#tr#0;n#table#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#0;n#ul#0;n#td#1;n#tr#0;n#table#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#li#0;n#ul#0;n#td#1;n#tr#0;n#table#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#1;n#ul#0;n#td#1;n#tr#0;n#table#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#li#1;n#ul#0;n#td#1;n#tr#0;n#table#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#2;n#ul#0;n#td#1;n#tr#0;n#table#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#li#2;n#ul#0;n#td#1;n#tr#0;n#table#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#3;n#ul#0;n#td#1;n#tr#0;n#table#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#li#3;n#ul#0;n#td#1;n#tr#0;n#table#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#0;n#tr#1;n#table#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#ul#0;n#td#0;n#tr#1;n#table#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#0;n#ul#0;n#td#0;n#tr#1;n#table#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#1;n#ul#0;n#td#0;n#tr#1;n#table#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#2;n#ul#0;n#td#0;n#tr#1;n#table#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#3;n#ul#0;n#td#0;n#tr#1;n#table#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#0;n#tr#2;n#table#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#1;n#tr#2;n#table#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#ul#0;n#td#1;n#tr#2;n#table#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#0;n#ul#0;n#td#1;n#tr#2;n#table#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#li#0;n#ul#0;n#td#1;n#tr#2;n#table#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#1;n#ul#0;n#td#1;n#tr#2;n#table#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#li#1;n#ul#0;n#td#1;n#tr#2;n#table#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#2;n#ul#0;n#td#1;n#tr#2;n#table#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#li#2;n#ul#0;n#td#1;n#tr#2;n#table#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#3;n#ul#0;n#td#1;n#tr#2;n#table#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#li#3;n#ul#0;n#td#1;n#tr#2;n#table#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#0;n#tr#3;n#table#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#ul#0;n#td#0;n#tr#3;n#table#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#0;n#ul#0;n#td#0;n#tr#3;n#table#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#1;n#ul#0;n#td#0;n#tr#3;n#table#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#2;n#ul#0;n#td#0;n#tr#3;n#table#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#3;n#ul#0;n#td#0;n#tr#3;n#table#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#ul#1;n#td#0;n#tr#3;n#table#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#0;n#ul#1;n#td#0;n#tr#3;n#table#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#1;n#ul#1;n#td#0;n#tr#3;n#table#2;n#!!top" expanded="true" />
             <element signature="n#style#0;n#table#3;n#!!top" expanded="true" />
             <element signature="n#style#0;n#td#0;n#tr#0;n#table#3;n#!!top" expanded="true" />
             <element signature="n#style#0;n#td#1;n#tr#0;n#table#3;n#!!top" expanded="true" />
             <element signature="n#style#0;n#ul#0;n#td#1;n#tr#0;n#table#3;n#!!top" expanded="true" />
             <element signature="n#style#0;n#li#0;n#ul#0;n#td#1;n#tr#0;n#table#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#li#0;n#ul#0;n#td#1;n#tr#0;n#table#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#1;n#ul#0;n#td#1;n#tr#0;n#table#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#li#1;n#ul#0;n#td#1;n#tr#0;n#table#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#2;n#ul#0;n#td#1;n#tr#0;n#table#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#li#2;n#ul#0;n#td#1;n#tr#0;n#table#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#3;n#ul#0;n#td#1;n#tr#0;n#table#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#li#3;n#ul#0;n#td#1;n#tr#0;n#table#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#0;n#tr#1;n#table#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#ul#0;n#td#0;n#tr#1;n#table#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#0;n#ul#0;n#td#0;n#tr#1;n#table#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#1;n#ul#0;n#td#0;n#tr#1;n#table#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#2;n#ul#0;n#td#0;n#tr#1;n#table#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#0;n#tr#2;n#table#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#1;n#tr#2;n#table#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#ul#0;n#td#1;n#tr#2;n#table#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#0;n#ul#0;n#td#1;n#tr#2;n#table#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#li#0;n#ul#0;n#td#1;n#tr#2;n#table#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#1;n#ul#0;n#td#1;n#tr#2;n#table#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#li#1;n#ul#0;n#td#1;n#tr#2;n#table#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#2;n#ul#0;n#td#1;n#tr#2;n#table#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#li#2;n#ul#0;n#td#1;n#tr#2;n#table#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#3;n#ul#0;n#td#1;n#tr#2;n#table#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#li#3;n#ul#0;n#td#1;n#tr#2;n#table#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#0;n#tr#3;n#table#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#ul#0;n#td#0;n#tr#3;n#table#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#0;n#ul#0;n#td#0;n#tr#3;n#table#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#1;n#ul#0;n#td#0;n#tr#3;n#table#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#2;n#ul#0;n#td#0;n#tr#3;n#table#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#0;n#tr#4;n#table#3;n#!!top" expanded="true" />
             <element signature="n#style#0;n#td#1;n#tr#4;n#table#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#ul#0;n#td#1;n#tr#4;n#table#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#0;n#ul#0;n#td#1;n#tr#4;n#table#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#li#0;n#ul#0;n#td#1;n#tr#4;n#table#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#1;n#ul#0;n#td#1;n#tr#4;n#table#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#li#1;n#ul#0;n#td#1;n#tr#4;n#table#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#2;n#ul#0;n#td#1;n#tr#4;n#table#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#li#2;n#ul#0;n#td#1;n#tr#4;n#table#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#3;n#ul#0;n#td#1;n#tr#4;n#table#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#li#3;n#ul#0;n#td#1;n#tr#4;n#table#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#0;n#tr#5;n#table#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#ul#0;n#td#0;n#tr#5;n#table#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#0;n#ul#0;n#td#0;n#tr#5;n#table#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#li#1;n#ul#0;n#td#0;n#tr#5;n#table#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#table#4;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#0;n#tr#0;n#table#4;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#0;n#tr#1;n#table#4;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#0;n#tr#2;n#table#4;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#0;n#tr#3;n#table#4;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#table#5;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#0;n#tr#0;n#table#5;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#table#6;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#0;n#tr#0;n#table#6;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#p#0;n#td#0;n#tr#0;n#table#6;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#1;n#tr#0;n#table#6;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#0;n#tr#1;n#table#6;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#p#0;n#td#0;n#tr#1;n#table#6;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#1;n#tr#1;n#table#6;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#0;n#tr#2;n#table#6;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#p#0;n#td#0;n#tr#2;n#table#6;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#1;n#tr#2;n#table#6;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#0;n#tr#3;n#table#6;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#p#0;n#td#0;n#tr#3;n#table#6;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#1;n#tr#3;n#table#6;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#0;n#tr#4;n#table#6;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#p#0;n#td#0;n#tr#4;n#table#6;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#1;n#tr#4;n#table#6;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#table#7;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#0;n#tr#0;n#table#7;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#0;n#tr#1;n#table#7;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#0;n#tr#2;n#table#7;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#0;n#tr#3;n#table#7;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/css/custom/parallel_coordinates_laptops.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="14" lean-forward="false" selection-start-line="2" selection-start-column="14" selection-end-line="2" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/js/custom/parallel_coordinates_laptops.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1952">
+          <caret line="305" column="19" lean-forward="false" selection-start-line="305" selection-start-column="14" selection-end-line="305" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_portfolio/2020-02-08-interactive-dataviz.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="22" lean-forward="false" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
+          <folding>
+            <element signature="n#style#0;n#table#0;n#center#3;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
