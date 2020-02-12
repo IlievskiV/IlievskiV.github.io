@@ -7,6 +7,11 @@ classes:    wide
 header:
     teaser: "assets/images/chatbot-front.jpg"
     image: "assets/images/chatbot-front.jpg"
+    image_description: "Common representation of the chatbots as a robot"
+    og_image: "assets/images/chatbot-front.jpg"
+    caption: "Chatbots are cool"
+redirect_from:
+    - /2017/10/15/go-chatbots-intro/
 ---
 
 <h2> Before the Intro </h2>
@@ -29,7 +34,7 @@ An example of such systems are the popular <a href="https://www.apple.com/ios/si
 
 
 <center>
-<img src="{{ site.url }}{{ site.baseurl }}/assets/images/what-are-chatbots.jpg" alt="">
+<img src="{{ site.url }}{{ site.baseurl }}/assets/images/what-are-chatbots.jpg" alt="Hand holding a smartphone and chatting with a chatbot">
 <br/>
 <span class="caption text-muted"><i>The user is trying to get a help from the chatbot</i></span>
 </center>
@@ -46,7 +51,7 @@ in a most convenient way, i.e. by conversation. These are the chatbots I will el
 <h2> Goal-Oriented (GO) Dialogue Systems </h2>
 
 <center>
-<img src="{{ site.url }}{{ site.baseurl }}/assets/images/goal-achieving.png" alt="" align="middle">
+<img src="{{ site.url }}{{ site.baseurl }}/assets/images/goal-achieving.png" alt="Dart and arrow in the center as an illustration of a goal-reaching" align="middle">
 </center>
 
 <p>The Goal-Oriented (GO) Dialogue Systems are complex systems consisted of several sub-components.
@@ -73,7 +78,7 @@ Generator (NLG) unit. Additionally, the DM could be connected to some external k
 such that, it can produce more meaningful answers. This composition is shown in the image below. </p>
 
 <center>
-<img src="{{ site.url }}{{ site.baseurl }}/assets/images/Dialogue_System.png" alt="">
+<img src="{{ site.url }}{{ site.baseurl }}/assets/images/Dialogue_System.png" alt="Diagram showing the general components of a Goal-Oriented Chatbot">
 <span class="caption text-muted"><i>Dialogue System modeled as a Partially Observable Markov Decision Process.</i></span>
 </center>
 

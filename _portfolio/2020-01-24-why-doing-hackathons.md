@@ -7,6 +7,9 @@ classes:    wide
 header:
     teaser: "assets/images/hackathons_top_image.jpeg"
     image: "assets/images/hackathons_top_image.jpeg"
+    image_description: "Few robots depicting the nature of the hackathons"
+    og_image: "assets/images/hackathons_top_image.jpeg"
+    caption: "Hackathons are cool"
 ---
 
 Today we live in the software era, where the deployed software is playing
@@ -50,7 +53,7 @@ spirit of the event you will find a way to realize your project. Moreover, you w
 learn how to work under time constraint pressure.
 
 <center>
-<img src="{{ site.url }}{{ site.baseurl }}/assets/images/ideas_image.jpeg" alt="ideas at hackathons">
+<img src="{{ site.url }}{{ site.baseurl }}/assets/images/ideas_image.jpeg" alt="Different light bulbs from paper as an illustration of an idea">
 </center>
 
 However, before doing anything and spend much of your time, it is always a good practice
@@ -80,7 +83,7 @@ yourself about the state of the existing technology at that particular moment. L
 not the least, maybe you will land your dream job afterward.
 
 <center>
-<img src="{{ site.url }}{{ site.baseurl }}/assets/images/connections_image.jpeg" alt="networking">
+<img src="{{ site.url }}{{ site.baseurl }}/assets/images/connections_image.jpeg" alt="Connected graph as an illustration for the networking with other people">
 </center><br/>
 
 I would like to elaborate more on the networking part. There are two types of connections

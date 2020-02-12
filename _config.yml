@@ -27,6 +27,7 @@ plugins:
   - jekyll-feed
   - jekyll-remote-theme
   - jekyll-include-cache
+  - jekyll-redirect-from
 
 # mimic GitHub Pages with --safe
 whitelist:
@@ -36,6 +37,7 @@ whitelist:
   - jekyll-feed
   - jekyll-remote-theme
   - jekyll-include-cache
+  - jekyll-redirect-from
 
 github: [metadata]
 minimal_mistakes_skin: "contrast"

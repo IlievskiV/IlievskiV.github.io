@@ -7,7 +7,9 @@ classes:    wide
 header:
     teaser: "assets/images/gsoc17.png"
     image: "assets/images/gsoc17.png"
+    og_image: "assets/images/gsoc17.png"
     image_description: "Google Summer of Code 2017 logo"
+    caption: "The logo of the [**Google Summer of Code**](https://summerofcode.withgoogle.com/)"
 ---
 
 <h2> Intro </h2>
@@ -45,7 +47,7 @@ If used for classification, the outputs of the network are the class assignment 
 One example of a CNN is given in the figure below.</p>
 
 <center>
-<img src="{{ site.url }}{{ site.baseurl }}/assets/images/conv-net-bird.png" alt="">
+<img src="{{ site.url }}{{ site.baseurl }}/assets/images/conv-net-bird.png" alt="Convolutional Neural Network extracts features from an image with a bird">
 <br/>
 <span class="caption text-muted"><i>An example of a CNN which should learn that there is a bird on the picture</i></span>
 </center>

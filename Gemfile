@@ -13,6 +13,7 @@ group :jekyll_plugins do
   gem "jekyll-algolia"
   gem "jemoji"
   gem "jekyll-gist"
+  gem "jekyll-redirect-from"
 end
 
 install_if -> { RUBY_PLATFORM =~ %r!mingw|mswin|java! } do
