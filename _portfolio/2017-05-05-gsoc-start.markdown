@@ -10,6 +10,8 @@ header:
     og_image: "assets/images/gsoc17.png"
     image_description: "Google Summer of Code 2017 logo"
     caption: "The logo of the [**Google Summer of Code**](https://summerofcode.withgoogle.com/)"
+redirect_from:
+    - /2017/05/06/gsoc-start/
 ---
 
 <h2> Intro </h2>
