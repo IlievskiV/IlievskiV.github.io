@@ -65,7 +65,7 @@ comments:
     shortname            : "https-ilievskiv-github-io"
 
 atom_feed:
-  path                   : # blank (default) uses feed.xml
+  path                   : "blog.xml" # blank (default) uses feed.xml
 
 feed:
   collections:
