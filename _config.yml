@@ -64,6 +64,14 @@ comments:
   disqus:
     shortname            : "https-ilievskiv-github-io"
 
+atom_feed:
+  path                   : # blank (default) uses feed.xml
+
+feed:
+  collections:
+    portfolio:
+      path: "/blog.xml"
+
 # Searching the website
 search                   : true # true, false (default)
 search_full_content      : true # true, false (default)

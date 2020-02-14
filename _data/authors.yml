@@ -1,0 +1,19 @@
+# Authors
+
+Vladimir Ilievski:
+  # Site Author
+  author:
+    name             : "Vladimir Ilievski"
+    avatar           : "/assets/images/bio_photo.jpg"
+    bio              : "Machine Learning Engineer <br/> Startup lover <br/> AI enthusiast"
+    location         : "Valais, Switzerland"
+    links:
+      - label: "Twitter"
+        icon: "fab fa-fw fa-twitter-square"
+        url: "https://twitter.com/VladOsaurus"
+      - label: "GitHub"
+        icon: "fab fa-fw fa-github"
+        url: "https://github.com/IlievskiV"
+      - label: "LinkedIn"
+        icon: "fab fa-fw fa-linkedin"
+        url: "https://www.linkedin.com/in/vilievski/"
