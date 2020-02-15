@@ -49,7 +49,7 @@ If used for classification, the outputs of the network are the class assignment 
 One example of a CNN is given in the figure below.</p>
 
 <center>
-<img src="{{ site.url }}{{ site.baseurl }}/assets/images/conv-net-bird.png" alt="Convolutional Neural Network extracts features from an image with a bird">
+<img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/conv-net-bird.png" class="lazyload" alt="Convolutional Neural Network extracts features from an image with a bird">
 <br/>
 <span class="caption text-muted"><i>An example of a CNN which should learn that there is a bird on the picture</i></span>
 </center>

@@ -11,7 +11,7 @@ header:
     image_description: "Radial stacked bar chart"
     caption: "Photo credit: [**Observable**](https://observablehq.com/@d3/radial-stacked-bar-chart)"
 ---
-<script src="https://d3js.org/d3.v4.js"></script>
+<script src="https://d3js.org/d3.v4.min.js"></script>
 <script src="https://bl.ocks.org/syntagmatic/raw/3341641/render-queue.js"></script>
 <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/custom/parallel_coordinates_laptops.css"></link>
 
@@ -68,7 +68,21 @@ header:
 </p>
 
 <center>
-    <img src="{{ site.url }}{{ site.baseurl }}/assets/images/visualization_zoo.png" alt="Gallery showing different plots">
+    <picture>
+        <source data-srcset="{{ site.url }}{{ site.baseurl }}/assets/images/regular/visualization_zoo_regular.webp" media="(min-width: 1281px)" type="image/webp"/>
+        <source data-srcset="{{ site.url }}{{ site.baseurl }}/assets/images/regular/visualization_zoo_regular.png" media="(min-width: 1281px)" type="image/png" />
+
+        <source data-srcset="{{ site.url }}{{ site.baseurl }}/assets/images/tablet/visualization_zoo_tablet.webp" media="(min-width: 641px) and (max-width: 1280px) and (orientation: landscape)" type="image/webp"/>
+        <source data-srcset="{{ site.url }}{{ site.baseurl }}/assets/images/tablet/visualization_zoo_tablet.png" media="(min-width: 641px) and (max-width: 1280px) and (orientation: landscape)" type="image/png" />
+
+        <source data-srcset="{{ site.url }}{{ site.baseurl }}/assets/images/tablet/visualization_zoo_tablet.webp" media="(min-width: 641px) and (max-width: 1280px) and (orientation: portrait)" type="image/webp"/>
+        <source data-srcset="{{ site.url }}{{ site.baseurl }}/assets/images/tablet/visualization_zoo_tablet.png" media="(min-width: 641px) and (max-width: 1280px) and (orientation: portrait)" type="image/png" />
+
+        <source data-srcset="{{ site.url }}{{ site.baseurl }}/assets/images/mobile/visualization_zoo_mobile.webp" media="(max-width: 640px)" type="image/webp"/>
+        <source data-srcset="{{ site.url }}{{ site.baseurl }}/assets/images/mobile/visualization_zoo_mobile.png" media="(max-width: 640px)" type="image/png" />
+
+        <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/regular/visualization_zoo_regular.png" class="lazyload" alt="Gallery showing different plots">
+    </picture>
     <span class="caption text-muted"><i>Figure 1. Credits: <a href="https://d3js.org/" target="_blank">D3</a>.
         Find the full gallery <a href="https://github.com/d3/d3/wiki/Gallery" target="_blank">here</a>.</i>
     </span>
@@ -101,7 +115,21 @@ header:
 </p>
 
 <center>
-    <img src="{{ site.url }}{{ site.baseurl }}/assets/images/co-emissions-per-capita-vs-gdp-per-capita-international-.png" alt="Bubble plot showing the CO2 emissions per capita vs GDP per capita">
+    <picture>
+        <source data-srcset="{{ site.url }}{{ site.baseurl }}/assets/images/regular/co_emissions_regular.webp" media="(min-width: 1281px)" type="image/webp" />
+        <source data-srcset="{{ site.url }}{{ site.baseurl }}/assets/images/regular/co_emissions_regular.png" media="(min-width: 1281px)" type="image/png" />
+
+        <source data-srcset="{{ site.url }}{{ site.baseurl }}/assets/images/tablet/co_emissions_tablet.webp" media="(min-width: 641px) and (max-width: 1280px) and (orientation: landscape)" type="image/webp" />
+        <source data-srcset="{{ site.url }}{{ site.baseurl }}/assets/images/tablet/co_emissions_tablet.png" media="(min-width: 641px) and (max-width: 1280px) and (orientation: landscape)" type="image/png" />
+
+        <source data-srcset="{{ site.url }}{{ site.baseurl }}/assets/images/tablet/co_emissions_tablet.webp" media="(min-width: 641px) and (max-width: 1280px) and (orientation: portrait)" type="image/webp" />
+        <source data-srcset="{{ site.url }}{{ site.baseurl }}/assets/images/tablet/co_emissions_tablet.png" media="(min-width: 641px) and (max-width: 1280px) and (orientation: portrait)" type="image/png" />
+
+        <source data-srcset="{{ site.url }}{{ site.baseurl }}/assets/images/mobile/co_emissions_mobile.webp" media="(max-width: 640px)" type="image/webp" />
+        <source data-srcset="{{ site.url }}{{ site.baseurl }}/assets/images/mobile/co_emissions_mobile.png" media="(max-width: 640px)" type="image/png" />
+
+        <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/regular/co_emissions_regular.png" class="lazyload" alt="Bubble plot showing the CO2 emissions per capita vs GDP per capita">
+    </picture>
     <span class="caption text-muted"><i>Figure 2. Credits: Our World in Data. Find the interactive visualization
         <a href="https://ourworldindata.org/grapher/co-emissions-per-capita-vs-gdp-per-capita-international-" target="_blank">here</a></i>
     </span>
@@ -132,7 +160,21 @@ header:
 
 
 <center>
-    <img src="{{ site.url }}{{ site.baseurl }}/assets/images/parallel_coordinates_example.png" alt="Parallel Coordinates Example plot">
+    <picture>
+        <source data-srcset="{{ site.url }}{{ site.baseurl }}/assets/images/regular/parallel_coordinates_example_regular.webp" media="(min-width: 1281px)" type="image/webp"/>
+        <source data-srcset="{{ site.url }}{{ site.baseurl }}/assets/images/regular/parallel_coordinates_example_regular.png" media="(min-width: 1281px)" type="image/png"/>
+
+        <source data-srcset="{{ site.url }}{{ site.baseurl }}/assets/images/tablet/parallel_coordinates_example_tablet.webp" media="(min-width: 641px) and (max-width: 1280px) and (orientation: landscape)" type="image/webp"/>
+        <source data-srcset="{{ site.url }}{{ site.baseurl }}/assets/images/tablet/parallel_coordinates_example_tablet.png" media="(min-width: 641px) and (max-width: 1280px) and (orientation: landscape)" type="image/png"/>
+
+        <source data-srcset="{{ site.url }}{{ site.baseurl }}/assets/images/tablet/parallel_coordinates_example_tablet.webp" media="(min-width: 641px) and (max-width: 1280px) and (orientation: portrait)" type="image/webp"/>
+        <source data-srcset="{{ site.url }}{{ site.baseurl }}/assets/images/tablet/parallel_coordinates_example_tablet.png" media="(min-width: 641px) and (max-width: 1280px) and (orientation: portrait)" type="image/png"/>
+
+        <source data-srcset="{{ site.url }}{{ site.baseurl }}/assets/images/mobile/parallel_coordinates_example_mobile.webp" media="(max-width: 640px)" type="image/webp"/>
+        <source data-srcset="{{ site.url }}{{ site.baseurl }}/assets/images/mobile/parallel_coordinates_example_mobile.png" media="(max-width: 640px)" type="image/png"/>
+
+        <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/regular/parallel_coordinates_example_regular.png" class="lazyload" alt="Parallel Coordinates Example plot">
+    </picture>
     <span class="caption text-muted"><i>Figure 3. Credits: <a href="https://bl.ocks.org/" target="_blank">Blocks</a>.
         Find the interactive visualization <a href="https://bl.ocks.org/jasondavies/raw/1341281/" target="_blank">here</a>.</i>
     </span>

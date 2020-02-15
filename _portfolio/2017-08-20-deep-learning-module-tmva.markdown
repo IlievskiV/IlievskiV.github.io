@@ -44,7 +44,7 @@ complex and sophisticated solutions on top of it. The blog, describing his proje
 so let me give you a more detailed view. </p>
 
 <center>
-<img src="{{ site.url }}{{ site.baseurl }}/assets/images/TMVA_DL_General.png" alt="Deep Learning module structure in TMVA"><br/>
+<img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/TMVA_DL_General.png" class="lazyload" alt="Deep Learning module structure in TMVA"><br/>
 <span class="caption text-muted"><i>An overview of the Deep Learning Module in TMVA</i></span>
 </center>
 
@@ -69,7 +69,7 @@ for a GPU-based execution.</p>
 to be generic. We can see the main methods and attributes of this class in the image below.</p>
 
 <center>
-<img src="{{ site.url }}{{ site.baseurl }}/assets/images/General_Layer.png" alt="UML Class Diagram of the General Layer in the Deep Learning module of TMVA">
+<img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/General_Layer.png" class="lazyload" alt="UML Class Diagram of the General Layer in the Deep Learning module of TMVA">
 <br/>
 <span class="caption text-muted"><i>General Layer class</i></span>
 </center>

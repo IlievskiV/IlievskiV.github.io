@@ -34,7 +34,7 @@ An example of such systems are the popular <a href="https://www.apple.com/ios/si
 
 
 <center>
-<img src="{{ site.url }}{{ site.baseurl }}/assets/images/what-are-chatbots.jpg" alt="Hand holding a smartphone and chatting with a chatbot">
+<img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/what-are-chatbots.jpg" class="lazyload" alt="Hand holding a smartphone and chatting with a chatbot">
 <br/>
 <span class="caption text-muted"><i>The user is trying to get a help from the chatbot</i></span>
 </center>
@@ -51,7 +51,7 @@ in a most convenient way, i.e. by conversation. These are the chatbots I will el
 <h2> Goal-Oriented (GO) Dialogue Systems </h2>
 
 <center>
-<img src="{{ site.url }}{{ site.baseurl }}/assets/images/goal-achieving.png" alt="Dart and arrow in the center as an illustration of a goal-reaching" align="middle">
+<img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/goal-achieving.png" class="lazyload" alt="Dart and arrow in the center as an illustration of a goal-reaching" align="middle">
 </center>
 
 <p>The Goal-Oriented (GO) Dialogue Systems are complex systems consisted of several sub-components.
@@ -78,7 +78,7 @@ Generator (NLG) unit. Additionally, the DM could be connected to some external k
 such that, it can produce more meaningful answers. This composition is shown in the image below. </p>
 
 <center>
-<img src="{{ site.url }}{{ site.baseurl }}/assets/images/Dialogue_System.png" alt="Diagram showing the general components of a Goal-Oriented Chatbot">
+<img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/Dialogue_System.png" class="lazyload" alt="Diagram showing the general components of a Goal-Oriented Chatbot">
 <span class="caption text-muted"><i>Dialogue System modeled as a Partially Observable Markov Decision Process.</i></span>
 </center>
 
