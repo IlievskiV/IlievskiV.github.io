@@ -65,12 +65,12 @@ comments:
     shortname            : "https-ilievskiv-github-io"
 
 atom_feed:
-  path                   : "blog.xml" # blank (default) uses feed.xml
+  path: "blog.xml"
 
 feed:
   collections:
     portfolio:
-      path: "/blog.xml"
+      path: "blog.xml"
 
 # Searching the website
 search                   : true # true, false (default)
