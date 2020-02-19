@@ -64,7 +64,7 @@ comments:
 
 feed:
   collections:
-    portfolio:
+    blog:
       path: "blog.xml"
 
 # Searching the website
@@ -241,28 +241,17 @@ compress_html:
     envs: development
 
 collections:
-  portfolio:
+  blog:
     output: true
     permalink: /:collection/:path/
 
 
 # Defaults
 defaults:
-  # _posts
+  # _blog
   - scope:
       path: ""
-      type: posts
-    values:
-      layout: single
-      author_profile: true
-      read_time: true
-      comments: true # true
-      share: true
-      related: true
-  # _portfolio
-  - scope:
-      path: ""
-      type: portfolio
+      type: blog
     values:
       layout: single
       author_profile: true
