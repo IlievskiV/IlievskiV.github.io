@@ -1,0 +1,451 @@
+---
+layout:      single
+title:       "JS Visualization: Discover Different Visualization Tools - Part 1"
+excerpt:     "Reviewing the JavaScript charting libraries with a hands-on experience"
+description: ""
+date:        2020-03-10 09:00:00
+classes:     wide
+header:
+    teaser: "assets/images/js_visualization_landscape.png"
+    image: "assets/images/js_visualization_landscape.png"
+    og_image: "assets/images/js_visualization_landscape.png"
+    image_description: "JavaScript Visualization Ecosystem"
+    caption: "JavaScript Visualization Landscape"
+---
+<p>
+    In the following series of blog posts, we make a recension of different <strong>JavaScript</strong> visualization
+    libraries divided by their main functionality. We cover the following visualization categories :
+</p>
+
+<ul>
+    <li>Charting: producing the common DataViz charts. For instance line, bar and area charts;</li>
+    <li>Graphs: for plotting, manipulating and analyzing graph-based data;</li>
+    <li>Maps: for representing data that has geographical features and</li>
+    <li>3D: creating three-dimensional charts as well as animations.</li>
+</ul>
+
+<p>
+    The <strong>goal</strong> is to show the advantages and disadvantages of each framework. This is quite important to know
+    when searching what JavaScript visualization toolkit to use. We can see a nice landscape in the image
+    above of some of the available options among these categories. In this blog post, we will only analyze
+    the charting data visualization tools with hands-on experience for some of them.
+</p>
+
+<h2>Data</h2>
+
+<p>
+    In all coding demos, we use the life expectancy dataset. This dataset was originally downloaded from
+    Our World In Data <a href="https://ourworldindata.org/life-expectancy" target="_blank" rel=”noopener”>analysis</a>
+    on life expectancy around the globe. The dataset consists of the life expectancy of every country as well as
+    continents in the world through the years. We re-structure the data for the needs of our demos using this
+    <a href="https://github.com/IlievskiV/Amusive-Blogging-N-Coding/blob/master/JavaScript%20Visualization%20Zoo/data/life_expectancy_transform.ipynb" target="_blank" rel="noopener">Python notebook</a>.
+</p>
+
+<h2>Charting Tools</h2>
+
+<p>
+    There are plenty of tools for charting. That gives us an opportunity and flexibility to choose one that well
+    suits our needs. In the top-left corner of the image above, we see some of the popular charting <i>JavaScript</i>
+    tools. This list is not exhaustive of course, there are many other libraries not included here.
+</p>
+
+<p>
+    More or less, all these tools enable the developers to easily pick one and quickly reproduce the most common
+    and essential charts. We will more thoroughly analyze as well as give a coding example for <i>NVD3</i>,
+    <i>Plotly JS</i>, and <i>ApexCharts JS</i>.
+</p>
+
+<h2>NVD3: À-propos</h2>
+
+<p>
+    <a href="http://nvd3.org/index.html" target="_blank" rel="noopener nofollow">NVD3</a> is an open-source library
+    and it is based on <i>D3</i>. Its aim is to bring the power of <i>D3</i> while removing all unnecessary details
+    and make the chart reproduction as smooth as possible. With its simple look, it can easily serve in the financial
+    and more scientific sectors.
+</p>
+
+<h3>Popularity and maintainability</h3>
+
+<p>
+    The open-source <a href="https://github.com/novus/nvd3" target="_blank" rel="noopener nofollow">GitHub repository</a>
+    is quite popular with 7000 stars and 2200 forks. Officially, the library is used in 2700 other repositories.
+    Besides the active contributors, the library is additionally maintained and supported by a company named
+    <a href="https://www.novus.com/" target="_blank" rel="noopener nofollow">Novus</a>.
+    That might be one more indication that the library is actively developed.
+</p>
+
+<p>
+    Although the main GitHub repository is quite popular there is no development activity in the repository for
+    a long time. The development is moved to another not so popular
+    <a href="https://github.com/nvd3/nvd3" target="_blank" rel="noopener nofollow">repository</a>, in order to make
+    it compatible with version 4 of D3.
+</p>
+
+<h3>Palette of charts </h3>
+<p>
+    <i>NVD3</i> provides a decent amount of easily reproducible charts. On the
+    <a href="http://nvd3.org/examples/index.html" target="_blank" rel="noopener nofollow">official page</a> of examples,
+    we can see that it provides <i>single</i> and <i>multi-line charts</i>, <i>scatter</i> and <i>bubble charts</i>
+    as well as <i>discrete</i>, <i>grouped</i> and <i>stacked bar charts</i>. On top of this, it provides a
+    <i>stacked area</i>, <i>pie</i> and <i>bullet charts</i>.
+</p>
+
+<center>
+    <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/nvd3_examples.png" class="lazyload" alt="NVD3 chart gallery">
+    <span class="caption text-muted">
+        <i>Figure 1:</i> NVD3 chart gallery.
+    </span>
+</center>
+<br/>
+
+<h3>Demo</h3>
+
+<p>
+    To show the capabilities of <i>NVD3</i> we make a multiline plot using our life expectancy dataset. The data
+    for every line must be formatted in the following format in order to be consumed by the tool:
+</p>
+
+<center>
+    <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/nvd3_data_format.png" class="lazyload" align="NVD3 data format in JSON">
+</center>
+<br/>
+
+<p>
+    where the <i>key</i> is the name of the line to appear in the plot and <i>values</i> is a list of objects where each
+    object contains two values <i>x</i> and <i>y</i>, denoting each <i>(x, y)</i> pair to appear in the plot for
+    that line.
+</p>
+
+<p>
+    First, we have to load the data. For this reason, as in every <i>D3</i> application, we define the plotting logic
+    inside the callback function of the <i>d3.json</i> method:
+</p>
+
+<center>
+    <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/nvd3_function.png" class="lazyload" alt="NVD3 function signature">
+</center>
+<br/>
+
+<p>
+    After the successful data loading, from the set of charts, we select an interactive line chart with
+    the following code:
+</p>
+
+<center>
+    <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/nvd3_line_chart_def.png" class="lazyload" alt="NVD3 line chart definition">
+</center>
+<br/>
+
+<p>
+    We restrict the values on the y-axis to be between 0 and 80. Then we set the labels and the ticks
+    of the x and y-axis:
+</p>
+
+<center>
+    <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/nvd3_x_y_axis.png" class="lazyload" alt="NVD3 set x and y axis options">
+</center>
+<br/>
+
+<p>
+    In the end, we only associate the loaded data to the defined line chart and set it to gradually draw in half
+    a second (500 milliseconds):
+</p>
+
+<center>
+    <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/nvd3_data_binding.png" class="lazyload" alt="NVD3 data binding">
+</center>
+<br/>
+
+<p>Finally, the chart is depicted in the image below. You can try it on your own
+    <a href="{{ site.url }}{{ site.baseurl }}/assets/html/nvd3_index.html" target="_blank">here</a>.
+</p>
+
+<center>
+    <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/nvd3-line-chart.png" class="lazyload" alt="NVD3 multiline chart">
+    <span class="caption text-muted">
+        <i>Figure 2:</i> NVD3 Multi-line chart for the life expectancy data. Try it
+        <a href="{{ site.url }}{{ site.baseurl }}/assets/html/nvd3_index.html" target="_blank">here</a>.
+    </span>
+</center>
+
+
+<h3>Last words</h3>
+
+<p>
+    As we can see, it is quite easy and straightforward to produce a line chart using <i>NVD3</i>. The colors of each
+    line are automatically generated. On top of this, the chart is interactive, showing the current values for each
+    line in a box as we slide through it.
+</p>
+
+<p>
+    The legend is by default displayed in the right top corner and allows us to select what lines to display
+    on the grid. One nice feature is, by clicking one item in the legend, we can disable the associated line.
+    Moreover, by double-clicking the item, we select only that particular line. If we double-click again the same item,
+    we enable all lines.
+</p>
+
+<p>
+    However, it is not possible by default to select a subset of values and zoom over them. This is very useful
+    when we have many values on the x-axis and multiple lines that might vary over different regions.
+</p>
+
+<h2>Plotly JS: À-propos</h2>
+<p>
+    <a href="https://plot.ly/javascript/" target="_blank" rel="noopener">Plotly JS</a> is a popular open-source
+    JavaScript library built on top of <i>D3</i>. The aim is to provide organizations with a powerful tool to
+    build analytics apps in order to propagate the message of the data more efficiently. It has a simple and
+    neat UI that can serve many purposes: building data dashboards, presenting scientific results and data,
+    developing web and mobile applications.
+</p>
+
+
+<h3>Popularity and maintainability</h3>
+<p>
+    The official <a href="https://github.com/plotly/plotly.js/" target="_blank" rel="noopener nofollow">GitHub repo</a>
+    is very popular with more than 11000 stars and 1300 forks. The development is quite active with every day
+    commits and fixes. Moreover, the codebase is used in another 3700 repositories.
+</p>
+
+<p>
+    Apart from this, <i>Plotly</i> as a company is quite successful with a lot of funding, partners, clients, and
+    monthly active users. All of this is a guarantee for the quality and freshness of the codebase.
+</p>
+
+<h3>Palette of charts </h3>
+<p>
+    This library covers a wide range of charts, counting more than 40 different types of charts, all listed on the
+    official <a href="https://plot.ly/javascript/" target="_blank" rel="noopener nofollow">examples page</a>.
+    First of all, there are some basic charts like <i>line</i>, <i>bar</i> and <i>pie charts</i>, as well as the,
+    <i>scatter plots</i>. On top of this, we have the basic statistical charts like <i>box plots</i>,
+    <i>histograms</i> and <i>error bars</i>. This list of more scientific charts is augmented with
+    <i>contour plots</i>, <i>heatmaps</i> and <i>radar</i>, and <i>polar charts</i>.
+</p>
+
+<center>
+    <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/plotly_examples.png" class="lazyload" alt="Plotly JS chart gallery">
+    <span class="caption text-muted">
+        <i>Figure 3:</i> Plotly JS chart gallery.
+    </span>
+</center>
+<br/>
+
+<p>
+    There is support for plotting financial data. In this sector, we have a <i>waterfall</i>, <i>funnel</i>,
+    <i>bullet</i> and <i>candlestick charts</i>. Moreover, <i>Plotly JS</i> provides some <i>mapping charts</i>
+    for geo-based data. Last but not least, there are <i>3D charts</i> and <i>animations</i>.
+</p>
+
+<h3>Demo</h3>
+
+<p>
+    To demonstrate the capabilities of <i>Plotly JS</i> we make a bar plot using our life expectancy dataset. For each
+    region over the years we plot one bar. We have to structure the data stored in a <i>JSON</i> file in the
+    following format:
+</p>
+
+<center>
+    <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/plotly_data_format.png" class="lazyload" align="Plotly data format in JSON">
+</center>
+<br/>
+
+<p>
+    where the value inside the variable <i>name</i> is assigned to a particular bar and appears in the legend. The lists
+    <i>x</i> and <i>y</i> as their name implies, contain the values the plot is relating on the x and y-axis
+    respectively.
+</p>
+
+<p>
+    As previously seen, we have to successfully load the data and define the chart inside a callback function:
+</p>
+
+<center>
+    <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/plotly_function.png" class="lazyload" alt="Plotly JS function signature">
+</center>
+<br/>
+
+<p>
+    After the successful data loading, we create a <i>JavaScript</i> object named <i>layout</i> and inside we set
+    the bar plot options. First, we can set the title and specify that there will be a group of bars with a certain
+    gap between them:
+</p>
+
+<center>
+    <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/plotly_layout.png" class="lazyload" alt="Plotly bar chart layout definition">
+</center>
+<br/>
+
+<p>
+    Using the same object, we can easily set the x and y-axis options. Thus, we set the title, the tick options as
+    well as the range of values for each axis:
+</p>
+
+<center>
+    <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/plotly_x_y_axis.png" class="lazyload" alt="Plotly bar chart set x and y axis options">
+</center>
+<br/>
+
+The resulting bar chart is shown in the image below. The interactive web version of the plot can be found
+<a href="{{ site.url }}{{ site.baseurl }}/assets/html/plotly_index.html" target="_blank">here</a>.
+
+<center>
+    <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/plotly_bar_chart.png" class="lazyload" alt="Plotly bar chart">
+    <span class="caption text-muted">
+        <i>Figure 4:</i> Plotly bar chart for the life expectancy data. Try it
+        <a href="{{ site.url }}{{ site.baseurl }}/assets/html/plotly_index.html" target="_blank">here</a>.
+    </span>
+</center>
+
+<h3>Last words</h3>
+
+<p>
+    The charts generated with <i>Plotly JS</i> include many features. Firstly, they are interactive, showing the
+    values associated with their label in a box as we move through the plot. Furthermore, the legend is interactive
+    allowing us to select what bar plots to keep active. As an example, we can select only one bar and disable the rest.
+</p>
+
+<p>
+    One powerful feature is the toolbar that appears on top of the plot. It has many useful functionalities allowing
+    us to easily manipulate the plot. For instance, we can download the plot as an image, zoom over it and select a
+    subset of values on each axis to have a better look at them.
+</p>
+
+<h2>ApexCharts JS: À-propos</h2>
+
+<p>
+    <a href="https://apexcharts.com/" target="_blank" rel="noopener">ApexCharts JS</a> is an open-source library for
+    interactive charts. Its main goal is to provide web developers a way to create and integrate into their
+    web applications a large variety of charts in a straightforward manner. It has an interesting UI with specific
+    bright colors providing a unique experience.
+</p>
+
+<h3>Popularity and maintainability</h3>
+
+<p>
+    The <a href="https://github.com/apexcharts/apexcharts.js" target="_blank" rel="noopener nofollow">GitHub</a>
+    repository containing the full development is well maintained. It is very well documented with tones of examples
+    and clarifications. It has 8400 stars and it is used in another 4800 repositories, which is a good indicator
+    that it is attractive. However, the number of forks is relatively low compared to the other popular libraries,
+    only 447.
+</p>
+
+<p>
+    One additional factor is the collaboration of <i>ApexCharts</i> with
+    <a href="https://www.fusioncharts.com/" target="_blank" rel="noopener">FusionCharts</a>, another provider of
+    web and mobile visualization utilities. This additionally enhances the support and diversity of the
+    available charts.
+</p>
+
+<h3>Palette of charts </h3>
+<p>
+    <i>ApexCharts JS</i> contains a group of simple and easy-to-produce charts and more advanced charts. In the simple
+    charts, we can find the standard <i>line</i>, <i>area</i> and <i>bar</i> charts as well as the mix between them.
+    Furthermore, in this group of simple charts, there are the <i>candlestick</i>, <i>bubble</i> and <i>scatter</i>
+    plots. Finally, we have a <i>heatmap</i>, <i>pie</i>, and <i>radialbar</i>.
+</p>
+
+<center>
+    <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/apex_examples.png" class="lazyload" alt="ApexCharts JS chart gallery">
+    <span class="caption text-muted">
+        <i>Figure 5:</i> ApexCharts JS chart gallery.
+    </span>
+</center>
+<br/>
+
+<p>
+    In the more advanced types of charts, one can find the <i>Chord</i> and <i>Sankey</i> diagrams used for
+    representing flows. In addition, there are <i>Funnel</i>, <i>Pyramid</i> and <i>Sunburst</i> charts.
+    There are also many advanced statistical charts. A reference to all charts can be found
+    <a href="https://apexcharts.com/javascript-chart-demos/" target="_blank" rel="noopener nofollow">here.</a>
+</p>
+
+<h3>Demo</h3>
+
+<p>
+    To test <i>ApexCharts JS</i> we create a multiline chart on top of our life expectancy data set. The data must
+    be stored in a <i>JSON</i> file using the following format:
+</p>
+
+<center>
+    <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/apex_data_format.png" class="lazyload" align="ApexCharts data format in JSON">
+</center>
+<br/>
+
+
+<p>
+    As usual, we must load the data from a JSON data file and upon the successful loading to define the chart
+    in a callback function. For instance, we load and define the chart in the following function:
+</p>
+
+<center>
+    <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/apex_function.png" class="lazyload" alt="ApexCharts JS function signature">
+</center>
+<br/>
+
+<p>
+    Then, we create an object named <i>options</i> and inside we define the multi-line chart components. We can start
+    by defining the data to plot, the title, and some basic chart properties:
+</p>
+
+<center>
+    <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/apex_option.png" class="lazyload" alt="ApexCharts JS multi-line chart layout definition">
+</center>
+<br/>
+
+<p>
+    Finally, in the same object we can specify the x and y-axis details like the data type, the range of values
+    and the title:
+</p>
+
+<center>
+    <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/apex_x_y_axis.png" class="lazyload" alt="ApexCharts JS set x and y axis options">
+</center>
+<br/>
+
+<p>
+    In the end, the line chart will look like the one presented in Figure 6 below. There is an interactive web
+    version to play with it, which can be found
+    <a href="{{ site.url }}{{ site.baseurl }}/assets/html/apex_index.html" target="_blank">here</a>.
+</p>
+
+<center>
+    <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/apex_line_chart.png" class="lazyload" alt="ApexCharts JS line chart">
+    <span class="caption text-muted">
+        <i>Figure 6:</i> ApexCharts JS multi-line chart for the life expectancy data. Try it
+        <a href="{{ site.url }}{{ site.baseurl }}/assets/html/apex_index.html" target="_blank">here</a>.
+    </span>
+</center>
+
+
+<h3>Last words</h3>
+
+<p>
+    Similarly, as the other tools, it is also quite simple to produce charts using the <i>ApexCharts JS</i>
+    tool. All charts are interactive with a possibility to zoom over a subset of values for a better analysis.
+    However, once we select a range of values, there is no way to restart the selection and get back in the previous
+    state.
+</p>
+
+<p>
+    The legend is interactive as well. We can disable and then enable again a certain line by clicking
+    on the legend item associated with it. Moreover, only by hovering the mouse pointer over one of the legend
+    items, the line associated with that item stands out while all other lines get transparent.
+</p>
+
+<h2>Summary</h2>
+<p>
+    In this blog post, we had a more thorough overview of the charting <i>JavaScript</i> libraries. In general,
+    we differentiate 4 types of <i>JavaScript</i> visualization libraries depending on their functionality:
+    charting, graphs, maps, and 3D.
+</p>
+
+<p>
+    Out of the many charting libraries, we make a hands-on demonstration with <i>NVD3</i>, <i>Plotly JS</i>
+    and <i>ApexCharts JS</i> using the <i>life expectancy</i> data set. We also give an overview of what
+    these tools provide and how reliable they are.
+</p>
+
+<p>
+    The full code to run all examples as well as the data set and the scripts to transform it can be
+    found <a href="https://github.com/IlievskiV/Amusive-Blogging-N-Coding/tree/master/JavaScript%20Visualization%20Zoo" target="_blank" rel="noopener">here.</a>
+    For more information please follow me on <a href="https://twitter.com/VladOsaurus" target="_blank" rel=”noopener”>Twitter</a>.
+</p>

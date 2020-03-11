@@ -1,0 +1,1 @@
+d3.json("../datasets/life-expectancy-nvd.json",function(a){var e=nv.models.lineChart().useInteractiveGuideline(!0).yDomain([0,80]);return e.xAxis.axisLabel("Year").tickFormat(d3.format(".1")),e.yAxis.axisLabel("Life expectancy (years)").tickFormat(d3.format(".02f")),d3.select("#chart svg").datum(a).transition().duration(500).call(e),nv.utils.windowResize(e.update),e});
