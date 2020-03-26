@@ -1,0 +1,356 @@
+---
+layout:      single
+title:       "JavaScript: Discover the Graph-Visualization Ecosystem"
+excerpt:     "Overview of the JavaScript Graph-Visualization libraries"
+description: "JavaScript Graph-Visualization libraries, graph data file formats, popular data repositories and
+              out-of-the-box tools"
+date:        2020-03-24 09:00:00
+classes:     wide
+header:
+    teaser: "assets/images/js_visualization_landscape.png"
+    image: "assets/images/js_visualization_landscape.png"
+    og_image: "assets/images/js_visualization_landscape.png"
+    image_description: "JavaScript Visualization Ecosystem"
+    caption: "JavaScript Visualization Landscape"
+---
+
+
+<p>
+    There are plenty of <i>JavaScript</i> Visualization tools. Based on their functionality, we can cluster them
+    into 4 main categories:
+</p>
+
+<ul>
+    <li>Charting: to produce the most common DataViz plots;</li>
+    <li>Graphs: representing and analyzing graph-based data;</li>
+    <li>Maps: for representing data that has geo-features and</li>
+    <li>3D: creating three-dimensional charts and cool animations.</li>
+</ul>
+
+<p>
+    In the previous <a href="{{ site.baseurl }}{% link _blog/2020-03-10-viz-tools-pt1.html %}" target="_blank">blog post</a>,
+    we started our <i>JavaScript</i> visualization trip with an overview of the charting libraries. This time we take
+    a look at the tools for plotting graph-based data.
+</p>
+
+<p>
+    A <strong>graph</strong> is a special data structure composed of <i>nodes</i> and <i>edges</i> between them.
+    Each graph <i>node</i> is a unique entity in <i>relation</i> to other nodes. This relation
+    is represented with an <i>edge</i>. In mathematics and computer sciences, there is a full
+    <a href="https://en.wikipedia.org/wiki/Graph_theory" target="_blank" rel="noopener">graph theory</a> dealing with
+    and analyzing the properties of the graphs. In the figure below, we see one graph example.
+</p>
+
+<center>
+    <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/graph_example.png" class="lazyload" alt="Example of a graph">
+    <span class="caption text-muted">
+        <i>Figure 1:</i> Graph example from <a href="https://js.cytoscape.org/demos/colajs-graph/" target="_blank" rel="nofollow noopener">Cytoscape</a>
+    </span>
+</center>
+<br/>
+
+<p>
+    The <strong>goal</strong> of this post is to give an overview of the graph-visualization ecosystem composed
+    of numerous data formats and repositories from one side and plenty of <i>JavaScript</i> low-level libraries as well
+    as out-of-the-box tools on the other side. <strong>Stay tuned!</strong>
+</p>
+
+<h2>Data Formats</h2>
+
+<p>
+    The graphs have a specific structure consisting of <i>nodes</i> and <i>edges</i> between them which requires special
+    structuring of the data used to model and represent them. For this reason, there exist several conventions
+    to store the graph-based data ranging from very simple formats to very complex that can store arbitrary data.
+    These data formats include:
+</p>
+
+<ul>
+    <li>
+        <strong>CSV</strong>: the simplest file format storing the information in a delimited text.
+    </li>
+    <li>
+        <strong>DOT</strong>: simple and easily understandable format supported by
+        <a href="https://www.graphviz.org/" target="_blank" rel="noopener">GraphViz</a>, an open-source tool for
+        graph visualization. More useful information can be found on
+        <a href="https://en.wikipedia.org/wiki/DOT_(graph_description_language)" target="_blank" rel="nofollow noopener">Wikipedia</a>.
+    </li>
+
+    <li>
+        <strong>GDF</strong>: a database-like file system that can be easily converted from <i>CSV</i>. It is officially used by
+        <a href="http://graphexploration.cond.org/" target="_blank" rel="noopener">GUESS</a>, an exploratory data
+        analysis and visualization tool for graphs and networks.
+    </li>
+    <li>
+        <strong>GML</strong>: the Graph Modelling Language is a hierarchical file format with key-value lists. Its aim is to support
+        flexibility and portability. It is supported by many tools. More information can be found on
+        <a href="https://en.wikipedia.org/wiki/Graph_Modelling_Language" target="_blank" rel="nofollow noopener">Wikipedia</a>.
+    </li>
+    <li>
+        <strong>GraphML</strong>: is an <i>XML</i> based file format. This gives the format a lot of expressiveness power and we can
+        define and represent many different graph structures. Many tools have adopted this file format. The full
+        documentation, as well as specification, can be found on the official
+        <a href="http://graphml.graphdrawing.org/" target="_blank" rel="noopener">GraphML website</a>.
+    </li>
+    <li>
+        <strong>GEXF</strong>: abbreviated from Graph Exchange XML format, as its name implies is also an <i>XML</i> format. It was
+        designed by <a href="https://gephi.org/" target="_blank" rel="noopener">Gephi</a>, an open-source graph
+        visualization platform, with a goal to describe complex and exchangeable network structures. To find out
+        more check the <i>Gephi's</i>
+        <a href="https://github.com/gephi/gexf/wiki/Basic-Concepts" target="_blank" rel="nofollow noopener">GitHub Wiki Page</a>
+        describing the format.
+    </li>
+</ul>
+
+<p>
+    A nice summary of all possible graph file formats can be found on the <i>Gephi's</i> website on
+    <a href="https://gephi.org/users/supported-graph-formats/" target="_blank" rel="nofollow noopener">Supported Graph Formats</a>
+    page. For convenience reasons we summarize the above-mentioned formats and their properties in the table below:
+</p>
+
+<center>
+    <table style="width: 100%; table-layout: fixed; overflow: hidden;">
+        <thead>
+            <tr>
+                <th style="text-align: center;">File Format</th>
+                <th style="text-align: center;">Matrix Structure</th>
+                <th style="text-align: center;">XML Structure</th>
+                <th style="text-align: center;">Edge Weight</th>
+                <th style="text-align: center;">Attributes</th>
+                <th style="text-align: center;">Visualization Attributes</th>
+                <th style="text-align: center;">Hierarchical Graphs</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td style="text-align: center;">CSV</td>
+                <td style="text-align: center;" bgcolor="#90ee90">Yes</td>
+                <td style="text-align: center;" bgcolor="#ffcccb">No</td>
+                <td style="text-align: center;" bgcolor="#90ee90">Yes</td>
+                <td style="text-align: center;" bgcolor="#ffcccb">No</td>
+                <td style="text-align: center;" bgcolor="#ffcccb">No</td>
+                <td style="text-align: center;" bgcolor="#ffcccb">No</td>
+            </tr>
+
+            <tr>
+                <td style="text-align: center;">DOT</td>
+                <td style="text-align: center;" bgcolor="#ffcccb">No</td>
+                <td style="text-align: center;" bgcolor="#ffcccb">No</td>
+                <td style="text-align: center;" bgcolor="#90ee90">Yes</td>
+                <td style="text-align: center;" bgcolor="#ffcccb">No</td>
+                <td style="text-align: center;" bgcolor="#90ee90">Yes</td>
+                <td style="text-align: center;" bgcolor="#ffcccb">No</td>
+            </tr>
+
+            <tr>
+                <td style="text-align: center;">GDF</td>
+                <td style="text-align: center;" bgcolor="#ffcccb">No</td>
+                <td style="text-align: center;" bgcolor="#ffcccb">No</td>
+                <td style="text-align: center;" bgcolor="#90ee90">Yes</td>
+                <td style="text-align: center;" bgcolor="#90ee90">Yes</td>
+                <td style="text-align: center;" bgcolor="#90ee90">Yes</td>
+                <td style="text-align: center;" bgcolor="#ffcccb">No</td>
+            </tr>
+
+            <tr>
+                <td style="text-align: center;">GML</td>
+                <td style="text-align: center;" bgcolor="#ffcccb">No</td>
+                <td style="text-align: center;" bgcolor="#ffcccb">No</td>
+                <td style="text-align: center;" bgcolor="#90ee90">Yes</td>
+                <td style="text-align: center;" bgcolor="#90ee90">Yes</td>
+                <td style="text-align: center;" bgcolor="#90ee90">Yes</td>
+                <td style="text-align: center;" bgcolor="#ffcccb">No</td>
+            </tr>
+
+            <tr>
+                <td style="text-align: center;">GraphML</td>
+                <td style="text-align: center;" bgcolor="#ffcccb">No</td>
+                <td style="text-align: center;" bgcolor="#90ee90">Yes</td>
+                <td style="text-align: center;" bgcolor="#90ee90">Yes</td>
+                <td style="text-align: center;" bgcolor="#90ee90">Yes</td>
+                <td style="text-align: center;" bgcolor="#90ee90">Yes</td>
+                <td style="text-align: center;" bgcolor="#90ee90">Yes</td>
+            </tr>
+
+            <tr>
+                <td style="text-align: center;">GEXF</td>
+                <td style="text-align: center;" bgcolor="#ffcccb">No</td>
+                <td style="text-align: center;" bgcolor="#90ee90">Yes</td>
+                <td style="text-align: center;" bgcolor="#90ee90">Yes</td>
+                <td style="text-align: center;" bgcolor="#90ee90">Yes</td>
+                <td style="text-align: center;" bgcolor="#90ee90">Yes</td>
+                <td style="text-align: center;" bgcolor="#90ee90">Yes</td>
+            </tr>
+        </tbody>
+    </table>
+    <span class="caption text-muted"><i>Table 1:</i> Graph File Formats and their properties</span>
+</center>
+
+<h2>Data Repositories</h2>
+
+<p>
+    In order to facilitate the network and graph-analysis research, there are plenty of data repositories. These
+    data sources contain tones of data in diverse and numerous domains including biology, machine learning, social
+    sciences, physics, etc. Some of the most popular repositories are the following:
+</p>
+
+<ul>
+    <li>
+        <strong>SNAP Collection:</strong> hosted by <i>Stanford University</i>, this collection is part of the
+        Stanford Network Analysis Platform (SNAP) which is a <i>C++</i> graph-mining and network analysis library.
+        More than 100 well-documented data sets, nicely clustered in various areas can be found on the official SNAP
+        <a href="https://snap.stanford.edu/data/" target="_blank" rel="nofollow noopener">website</a>.
+    </li>
+
+    <li>
+        <strong>Network Repository:</strong> one of the largest repositories for network and graph data in more than
+        30 domains. All the data is nicely documented and organized on the
+        <a href="http://networkrepository.com/" target="_blank" rel="nofollow noopener">official web page</a>.
+    </li>
+
+    <li>
+        <strong>KONECT:</strong> which is an abbreviation of <i>the Koblenz Network Collection</i> is a collaboration
+        whose aim is to collect various types of large network data sets in order to boost the network research.
+        The <a href="http://konect.uni-koblenz.de/" target="_blank" rel="nofollow noopener">data repository</a> holds
+        more than 260 well-maintained data sets.
+    </li>
+
+    <li>
+        <strong>UCI Network Repository:</strong> is maintained by the <i>University of California</i> with the goal
+        to facilitate the research in this domain. The
+        <a href="https://networkdata.ics.uci.edu/resources.php" target="_blank" rel="nofollow noopener">repo</a>
+        contains many different network data sets as well as links to other useful data sources.
+    </li>
+</ul>
+
+<h2>Graph Visualization Libraries</h2>
+
+<p>
+    The JavaScript Graph Visualization landscape is quite rich and contains dozens of libraries. Some of these libraries
+    are nicely summarized in the top-right corner of the image above. This list is not exhaustive of course, there are
+    many other tools not listed here. In this
+    <a href="https://medium.com/@Elise_Deux/the-list-of-graph-visualization-libraries-7a7b89aab6a6" target="_blank" rel="nofollow noopener">Medium story</a>,
+    you can find a more comprehensive list.
+
+    In the following section, we briefly overview the following GraphViz libraries: <i>Cytoscape JS</i>,
+    <i>Sigma JS</i>, <i>VivaGraph JS</i>, and <i>Springy JS</i>.
+</p>
+
+<p>
+    All these libraries are open-source and everyone can contribute to their development. Their implementation is
+    hosted on <i>GitHub</i>. For this reason, in the figure below we summarize their <i>GitHub</i> stats as of the
+    date of publishing of this post. These stats might be a good indicator of the development activity and popularity
+    of the library.
+</p>
+
+<center>
+    <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/GitHubStats_GraphViz.png" class="lazyload" alt="GitHub stats for the Graph Visualization JavaScript Open-Source Libraries">
+    <span class="caption text-muted">
+        <i>Figure 2:</i> GitHub stats for some of the Graph Visualization Open-Source Libraries
+    </span>
+</center>
+<br/>
+
+<p>
+    It is worth mentioning that all of these libraries allow us to explore the data interactively, which is quite
+    important as we have demonstrated in the blog
+    <a href="{{ site.baseurl }}{% link _blog/2020-02-08-interactive-dataviz.html %}" target="_blank">"The Importance of Interactive Data Visualization"</a>:
+</p>
+
+<blockquote style="font-size: 24px;">
+    <i>
+        The human-computer interaction is more immersive and the results are more interpretable.
+    </i>
+</blockquote>
+
+<h3>Cytoscape JS</h3>
+
+<p>
+    Initially developed to analyze and visualize biological and molecular interactions and networks,
+    <a href="https://cytoscape.org/" target="_blank" rel="noopener">Cytoscape</a>
+    evolved furthermore as a general-purpose graph visualization and network analysis tool. The
+    <a href="https://js.cytoscape.org/" target="_blank" rel="nofollow noopener">JavaScript API</a>
+    augments the out-of-the-box tool to create nice graph plots in many interdisciplinary areas as summarized
+    in their <a href="https://cytoscape.org/screenshots.html" target="_blank" rel="nofollow noopener">gallery</a>
+    of examples.
+</p>
+
+<h3>Sigma JS</h3>
+<p>
+    <a href="http://sigmajs.org/" target="_blank" rel="noopener">Sigma JS</a> is an open-source tool mainly focused
+    on deploying interactive graph visualizations in web applications. It is based on
+    <a href="https://en.wikipedia.org/wiki/WebGL" target="_blank" rel="nofollow noopener">WebGL</a>
+    (or alternatively on <a href="https://en.wikipedia.org/wiki/Canvas_element" target="_blank" rel="nofollow noopener">Canvas</a>)
+    to render efficiently the graphs in the browser. On the official
+    <a href="https://github.com/jacomyal/sigma.js" target="_blank" rel="nofollow noopene">GitHub</a> repository, we can
+    find many interesting examples as well as proper
+    <a href="https://github.com/jacomyal/sigma.js/wiki" target="_blank" rel="nofollow noopener">documentation</a>.
+</p>
+
+<h3>Cola JS</h3>
+
+<p>
+    The open-source JavaScript library <a href="https://ialab.it.monash.edu/webcola/" target="_blank" rel="noopener">Cola</a>
+    (which stands for Constrained Layout), or also known as <i>WebCola</i> is not a standalone graph-visualization
+    library. It is rather an implementation of a constraint-based algorithm for drawing graph layouts. This library
+    complements the other libraries with graph visualization capabilities like <i>D3</i> or <i>Cytoscape</i>.
+</p>
+
+<h3>VivaGraph JS</h3>
+
+<p>
+    Among the other alternatives is the <i>VivaGraph JS</i> library which provides a nice API for rendering graphs on
+    the web using many different engines and layouts. The official
+    <a href="https://github.com/anvaka/VivaGraphJS" target="_blank" rel="nofollow noopener">GitHub repo</a> provides
+    introductory guidelines as well as examples of how to use the library.
+</p>
+
+<h3>Springy JS</h3>
+
+<p>
+    <a href="http://getspringy.com/" target="_blank" rel="noopener">Springy JS</a> is another open-source tool designed
+    to be lightweight to use. Thus, it only provides a
+    <a href="https://en.wikipedia.org/wiki/Force-directed_graph_drawing" target="_blank" rel="nofollow noopener">force-directed</a>
+    layout with simple graph-manipulation capabilities. Same as with many other tools, it is possible to use
+    either <i>WebGL</i>, <i>Canvas</i> or <i>SVG</i> rendering engine.
+</p>
+
+<h2>Summary</h2>
+<p>
+    In this blog post, we analyzed the <i>Graph Visualization</i> ecosystem. We started with a short introduction to the
+    graph data structure. Then we continued presenting the different data formats to store a graph and where to find
+    such data. Afterward, we briefly overviewed some popular <i>JavaScript</i> open-source graph visualization
+    libraries.
+</p>
+
+
+<h2>Appendix: GUI-based tools</h2>
+<p>
+    Aside from the programming interfaces that allow us to explicitly program the graph visualization, there
+    are many out-of-the-box tools. These tools can automatically load data, with support for many different file
+    formats. On top of this, they provide functionalities to manipulate and analyze the graphs in real-time.
+</p>
+
+<p>
+    In this appendix, we briefly summarize the following three tools: <i>Gephi</i> and <i>GraphVis</i>.
+    You can find a comprehensive list of many of these tools in the following
+    <a href="https://medium.com/@Elise_Deux/list-of-free-graph-visualization-applications-9c4ff5c1b3cd" target="_blank" rel="nofollow noopener">Medium story</a>.
+</p>
+
+<h3>Gephi</h3>
+<p>
+    <a href="http://gephi.org/" target="_blank" rel="noopener">Gephi</a> is a free, open-source and multi-platform tool.
+    It was designed and developed to enable real-time rendering and analysis of huge graphs. Thus, it contains a special
+    3D engine that only uses the <i>GPU</i> and leaves the <i>CPU</i> free. Moreover, it implements a fast and efficient
+    constraint-optimization algorithm called <i>Force Atlas</i> in order to draw the graphs in an aesthetically-pleasing
+    way. Apart from this, <i>Gephi</i> defined and developed the <i>GEXF</i> file format as we described before.
+</p>
+
+
+<h3>GraphVis</h3>
+<p>
+    <a href="http://graphvis.com/" target="_blank" rel="noopener">GraphVis</a> is a web-based commercial tool that
+    empowers real-time interactive graph mining and relational machine learning (link prediction, finding
+    influential nodes). Its GUI is very appealing and enables users to interactively query, filter and find patterns
+    in one complex network of nodes and edges.
+</p>
