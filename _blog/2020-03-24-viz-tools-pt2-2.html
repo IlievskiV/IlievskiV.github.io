@@ -1,0 +1,372 @@
+---
+layout:      single
+title:       "JavaScript: Graph Visualization using Cytoscape JS"
+excerpt:     "Hands-on experience with Cytoscape JS"
+description: "Tutorial on how to create an interactive graph-visualization by using Cytoscape JS"
+date:        2020-03-25 09:00:00
+classes:     wide
+header:
+    teaser: "assets/images/js_visualization_landscape.png"
+    image: "assets/images/js_visualization_landscape.png"
+    og_image: "assets/images/js_visualization_landscape.png"
+    image_description: "JavaScript Visualization Ecosystem"
+    caption: "JavaScript Visualization Landscape"
+---
+
+<p>
+    In the last <a href="{{ site.baseurl }}{% link _blog/2020-03-24-viz-tools-pt2-1.html %}" target="_blank">blog post</a>,
+    we dived in the Graph-Visualization ecosystem. We elaborated more on the common data formats, the existing and popular
+    data repositories, the  <i>JavaScript</i> libraries as well as some GUI-based tools.
+</p>
+
+<p>
+    This time we go step further and demonstrate what means an interactive graph visualization. On the importance
+    of interactive visualization, we already discussed in one of the previous blogs,
+    <a href="{{ site.baseurl }}{% link _blog/2020-02-08-interactive-dataviz.html %}" target="_blank">"The Importance of Interactive Data Visualization"</a>,
+    which is quite aligned with the following quote:
+</p>
+
+<blockquote style="font-size: 24px;">
+    <i>
+        Visualization gives you answers to questions you didn’t know you had.
+    </i>
+</blockquote>
+<p><cite>-- Ben Schneiderman</cite>
+
+<p>In a similar way, we show how the interactive graph visualization can be beneficial in discovering data patterns.
+<strong>Stay tuned!</strong></p>
+
+<h2>Hands-On</h2>
+
+<p>
+    To demonstrate the capabilities of the Graph Visualization Libraries we use the
+    <a href="https://js.cytoscape.org/" target="_blank" rel="noopener">Cytoscape JS</a> library.
+    As a starting point, we use the code provided in the following
+    <a href="https://github.com/cytoscape/cytoscape.js-tutorial-demo" target="_blank" rel="nofollow noopener">GitHub repo</a>,
+    which is a common playground to start with <i>Cytoscape</i>.
+</p>
+
+<h3>Data</h3>
+
+<p>
+    The dataset we use is the <i>class dependency network of the JDK 1.6.0.7 framework</i> downloaded from the
+    <a href="http://konect.uni-koblenz.de/networks/subelj_jdk" target="_blank" rel="nofollow noopener">KOBLENZ data repository</a>.
+    Each node represents one class and an edge between them means there is a dependency between the classes.
+    The data set is stored in a <i>CSV</i> file format and it contains <i>6,434</i> nodes and <i>150,985</i> edges, which
+    is an immense number to load and render in the browser. For this reason, just for demonstration purposes, we select
+    a subset of 50 nodes and all the edges between them.
+</p>
+
+<p>
+    The <i>Cytoscape JS</i> library expects the data to be stored in a <i>JSON</i> file with a
+    <a href="https://js.cytoscape.org/#notation/elements-json" target="_blank" rel="nofollow noopenernoopener">predefined structure</a>.
+    Thus, we transform the original data set by using this
+    <a href="https://github.com/IlievskiV/Amusive-Blogging-N-Coding/blob/master/JavaScript%20Visualization%20Zoo/Graphs/transform_data.ipynb" target="_blank" rel="noopener">Python Notebook</a>.
+
+</p>
+<p>
+    We start by selecting a subset of 50 nodes. For each node, we extract the name of the <i>class</i> it represents and
+    the <i>package</i> where it belongs. Along with this, we include some attributes that define the rendering of the
+    node:
+</p>
+
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td style="border-bottom: none;"><pre style="margin: 0; line-height: 125%"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35</pre></td><td style="border-bottom: none;"><pre style="margin: 0; line-height: 125%">NUM_NODES = <span style="color: #0000DD; font-weight: bold">50</span>  <span style="color: #888888"># how many nodes to subselect</span>
+nodes = []  <span style="color: #888888"># the final subset of nodes</span>
+packages = []  <span style="color: #888888"># the set of packages for each node</span>
+
+<span style="color: #888888"># each line represents one node</span>
+<span style="color: #008800; font-weight: bold">with</span> <span style="color: #003388">open</span>(<span style="color: #dd2200; background-color: #fff0f0">&#39;raw_data/ent.subelj_jdk_jdk.class.name&#39;</span>, <span style="color: #dd2200; background-color: #fff0f0">&#39;r&#39;</span>) <span style="color: #008800; font-weight: bold">as</span> f:
+    <span style="color: #008800; font-weight: bold">for</span> i, line <span style="color: #008800">in</span> <span style="color: #003388">enumerate</span>(f):
+        <span style="color: #888888"># stop when the limit is reached</span>
+        <span style="color: #008800; font-weight: bold">if</span> i == NUM_NODES:
+            <span style="color: #008800; font-weight: bold">break</span>
+
+        full_name = <span style="color: #003388">str</span>(line[:-<span style="color: #0000DD; font-weight: bold">1</span>])  <span style="color: #888888"># the  fill name</span>
+        class_name = full_name.split(<span style="color: #dd2200; background-color: #fff0f0">&#39;.&#39;</span>)[-<span style="color: #0000DD; font-weight: bold">1</span>]  <span style="color: #888888"># only the class name</span>
+        package = <span style="color: #dd2200; background-color: #fff0f0">&#39;.&#39;</span>.join(full_name.split(<span style="color: #dd2200; background-color: #fff0f0">&#39;.&#39;</span>)[:-<span style="color: #0000DD; font-weight: bold">1</span>])  <span style="color: #888888"># the package where the class belongs</span>
+        packages.append(package)
+        node = {
+            <span style="color: #dd2200; background-color: #fff0f0">&quot;data&quot;</span>: {
+                <span style="color: #dd2200; background-color: #fff0f0">&quot;id&quot;</span>: <span style="color: #003388">str</span>(i + <span style="color: #0000DD; font-weight: bold">1</span>),  <span style="color: #888888"># the string representation of the unique node ID</span>
+                <span style="color: #dd2200; background-color: #fff0f0">&quot;idInt&quot;</span>: i + <span style="color: #0000DD; font-weight: bold">1</span>,  <span style="color: #888888"># the numeric representation of the unique node ID</span>
+                <span style="color: #dd2200; background-color: #fff0f0">&quot;name&quot;</span>: <span style="color: #dd2200; background-color: #fff0f0">&#39;cls: &#39;</span> + class_name + <span style="color: #dd2200; background-color: #fff0f0">&quot;; pkg: &quot;</span> + package,  <span style="color: #888888"># the name of the node used for printing</span>
+                <span style="color: #dd2200; background-color: #fff0f0">&quot;query&quot;</span>: <span style="color: #008800; font-weight: bold">True</span>,
+                <span style="color: #dd2200; background-color: #fff0f0">&quot;classes&quot;</span>: package  <span style="color: #888888"># the keyword &#39;classes&#39; is used to group the nodes in classes</span>
+            },
+            <span style="color: #dd2200; background-color: #fff0f0">&quot;group&quot;</span>: <span style="color: #dd2200; background-color: #fff0f0">&quot;nodes&quot;</span>,  <span style="color: #888888"># it belongs in the group of nodes</span>
+            <span style="color: #dd2200; background-color: #fff0f0">&quot;removed&quot;</span>: <span style="color: #008800; font-weight: bold">False</span>,
+            <span style="color: #dd2200; background-color: #fff0f0">&quot;selected&quot;</span>: <span style="color: #008800; font-weight: bold">False</span>,  <span style="color: #888888"># the node is not selected</span>
+            <span style="color: #dd2200; background-color: #fff0f0">&quot;selectable&quot;</span>: <span style="color: #008800; font-weight: bold">True</span>,  <span style="color: #888888"># we can select the node</span>
+            <span style="color: #dd2200; background-color: #fff0f0">&quot;locked&quot;</span>: <span style="color: #008800; font-weight: bold">False</span>,  <span style="color: #888888"># the node position is not immutable</span>
+            <span style="color: #dd2200; background-color: #fff0f0">&quot;grabbable&quot;</span>: <span style="color: #008800; font-weight: bold">True</span>  <span style="color: #888888"># we can grab and move the node</span>
+        }
+        nodes.append(node)
+
+<span style="color: #888888"># get all the unique package names</span>
+packages = <span style="color: #003388">set</span>(packages)
+<span style="color: #003388">print</span>(packages)
+</pre></td></tr></table></div>
+<br/>
+
+<p>
+    Once we know the nodes, we select the edges between them. For each edge, it is mandatory to specify the
+    <i>source</i> and the <i>target</i> node. We also include additional rendering options. Additionally,
+    for each node, we calculate the <i>in-degree</i> number which is the number of incoming edges. We use
+    the normalized <i>in-degree</i> number as a score to help us better visualize the nodes:
+</p>
+
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td style="border-bottom: none;"><pre style="margin: 0; line-height: 125%"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42</pre></td><td style="border-bottom: none;"><pre style="margin: 0; line-height: 125%">edges = []  <span style="color: #888888"># the final subset of edges</span>
+
+<span style="color: #888888"># each line represents an edge between two nodes. The nodes are represented by their id</span>
+<span style="color: #008800; font-weight: bold">with</span> <span style="color: #003388">open</span>(<span style="color: #dd2200; background-color: #fff0f0">&#39;raw_data/out.subelj_jdk_jdk&#39;</span>, <span style="color: #dd2200; background-color: #fff0f0">&#39;r&#39;</span>) <span style="color: #008800; font-weight: bold">as</span> f:
+    <span style="color: #888888"># jump the first two lines, they contain some info</span>
+    <span style="color: #008800; font-weight: bold">for</span> i, line <span style="color: #008800">in</span> <span style="color: #003388">enumerate</span>(f):
+        <span style="color: #008800; font-weight: bold">if</span> i == <span style="color: #0000DD; font-weight: bold">0</span> <span style="color: #008800">or</span> i == <span style="color: #0000DD; font-weight: bold">1</span>:
+            <span style="color: #008800; font-weight: bold">continue</span>
+
+        <span style="color: #888888"># get the source node and the target node</span>
+        node_ids = line.strip().split(<span style="color: #dd2200; background-color: #fff0f0">&#39; &#39;</span>)
+        source, target = node_ids[<span style="color: #0000DD; font-weight: bold">0</span>], node_ids[<span style="color: #0000DD; font-weight: bold">1</span>]
+        <span style="color: #008800; font-weight: bold">if</span> <span style="color: #003388">int</span>(source) &lt;= NUM_NODES <span style="color: #008800">and</span> <span style="color: #003388">int</span>(target) &lt;= NUM_NODES:
+            edge = {
+                <span style="color: #dd2200; background-color: #fff0f0">&quot;data&quot;</span>: {
+                    <span style="color: #dd2200; background-color: #fff0f0">&quot;source&quot;</span>: <span style="color: #003388">str</span>(source),  <span style="color: #888888"># the source node id (edge comes from this node)</span>
+                    <span style="color: #dd2200; background-color: #fff0f0">&quot;target&quot;</span>: <span style="color: #003388">str</span>(target),  <span style="color: #888888"># the target node id (edge goes to this node)</span>
+                    <span style="color: #dd2200; background-color: #fff0f0">&quot;directed&quot;</span>: <span style="color: #008800; font-weight: bold">True</span>,
+                    <span style="color: #dd2200; background-color: #fff0f0">&quot;intn&quot;</span>: <span style="color: #008800; font-weight: bold">True</span>,
+                    <span style="color: #dd2200; background-color: #fff0f0">&quot;rIntnId&quot;</span>: i - <span style="color: #0000DD; font-weight: bold">1</span>,
+                    <span style="color: #dd2200; background-color: #fff0f0">&quot;id&quot;</span>: <span style="color: #dd2200; background-color: #fff0f0">&quot;e&quot;</span> + <span style="color: #003388">str</span>(i - <span style="color: #0000DD; font-weight: bold">1</span>)
+                },
+                <span style="color: #dd2200; background-color: #fff0f0">&quot;position&quot;</span>: {},  <span style="color: #888888"># the initial position is not known</span>
+                <span style="color: #dd2200; background-color: #fff0f0">&quot;group&quot;</span>: <span style="color: #dd2200; background-color: #fff0f0">&quot;edges&quot;</span>,  <span style="color: #888888"># it belongs in the group of edges</span>
+                <span style="color: #dd2200; background-color: #fff0f0">&quot;removed&quot;</span>: <span style="color: #008800; font-weight: bold">False</span>,
+                <span style="color: #dd2200; background-color: #fff0f0">&quot;selected&quot;</span>: <span style="color: #008800; font-weight: bold">False</span>,  <span style="color: #888888"># the edge is not selected</span>
+                <span style="color: #dd2200; background-color: #fff0f0">&quot;selectable&quot;</span>: <span style="color: #008800; font-weight: bold">True</span>,  <span style="color: #888888"># we can select the node</span>
+                <span style="color: #dd2200; background-color: #fff0f0">&quot;locked&quot;</span>: <span style="color: #008800; font-weight: bold">False</span>,  <span style="color: #888888"># the edge position is not immutable</span>
+                <span style="color: #dd2200; background-color: #fff0f0">&quot;grabbable&quot;</span>: <span style="color: #008800; font-weight: bold">True</span>,  <span style="color: #888888"># we can grab and move the node</span>
+                <span style="color: #dd2200; background-color: #fff0f0">&quot;directed&quot;</span>: <span style="color: #008800; font-weight: bold">True</span>  <span style="color: #888888"># the edge is directed</span>
+            }
+            edges.append(edge)
+
+<span style="color: #888888"># initial dictionary mapping each node id to its normalized indegree</span>
+nodes_indegree = <span style="color: #003388">dict</span>(<span style="color: #003388">zip</span>(<span style="color: #003388">list</span>(<span style="color: #003388">range</span>(<span style="color: #0000DD; font-weight: bold">1</span>, NUM_NODES + <span style="color: #0000DD; font-weight: bold">1</span>)), [<span style="color: #0000DD; font-weight: bold">0</span>]*(NUM_NODES + <span style="color: #0000DD; font-weight: bold">1</span>)))
+N = <span style="color: #003388">len</span>(edges)
+<span style="color: #008800; font-weight: bold">for</span> e <span style="color: #008800">in</span> edges:
+    nodes_indegree[<span style="color: #003388">int</span>(e[<span style="color: #dd2200; background-color: #fff0f0">&quot;data&quot;</span>][<span style="color: #dd2200; background-color: #fff0f0">&quot;target&quot;</span>])] += <span style="color: #0000DD; font-weight: bold">1.0</span>/N
+
+<span style="color: #888888"># assign the normalized indegree to each node</span>
+<span style="color: #008800; font-weight: bold">for</span> node <span style="color: #008800">in</span> nodes:
+    node[<span style="color: #dd2200; background-color: #fff0f0">&quot;data&quot;</span>][<span style="color: #dd2200; background-color: #fff0f0">&quot;score&quot;</span>] = nodes_indegree[node[<span style="color: #dd2200; background-color: #fff0f0">&quot;data&quot;</span>][<span style="color: #dd2200; background-color: #fff0f0">&quot;idInt&quot;</span>]]
+</pre></td></tr></table></div>
+
+
+<h3>Demo</h3>
+
+
+<p>
+    There are three basic operations to execute in order to visualize the graph: <i>i) load the data</i>,
+    <i>ii) apply a style</i>, and <i>iii) apply a rendering algorithm</i>.
+</p>
+
+<p>
+    We already transformed and stored the data as described above. We can load the data using the following code
+    snippet:
+</p>
+
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td style="border-bottom: none;"><pre style="margin: 0; line-height: 125%"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></td><td style="border-bottom: none;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">let</span> $dataset = <span style="color: #dd2200; background-color: #fff0f0">&quot;jdk_dependency.json&quot;</span>;
+<span style="color: #008800; font-weight: bold">let</span> getDataset = name =&gt; fetch(<span style="color: #a61717; background-color: #e3d2d2">`</span>datasets/${name}<span style="color: #a61717; background-color: #e3d2d2">`</span>).then( toJson );
+<span style="color: #008800; font-weight: bold">let</span> applyDataset = dataset =&gt; {
+  cy.zoom(<span style="color: #0000DD; font-weight: bold">0.001</span>);  <span style="color: #888888">// set a zoom level</span>
+  cy.pan({ x: -<span style="color: #0000DD; font-weight: bold">9999999</span>, y: -<span style="color: #0000DD; font-weight: bold">9999999</span> });  <span style="color: #888888">// set the current panning position.</span>
+  cy.elements().remove();  <span style="color: #888888">// remove all the elements if any, before loading the data</span>
+  cy.add( dataset );  <span style="color: #888888">// set the data</span>
+}
+<span style="color: #008800; font-weight: bold">let</span> applyDatasetFromSelect = () =&gt;
+      Promise.resolve( $dataset ).then( getDataset ).then( applyDataset );
+</pre></td></tr></table></div>
+
+<br/>
+
+<p>
+    The <i>style</i> defines the visual appearance of the graph elements. The style information is usually stored in a
+    <i>JSON</i> file that resembles and follows the <i>CSS</i> conventions. For instance, we can specify the style of
+    the nodes in the following manner:
+</p>
+
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td style="border-bottom: none;"><pre style="margin: 0; line-height: 125%"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></td><td style="border-bottom: none;"><pre style="margin: 0; line-height: 125%">{
+  <span style="color: #bb0066; font-weight: bold">&quot;selector&quot;</span>: <span style="color: #dd2200; background-color: #fff0f0">&quot;node&quot;</span>,
+  <span style="color: #bb0066; font-weight: bold">&quot;style&quot;</span>: {
+     <span style="color: #bb0066; font-weight: bold">&quot;width&quot;</span>: <span style="color: #dd2200; background-color: #fff0f0">&quot;20&quot;</span>,
+     <span style="color: #bb0066; font-weight: bold">&quot;height&quot;</span>: <span style="color: #dd2200; background-color: #fff0f0">&quot;20&quot;</span>,
+     <span style="color: #bb0066; font-weight: bold">&quot;label&quot;</span>: <span style="color: #dd2200; background-color: #fff0f0">&quot;data(name)&quot;</span>,
+     <span style="color: #bb0066; font-weight: bold">&quot;font-size&quot;</span>: <span style="color: #dd2200; background-color: #fff0f0">&quot;5px&quot;</span>,
+     <span style="color: #bb0066; font-weight: bold">&quot;background-color&quot;</span>: <span style="color: #dd2200; background-color: #fff0f0">&quot;#aa0755&quot;</span>,
+     <span style="color: #bb0066; font-weight: bold">&quot;text-outline-width&quot;</span>: <span style="color: #dd2200; background-color: #fff0f0">&quot;1px&quot;</span>,
+     <span style="color: #bb0066; font-weight: bold">&quot;color&quot;</span>: <span style="color: #dd2200; background-color: #fff0f0">&quot;#fff&quot;</span>,
+  }
+}
+</pre></td></tr></table></div>
+<br/>
+
+For full details regarding the style please refer to the following
+<a href="https://js.cytoscape.org/#style" target="_blank" rel="nofollow noopener">page</a>. After defining the
+<i>style</i> we can simply load it:
+
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td style="border-bottom: none;"><pre style="margin: 0; line-height: 125%">1
+2
+3
+4
+5
+6
+7
+8</pre></td><td style="border-bottom: none;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">let</span> $stylesheet = <span style="color: #dd2200; background-color: #fff0f0">&quot;style.json&quot;</span>;
+<span style="color: #008800; font-weight: bold">let</span> getStylesheet = name =&gt; {
+  <span style="color: #008800; font-weight: bold">let</span> convert = res =&gt; name.match(<span style="color: #008800; background-color: #fff0ff">/[.]json$/</span>) ? toJson(res) : toText(res);
+  <span style="color: #008800; font-weight: bold">return</span> fetch(<span style="color: #a61717; background-color: #e3d2d2">`</span>stylesheets/${name}<span style="color: #a61717; background-color: #e3d2d2">`</span>).then( convert );}
+<span style="color: #008800; font-weight: bold">let</span> applyStylesheet = stylesheet =&gt; {
+  cy.style().fromJson( stylesheet ).update();}
+<span style="color: #008800; font-weight: bold">let</span> applyStylesheetFromSelect = () =&gt;
+  Promise.resolve( $stylesheet ).then( getStylesheet ).then( applyStylesheet );
+</pre></td></tr></table></div>
+<br/>
+
+<p>
+    Finally, we need to specify the <a href="https://js.cytoscape.org/#layouts" target="_blank" rel="nofollow noopener">layout</a>,
+    which algorithmically infers the positions of the nodes. Such an example is the
+    <a href="https://en.wikipedia.org/wiki/Force-directed_graph_drawing" target="_blank" rel="nofollow noopener">force-directed</a> algorithm,
+    which draws the graph in an aesthetically-pleasing way. In this demo, we use the <i>CoLa</i> layout,
+    which is a more sophisticated version of the <i>force-directed</i> layout.
+</p>
+
+<p>
+    Last but not least, once the graph is fully rendered we can run many searching and analysis algorithms on top of it.
+    For example in this demo, we can run the
+    <a href="https://en.wikipedia.org/wiki/Breadth-first_search" target="_blank" rel="nofollow noopener">Breadth-First Search (BFS)</a>
+    or <a href="https://en.wikipedia.org/wiki/Depth-first_search" target="_blank" rel="nofollow noopener">Depth-First Search (DFS)</a> algorithms.
+</p>
+
+<p>
+    In the animated image below we illustrate the final visualization of the graph. If you want to try it on your own,
+    you can do it by opening the following
+    <a href="{{ site.url }}{{ site.baseurl }}/assets/html/cytoscape_index.html" target="_blank">web page</a>.
+</p>
+
+<center>
+    <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/graphviz_jdk.gif" class="lazyload" alt="Demo of the Graph Visualization">
+    <br/>
+    <span class="caption text-muted">
+        <i>Animation:</i> Demo of the Graph Visualization using Cytoscape
+    </span>
+</center>
+<br/>
+
+<p>
+    The full code and data can be found in the following
+    <a href="https://github.com/IlievskiV/Amusive-Blogging-N-Coding/tree/master/JavaScript%20Visualization%20Zoo" target="_blank" rel="noopener">GitHub repo</a>.
+    For more information, follow me on <a href="https://twitter.com/VladOsaurus" target="_blank" rel="nofollow noopener">Twitter</a>.
+</p>
+
+<h2>Summary</h2>
+
+<p>
+    In this blog post, we showed a real coding example on how to create an interactive visualization using the
+    <i>Cytoscape JS</i> library. It is a powerful library with many options given to the developer. First of all,
+    we can design the appearance of the graph by using custom stylesheets. The graph aesthetical appearance is
+    furthermore reinforced with dozens of layouts like the one we used in our demo, the <i>CoLa</i> layout. Last
+    but not least this <i>JavaScript</i> library offers plenty of graph-analysis algorithms.
+</p>
