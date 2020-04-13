@@ -1,0 +1,348 @@
+---
+layout:      single
+title:       "Animated Visualization of Random Walks in Python"
+excerpt:     "Animation and visualization of random walks with Matplotlib in Python"
+description: "Tutorial on Random Walk using Python"
+date:        2020-04-12 09:00:00
+classes:     wide
+header:
+    teaser: "assets/images/random_walk_teaser.png"
+    image: "assets/images/random_walk_teaser.png"
+    og_image: "assets/images/random_walk_teaser.png"
+    image_description: "Animation of Random Walk with Python and Matplotlib"
+    caption: "Random Walk"
+---
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<p>
+    The <a href="https://en.wikipedia.org/wiki/Stochastic_process" target="_blank" rel="nofollow noopener">random processes</a>
+    are fundamental in a plethora of engineering and science domains. They are used to model complex systems like weather
+    forecasting, which are highly unpredictable.
+</p>
+
+
+<p>
+    In this <strong>blog post</strong>, we will introduce the simplest random process, i.e. the <i>simple random walk</i>,
+    which is the basis and foundation for many random processes. We will simulate a random walk using the <i>Python</i>
+    numerical libraries like <i>NumPy</i>. Moreover, we will make an animated visualization using the <i>Matplotlib</i> Animation
+    API in order to emphasize the random nature of this phenomenon. This is an important part because we
+    <a href="https://ilievskiv.github.io/blog/2020-02-08-interactive-dataviz/" target="_blank" rel="dofollow">convey our message more easily</a>.
+    So let's begin and <strong>stay tuned</strong>!
+</p>
+
+<h2>Intuition</h2>
+
+<p>
+    We are not in control of everything and we can't predict all outcomes although we are used thinking that way.
+    For example, how could we know the exact number of people in our favorite book store exactly at 12:36? We never
+    know since this number is random and can't be calculated based on all observations we have. It is not possible
+    to fit a magical deterministic formula to give us the answer. Instead, we can think of rough estimates and let the
+    exact number of people be pure mere of luck. Thus, the number of visitors in the book store from minute to minute
+    is a <strong>random process</strong>.
+</p>
+
+<center>
+    <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/queue_system.png" class="lazyload" alt="">
+    <br/>
+    <span class="caption text-muted">
+        <i>Fig. 1:</i> Queueing System used to model arrivals and departures
+    </span>
+</center>
+<br/>
+
+<p>
+    The random processes are used to model plenty of phenomena in the exact sciences and engineering. The best possible
+    way to start thinking of them is to play a game with
+    <a href="https://www.google.com/search?q=flip+a+coin" target="_blank" rel="nofollow noopener">coin tossing</a>.
+    Every time we flip the coin if the outcome is <i>head</i> we win 1 dollar and of the outcome is <i>tail</i> we
+    lose 1 dollar. Can we know how much dollars we would win or lose after 10 consecutive coin flips? Certainly no,
+    but what we can know is how probable some outcome is after 10 steps. This leads us to the definition of a random walk.
+</p>
+
+<h2>Random Walk Definition</h2>
+
+<p>
+    Let \( \{\epsilon_{k}\}_{k \in \mathbb{N}} \) be a sequence of independent and identically distributed (i.i.d)
+    discrete random variables such that \( \mathbb{P}\{ \epsilon_{k} = \pm 1 \} = {1 \over 2} \). We can think of
+    this in terms of the coin-tossing we had before. With a probability of \( 0.5 \), it can happen to be a <i>head</i>,
+    thus winning 1 dollar, and with a probability of \( 0.5 \) it can be a <i>tail</i> thus losing 1 dollar.
+</p>
+
+<p>
+    Then, a <i>simple random walk</i> \( \{X_{n}\}_{n \in \mathbb{N}} \) is defined as
+    \[ X_{n} = {\sum_{k=1}^{n} \epsilon_{k}} \]
+
+    We can think of this random variable like the cumulative sum of dollars we would have at time step \( n \). After flipping the coin
+    10 times, this sum might range from \( -10 \) to \( +10 \), or in general from \( -N \) to \( +N \).
+    Because \( N \) might be a large number we can normalize this range to be most of the time between \( -1 \) and
+    \( +1 \). We can construct such a thing using the
+    <a href="https://en.wikipedia.org/wiki/Central_limit_theorem" target="_blank" rel="nofollow noopener">Central Limit Theorem</a>:
+    \[ {X_{N} \over \sqrt{N}}  \longrightarrow {\mathcal{N}(0, 1)} \]
+
+    where \( \mathcal{N} \) denotes a
+    <a href="https://en.wikipedia.org/wiki/Normal_distribution" target="_blank" rel="nofollow noopener">Gaussian Random Variable</a>
+    with given mean and variance, in this case, \( 0 \) and \( 1 \). There is a
+    <a href="https://mathworld.wolfram.com/CentralLimitTheorem.html" target="_blank" rel="noopener">proof</a> showing
+    that the given identity always holds.
+</p>
+
+<p>
+    Once we know the definition of a <i>simple random walk</i>, we can implement a simulation in Python and make a
+    visualization of the possible outcomes.
+</p>
+
+<h2>Random Walk in Python</h2>
+
+<p>
+    By using the <i>NumPy</i> utilities we can easily simulate a <i>simple random walk</i>. Given the number of steps \( N \)
+    as an input argument, we can randomly generate \( N \) samples from the set \( \{ +1, -1\} \) with an equal probability
+    of \( 0.5 \). Then, we will only use the <i>cumsum</i> function, to give us the cumulative sum in every time step.
+    The Python code is given below:
+</p>
+
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td style="border-bottom: none;"><pre style="margin: 0; line-height: 125%"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27</pre></td><td style="border-bottom: none;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">import</span> <span style="color: #bb0066; font-weight: bold">numpy</span> <span style="color: #008800; font-weight: bold">as</span> <span style="color: #bb0066; font-weight: bold">np</span>
+np.random.seed(<span style="color: #0000DD; font-weight: bold">1234</span>)
+
+<span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066bb; font-weight: bold">random_walk</span>(N):
+    <span style="color: #dd2200; background-color: #fff0f0">&quot;&quot;&quot;</span>
+<span style="color: #dd2200; background-color: #fff0f0">    Simulates a discrete random walk</span>
+<span style="color: #dd2200; background-color: #fff0f0">    :param int N : the number of steps to take</span>
+<span style="color: #dd2200; background-color: #fff0f0">    &quot;&quot;&quot;</span>
+    <span style="color: #888888"># event space: set of possible increments</span>
+    increments = np.array([<span style="color: #0000DD; font-weight: bold">1</span>, -<span style="color: #0000DD; font-weight: bold">1</span>])
+    <span style="color: #888888"># the probability to generate 1</span>
+    p=<span style="color: #0000DD; font-weight: bold">0.5</span>
+
+    <span style="color: #888888"># the epsilon values</span>
+    random_increments = np.random.choice(increments, N, p)
+    <span style="color: #888888"># calculate the random walk</span>
+    random_walk = np.cumsum(random_increments)
+
+    <span style="color: #888888"># return the entire walk and the increments</span>
+    <span style="color: #008800; font-weight: bold">return</span> random_walk, random_increments
+
+<span style="color: #888888"># generate a random walk</span>
+N = <span style="color: #0000DD; font-weight: bold">500</span>
+X, epsilon = random_walk(N)
+
+<span style="color: #888888"># normalize the random walk using the Central Limit Theorem</span>
+X = X * np.sqrt(<span style="color: #0000DD; font-weight: bold">1.</span>/N)
+</pre></td></tr></table></div>
+<br/>
+
+<h3>Animating the Random Walk</h3>
+
+<p>
+    <i>Matplotlib</i> library provides an
+    <a href="https://matplotlib.org/3.2.1/api/animation_api.html" target="_blank" rel="noopener">animation</a> API that
+    offers a different perspective of the plotting in Python. Instead of serving static charts, we can use an eye-catching
+    animation to emphasize and more efficiently transfer the message we would like to send. This comes quite handy and the
+    effect is furthermore amplified for time-series data such as the <i>simple random walk</i>
+
+</p>
+
+<p>
+    Using this animation API we can animate one realization of a <i>simple random walk</i> as shown in the code snippet
+    below:
+</p>
+
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td style="border-bottom: none;"><pre style="margin: 0; line-height: 125%"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38</pre></td><td style="border-bottom: none;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">import</span> <span style="color: #bb0066; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008800; font-weight: bold">as</span> <span style="color: #bb0066; font-weight: bold">plt</span>
+<span style="color: #008800; font-weight: bold">import</span> <span style="color: #bb0066; font-weight: bold">matplotlib.animation</span> <span style="color: #008800; font-weight: bold">as</span> <span style="color: #bb0066; font-weight: bold">animation</span>
+plt.style.use(<span style="color: #dd2200; background-color: #fff0f0">&#39;seaborn&#39;</span>)
+
+<span style="color: #888888">#general figure options</span>
+fig = plt.figure(figsize=(<span style="color: #0000DD; font-weight: bold">15</span>, <span style="color: #0000DD; font-weight: bold">7</span>))
+ax = plt.axes(xlim=(<span style="color: #0000DD; font-weight: bold">0</span>, N), ylim=(np.min(X) - <span style="color: #0000DD; font-weight: bold">0.5</span>, np.max(X) + <span style="color: #0000DD; font-weight: bold">0.5</span>))
+line, = ax.plot([], [], lw=<span style="color: #0000DD; font-weight: bold">2</span>)
+ax.set_title(<span style="color: #dd2200; background-color: #fff0f0">&#39;2D Random Walk&#39;</span>, fontsize=<span style="color: #0000DD; font-weight: bold">18</span>)
+ax.set_xlabel(<span style="color: #dd2200; background-color: #fff0f0">&#39;Steps&#39;</span>, fontsize=<span style="color: #0000DD; font-weight: bold">16</span>)
+ax.set_ylabel(<span style="color: #dd2200; background-color: #fff0f0">&#39;Value&#39;</span>, fontsize=<span style="color: #0000DD; font-weight: bold">16</span>)
+ax.tick_params(labelsize=<span style="color: #0000DD; font-weight: bold">12</span>)
+
+<span style="color: #888888"># initialization function </span>
+<span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066bb; font-weight: bold">init</span>():
+    <span style="color: #888888"># creating an empty plot/frame </span>
+    line.set_data([], [])
+    <span style="color: #008800; font-weight: bold">return</span> line,
+
+<span style="color: #888888"># lists to store x and y axis points </span>
+xdata, ydata = [], []
+
+<span style="color: #888888"># animation function </span>
+<span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066bb; font-weight: bold">animate</span>(i):
+    <span style="color: #888888"># x, y values to be plotted </span>
+    y = X[i]
+
+    <span style="color: #888888"># appending new points to x, y axes points list </span>
+    xdata.append(i)
+    ydata.append(y)
+    line.set_data(xdata, ydata)
+    <span style="color: #008800; font-weight: bold">return</span> line,
+
+<span style="color: #888888"># call the animator	 </span>
+anim = animation.FuncAnimation(fig, animate, init_func=init,
+                               frames=N, interval=<span style="color: #0000DD; font-weight: bold">20</span>, blit=<span style="color: #008800; font-weight: bold">True</span>)
+<span style="color: #888888"># save the animation as mp4 video file </span>
+anim.save(<span style="color: #dd2200; background-color: #fff0f0">&#39;random_walk.gif&#39;</span>,writer=<span style="color: #dd2200; background-color: #fff0f0">&#39;imagemagick&#39;</span>)
+</pre></td></tr></table></div>
+<br/>
+
+
+<p>
+    The animation function needs three essential inputs: <i>i)</i> an instance of the figure to show the animation,
+    <i>ii)</i> data initialization function and <i>iii)</i> a function that defines the animation logic. Then we
+    provide the number of frames to draw (how many times to iterate over the data) and the delay in milliseconds
+    between the consecutive frames. One final option we could use is the <i>bit blit</i>, i.e. to redraw only those parts
+    that have changed between two consecutive frames, thus leading to faster animation. The result we get is shown in
+    the animation below:
+</p>
+
+<center>
+    <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/random_walk.gif" class="lazyload" alt="Random Walk Animation through the steps">
+    <br/>
+    <span class="caption text-muted">
+        <i>Animation:</i> Simple Random Walk
+    </span>
+</center>
+<br/>
+
+The full source code behind this random walk simulation and animation can be found in this
+<a href="https://github.com/IlievskiV/Amusive-Blogging-N-Coding/tree/master/Random%20Processes" target="_blank" rel="dofollow noopener">GitHub repository</a>.
+
+<h2>Conclusion</h2>
+
+<p>
+    In this short tutorial blog post, we simulated and animated a simple random walk using Python's Matplotlib library.
+    This random process, although very simple is quite important and opens the way towards the other applied random
+    processes.
+</p>
+
+<p>
+    This list includes but is not limited to the  <i>Brownian Motion</i> and its variants like the
+    <i>Geometric Brownian Motion</i>, used to model systems with random exponential growth. Moreover, it is a foundation
+    for the <i>Stochastic Differential Equations</i> and <i>Stochastic Integration</i>. We will cover all of these
+    topics in the next blog posts.
+</p>
+
+<h2>Appendix: Central Limit Theorem Numerical Simulation</h2>
+
+<p>
+    In this tutorial, we claimed that the normalized random walk follows a Gaussian distribution with mean 0 and
+    variance 1, for which there is a strong mathematical proof. Although this is a universal truth, we can still make
+    a numerical simulation, as shown in the code snippet below:
+</p>
+
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td style="border-bottom: none;"><pre style="margin: 0; line-height: 125%"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</pre></td><td style="border-bottom: none;"><pre style="margin: 0; line-height: 125%">num_simulations = <span style="color: #0000DD; font-weight: bold">10000</span> <span style="color: #888888"># num of simulation</span>
+N = <span style="color: #0000DD; font-weight: bold">100000</span> <span style="color: #888888"># number od steps in each simulation</span>
+dt = <span style="color: #0000DD; font-weight: bold">1.</span>/N <span style="color: #888888"># the time step</span>
+X_norm = [<span style="color: #0000DD; font-weight: bold">0</span>] * num_simulations <span style="color: #888888"># the normalized random variable</span>
+
+<span style="color: #888888"># run the simulations</span>
+<span style="color: #008800; font-weight: bold">for</span> i <span style="color: #008800">in</span> <span style="color: #003388">range</span>(num_simulations):
+    X, _ = random_walk(N)
+    X_norm[i] = X[N - <span style="color: #0000DD; font-weight: bold">1</span>] * np.sqrt(dt)
+
+<span style="color: #003388">print</span>(<span style="color: #dd2200; background-color: #fff0f0">&#39;The mean is: {0}&#39;</span>.format(np.mean(X_norm)))
+<span style="color: #003388">print</span>(<span style="color: #dd2200; background-color: #fff0f0">&#39;The var is: {0}&#39;</span>.format(np.var(X_norm)))
+
+plt.figure(figsize=(<span style="color: #0000DD; font-weight: bold">15</span>, <span style="color: #0000DD; font-weight: bold">7</span>))
+plt.grid(<span style="color: #008800; font-weight: bold">True</span>, which=<span style="color: #dd2200; background-color: #fff0f0">&#39;major&#39;</span>, linestyle=<span style="color: #dd2200; background-color: #fff0f0">&#39;--&#39;</span>, color=<span style="color: #dd2200; background-color: #fff0f0">&#39;black&#39;</span>, alpha=<span style="color: #0000DD; font-weight: bold">0.4</span>)
+plt.title(<span style="color: #dd2200; background-color: #fff0f0">&#39;Probability distribution of X_n&#39;</span>, fontsize=<span style="color: #0000DD; font-weight: bold">18</span>)
+plt.xlabel(<span style="color: #dd2200; background-color: #fff0f0">&#39;Value for one realization of X_n&#39;</span>, fontsize=<span style="color: #0000DD; font-weight: bold">18</span>)
+plt.ylabel(<span style="color: #dd2200; background-color: #fff0f0">&#39;Probability Density&#39;</span>, fontsize=<span style="color: #0000DD; font-weight: bold">22</span>)
+plt.hist(X_norm, <span style="color: #0000DD; font-weight: bold">100</span>, density=<span style="color: #008800; font-weight: bold">True</span>, color=<span style="color: #dd2200; background-color: #fff0f0">&#39;#0492C2&#39;</span>)
+</pre></td></tr></table></div>
+<br/>
+
+The resulting plot of this simulation is depicted in the image below:
+
+<center>
+    <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/central_limit_theorem_sim.png" class="lazyload" alt="Gaussian Bell Curve">
+    <br/>
+    <span class="caption text-muted">
+        <i>Fig 2:</i> Simulation of the Central Limit Theorem
+    </span>
+</center>
