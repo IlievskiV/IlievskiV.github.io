@@ -1,0 +1,425 @@
+---
+layout:      single
+title:       "Animated Visualization of Brownian Motion in Python"
+excerpt:     "Animation and visualization of Brownian Motion in Python with Matplotlib"
+description: "Tutorial on Brownian Motion using Python using Matplotlib to animate the Brownian Motion construction"
+date:        2020-04-16 09:00:00
+classes:     wide
+header:
+    teaser: "assets/images/brownian_motion_teaser.png"
+    image: "assets/images/brownian_motion_teaser.png"
+    og_image: "assets/images/brownian_motion_teaser.png"
+    image_description: "Animation of Brownian Motion in Python with Matplotlib"
+    caption: "Brownian Motion"
+---
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<p>
+    In the previous <a href="{{ site.baseurl }}{% link _blog/2020-04-12-random-walk.html %}" target="_blank" rel="dofollow">blog post</a> we have
+    defined and animated a <i>simple random walk</i>, which paves the way towards all other more applied stochastic
+    processes. One of these processes is the
+    <a href="https://en.wikipedia.org/wiki/Wiener_process" target="_blank" rel="nofollow noopener">Brownian Motion</a>
+    also known as a <strong>Wiener Process</strong>.
+</p>
+
+<p>
+    In this <strong>blog post</strong>, we will see how to generalize from discrete-time to continuous-time random
+    process, because they confront the reality. That means, how to use the <i>simple random walk</i> to construct a
+    <i>Brownian Motion</i>, which has a multitude of interdisciplinary applications some of which in finance. We will use
+    the <i>Python</i> numerical packages such as <i>NumPy</i> and <i>SciPy</i> with a goal of simulating the process
+    and its properties.
+</p>
+
+<p>
+    To ameliorate the visual perception we will use the <i>Matplotlib</i> Animation API. This is of
+    <a href="{{ site.baseurl }}{% link _blog/2020-02-08-interactive-dataviz.html %}" target="_blank" rel="dofollow">paramount importance</a>
+    since it helps to transfer the message more efficiently in an enthralling manner.
+</p>
+
+<p>
+    Ready? So let's go and <strong>stay tuned</strong>!
+</p>
+
+<h2>Going from discrete to continuous</h2>
+
+<p>
+    The <a href="{{ site.baseurl }}{% link _blog/2020-04-12-random-walk.html %}" target="_blank" rel="dofollow">simple random walk</a>
+    operates in discrete time steps belonging to the set of natural numbers, which means nothing happens in between.
+    However, the changes in nature happen in infinitesimal time periods. Then, how can we turn \( N \) discrete
+    steps into continuous steps?
+</p>
+
+<center>
+    <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/discrete_to_continuous_plot.png" class="lazyload" alt="Two plots, one with discrete points, the other with continuous points">
+    <br/>
+    <span class="caption text-muted">
+        <i>Fig. 1:</i> From Discrete to Continuous Values
+    </span>
+</center>
+<br/>
+
+<p>
+    If we have \( N \) discrete time steps, we can evenly distribute them in the space between \( 0 \) and \( 1 \). It
+    implies that we assign one slot to each discrete time step. For instance, if \( N = 10 \) then to each discrete
+    time step we can assign the following slots \( \{ 0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9 \} \).
+</p>
+
+<p>
+    If we start increasing \( N \), the slots will start getting closer and closer to each other, thus creating a
+    continuum. Additionally, we can normalize the values associated with those slots by \( \sqrt{N} \).
+    Formally, if we have a <i>simple random walk</i> defined as:
+</p>
+
+<center>
+    <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/random_walk_definition.png" class="lazyload" alt="Math equation defining the random walk">
+</center>
+<br/>
+
+<p>
+    then a <strong>continuous</strong> and <strong>normalized</strong> process is defined as:
+</p>
+
+
+<center>
+    <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/discrete_to_continuous.png" class="lazyload" alt="math equation defining the shift from discrete to continuous points">
+</center>
+<br/>
+
+<p>
+    We demonstrated how with a simple trick we can switch from discrete to continuous notation. Now, letting \( N \)
+    to approach infinity leads us to the definition of a <strong>Brownian Motion</strong>.
+</p>
+
+<h2>Brownian Motion Definition</h2>
+
+<p>
+    If we let \( N \) to grow indefinitely, or to be sufficiently large, we observe some interesting properties of the
+    above mentioned random process. From the <a href="https://en.wikipedia.org/wiki/Central_limit_theorem" target="_blank" rel="nofollow noopener">Central Limit Theorem</a>,
+    we know for sure that only when \( t = 1 \):
+</p>
+
+<center>
+    <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/w_convereges_to_normal_clt.png" class="lazyload" alt="math equation for the Central Limit Theorem">
+</center>
+<br/>
+
+<p>
+    i.e. it converges to a <i>standard normal distribution</i> with mean \( 0 \) and variance \( 1 \). However, the
+    <i>Central Limit Theorem</i> does not give us an answer for the distribution of all other points, i.e. for arbitrary
+    \( t \). The answer is given by the
+    <a href="https://en.wikipedia.org/wiki/Donsker%27s_theorem" target="_blank" rel="nofollow noopener">Donsker's Invariance Principle</a>
+    which extends the <i>Central Limit Theorem</i> such that for any \( t \in [0, 1] \) we have:
+</p>
+
+<center>
+    <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/donsker_theorem.png" class="lazyload" alt="math equation for the Donsker's theorem">
+</center>
+<br/>
+
+<p>
+    It signifies that the process converges to a standard <i>Brownian Motion</i>, which has the following properties:
+</p>
+
+<ul>
+    <li>\( W_{0} = 0 \);</li>
+    <li>\( W \) has <i>independent</i> increments: \( W_{t + u} - W_{t} \) is independent of \( W_{s} \) for every \( t \gt 0, u \geq 0, s \leq t \);</li>
+    <li>\( W \) has Gaussian increments: \( W_{t + u} - W_{t} \sim  \mathcal{N}(0, u) \) and</li>
+    <li>\( W_{t} \) is continuous in \( t \).</li>
+</ul>
+
+<p>
+    In this case, just for demonstration purposes to show how to construct a <i>Brownian Motion</i> from a
+    <i>simple random walk</i> we used the unit increments \( \{ -1, +1 \} \) with an equal probability to occur. More
+    generally, these increments can be generated from any distribution, most frequently the normal distribution.
+    This is true due to the universality of the <i>Central Limit Theorem</i> as well as the <i>Donsker's Invariance Principle</i>.
+</p>
+
+<p>
+    Once we know the definition of a <i>Brownian Motion</i>, we can implement a simulation in Python and make a
+    visualization of the possible outcomes.
+</p>
+
+<h2>Brownian Motion in Python</h2>
+
+<p>
+    We can easily construct a <i>Brownian Motion</i> using the <i>NumPy</i> package. By providing the number of discrete
+    time steps \( N \), the number of continuous-time steps \( T \), we simply generate \( N \) increments from the
+    normal distribution with some variance \( h \) and distribute them across the continuous-time steps \( T \).
+    Then, the <i>Brownian Motion</i> is a cumulative sum of the increments, i.e. we use the <i>cumsum</i> function.
+    The Python code is given below:
+</p>
+
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td style="border-bottom: none;"><pre style="margin: 0; line-height: 125%"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24</pre></td><td style="border-bottom: none;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">import</span> <span style="color: #bb0066; font-weight: bold">numpy</span> <span style="color: #008800; font-weight: bold">as</span> <span style="color: #bb0066; font-weight: bold">np</span>
+np.random.seed(<span style="color: #0000DD; font-weight: bold">1234</span>)
+
+<span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066bb; font-weight: bold">brownian_motion</span>(N, T, h):
+    <span style="color: #dd2200; background-color: #fff0f0">&quot;&quot;&quot;</span>
+<span style="color: #dd2200; background-color: #fff0f0">    Simulates a Brownian motion</span>
+<span style="color: #dd2200; background-color: #fff0f0">    :param int N : the number of discrete steps</span>
+<span style="color: #dd2200; background-color: #fff0f0">    :param int T: the number of continuous time steps</span>
+<span style="color: #dd2200; background-color: #fff0f0">    :param float h: the variance of the increments</span>
+<span style="color: #dd2200; background-color: #fff0f0">    &quot;&quot;&quot;</span>
+    dt = <span style="color: #0000DD; font-weight: bold">1.</span> * T/N  <span style="color: #888888"># the normalizing constant</span>
+    random_increments = np.random.normal(<span style="color: #0000DD; font-weight: bold">0.0</span>, <span style="color: #0000DD; font-weight: bold">1.0</span> * h, N)*np.sqrt(dt)  <span style="color: #888888"># the epsilon values</span>
+    brownian_motion = np.cumsum(random_increments)  <span style="color: #888888"># calculate the brownian motion</span>
+    brownian_motion = np.insert(brownian_motion, <span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">0.0</span>) <span style="color: #888888"># insert the initial condition</span>
+
+    <span style="color: #008800; font-weight: bold">return</span> brownian_motion, random_increments
+
+N = <span style="color: #0000DD; font-weight: bold">50</span> <span style="color: #888888"># the number of discrete steps</span>
+T = <span style="color: #0000DD; font-weight: bold">1</span> <span style="color: #888888"># the number of continuous time steps</span>
+h = <span style="color: #0000DD; font-weight: bold">1</span> <span style="color: #888888"># the variance of the increments</span>
+dt = <span style="color: #0000DD; font-weight: bold">1.0</span> * T/N  <span style="color: #888888"># total number of time steps</span>
+
+<span style="color: #888888"># generate a brownian motion</span>
+X, epsilon = brownian_motion(N, T ,h)
+</pre></td></tr></table></div>
+
+<h2>Animating the Brownian Motion </h2>
+
+<p>
+    Serving nicely formatted static plots is cool, but it doesn't put the accent on what is important to tell. For
+    this reason, we use an animated plot, animating the principal point which is aligned with the message we want to send.
+</p>
+
+<p>
+    To send the correct message, in this case, we illustrate the universal truth of the <i>Donsker's Invariance Principle</i>.
+    As the number of discrete time steps \( N \) grows, the <i>simple random walk</i> approaches the standard
+    <i>Brownian Motion</i>. We realize this using the <i>Matplotlib's</i>
+    <a href="https://matplotlib.org/3.2.1/api/animation_api.html" target="_blank" rel="nofollow noopener">animation API</a>,
+    as shown in the code below:
+</p>
+
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td style="border-bottom: none;"><pre style="margin: 0; line-height: 125%"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33</pre></td><td style="border-bottom: none;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">import</span> <span style="color: #bb0066; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008800; font-weight: bold">as</span> <span style="color: #bb0066; font-weight: bold">plt</span>
+<span style="color: #008800; font-weight: bold">from</span> <span style="color: #bb0066; font-weight: bold">matplotlib.animation</span> <span style="color: #008800; font-weight: bold">import</span> FuncAnimation
+
+fig = plt.figure(figsize=(<span style="color: #0000DD; font-weight: bold">21</span>, <span style="color: #0000DD; font-weight: bold">10</span>))
+ax = plt.axes(xlim=(<span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">1</span>))
+line, = ax.step([], [], where=<span style="color: #dd2200; background-color: #fff0f0">&#39;mid&#39;</span>, color=<span style="color: #dd2200; background-color: #fff0f0">&#39;#0492C2&#39;</span>)
+
+<span style="color: #888888"># formatting options</span>
+ax.set_xticks(np.linspace(<span style="color: #0000DD; font-weight: bold">0</span>,<span style="color: #0000DD; font-weight: bold">1</span>,<span style="color: #0000DD; font-weight: bold">11</span>))
+ax.set_xlabel(<span style="color: #dd2200; background-color: #fff0f0">&#39;Time&#39;</span>, fontsize=<span style="color: #0000DD; font-weight: bold">30</span>)
+ax.set_ylabel(<span style="color: #dd2200; background-color: #fff0f0">&#39;Value&#39;</span>, fontsize=<span style="color: #0000DD; font-weight: bold">30</span>)
+ax.tick_params(labelsize=<span style="color: #0000DD; font-weight: bold">22</span>)
+ax.grid(<span style="color: #008800; font-weight: bold">True</span>, which=<span style="color: #dd2200; background-color: #fff0f0">&#39;major&#39;</span>, linestyle=<span style="color: #dd2200; background-color: #fff0f0">&#39;--&#39;</span>, color=<span style="color: #dd2200; background-color: #fff0f0">&#39;black&#39;</span>, alpha=<span style="color: #0000DD; font-weight: bold">0.6</span>)
+
+<span style="color: #888888"># initialization function </span>
+<span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066bb; font-weight: bold">init</span>():
+    line.set_data([], [])
+    <span style="color: #008800; font-weight: bold">return</span> line,
+
+<span style="color: #888888"># animation function </span>
+<span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066bb; font-weight: bold">animate</span>(i):
+    np.random.seed(<span style="color: #0000DD; font-weight: bold">42</span>)
+    y, epsilon = brownian_motion((i + <span style="color: #0000DD; font-weight: bold">1</span>) * <span style="color: #0000DD; font-weight: bold">10</span>, <span style="color: #0000DD; font-weight: bold">1</span> ,<span style="color: #0000DD; font-weight: bold">1</span>)
+    tr = np.linspace(<span style="color: #0000DD; font-weight: bold">0.0</span>, <span style="color: #0000DD; font-weight: bold">1</span>, (i + <span style="color: #0000DD; font-weight: bold">1</span>) * <span style="color: #0000DD; font-weight: bold">10</span> + <span style="color: #0000DD; font-weight: bold">1</span>)
+    ax.set_title(<span style="color: #dd2200; background-color: #fff0f0">&#39;Brownian Motion for {} steps&#39;</span>.format((i + <span style="color: #0000DD; font-weight: bold">1</span>) * <span style="color: #0000DD; font-weight: bold">10</span>), fontsize=<span style="color: #0000DD; font-weight: bold">40</span>)
+    ax.set_ylim((np.min(y) - <span style="color: #0000DD; font-weight: bold">0.1</span>, np.max(y) + <span style="color: #0000DD; font-weight: bold">0.1</span>))
+
+    line.set_data(<span style="color: #003388">list</span>(tr), <span style="color: #003388">list</span>(y))
+    <span style="color: #008800; font-weight: bold">return</span> line,
+
+<span style="color: #888888"># call the animator	 </span>
+anim = FuncAnimation(fig, animate, init_func=init, frames=<span style="color: #0000DD; font-weight: bold">100</span>, interval=<span style="color: #0000DD; font-weight: bold">100</span>, blit=<span style="color: #008800; font-weight: bold">True</span>)
+anim.save(<span style="color: #dd2200; background-color: #fff0f0">&#39;brownian_motion.gif&#39;</span>,writer=<span style="color: #dd2200; background-color: #fff0f0">&#39;imagemagick&#39;</span>)
+</pre></td></tr></table></div>
+<br/>
+
+<p>
+    The animation function needs three essential inputs: <i>i)</i> an instance of the figure to show the animation,
+    <i>ii)</i> data initialization function and <i>iii)</i> a function that defines the animation logic. Additionally,
+    we provide the number of frames to draw and the delay in milliseconds between them.
+</p>
+
+<p>
+    The <i>animate</i> function plays a central role. Every iteration, we generate from scratch a <i>Brownian Motion</i>
+    with 10 more steps compared to the one in the previous iteration. Thus, the result we get is the following:
+</p>
+
+<center>
+    <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/brownian_motion.gif" class="lazyload" alt="Animation of the Brownian Motion">
+    <br/>
+    <span class="caption text-muted">
+        <i>Animation: </i> Converging to Brownian Motion
+    </span>
+</center>
+<br/>
+
+<p>
+    We clearly see how the <i>simple random walk</i> converges from a sparsely distributed to a standard <i>Brownian Motion</i>
+    as the number of steps increases.
+</p>
+
+<p>
+    The full source code related to all we have discussed during this blog can be found on
+    <a href="https://github.com/IlievskiV/Amusive-Blogging-N-Coding/blob/master/Random%20Processes/brownian_motion_animation.ipynb", target="_blank" rel="dofollow noopener">GitHub</a>.
+    For more information, please follow me on <a href="https://twitter.com/VladOsaurus" target="_blank" rel="noopener">Twitter</a>.
+</p>
+
+<h2>Conclusion</h2>
+
+<p>
+    In this blog we demonstrated how we can go from a discrete simple random walk to a continuous Brownian Motion. We
+    used the Python's numerical packages to achieve this task computationally. On top of this, we illustrated the
+    principle of creation a continuous random process with an animated plot using the Matplotlib's animation API.
+</p>
+
+<p>
+    The <i>Brownian Motion</i> is an important random process. It opens the way towards its variant, the <i>Geometric
+    Brownian Motion</i>, which is a more realistic process with a random exponential growth and predetermined bias. We
+    will cover this process in the next blog.
+</p>
+
+<h2>Appendix: Simulate the Gaussian Increments</h2>
+
+<p>
+    One particular property of the <i>Brownian Motion</i> we observed is the Gaussian increments. There is a strong
+    mathematical proof for this statement, which we can augment with a simulation. The computation utilities give
+    us the privilege to see it with our own eyes, as shown in the snippet below:
+</p>
+
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td style="border-bottom: none;"><pre style="margin: 0; line-height: 125%"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32</pre></td><td style="border-bottom: none;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">from</span> <span style="color: #bb0066; font-weight: bold">scipy</span> <span style="color: #008800; font-weight: bold">import</span> stats
+
+num_simulations = <span style="color: #0000DD; font-weight: bold">10000</span>  <span style="color: #888888"># how many times to repeat</span>
+Ns, Ts, hs = <span style="color: #0000DD; font-weight: bold">20000</span>, <span style="color: #0000DD; font-weight: bold">10.0</span>, <span style="color: #0000DD; font-weight: bold">1.0</span> <span style="color: #888888"># discrete steps, continuous steps, veriance</span>
+dts = <span style="color: #0000DD; font-weight: bold">1.0</span> * T/N  <span style="color: #888888"># total number of time steps</span>
+
+u = <span style="color: #0000DD; font-weight: bold">2.</span>  <span style="color: #888888"># the difference in time points</span>
+t = <span style="color: #003388">int</span>(np.floor((np.random.uniform(low=u+<span style="color: #0000DD; font-weight: bold">0.01</span>, high=<span style="color: #0000DD; font-weight: bold">1.</span> * T - u)/T) * N)) <span style="color: #888888"># random starting point</span>
+
+<span style="color: #888888"># initialize the means</span>
+rand_val_t = np.zeros(num_simulations)
+rand_val_t_plus_u = np.zeros(num_simulations)
+rand_val_t_minus_u = np.zeros(num_simulations)
+
+<span style="color: #008800; font-weight: bold">for</span> i <span style="color: #008800">in</span> <span style="color: #003388">range</span>(num_simulations):
+    <span style="color: #888888"># generate a brownian motion</span>
+    Xs, _ = brownian_motion(Ns, Ts, hs)
+
+    <span style="color: #888888"># store the means at the two points</span>
+    rand_val_t[i] = Xs[t]
+    rand_val_t_plus_u[i] = Xs[t + <span style="color: #003388">int</span>(u*Ns/Ts)]
+
+<span style="color: #888888"># calculate the difference</span>
+diff = rand_val_t_plus_u - rand_val_t
+
+<span style="color: #888888"># print stats</span>
+<span style="color: #003388">print</span>(<span style="color: #dd2200; background-color: #fff0f0">&#39;The mean is: {0}&#39;</span>.format(np.mean(diff)))
+<span style="color: #003388">print</span>(<span style="color: #dd2200; background-color: #fff0f0">&#39;The variance is: {0}&#39;</span>.format(np.var(diff)))
+
+<span style="color: #888888"># make normality test with null hypothesis: x comes from a normal distribution</span>
+k2, p = stats.normaltest(diff)
+<span style="color: #003388">print</span>(<span style="color: #dd2200; background-color: #fff0f0">&quot;Null hypothesis can be rejected&quot;</span>) <span style="color: #008800; font-weight: bold">if</span> p &lt; <span style="color: #0000DD; font-weight: bold">1</span>e-<span style="color: #0000DD; font-weight: bold">3</span> <span style="color: #008800; font-weight: bold">else</span> <span style="color: #003388">print</span>(<span style="color: #dd2200; background-color: #fff0f0">&quot;Null hypothesis cannot be rejected&quot;</span>)
+</pre></td></tr></table></div>
+<br/>
+
+<p>
+    The resulting plot of this simulation is depicted in the image below:
+</p>
+
+<center>
+    <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/brownian_motion_gauss_incr.png" class="lazyload" alt="Gaussian Bell Curve">
+    <br/>
+    <span class="caption text-muted">
+        <i>Fig 2:</i> The Gaussian Increments of the Brownian Motion
+    </span>
+</center>
+
+<h2>References</h2>
+
+<p>
+    [1] Arturo Fernandez,
+    <a href="https://www.stat.berkeley.edu/~arturof/Teaching/STAT150/Notes/II_Brownian_Motion.pdf" target="_blank">“Brownian Motion and An Introduction to Stochastic Integration”</a>
+    (2011), Statistics 157: Topics In Stochastic Processes Seminar <br/>
+
+    [2] Eric Vanden-Eijnden, <a href="https://www.whoi.edu/fileserver.do?id=21268&pt=10&p=17232" target="_blank">“Lecture 6: Wiener Process”</a>
+</p>
