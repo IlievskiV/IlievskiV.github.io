@@ -1,0 +1,245 @@
+---
+layout:      single
+title:       "Random Walks Have Never Been Funnier: Drifted Brownian Motion in Python"
+excerpt:     "Simulation and Animation of Brownian Motion with Drift and Volatility in Python with Matplotlib"
+description: "Introducing Drift and Volatility in a Brownian Motion simulation in Python together with
+              animations using Matplotlib"
+date:        2020-05-01 09:00:00
+classes:     wide
+header:
+    teaser: "assets/images/vol_bm_with_drift.png"
+    image: "assets/images/vol_bm_with_drift.png"
+    og_image: "assets/images/vol_bm_with_drift.png"
+    image_description: "Volatile Brownian Motion with Drift in Python with Matplotlib"
+    caption: "Volatility and Drift"
+---
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+
+<p>
+    We are not in power to predict the outcome of everything that surrounds us. For instance, we do not know the exact
+    number of people that will attend an event or the exact noise that is going to occur in a signal or
+    electric circuit. Rather than that, we can think of rough estimates and compute the likelihood of the possible
+    scenarios. Thus, it is not surprising at all that the answers for many phenomena lie in the realm of randomness.
+</p>
+
+<p>
+    The stochastic processes play a major role in the modeling of many time-dependent systems. One particular and
+    well-studied process is the <i>Brownian Motion</i> that we already covered in the previous
+    <a href="{{ site.baseurl }}{% link _blog/2020-04-16-brownian-motion.html %}" target="_blank" rel="dofollow">blog post</a>.
+    This process has fascinating properties and is very handy in quite different and interdisciplinary areas
+    including quantum physics, economics, or chemistry.
+</p>
+
+<p>
+    Having only a bare <i>Brownian Motion</i> is of no use and can be considered as a jitter. For this reason, in
+    this blog post, we drill more and attach some properties to the standard <i>Brownian Motion</i>. These properties
+    include the <i>drift</i> (also called <i>bias</i>) which drives the process in a particular direction and the
+    volatility which increases the fluctuation of the process. We leverage <i>Python's</i> numerical capabilities
+    to simulate such a process. On top of everything, we enhance the visual experience with multiple animations
+    using the <i>Matplotlib's</i> Animation API.
+</p>
+
+<p>
+    Having said that, let us begin and <b>stay tuned!</b>
+</p>
+
+<h2>Towards more inclusive Brownian Motion</h2>
+
+<p>
+    The standard <i>Brownian Motion</i> has an interesting set of features making its pattern recognizable
+    in plentiful domains. The standard, non-avoidable pattern that we all know is the price of some stock over
+    the course of time. For example let's take a look at the
+    <a href="https://en.wikipedia.org/wiki/S%26P_500_Index" target="_blank" rel="nofollow noopener">S&P 500 stock market index</a>
+    from 1950 until 2018, depicted in the figure below.
+</p>
+
+<center>
+    <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/SP500.png" class="lazyload" alt="Line plot over a time period from 1950 until 2018">
+    <br/>
+    <span class="caption text-muted">
+        <i>Fig. 1:</i> S&P 500 index level every 2 years from 1950 until 2018
+    </span>
+</center>
+<br/>
+
+<p>
+    At first glance, we can instantly recognize the random Brownian pattern. However, it is clear that there are
+    other components hidden inside, it is not just plain randomness. We can notice that the process has a tendency
+    to grow over time with some local drops and fluctuations. Thus, we must account for these observations.
+</p>
+
+<p>
+    In order to reason about the directional tendency of the process, we can think of an additive component resembling
+    a slope growing over time. In mathematical terms it means we have some constant, let's say \( \mu \) multiplying
+    the time variable \( t \). In this case of modeling a stock price, we interpret \( \mu \) as a mean of returns.
+</p>
+
+<p>
+    We can easily see that the fluctuations appear randomly, thus they must be directly tied with the random component.
+    Moreover, some of the drops are more severe while others are milder. That indicates only one thing, as the process
+    randomly ascends or descends, we magnify these relative changes by multiplying with some constant, let's say
+    \( \sigma \). This is how we incorporate the diffusion factor or vvolatility.
+</p>
+
+<p>
+    Having said all of this, we come to a formal definition of a drifted <i>Brownian Motion</i> with volatility, which
+    is:
+</p>
+
+<center>
+    <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/volatile_bm_with_drift.png" class="lazyload" alt="math equation for drifted Brownian Motion">
+</center>
+<br/>
+
+<p>
+    In the next few sections, we will analyze separately and visually illustrate with meaningful animations these two
+    properties.
+</p>
+
+<h2>Drifted Brownian Motion in Python</h2>
+
+<p>
+    To simulate the drifted <i>Brownian Motion</i> with volatility, we basically extend the work from the previous
+    <a href="{{ site.baseurl }}{% link _blog/2020-04-16-brownian-motion.html %}" target="_blank" rel="dofollow">blog post</a>
+    where we defined only a bare <i>Brownian Motion</i>. Having this component ready-to-use, the <i>Python</i>
+    implementation of this extended process is given below:
+</p>
+
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td style="border-bottom: none;"><pre style="margin: 0; line-height: 125%"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23</pre></td><td style="border-bottom: none;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">import</span> <span style="color: #bb0066; font-weight: bold">numpy</span> <span style="color: #008800; font-weight: bold">as</span> <span style="color: #bb0066; font-weight: bold">np</span>
+
+<span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066bb; font-weight: bold">drifted_brownian_motion</span>(mu, sigma, N, T, seed=<span style="color: #0000DD; font-weight: bold">42</span>):
+    <span style="color: #dd2200; background-color: #fff0f0">&quot;&quot;&quot;Simulates a Brownian Motion with drift.</span>
+<span style="color: #dd2200; background-color: #fff0f0">    </span>
+<span style="color: #dd2200; background-color: #fff0f0">    :param float mu: drift coefficient</span>
+<span style="color: #dd2200; background-color: #fff0f0">    :param float sigma: volatility coefficient</span>
+<span style="color: #dd2200; background-color: #fff0f0">    :param int N : number of discrete steps</span>
+<span style="color: #dd2200; background-color: #fff0f0">    :param int T: number of continuous time steps</span>
+<span style="color: #dd2200; background-color: #fff0f0">    :param int seed: initial seed of the random generator</span>
+<span style="color: #dd2200; background-color: #fff0f0">    :returns list: drifted Brownian motion</span>
+<span style="color: #dd2200; background-color: #fff0f0">    &quot;&quot;&quot;</span>
+    <span style="color: #888888"># set the seed</span>
+    np.random.seed(seed)
+    <span style="color: #888888"># standard brownian motion</span>
+    W, _ = brownian_motion(N, T ,<span style="color: #0000DD; font-weight: bold">1.0</span>)
+    <span style="color: #888888"># the normalizing constant</span>
+    dt = <span style="color: #0000DD; font-weight: bold">1.</span> * T/N
+    <span style="color: #888888"># generate the time steps</span>
+    time_steps = np.linspace(<span style="color: #0000DD; font-weight: bold">0.0</span>, N*dt, N+<span style="color: #0000DD; font-weight: bold">1</span>)
+    <span style="color: #888888"># calculate the Brownian Motion with drift</span>
+    X = mu * time_steps + sigma * W
+    <span style="color: #008800; font-weight: bold">return</span> X
+</pre></td></tr></table></div>
+<br/>
+
+<p>
+    A picture is worth a thousand words, an animation even more. Using the <i>Matplotlib's</i> Animation API we analyze
+    and illustrate the effect of these two components separately. The visual way of thinking helps us to actually
+    <a href="{{ site.baseurl }}{% link _blog/2020-02-08-interactive-dataviz.html %}" target="_blank" rel="dofollow">
+        comprehend the concepts in a striking and captivating manner</a>, or in other words citing the popular
+    cognitive psychologist <a href="https://en.wikipedia.org/wiki/Steven_Pinker" target="_blank" rel="nofollow noopener">Steven Pinker</a>:
+</p>
+
+<blockquote style="font-size: 24px;">
+    <i>
+        For us to go from “I think I understand” to “I understand,” we need to see the sights and feel the motions.
+    </i>
+</blockquote>
+
+<h2>Animated illustration of the drift</h2>
+
+<p>
+    By setting the diffusion coefficient \( \sigma \) to 1, and varying the drift coefficient, we can observe the
+    difference between a process with and without drift (colored with orange and blue respectively). In the animation
+    below, as time passes by, the gap between the processes becomes larger and larger.
+</p>
+
+<center>
+    <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/drift_no_vol_bm.gif" class="lazyload" alt="Animation of the Brownian Motion only with drift ">
+    <br/>
+    <span class="caption text-muted">
+        <i>Animation: </i> The impact of the drift
+    </span>
+</center>
+<br/>
+
+<p>
+    This is a perfect demonstration that a <i>Brownian Motion</i> without bias is just a jitter, which means it
+    is an important property.
+</p>
+
+<h2>Animated illustration of the volatility</h2>
+
+<p>
+    On the other hand, by fixing the drift coefficient \( \mu \) to 0 and varying the diffusion coefficient, we
+    can examine the volatile behavior of the process. As depicted in the animation below, the two processes, one
+    with volatility (in orange) and another one without (in blue), have exactly the same tendency over time. However,
+    the fluctuations of the volatile motion are severe, dropping instantly from high to low values and vice-versa.
+</p>
+
+<center>
+    <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/vol_no_drift_bm.gif" class="lazyload" alt="Animation of the Brownian Motion only with volatility ">
+    <br/>
+    <span class="caption text-muted">
+        <i>Animation: </i> The impact of the volatility
+    </span>
+</center>
+<br/>
+
+<p>
+    We confirm that the volatility completely changes the pace of random processes, which implies that it is a
+    key component to consider.
+</p>
+
+<p>
+    The full source code behind this simulation and animations can be found on my
+    <a href="https://github.com/IlievskiV/Amusive-Blogging-N-Coding/blob/master/Random%20Processes/drifted_brownian_motion.ipynb" target="_blank" rel="dofollow noopener">GitHub repo</a>,
+    called Amusive Blogging and Coding (ABC).
+</p>
+
+<h2>Conclusion</h2>
+
+<p>
+    In this blog post, we extended the bare <i>Brownian Motion</i> with two important properties: <i>drift</i> and
+    <i>volatility</i>. Through the animated visualizations, we observed the impact of these key components. We saw that
+    without drift, the motion is a pure noise without any trend. On the other side, the volatility makes the process
+    to keep the same trend but within a wider span of possible values.
+</p>
+
+<p>
+    This process has additional ingredients which make it more inclusive and aligned with the reality. However,
+    it still exhibits an additive behavior which is not a natural way of expressing growth. For this reason we need
+    another trick, to switch from additive to multiplicative changes and think in terms of rates of changes.
+    One such process is the <i>Geometric Brownian Motion</i> which we will cover next time.
+</p>
+
+<h2>References</h2>
+
+<p>
+    [1] Peter Olofsson, Mikael Andersson,
+    <a href="http://ramanujan.math.trinity.edu/polofsson/teach/Book.pdf" target="_blank">"Probability, Statistics, and
+    Stochastic Processes"</a>
+</p>
