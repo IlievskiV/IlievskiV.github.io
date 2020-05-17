@@ -1,0 +1,370 @@
+---
+layout:      single
+title:       "Forget Determinism, see Randomness in Action: How to Model Stock Price"
+excerpt:     "Geometric Brownian Motion in Python with Matplotlib"
+description: "Simulation and Animated Visualization of the Geometric Brownian Motion in Python with Matplotlib"
+date:        2020-05-17 09:00:00
+classes:     wide
+header:
+    teaser: "assets/images/gbm_teaser.png"
+    image: "assets/images/gbm_teaser.png"
+    og_image: "assets/images/gbm_teaser.png"
+    image_description: "Monte Carlo Simulation of Geometric Brownian Motion in Python with Matplotlib"
+    caption: "Geometric Brownian Motion"
+---
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<p>
+    Our intuition can be easily twisted with a simple thought experiment. If someone offers you a million dollars at
+    once or gives you a penny that doubles every day for a month, what would you choose? The choice is yours, but I
+    would suggest choosing the penny.
+</p>
+
+
+<p>
+    What is important in the previous puzzle is that our doubling penny follows a <b>geometric progression</b> law.
+    It is the law of expressing changes in terms of previous states in a multiplicative manner. This is why it easily
+    breaks our intuition on how rapidly some measurable quantity can escalate in a positive or negative direction.
+</p>
+
+<p>
+    This vigorously exploding tendency depending on the previous states is essential for modeling some random
+    processes. In the previous blog posts, we introduced the
+    <a href="{{ site.baseurl }}{% link _blog/2020-04-12-random-walk.html %}" target="_blank" rel="dofollow">Random Walk</a>,
+    and out of it, we constructed the
+    <a href="{{ site.baseurl }}{% link _blog/2020-04-16-brownian-motion.html %}" target="_blank" rel="dofollow">Standard Brownian Motion</a>
+    and the Brownian Motion with
+    <a href="{{ site.baseurl }}{% link _blog/2020-05-01-drifted-brownian-motion.html %}" target="_blank" rel="dofollow">drift and volatility</a>.
+    However, these processes exhibit an additive behavior without explicitly embedding the rate of change with respect
+    to the previous time steps.
+</p>
+
+<p>
+    In this blog, we dig more and introduce the <b>Geometric Brownian Motion</b>. It handles <i>products</i> of
+    independent increments rather than a <i>sum</i> of independent increments. This multiplicative nature amplifies
+    the rate of relative changes in short-time intervals, which in turn makes the process well suited for a plethora
+    of applications. For instance, one of the most common applications is to model <b>stock prices</b> or even whole
+    <b>stock exchange indices</b>.
+</p>
+
+<p>
+    In the same fashion as before, we use <i>Python's</i> numerical packages to implement the <i>Geometric Brownian
+    Motion</i>. Additionally, we analyze and simulate some fascinating properties of this process using
+    <i>Matplotlib's</i> Animation API. <b>Stay tuned!</b>
+</p>
+
+<h2>The Natural Language of Growth</h2>
+
+<p>
+    <a href="{{ site.baseurl }}{% link _blog/2020-04-12-random-walk.html %}" target="_blank" rel="dofollow">Random Walks</a>
+    follow an additive law, which means every succeeding value is the sum of the preceding one and a random increment
+    (positive or negative), i.e.
+</p>
+
+<center>
+    <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/random_walk_recursive.png" class="lazyload" alt="Math equation defining the random walk recursively">
+</center>
+<br/>
+
+<p>
+    The quantity we add to the preceding value defines the <i>rate of change</i> of the process. In this case, the
+    rate is not directly related to the previous value, thus posing a major limitation.
+</p>
+
+<p>
+    A more intuitive way is to express the rate of change in relative terms to the previous values. For instance, think
+    about the <i>interest rate</i>, a well-defined quantity in the banking sector. It is always expressed as a percentage
+    of the principal, i.e. the initial value.
+</p>
+
+<p>
+    For demonstration purposes, let's take two very simple processes in the discrete space, one multiplicative and
+    another additive as defined below:
+</p>
+
+<center>
+    <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/additive_vs_multiplicative.png" class="lazyload" alt="Equations for Additive and Multiplicative Progressions"/>
+</center>
+<br/>
+
+<p>
+    The <a href="https://www.investopedia.com/terms/r/rateofchange.asp" target="_blank" rel="nofollow noopener">rate of change</a>
+    is defined as the speed at which one variable changes in a short amount of time. In our example, for the two
+    discrete-time processes, the rate of change is illustrated below:
+</p>
+
+<center>
+    <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/rate_of_change.png" class="lazyload" alt="Two plots of different functions explaining the rate of change"/>
+    <br/>
+    <span class="caption text-muted">
+        <i>Fig. 1:</i> Rate of change between additive and multiplicative increments
+    </span>
+</center>
+<br/>
+
+<p>
+    On one hand, the rate of change for the multiplicative process depends directly on the previous value. On the other
+    hand, the rate of change for the additive process is constant without any relation to the process itself. This
+    is quite constraining because we do not have an anchor to refer to.
+</p>
+
+<p>
+    In order to transform a process with additive increments, like the <i>Random Walk</i> to a process with
+    multiplicative increments, we use a simple trick. Power with a sum in the exponent becomes a product of powers,
+    as shown below:
+</p>
+
+<center>
+    <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/additive_to_multiplicative.png" class="lazyload" alt="From Additive to Multiplicative Progressions"/>
+</center>
+<br/>
+
+<p>
+    Most frequently in math, we use the number \( e \) as a base of power, since it represents the <b>natural
+    language of growth</b>. It simplifies the operations and removes all hurdles in the process of derivation and
+    integration. This leads us to the definition of a <b>Geometric Brownian Motion</b>.
+</p>
+
+<h2>Definition of Geometric Brownian Motion</h2>
+
+<p>
+    The <b>Geometric Brownian Motion</b> is a simple transformation of the
+    <a href="{{ site.baseurl }}{% link _blog/2020-05-01-drifted-brownian-motion.html %}" target="_blank" rel="dofollow">Drifted Brownian Motion</a>,
+    yet so essential. We transform a process that can handle the sum of independent normal increments to a process that can
+    handle the product of independent increments, as defined below:
+</p>
+
+<center>
+    <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/gbm_definition.png" class="lazyload" alt="Equation for the Geometric Brownian Motion"/>
+</center>
+<br/>
+
+<p>
+    This process follows a <a href="https://en.wikipedia.org/wiki/Log-normal_distribution" target="_blank" rel="nofollow noopener">log-normal</a>
+    distribution, which implies that the generated values never go below zero. This comes quite handy for modeling
+    <b>stock prices and stock exchange indices</b> because they share the same characteristic, they are never negative.
+</p>
+
+<p>
+    Our <i>Python</i> implementation is based on our previous work on
+    <a href="{{ site.baseurl }}{% link _blog/2020-04-16-brownian-motion.html %}" target="_blank" rel="dofollow">Standard Brownian Motion</a>.
+    By reusing that module, the <b>Geometric Brownian Motion</b> is implemented as follows:
+</p>
+
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td style="border-bottom: none;"><pre style="margin: 0; line-height: 125%"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23</pre></td><td style="border-bottom: none;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066bb; font-weight: bold">geometric_brownian_motion</span>(G0, mu, sigma, N, T):
+    <span style="color: #dd2200; background-color: #fff0f0">&quot;&quot;&quot;Simulates a Geometric Brownian Motion.</span>
+
+<span style="color: #dd2200; background-color: #fff0f0">    :param float G0: initial value</span>
+<span style="color: #dd2200; background-color: #fff0f0">    :param float mu: drift coefficient</span>
+<span style="color: #dd2200; background-color: #fff0f0">    :param float sigma: diffusion coefficient</span>
+<span style="color: #dd2200; background-color: #fff0f0">    :param int N: number of discrete steps</span>
+<span style="color: #dd2200; background-color: #fff0f0">    :param int T: number of continuous time steps</span>
+<span style="color: #dd2200; background-color: #fff0f0">    :return list: the geometric Brownian Motion</span>
+<span style="color: #dd2200; background-color: #fff0f0">    &quot;&quot;&quot;</span>
+    <span style="color: #888888"># the normalizing constant</span>
+    dt = <span style="color: #0000DD; font-weight: bold">1.</span> * T/N
+    <span style="color: #888888"># standard brownian motion</span>
+    W, _ = brownian_motion(N, T ,<span style="color: #0000DD; font-weight: bold">1.0</span>)
+    <span style="color: #888888"># generate the time steps</span>
+    time_steps = np.linspace(<span style="color: #0000DD; font-weight: bold">0.0</span>, N*dt, N+<span style="color: #0000DD; font-weight: bold">1</span>)
+
+    <span style="color: #888888"># calculate the geometric brownian motion</span>
+    G = G0 * np.exp(mu * time_steps + sigma * W)
+    <span style="color: #888888"># replace the initial value</span>
+    G[<span style="color: #0000DD; font-weight: bold">0</span>] = G0
+
+    <span style="color: #008800; font-weight: bold">return</span> G
+</pre></td></tr></table></div>
+<br/>
+
+<p>
+    This process has some very interesting properties to analyze, related to its mean and variance. We cover this in
+    the following section.
+</p>
+
+<h2>Zero Mean, Infinite Variance</h2>
+<p>
+    The random processes have mean and variance as a function of the time, which makes them interesting for analysis.
+    Without going into the details of their derivation, the mean and variance of the <b>Geometric Brownian Motion</b>
+    are given below:
+</p>
+
+<center>
+    <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/mean_var_gbm.png" class="lazyload" alt="Equations for the Mean and Variance of the GBM"/>
+</center>
+<br/>
+
+
+<p>
+    The major limitation of these metrics is their determinism. A more realistic scenario would be to model them
+    in a stochastic manner as well. The Python implementation is quite straightforward as shown in the code snippet
+    below:
+</p>
+
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td style="border-bottom: none;"><pre style="margin: 0; line-height: 125%"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32</pre></td><td style="border-bottom: none;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">import</span> <span style="color: #bb0066; font-weight: bold">numpy</span> <span style="color: #008800; font-weight: bold">as</span> <span style="color: #bb0066; font-weight: bold">np</span>
+<span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066bb; font-weight: bold">gbm_mean</span>(G0, mu, sigma, N, T):
+    <span style="color: #dd2200; background-color: #fff0f0">&quot;&quot;&quot;Simulates the mean of the Geometric Brownian Motion, which is:</span>
+<span style="color: #dd2200; background-color: #fff0f0">        E(t) = G0*e^{(mu + sigma^{2}/2)*t}</span>
+<span style="color: #dd2200; background-color: #fff0f0">    :param float G0: initial value</span>
+<span style="color: #dd2200; background-color: #fff0f0">    :param float mu: drift coefficient</span>
+<span style="color: #dd2200; background-color: #fff0f0">    :param float sigma: diffusion coefficient</span>
+<span style="color: #dd2200; background-color: #fff0f0">    :param int N: number of discrete steps</span>
+<span style="color: #dd2200; background-color: #fff0f0">    :param int T: number of continuous time steps</span>
+<span style="color: #dd2200; background-color: #fff0f0">    &quot;&quot;&quot;</span>
+    <span style="color: #888888"># generate the time steps</span>
+    t = np.linspace(<span style="color: #0000DD; font-weight: bold">0.0</span>, T, N+<span style="color: #0000DD; font-weight: bold">1</span>)
+    <span style="color: #888888"># calculate the mean</span>
+    E = G0 * np.exp((mu + <span style="color: #0000DD; font-weight: bold">0.5</span>*sigma**<span style="color: #0000DD; font-weight: bold">2</span>)*t)
+
+    <span style="color: #008800; font-weight: bold">return</span> E
+
+<span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066bb; font-weight: bold">gbm_var</span>(G0, mu, sigma, N, T):
+    <span style="color: #dd2200; background-color: #fff0f0">&quot;&quot;&quot;Simulates the variance of the Geometric Brownian Motion, which is:</span>
+<span style="color: #dd2200; background-color: #fff0f0">        Var(t) = G0^2 * e^{(2*mu + sigma^{2})*t} * (e^{sigma^{2}*t} - 1)</span>
+<span style="color: #dd2200; background-color: #fff0f0">    :param float G0: initial value</span>
+<span style="color: #dd2200; background-color: #fff0f0">    :param float mu: drift coefficient</span>
+<span style="color: #dd2200; background-color: #fff0f0">    :param float sigma: diffusion coefficient</span>
+<span style="color: #dd2200; background-color: #fff0f0">    :param int N: number of discrete steps</span>
+<span style="color: #dd2200; background-color: #fff0f0">    :param int T: number of continuous time steps</span>
+<span style="color: #dd2200; background-color: #fff0f0">    &quot;&quot;&quot;</span>
+    <span style="color: #888888"># generate the time steps</span>
+    t = np.linspace(<span style="color: #0000DD; font-weight: bold">0.0</span>, T, N+<span style="color: #0000DD; font-weight: bold">1</span>)
+    <span style="color: #888888"># calculate the variance</span>
+    V = G0**<span style="color: #0000DD; font-weight: bold">2</span> * np.exp(t * (<span style="color: #0000DD; font-weight: bold">2</span>*mu + sigma**<span style="color: #0000DD; font-weight: bold">2</span>)) * (np.exp(t * sigma**<span style="color: #0000DD; font-weight: bold">2</span>) - <span style="color: #0000DD; font-weight: bold">1</span>)
+
+    <span style="color: #008800; font-weight: bold">return</span> V
+</pre></td></tr></table></div>
+<br>
+
+<p>
+    As we can see the drift and volatility coefficients define the nature of the mean and variance, which means they
+    have an important role. The interplay between them can shape the mean and variance in many different and interesting
+    scenarios. One particular and fascinating property is that we can have <b>zero mean and infinite variance</b>.
+    Although it seems bizarre, we observe this phenomenon as soon as the following condition holds:
+</p>
+
+<center>
+    <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/zero_mean_inf_var.png" class="lazyload" alt="Condition for zero mean and infinite variance"/>
+</center>
+<br/>
+
+<p>
+    We make an animated visualization using the <i>Matplotlib's</i> Animation API to get more sense on this and go from
+    "I think I understand" to "I fully understand". This facilitates the process of grasping and
+    <a href="{{ site.baseurl }}{% link _blog/2020-02-08-interactive-dataviz.html %}" target="_blank" rel="dofollow">
+        understanding the concepts in an enticing manner</a>, as depicted below:
+</p>
+
+<center>
+    <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/gbm_mean_var.gif" class="lazyload" alt="Animation of the zero mean and infinite variance of the Geometric Brownian Motion">
+    <br/>
+    <span class="caption text-muted">
+        <i>Animation: </i> Zero Mean and Infinite Variance
+    </span>
+</center>
+<br/>
+
+<p>
+    Now we conclude that what we observed is coherent with the short mathematical analysis we made. The mean indeed
+    decays to zero, while the variance explodes to infinity.
+</p>
+
+<p>
+    The full source code related to all we have discussed during this blog can be found on
+    <a href="https://github.com/IlievskiV/Amusive-Blogging-N-Coding/blob/master/Random%20Processes/geometric_brownian_motion.ipynb", target="_blank" rel="dofollow noopener">GitHub</a>.
+    For more information, please follow me on <a href="https://twitter.com/VladOsaurus" target="_blank" rel="noopener">Twitter</a>.
+</p>
+
+<h2>Key takeaways</h2>
+
+<p>
+    During this blog, we learned about the <i>Geometric Brownian Motion</i>, which is well suited for expressing
+    the rate of change in multiplicative terms. It handles products of random increments, thus following a
+    <i>log-normal</i> distribution. Therefore, the generated values are more easily expressed in relative terms of
+    the previous ones and they are never negative. This makes the process a good match to model <b>stock prices and
+    stock exchange indices</b>.
+</p>
+
+<p>
+    On top of everything, this process is the foundation of the <i>Stochastic Differential Equations</i> and
+    <i>Stochastic Integration</i>, which we will start covering in the next few blogs.
+</p>
+
+<h2>Appendix</h2>
+
+<p>
+    In our visualization above, we only saw one single realization of the <i>Geometric Brownian Motion</i>. However,
+    the process can yield any number of hypothetical paths, depending on the initial conditions. To visualize this pure
+    uncertainty of the process, we generate 10 processes with exactly the same parameters, only different initial seed.
+    The result is visualized in the animation below:
+</p>
+
+<center>
+    <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/gbm_monte_carlo.gif" class="lazyload" alt="Animation of a Monte Carlo Simulation of Geometric Brownian Motion">
+    <br/>
+    <span class="caption text-muted">
+        <i>Animation: </i> Same parameters, different seeds
+    </span>
+</center>
+
+<h2>References</h2>
+
+<p>
+    [1] Peter Olofsson, Mikael Andersson,
+    <a href="http://ramanujan.math.trinity.edu/polofsson/teach/Book.pdf" target="_blank">"Probability, Statistics, and
+    Stochastic Processes"</a>
+</p>
