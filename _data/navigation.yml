@@ -4,5 +4,7 @@ main:
     url: /whoami/
   - title: "Blog"
     url: /blog/
+  - title: "Visualizations"
+    url: /visualizations/
   - title: "Contact me"
     url: /contactme/

@@ -244,6 +244,9 @@ collections:
   blog:
     output: true
     permalink: /:collection/:path/
+  visualizations:
+    output: true
+    permalink: /:collection/:path/
 
 
 # Defaults
