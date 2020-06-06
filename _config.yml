@@ -44,14 +44,14 @@ minimal_mistakes_skin: "contrast"
 
 # Site Settings
 locale: "en-US"
-title: VLADIMIR ILIEVSKI
+title: iSquared
 title_separator: "|"
 subtitle: ""
-name: "Vladimir Ilievski"
+name: "iSquared"
 description: >- # this means to ignore newlines until "baseurl:"
-  "Machine Learning and Data Science: broaden your horizons with hands on experience"
+  "Explaining science visually"
 
-url: "https://IlievskiV.github.io"
+url: "https://isquared.digital"
 baseurl: ""
 teaser: # path of fallback teaser image, e.g. "/assets/images/500x300.png"
 logo: "/assets/logos/masthead_logo.png"
@@ -87,6 +87,8 @@ twitter:
   username: "VladOsaurus"
 linkedin:
   username: "vilievski"
+medium:
+  username: "ilievski.vladimir"
 
 og_image                 : /assets/images/site_logo.png
 # For specifying social profiles, used in _includes/seo.html
@@ -109,7 +111,7 @@ analytics:
 author:
   name             : "Vladimir Ilievski"
   avatar           : "/assets/images/bio_photo.jpg"
-  bio              : "Machine Learning Engineer <br/> Startup lover <br/> AI enthusiast"
+  bio              : "Machine Learning Engineer with Partially Differentiable Ideas"
   location         : "Valais, Switzerland"
   links:
     - label: "Twitter"

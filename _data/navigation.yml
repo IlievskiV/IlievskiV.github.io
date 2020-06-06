@@ -1,10 +1,10 @@
 # main links
 main:
-  - title: "whoami"
-    url: /whoami/
   - title: "Blog"
     url: /blog/
   - title: "Visualizations"
     url: /visualizations/
-  - title: "Contact me"
+  - title: "Get in Touch"
     url: /contactme/
+  - title: "$whoami"
+    url: /whoami/
