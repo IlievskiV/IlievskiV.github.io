@@ -1,0 +1,75 @@
+---
+layout:      single
+title:       "Visualized Koch Snowflake in Python with Matplotlib"
+excerpt:     "How to mathematically construct a perfect snowflake?"
+description: "Learn how to implement a Koch Snowflake in Python and how to animate it using Matplotlib. Source code of
+the algorithm and animation provided."
+date:        2020-06-15 09:00:00
+classes:     wide
+author_profile: true
+header:
+    teaser: "assets/images/koch_snowflake_teaser.gif"
+    image: "assets/images/koch_snowflake.png"
+    og_image: "assets/images/koch_snowflake.png"
+---
+
+
+
+<p>
+    Drawing snowflakes is easy, it only takes to know some simple math. We can mathematically construct a perfect snowflake
+    by following the <a href="https://en.wikipedia.org/wiki/Koch_snowflake" target="_blank" rel="nofollow noopener">Koch Snowflake</a>
+    algorithm. It is also known as a <i>Koch curve</i> and it is a <a href="https://mathworld.wolfram.com/Fractal.html" target="_blank" rel="dofollow noopener">fractal</a>
+    line. That means the line shows the same pattern of irregularity regardless of the scale at which we see it. The
+    <i>Koch Snowflake</i> as a closed polygon has a fascinating property of infinite length and finite area.
+</p>
+
+<p>
+    So, how do we construct such an intricating polygon? We start with an <i>equilateral triangle</i> (all sides are equal)
+    and for each line we recursively and infinitely repeat the following steps:
+    <ul>
+        <li>divide the line in three equal parts</li>
+        <li>remove the line in the middle</li>
+        <li>draw an equilateral triangle above the removed middle part</li>
+    </ul>
+</p>
+
+<p>
+    To understand this process in a better way, it is always good to make an
+    <a href="{{ site.baseurl }}{% link _blog/2020-02-08-interactive-dataviz.html %}" target="_blank" rel="dofollow">animated visualization</a>.
+    For this reason, we implement the described algorithm in Python and visualize it using the Matplotlib's Animation API.
+    Thus, the process is perfectly illustrated in the animation below:
+</p>
+
+<center>
+    <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/koch_snowflake.gif" class="lazyload" alt="Animated Visualization of the Koch Snowflake construction">
+    <br/>
+    <span class="caption text-muted">
+        <i>Animation: </i> Koch Snowflake Construction
+    </span>
+</center>
+<br/>
+
+<p>
+    The full source code behind the <i>Koch Snowflake</i> algorithm and the animation above can be found in this
+    <a href="https://github.com/IlievskiV/Amusive-Blogging-N-Coding/blob/master/Visualizations/snowflake.ipynb" target="_blank" rel="dofollow noopener">Python Notebook</a>.
+</p>
+
+<p>
+    If you liked this visualization and this way of perceiving the concepts please share it on the social media.
+    You can also subscribe the the mailing list below to be always up to date. You will receive emails from time
+    to time.
+</p>
+
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<link href="/assets/css/mailchimp.css">
+<div id="mc_embed_signup">
+<form action="https://digital.us19.list-manage.com/subscribe/post?u=cb9dbe40387c27177a25de80f&amp;id=08bda6f8e0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	<label for="mce-EMAIL">Join the iSquared mailing list</label>
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_cb9dbe40387c27177a25de80f_08bda6f8e0" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
