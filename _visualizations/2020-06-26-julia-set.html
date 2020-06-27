@@ -1,0 +1,91 @@
+---
+layout:      single
+title:       "Julia Set: Animate your own in Python with Matplotlib"
+excerpt:     "The mind-gobbling properties of the Julia Set through the prism of visualization"
+description: "Learn how to make your own animation of the Julia Set fractals in Python with Matplotlib. Python code, visualization, and explanation provided."
+date:        2020-06-27 09:00:00
+classes:     wide
+author_profile: true
+header:
+    teaser: "assets/images/julia_set_teaser.gif"
+    og_image: "assets/images/julia_set.png"
+---
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+
+<p>
+    An Infinity within infinity. That's how we can describe the bizarre
+    <a href="https://en.wikipedia.org/wiki/Fractal" target="_blank" rel="nofollow noopener">fractal geometry</a>. This
+    geometry is defined by a self-similar symmetry that exhibits the same or similar patterns regardless of the scale at which
+    we zoom over.
+</p>
+
+
+<p>
+    We already covered the fascinating properties of the
+    <a href="{{ site.baseurl }}{% link _visualizations/2020-06-11-mandelbrot.html %}" target="_blank">Mandelbrot set</a> and the
+    <a href="{{ site.baseurl }}{% link _visualizations/2020-06-15-koch-curve.html %}" target="_blank">Koch Curve</a>, which
+    are also fractals. In this post, we make an animated visualization of the
+    <a href="https://en.wikipedia.org/wiki/Julia_set" target="_blank" rel="nofollow noopener">Julia Set</a>, which is
+    a special kind of fractal. We implement the numerical simulation using <i>Python</i> augmented with an animated
+    visualization in <i>Matplotlib</i>.
+</p>
+
+<h2>Definition</h2>
+
+<p>
+    Similar to the <i>Mandelbrot Set</i>, the <i>Julia Set</i> is a set of all complex numbers \( z \) for a given
+    \( c = x + i*y \), such that the sequence \( z_{n+1} = z_{n}^{2} + c \) is bounded. We can easily visualize all such
+    complex numbers in the complex plane and get a stunning plot. All we have to do is to associate a color (from a predefined
+    palette of colors), corresponding to the number of steps before the sequence diverges. If it diverges, the color is set
+    to black.
+</p>
+
+<h2>Animated Visualization</h2>
+
+<p>
+    The number \( c = x + i*y \) gives us the freedom to set it to a range of values and produce mind-blowing animations.
+    We get one particular and very interesting range of values if we represent \( c \) as
+    \( c = r\cos\alpha + i * r \sin\alpha = re^{i * \alpha} \), for \( r = 0.7885 \) and \( \alpha \in [0, 2\pi] \).
+</p>
+
+<p>
+    Using <i>Matplotlib's</i> Animation API, we visualize the convergence of the <i>Julia Set</i> over this interesting
+    range of values for \( c \). This is depicted in the animation below:
+</p>
+
+<center>
+    <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/julia_set.gif" class="lazyload" alt="Animated Visualization of the Julia set convergence for different values of the parameter c">
+    <br/>
+    <span class="caption text-muted">
+        <i>Animation: </i> Julia set convergence for \( c = re^{i * \alpha} \) as \( \alpha \) changes counterclockwise
+    </span>
+</center>
+<br/>
+
+
+<p>
+    The source code behind this animation and simulation can be found in this
+    <a href="https://github.com/IlievskiV/Amusive-Blogging-N-Coding/blob/master/Visualizations/julia_set.ipynb" target="_blank" rel="dofollow noopener">Python Notebook</a>.
+</p>
+
+<p>
+    If this illustration of the <i>Julia Set</i> is interesting to you, feel free to share it on the social media.
+    Also, it would help if you subscribe to the mailing list below. You will get cool animations like this one from time to time.
+    Thanks for reading this article!
+</p>
+
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<link href="/assets/css/mailchimp.css">
+<div id="mc_embed_signup">
+<form action="https://digital.us19.list-manage.com/subscribe/post?u=cb9dbe40387c27177a25de80f&amp;id=08bda6f8e0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	<label for="mce-EMAIL">Join the iSquared mailing list</label>
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_cb9dbe40387c27177a25de80f_08bda6f8e0" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
