@@ -1,0 +1,96 @@
+---
+layout:      single
+title:       "Chaotic Beauty: Bifurcation Diagram Animation with Matplotlib"
+excerpt:     "It is strange how seemingly simple things turn out to be so chaotic."
+description: "Learn how to visualize the bifurcation diagram of a simple logistic map in Python with Matplotlib. Python code, visualization, and explanation provided."
+date:        2020-11-18 09:00:00
+classes:     wide
+author_profile: true
+header:
+    teaser: "assets/images/bifurcation_teaser.gif"
+    image: "assets/images/bifurcation.png"
+    og_image: "assets/images/bifurcation.png"
+---
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<p>
+    Not everything that seems simple turns out to be so simple, sounds familiar right? Let's take the
+    <a href="https://en.wikipedia.org/wiki/Logistic_map" target="_blank" rel="nofollow noopener">Logistic Map</a>,
+    which is a simple chaotic dynamical system. It is defined with following recursive relation:
+</p>
+
+<div style="font-size:200%">
+    \[ x^{(r)}_{n + 1} = rx^{(r)}_{n}(1 - x^{(r)}_{n}) \]
+</div>
+
+<p>
+    where \( x_{n} \) is a number between 0 and 1, while \( r \) is a free parameter that controls the behaviour
+    of the system.
+</p>
+
+
+<h2>Going from Equilibrium to Chaos</h2>
+
+<p>
+    To see how the free parameter \( r \) affects the convergence of the sequence, we can animate its evolution
+    for a few consecutive steps regardless of the initial value \( x_{0} \).
+</p>
+
+
+<p>
+    For this reason, we can use the <i>Matplotlob Animation API</i>. First, we randomly generate 1 million
+    random values between 0 and 1 and use them as initial values. Then, we crank the <i>Logistic Map</i>
+    relation for 50 iterations by varying the free parameter \( r \) from 0 to 4.
+</p>
+
+<p>
+    We can see that for \( r \) between 0 and 3, the system is pretty stable and predictable, it almost always
+    converges to a single point. But then. something strange happens, it goes out of equilibrium and becomes
+    chaotic, unpredictable. Pretty amazing, huh!
+</p>
+
+<center>
+    <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/bifurcation.gif" class="lazyload" alt="Animated Visualization of bifurcation diagram for the logistic map">
+    <br/>
+    <span class="caption text-muted">
+        <i>Animation: </i> Convergence to Bifurcation Diagram regardless of the initial value
+    </span>
+</center>
+<br/>
+
+
+<p>
+    The source code for these animations can be found in this
+    <a href="https://github.com/IlievskiV/Amusive-Blogging-N-Coding/blob/master/Visualizations/bifurcation_diagram.ipynb" target="_blank" rel="dofollow noopener">Jupyter Notebook</a>.
+    For more information, please follow me on <a href="https://twitter.com/VladOsaurus" target="_blank" rel="noopener">Twitter</a>
+    or <a href="https://www.linkedin.com/in/vilievski/" target="_blank" rel="noopener">LinkedIn</a>.
+</p>
+
+<p>
+    If this demonstration of the <i>Bifurcation Diagram</i> for the <i>Logistic Map</i> is interesting to you,
+    feel free to share it on the social media. Also, it would help if you subscribe to the mailing list below.
+    You will get cool animations like this one from time to time. Thanks for reading this article!
+</p>
+
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<link href="/assets/css/mailchimp.css">
+<div id="mc_embed_signup">
+<form action="https://digital.us19.list-manage.com/subscribe/post?u=cb9dbe40387c27177a25de80f&amp;id=08bda6f8e0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	<label for="mce-EMAIL">Join the iSquared mailing list</label>
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_cb9dbe40387c27177a25de80f_08bda6f8e0" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<h2>References</h2>
+
+<p>
+    [1] Cyrille Rossant,
+    <a href="" target="_blank">"IPython Interactive Computing and Visualization Cookbook, Second Edition"</a>
+    (2018), Packt Publishing
+</p>
