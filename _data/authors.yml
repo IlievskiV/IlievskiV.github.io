@@ -6,7 +6,7 @@ Vladimir Ilievski:
     name             : "Vladimir Ilievski"
     avatar           : "/assets/images/bio_photo.jpg"
     bio              : "Machine Learning Engineer <br/> Startup lover <br/> AI enthusiast"
-    location         : "Valais, Switzerland"
+    location         : "Vaud, Switzerland"
     links:
       - label: "Twitter"
         icon: "fab fa-fw fa-twitter-square"

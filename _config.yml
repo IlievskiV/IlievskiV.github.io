@@ -112,7 +112,7 @@ author:
   name             : "Vladimir Ilievski"
   avatar           : "/assets/images/bio_photo.jpg"
   bio              : "Machine Learning Engineer with Partially Differentiable Ideas"
-  location         : "Valais, Switzerland"
+  location         : "Vaud, Switzerland"
   links:
     - label: "Twitter"
       icon: "fab fa-fw fa-twitter-square"

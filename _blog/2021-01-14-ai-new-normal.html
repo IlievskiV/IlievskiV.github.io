@@ -1,0 +1,544 @@
+---
+layout:      single
+title:       "The new normal that changes the way we do AI. Here is how, with illustrated examples"
+excerpt:     "Illustrated examples on how and why to use and adopt the BERT-like models"
+description: "We learn about the BERT model in AI, and how and why it is important to adopt it"
+date:        2021-01-14 09:00:00
+classes:     wide
+header:
+    teaser: "assets/images/ai_new_normal_teaser.png"
+    image: "assets/images/ai_new_normal_teaser.png"
+    og_image: "assets/images/ai_new_normal_teaser.png"
+---
+
+<p>
+    After two days of intense debate, the United Methodist Church has agreed to a historic split - one that is expected
+    to end in the creation of a new denomination, one that will be "theologically and socially conservative,"
+    according to The Washington Post.
+</p>
+
+<p>
+    You might be wondering what this bizarre and trifling text has in common with AI, but in fact, it does. It is
+    one of the news articles generated from the biggest ever and most sophisticated neural network,
+    namely the <a href="https://arxiv.org/pdf/2005.14165.pdf" target="_blank" rel="noopener nofollow">GPT-3</a>.
+    If the text befuddles you, don’t worry, you’re not the only one. Only 12% of the pundits got it right.
+    That’s not a typo. GPT-3 mastered many tasks that were considered human-only, setting the bar ever higher.
+</p>
+
+<p>
+    In the industry, there is a burgeoning need for intelligent systems working out-of-the-box with delicate
+    specifications. Be it analyzing different text sources to predict the stock market tendency, detecting fake news,
+    or simply answering questions like what color is Kardashian's hair (go for it, ask <a
+        href="https://www.google.com/search?q=what+color+is+Kardashian%27s+hair&oq=what+color+is+Kardashian%27s+hair&aqs=chrome..69i57j0i22i30i457j0i22i30l6.417j0j7&sourceid=chrome&ie=UTF-8"
+        target="_blank" rel="noopener nofollow">Google</a> or Bing).
+    We can <a href="https://openai.com/blog/openai-api/" target="_blank" rel="noopener">use GPT-3 as a pre-trained
+    model</a>
+    and make it learn any task we want: generating poems, code, spreadsheets, even some simple mobile and web
+    applications.
+</p>
+
+<p>
+    Building and training such a pervasive and intelligent NLP system from scratch was never a problem. We only need
+    a few million dollars to train the final version of it, without counting all the trials and errors throughout
+    the process. The apocryphal <a href="https://lambdalabs.com/blog/demystifying-gpt-3/" target="_blank"
+                                   rel="noopener nofollow">sum for training GPT-3 is $4.6 million</a>.
+    Now, that is a problem. Not everyone can afford such commodities, especially the young start-ups aiming
+    to build disruptive NLP-based applications.
+</p>
+
+<p>
+    Being such an elusive task, it doesn’t make sense to start from scratch and reluctantly fail over and over again.
+    Instead, we need to adopt a new paradigm and take advantage of the pre-trained models, a strategy that is still not
+    fully adopted in the industry.
+</p>
+
+<p>
+    In the pursuit of this idea, through illustrated examples, I’m going to show you what lies at the heart of what
+    we as machine learning engineers want to achieve: how to build better AI applications.
+</p>
+
+<h2>Transformers: the abolishing of the recurrence</h2>
+
+<p>
+    Generally in machine learning, there are two casts of practitioners: the first who admire convolutional
+    neural networks (CNNs), and the others who admire recurrent neural networks (RNNs). Of course, there is an
+    interplay between them in some scenarios.
+</p>
+
+<p>
+    Certainly, the RNNs are the hallmark of NLP, and for quite good reason. NLP is a sequencing task where words have
+    a strict order and uncover cues for the next ones. Due to this temporal nature, the most obvious choice is to use
+    RNNs. However, there are numerous impediments to their successful employment. First of all, the everlasting problem
+    of <a href="https://www.dlology.com/blog/how-to-deal-with-vanishingexploding-gradients-in-keras/" target="_blank"
+          rel="noopener nofollow">vanishing and exploding gradients</a>,
+    being extremely slow, and on top of everything, they are not parallelizable.
+</p>
+
+<p>
+    Starting from the hypothesis that words that group together have a similar meaning,
+    the <a href="https://en.wikipedia.org/wiki/Word2vec" target="_blank" rel="noopener nofollow">word2vec</a> word
+    embeddings
+    were coined. This was a major step toward adopting pre-trained models at scale in NLP, besides the ability to
+    mathematically conclude that the words “cat” and “dog” are closely related.
+</p>
+
+<p>
+    This shift culminated with the invention of the fully convolutional
+    <a href="https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html" target="_blank" rel="noopener">Transformer
+        architecture</a> pre-trained in a
+    self-supervised manner. The model is summarized in the figure below. The scope of this text is too short for
+    an exhaustive drill of the Transformer, thus I refer readers to the
+    <a href="https://nlp.seas.harvard.edu/2018/04/03/attention.html" target="_blank" rel="noopener">excellent blog “The
+        Annotated Transformer”</a>.
+</p>
+
+<center>
+    <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/transformer_model.png" class="lazyload"
+         alt="Sketch of the Transformer model"/>
+    <br/>
+    <span class="caption text-muted">
+        <i>Fig. 1:</i> Transformer Model
+    </span>
+</center>
+<br/>
+
+<p>
+    The main message here is: this superposition of the concepts propelled <strong>the paradigm shift of re-using
+    pre-trained models and slowly abolishing the RNN use in NLP</strong>. As never before, with a decent amount of
+    data and processing power it is now possible to craft a custom, top-notch NLP module.
+</p>
+
+<p>
+    This zoo of ready-to-use pre-trained Transformer models is becoming the <strong>“new normal”</strong>, creating an
+    exquisite
+    platform, an ecosystem in which many ideas can grow and blossom.
+</p>
+
+<p>
+    Let’s get to the nuts and bolts and see how to take advantage of this impetus and start creating better NLP apps.
+</p>
+
+<h2>Enter BERT</h2>
+
+<p>
+    No, not the one from <i>Sesame Street</i>, but the Transformer-based model called “Bidirectional Encoder Representations
+    from Transformers” or <strong>BERT</strong> in short.
+</p>
+
+<p>
+    The <a href="https://arxiv.org/abs/1810.04805" target="_blank" rel="noopener nofollow">original paper</a> was first
+    introduced in 2018 along with the <a href="https://github.com/google-research/bert" target="_blank"
+                                         rel="noopener nofollow">open-source implementation</a>
+    distributed with a few already pre-trained models. Along with the <a
+        href="https://openai.com/blog/language-unsupervised/" target="_blank" rel="noopener">first version of GPT</a>,
+    it was one of the first models of this kind. After this, an entire concoction of pre-trained models accessible
+    through a programming interface has spurred off.
+</p>
+
+<p>
+    Conceptually, the BERT model is quite simple, it is a stack of Transformer Encoders as depicted in the figure below:
+</p>
+
+<center>
+    <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/bert_model.png" class="lazyload"
+         alt="Sketch of the BERT model"/>
+    <br/>
+    <span class="caption text-muted">
+        <i>Fig. 2:</i> BERT Model
+    </span>
+</center>
+<br/>
+
+<p>
+    This <i>puppetware</i>, as it is popularly referred to, was created with one goal in mind: <strong>to be a general
+    task-agnostic pre-trained model that can be fine-tuned on many downstream tasks</strong>. To achieve this, the
+    input/output structure and the pre-training procedure are designed to be complementary and flexible enough
+    for a wide variety of downstream tasks. One thing is for sure, and that is:
+</p>
+
+<blockquote style="font-size: 24px;">
+    “In order to use a pre-trained BERT model properly, the most important task is
+    to understand the expected input and output.”
+</blockquote>
+
+<h3>Input/Output</h3>
+
+<p>
+    Both the input and output are on the level of individual tokens, such that for each token there is a
+    corresponding multidimensional array of size <strong>H</strong>.
+</p>
+
+<p>
+    The input consists of two textual segments <strong>A</strong> and <strong>B</strong> separated by a special token
+    designated as <strong>[SEP]</strong>. Additionally, there is always one special token at the beginning denoted
+    as <strong>[CLS]</strong>. Having this input structure, the final input token representation is expressed as a
+    sum of three embeddings: <a href="https://arxiv.org/pdf/1609.08144.pdf" target="_blank" rel="noopener nofollow">WordPiece
+    embeddings</a>,
+    segment embeddings (token belongs to segment <strong>A</strong> or <strong>B</strong>), and positional embeddings
+    (global position encoding of the token). There is a particular reason behind this mixture of three different
+    embeddings, however, the most important thing to remember is that each token is now projected to a dimension
+    of size <strong>H</strong>. This dimension persists through the entire BERT model. All of this is illustrated
+    in the figure below:
+</p>
+
+<center>
+    <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/bert_input_details.png" class="lazyload"
+         alt="Sketch of the BERT model inputs and outputs"/>
+    <br/>
+    <span class="caption text-muted">
+        <i>Fig. 3:</i> BERT Input and Output
+    </span>
+</center>
+<br/>
+
+<p>
+    The output is a learned representation of size <strong>H</strong> for each input token. <strong>All of the outputs
+    are
+    left to be used furthermore by the engineers depending on the use case</strong>. First, the output representation
+    for the special token <strong>[CLS]</strong> can be used for <i>any</i> text classification task. Second,
+    the output representations of the actual word tokens can be used in <i>any</i> language understanding assignment.
+</p>
+
+<h3>Pre-training</h3>
+
+<p>
+    The pre-training is based on two techniques: 1. Masked Language Modeling (MLM) and
+    2. Next Sentence Prediction (NSP).
+</p>
+
+<p>
+    The <strong>MLM</strong> task uses the same assumption as in <i>word2vec</i>: words that appear in the same
+    context have a similar meaning. Thus, it selects 15% of the input words at random for possible masking.
+    Then, 80% of them are masked, 10% are replaced with a random word and the last 10% are left unchanged.
+    Finally, the BERT outputs for the randomly selected words are passed in a <i>softmax</i> output over the
+    entire vocabulary.
+</p>
+
+<p>
+    The <strong>NSP</strong> task extends the scope of the <strong>MLP</strong> task by capturing dependencies between
+    sentences. To accomplish this, 50% of the time segment B is the <i>de facto</i> next segment after A, and the
+    remaining 50% of the time it is some random choice. Both tasks are shown in the figure below:
+</p>
+
+<center>
+    <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/bert_mlm_nsp.png" class="lazyload"
+         alt="Sketch of the BERT pre-training"/>
+    <br/>
+    <span class="caption text-muted">
+        <i>Fig. 4:</i> BERT pre-training
+    </span>
+</center>
+<br/>
+
+<p>
+    In the original paper, there are 2 pre-trained models: 1. BERT-Base, containing 110 million parameters and
+    2. BERT-Large containing 340 million parameters. There is no wonder why this model knows almost everything.
+    Both models are pre-trained using the <a href="https://github.com/soskek/bookcorpus" target="_blank"
+                                             rel="noopener nofollow">Book Corpus dataset</a>
+    (800 million words) and the entire English Wikipedia (2500 million words).
+</p>
+
+<h2>Basic usage of BERT</h2>
+
+<p>
+    As noted earlier there is a trove of open-source and pre-trained BERT models ready to be used by almost everyone.
+    One such amazing repository is the one offered by <a href="https://huggingface.co/transformers/model_doc/bert.html"
+                                                         target="_blank" rel="noopener nofollow">Huggingface</a> 🤗,
+    and trust me, it is quite straightforward to take advantage of this mighty machinery. The code below demonstrates
+    this:
+</p>
+
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+    <table>
+        <tr>
+            <td style="border-bottom: none;"><pre style="margin: 0; line-height: 125%"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre>
+            </td>
+            <td style="border-bottom: none;"><pre style="margin: 0; line-height: 125%"><span
+                    style="color: #008800; font-weight: bold">from</span> <span
+                    style="color: #bb0066; font-weight: bold">transformers</span> <span
+                    style="color: #008800; font-weight: bold">import</span> BertTokenizer, BertModel
+<span style="color: #008800; font-weight: bold">import</span> <span
+                        style="color: #bb0066; font-weight: bold">torch</span>
+
+tokenizer = BertTokenizer.from_pretrained(<span style="color: #dd2200; background-color: #fff0f0">&#39;bert-base-uncased&#39;</span>)
+model = BertModel.from_pretrained(<span
+                        style="color: #dd2200; background-color: #fff0f0">&#39;bert-base-uncased&#39;</span>)
+
+inputs = tokenizer(<span
+                        style="color: #dd2200; background-color: #fff0f0">&quot;[CLS] This is very awesome!&quot;</span>, return_tensors=<span
+                        style="color: #dd2200; background-color: #fff0f0">&quot;pt&quot;</span>)
+outputs = model(**inputs)
+
+<span style="color: #888888"># the learned representation for the [CLS] token</span>
+cls = outputs.last_hidden_state[<span style="color: #0000DD; font-weight: bold">0</span>, <span
+                        style="color: #0000DD; font-weight: bold">0</span>, :]
+</pre>
+            </td>
+        </tr>
+    </table>
+</div>
+<br/>
+
+<p>
+    Now, let’s see what kind of NLP applications we can develop with BERT.
+</p>
+
+<h2>BERT for Text Classification</h2>
+
+<p>
+    Sentiment analysis epitomizes text classification, but its span is much wider. Text classification is a
+    hodgepodge of many things. It ranges from classifying single sentences and reviews to categorizing entire documents.
+</p>
+
+<p>
+    The task of text classification is to take some text corpora and automatically assign a label to it. It might be
+    handy in many different situations, as summarized in the following section.
+</p>
+
+<h3>Use Cases</h3>
+
+<p>
+    Text classification can be used to automate the following tasks, but it is not limited to:
+
+<ul>
+    <li>
+        <strong>Sentiment Analysis:</strong> detect subjectivity and polarity in a text. It is beneficial to
+        understand our customers, whether they feel satisfied or not from our service.
+    </li>
+
+    <li>
+        <strong>Intent classification:</strong> understand the topic of the user’s utterance. This can be helpful
+        in our chatbot or to automatically route the request to the right agents to take care of.
+    </li>
+
+    <li>
+        <strong>Document categorization:</strong> automatically entitle labels to textual documents. This can
+        ameliorate the document retrieval in our product or organization, taking into consideration the
+        rule of thumb that nearly 80% of corporate information exists in textual format.
+    </li>
+
+    <li>
+        <strong>Language detection:</strong> as absurd as it sounds, but sometimes it is crucial to first detect
+        the language in which a given sentence is written.
+    </li>
+
+    <li>
+        <strong>Customer categorization:</strong> group social media users into cohorts. This is important
+        for the marketing teams for the sake of segmenting the different casts of potential customers.
+    </li>
+</ul>
+</p>
+
+<h3>How to do it with BERT</h3>
+
+<p>
+    If you need any kind of text classification, look no further. With the help of BERT or BERT-like models already
+    at our disposal, we can craft reliable and functional text classification systems. In the figure below,
+    it is demonstrated how we can easily adapt a pre-trained BERT model for any text classification task:
+</p>
+
+<center>
+    <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/bert_text_classification.png" class="lazyload"
+         alt="Sketch of the BERT for text classification"/>
+    <br/>
+    <span class="caption text-muted">
+        <i>Fig. 5:</i> BERT for text classification
+    </span>
+</center>
+<br/>
+
+<p>
+    We just need to take a sentence and append in front of it the special <strong>[CLS]</strong> token. After feeding
+    the sentence into the BERT model, we use only the first output corresponding to the <strong>[CLS]</strong> token
+    and discard the rest of the output.
+</p>
+
+<h3>One excellent resource</h3>
+
+<p>
+    The paper <a href="https://arxiv.org/abs/1905.05583" target="_blank" rel="noopener nofollow">How to Fine-Tune BERT
+    for Text Classification</a>
+    along with the underlying <a href="https://github.com/xuyige/BERT4doc-Classification" target="_blank"
+                                 rel="noopener nofollow">GitHub repository</a>
+    represents an excellent solution to re-use and start with text classification.
+</p>
+
+<h2>BERT for Named-Entity Recognition (NER)</h2>
+
+<p>
+    “Floyd revolutionized rock with the Wall” - in this sentence we all know that the word <strong>“rock”</strong>
+    refers to the rock genre of music instead of the geological object, otherwise the sentence would not make any sense.
+</p>
+
+<p>
+    This is exactly the task of the <a href="https://en.wikipedia.org/wiki/Entity_linking" target="_blank"
+                                       rel="noopener nofollow">Named-Entity Recognition</a>
+    (NER) task, to link a word or group of words to a unique entity, or a class depending on the context.
+    Once knowing all entities, we can link them to a knowledge base or a database where we can find more info
+    about them. In other words, it is extracting data about the data.
+</p>
+
+<h3>Use Cases</h3>
+
+<p>
+    The scope of the <strong>NER</strong> is big, but these are the main relevant fields where it is applied:
+
+<ul>
+    <li>
+        <strong>Information retrieval:</strong> by discovering the entities of the words we can understand the
+        semantic search queries much better. This can help us to find more relevant search results.
+    </li>
+
+    <li>
+        <strong>Building better chatbots:</strong> understand the users better. In fact, chatbots rely on NER,
+        based on the extracted entities they can search knowledge bases, databases, and return relevant
+        answers driving the conversation in the right direction.
+    </li>
+
+    <li>
+        <strong>Knowledge extraction:</strong> make the unstructured data relevant. As most of the information
+        exists in textual format, extracting value from it becomes an essential task.
+    </li>
+</ul>
+</p>
+
+<h3>How to do it with BERT</h3>
+
+<p>
+    There are many different techniques for tackling the NER task including highly specialized neural network
+    architectures. With the invention of BERT and BERT-like systems, crafting NER systems is quite handy,
+    as illustrated below:
+</p>
+
+<center>
+    <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/bert_ner.png" class="lazyload"
+         alt="Sketch of the BERT for NER"/>
+    <br/>
+    <span class="caption text-muted">
+        <i>Fig. 6:</i> BERT for Named-Entity Recognition
+    </span>
+</center>
+<br/>
+
+<p>
+    The tokenized sentence at the input is fed into the pre-trained BERT model. To determine the entities to which the
+    words belong, we use the BERT learned representation for the words and feed them in a classifier.
+</p>
+
+<h3>One excellent resource</h3>
+
+<p>
+    NER is one of the benchmarking tasks in the original paper, thus it is possible to use the original repository.
+    On top of this, there are a plethora of repositories solving NER with BERT in a similar way, out of which
+    the most comprehensive is <a href="https://github.com/kamalkraj/BERT-NER" target="_blank" rel="noopener nofollow">this
+    GitHub repository</a>,
+    giving a way to put it in production immediately.
+</p>
+
+<h2>BERT for Extractive Text Summarization</h2>
+
+<p>
+    Imagine having a long text without an abstract, or a news article without a headline. What would you first do in
+    this case is skim through the text in order to understand what is it about. This mundane task can easily be
+    bypassed, if there were some automatic summary extraction system.
+</p>
+
+<p>
+    The task of the extractive text summarization is to automatically sample the most salient and informative
+    sentences from a given text. This is quite convenient in many different scenarios as described further down.
+</p>
+
+<h3>Use Cases</h3>
+
+<p>
+    Automatic text summarization can be applied for everything related to long documents:
+<ul>
+    <li>
+        <strong>News summarization:</strong> summarizing the brimming amount of every day news articles.
+    </li>
+
+    <li>
+        <strong>Legal contract analysis:</strong> summarizing the excruciatingly confusing and long legal
+        documents in order to understand them in simple words.
+    </li>
+
+    <li>
+        <strong>Marketing and SEO:</strong> crawl and summarize the content of the competitors to understand it
+        better.
+    </li>
+
+    <li>
+        <strong>Financial reports analysis:</strong> extract meaningful information from the financial news
+        and reports for the sake of making better decisions.
+    </li>
+</ul>
+</p>
+
+<h3>How to do it with BERT</h3>
+
+<p>
+    Performing extractive text summarization with BERT might be tricky since it is not one of the tasks for which
+    BERT was designed to be a pre-trained model. Despite this, the BERT model is flexible enough to be
+    customized to work in this scenario. We show how to do this in the illustration below:
+</p>
+
+<center>
+    <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/bert_summarization.png" class="lazyload"
+         alt="Sketch of the BERT for Summarization"/>
+    <br/>
+    <span class="caption text-muted">
+        <i>Fig. 7:</i> BERT for Extractive Text Summarization
+    </span>
+</center>
+<br/>
+
+<p>
+    In this case, we operate on a sentence level, but the sentences are anyway considered as a list of tokens.
+    To select what sentences are important, we enclose each sentence with <strong>[CLS]</strong> token on the left
+    and <strong>[SEP]</strong> token on the right. To make the neighboring sentences depend on each other we
+    explicitly provide segmentation tokens. For each sentence, we alternatively switch between <strong>segment
+    A</strong>
+    and <strong>segment B</strong>.
+</p>
+
+<p>
+    After feeding this composite input into the pre-trained BERT model, we only use the output representation for each
+    of the <strong>[CLS]</strong> tokens to select the best sentences that summarize the text.
+</p>
+
+<h3>One excellent resource</h3>
+
+<p>
+    The work in the paper entitled <a href="https://arxiv.org/abs/1908.08345" target="_blank" rel="noopener nofollow">Text Summarization with Pre-Trained Encoders</a>
+    along with its associated <a href="https://github.com/nlpyang/BertSum" target="_blank" rel="noopener nofollow">GitHub repository</a>
+    presents the system called <i>BertSum</i>. This system can serve as a very good foundation in developing
+    more specialized text summarizers based on BERT.
+</p>
+
+<h2>Conclusion</h2>
+
+<p>
+    The purpose of this text is to elicit the machine learning practitioners as well as the decision makes in the
+    business domain to start adopting the new paradigm shift.
+</p>
+
+<p>
+    With illustrated examples, we see how we can easily use and adapt a pre-trained BERT model on a variety of tasks
+    including: text classification, named-entity recognition and extractive text summarization.
+</p>
+
+<p>
+    In future, this zoo of high performant pre-trained models like BERT will become more important and relevant.
+    We see this from the recent developments, for instance the creation of the GPT-3 model. This might be the push
+    we all need in achieving our goals. Thus, let’s grab this chance and use the momentum.
+</p>
