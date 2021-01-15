@@ -14,6 +14,7 @@ group :jekyll_plugins do
   gem "jemoji"
   gem "jekyll-gist"
   gem "jekyll-redirect-from"
+  gem "kramdown", ">= 2.3.0"
 end
 
 install_if -> { RUBY_PLATFORM =~ %r!mingw|mswin|java! } do
