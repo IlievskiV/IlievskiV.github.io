@@ -1,0 +1,135 @@
+---
+layout:      single
+title:       "The holy grail of mathematics: animated visualization of the Riemann Zeta zeros"
+excerpt:     "Not an ordinary function, animating the zeros of the Riemann Zeta function in Python using Matplotlib"
+description: "We make an animated visualization of the Riemann Zeta function zeros in Python using the Matplotlib
+              Animation API"
+date:        2021-02-25 09:00:00
+classes:     wide
+author_profile: true
+header:
+    teaser: "assets/images/riemann_zeta_zeros_teaser.gif"
+    image: "assets/images/riemann_zeta_zeros.png"
+    og_image: "assets/images/riemann_zeta_zeros.png"
+---
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<p>
+    Perceived as the "holy grail" of mathematics, the <b>Riemann Hypothesis</b> which revolves around
+    the <b>Riemann Zeta</b> function provokes fascination and admiration. Its solution paves the way
+    on predicting the pattern in which the prime numbers occur, the building block of mathematics.
+</p>
+
+<p>
+    The <b>Riemann Zeta</b> function is quite simple. It is defined as:
+</p>
+
+<div style="font-size:200%">
+    \[ \zeta(s) = \sum_{n=1}^{\infty} \frac{1}{n^s}, s \in \mathbb{C}, n \in \mathbb{N} \]
+</div>
+
+<p>
+    where \( s = \sigma + t \times i \) is any complex number, while \( n \) is any natural number.
+</p>
+
+<h2>Riemann Hypothesis: where the magic happens</h2>
+
+<p>
+    When the real part of the complex number \( s \equiv \sigma \) is greater than one, the sum always converges.
+    However, with a technique called <a href="https://en.wikipedia.org/wiki/Analytic_continuation" target="_blank" rel="noopener nofollow">analytic continuation</a>
+    it is possible to extend the <i>domain of definition</i> for cases when the real part \( \sigma \) is less than 1.
+</p>
+
+<p>
+    And here is where the magic happens! Riemann hypothesized that all non-trivial zeros of the zeta function
+    lie on the line \( s = 1/2 + t \times i \). Using a computer simulation this has been verified for
+    10,000,000,000,000 (ten trillion) solutions. However, a bulletproof mathematical demonstration is still missing,
+    for which the <a href="http://www.claymath.org/" target="_blank" rel="noopener">Clay Mathematics Institute</a>
+    is giving a million dollar prize.
+</p>
+
+<p>
+    If this hypothesis shows to be correct, the <i>Riemann Zeta</i> zeros can be used to approximate the density of the
+    prime numbers almost perfectly. It means, we will know the pattern in which the prime numbers occur.
+</p>
+
+<h2>Visualizing the zeros</h2>
+
+<p>
+    Even tough it is still a hypothesis, nothing prevents us from visualizing how the function behaves for all
+    hypothesized zeros. Using <i>Python</i> and the <i>Matplotlib Animation API</i> it is quite straightforward to
+    do this.
+</p>
+
+<p>
+    In this specific example, first we set \( s = \sigma + t \times i = 1/2 + t \times i \). Then, we generate 10,000
+    equidistant values for \( t \) in the space between 0 and 100 and calculate \( s \) for all of them.
+    We plug these values inside the zeta function, which will result in another series of complex number.
+    We take the real and imaginary part of this zeta function output and plot them against each other.
+    The resulting trajectory is animated below:
+</p>
+
+<center>
+    <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/riemann_zeta_zeros.gif" class="lazyload" alt="Animated Visualization of the Riemann Zeta hypothesized zeros ">
+    <br/>
+    <span class="caption text-muted">
+        <i>Animation: </i> Hypothesized Zeros of the Riemann Zeta function
+    </span>
+</center>
+<br/>
+
+<p>
+    It is interesting to see how the hypothesized zeros are oscillating in the same region around the coordinate center
+    forming an <i>onion-like</i> pattern.
+</p>
+
+<p>
+    The source code for this animation of the zeros of the Riemann Zeta function can be found in this
+    <a href="https://github.com/IlievskiV/Amusive-Blogging-N-Coding/blob/master/Visualizations/riemann_zeta_zeros.ipynb" target="_blank" rel="dofollow noopener">Jupyter Notebook</a>.
+    For more information, please follow me on <a href="https://www.linkedin.com/in/vilievski/" target="_blank" rel="noopener">LinkedIn</a>
+    or <a href="https://twitter.com/VladOsaurus" target="_blank" rel="noopener">Twitter</a>.
+</p>
+
+<p>
+    If this is something interesting to you, feel free to share it on the social media. Also, it would help if you
+    subscribe to the mailing list below. You will get cool animations like this one from time to time.
+    And finally, thanks for reading this article!
+</p>
+
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<link href="/assets/css/mailchimp.css">
+<div id="mc_embed_signup">
+<form action="https://digital.us19.list-manage.com/subscribe/post?u=cb9dbe40387c27177a25de80f&amp;id=08bda6f8e0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	<label for="mce-EMAIL">Join the iSquared mailing list</label>
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_cb9dbe40387c27177a25de80f_08bda6f8e0" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<h2>Appendix: Absurd or not?</h2>
+
+<p>
+    Using the analytic continuation of the Riemann Zeta function, we can plug \( s = -1 \) and get the
+    sum of all natural numbers:
+</p>
+
+<div style="font-size:200%">
+    \[ \zeta(-1) = \sum_{n=1}^{\infty} \frac{1}{n^{-1}} = 1 + 2 + 3 + ...  \]
+</div>
+
+<p>
+    One might expect that this sum will be infinite, but in this realm of analytic continuation, it holds that:
+</p>
+
+<div style="font-size:200%">
+    \[ \zeta(-1) = \sum_{n=1}^{\infty} \frac{1}{n^{-1}} = 1 + 2 + 3 + ... = -\frac{1}{12} \]
+</div>
+
+<p>
+    Pretty absurd, right?
+</p>
