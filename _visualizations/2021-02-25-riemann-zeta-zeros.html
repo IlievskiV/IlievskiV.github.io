@@ -43,9 +43,12 @@ header:
 
 <p>
     And here is where the magic happens! Riemann hypothesized that all non-trivial zeros of the zeta function
-    lie on the line \( s = 1/2 + t \times i \). Using a computer simulation this has been verified for
-    10,000,000,000,000 (ten trillion) solutions. However, a bulletproof mathematical demonstration is still missing,
-    for which the <a href="http://www.claymath.org/" target="_blank" rel="noopener">Clay Mathematics Institute</a>
+    lie on the line \( s = 1/2 + t \times i \), as illustrated in Figure 1 below.
+</p>
+
+<p>
+    Using a computer simulation this has been verified for 10,000,000,000,000 (ten trillion) solutions. However,
+    a bulletproof mathematical demonstration is still missing, for which the <a href="http://www.claymath.org/" target="_blank" rel="noopener">Clay Mathematics Institute</a>
     is giving a million-dollar prize.
 </p>
 
@@ -64,11 +67,17 @@ header:
     prime numbers almost perfectly. It means we will know the pattern in which the prime numbers occur.
 </p>
 
+<p>
+    <b>Note:</b> It doesn't mean that for all values on the vertical line 1/2, the zeta function outputs 0. The real
+    part \( \sigma \) might still be equal to 1/2 and the value of the zeta function to be different than 0. But
+    if the zeta function output is 0, then \( \sigma \) should be equal to 1/2.
+</p>
+
 <h2>Visualizing the zeros</h2>
 
 <p>
-    Even though it is still a hypothesis, nothing prevents us from visualizing how the function behaves for all
-    hypothesized zeros. Using <i>Python</i> and the <i>Matplotlib Animation API</i> it is quite straightforward to
+    Even though it is still a hypothesis, nothing prevents us from visualizing how the function behaves on the
+    critical line. Using <i>Python</i> and the <i>Matplotlib Animation API</i> it is quite straightforward to
     do this.
 </p>
 
@@ -90,9 +99,10 @@ header:
 <br/>
 
 <p>
-    It is interesting to see how the hypothesized zeros are oscillating in the same region around the coordinate center
+    It is interesting to see how the zeta function is oscillating in the same region around the coordinate center
     forming an <i>onion-like</i> pattern.
 </p>
+
 
 <p>
     The source code for this animation of the zeros of the Riemann Zeta function can be found in this
