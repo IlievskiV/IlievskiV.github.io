@@ -1,0 +1,445 @@
+---
+layout:      single
+title:       "Simple but Stunning: Animated Cellular Automata in Python"
+excerpt:     "Illustration, implementation and animation of the elementary cellular automata in Python with Matplotlib"
+description: "We learn the concept of the cellular automata through illustrated examples and provide
+an implementation and animation in Python with Matplotlib"
+date:        2021-05-02 09:00:00
+classes:     wide
+header:
+    teaser: "assets/images/ca_teaser.png"
+    image: "assets/images/ca_teaser.png"
+    og_image: "assets/images/ca_teaser.png"
+---
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<p>
+    The automation epitomizes the last few decades of rapid technological development where many processes
+    take place without human intervention. But what exactly does it mean?
+</p>
+
+<p>
+    <b>Automaton</b> (noun):
+</p>
+
+<ul style="list-style-type: none;">
+    <li>: a mechanism that is relatively self-operating</li>
+    <li>: a machine or control mechanism designed to follow a predetermined sequence of operations</li>
+</ul>
+
+<p>
+    These are the two most common definitions of the word <b>automaton</b>, related to the word <b>automation</b>,
+    <b>automatic</b> or <b>automatically</b>.
+</p>
+
+<p>
+    In the very same sense, as you might already know, one
+    <a href="https://en.wikipedia.org/wiki/Automaton" target="_blank" rel="noopener nofollow">automaton</a>
+    is always in some precise and unequivocal state. It transitions to another precisely defined state given
+    some instruction. We can visually represent any automata using a directed graph, where states are
+    represented with nodes, while the transitions with edges. One very simple automaton is shown in the figure below:
+</p>
+
+<center>
+    <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/dfa_example.png" class="lazyload"
+         alt="Graphical representation of an automaton"/>
+    <br/>
+    <span class="caption text-muted">
+        <i>Fig. 1:</i> Simple Automaton with two states. Taken from Wikipedia.
+    </span>
+</center>
+<br/>
+
+<p>
+    This is the fundamental principle of the entire computing machinery we use today. Starting from the very
+    simple coffee machine at your home up to the very complex device on which you read this story. All these
+    machines follow a set of instructions and transition from one state to another.
+</p>
+
+<p>
+    Contrary to this deterministic definition of automata, what happens if we have some arbitrary program?
+    What if we have a program that does not rely on receiving some precise set of instructions, but rather
+    arbitrary ones depending on its current state. Something more closely related to the evolution of the
+    living organisms in nature.
+</p>
+
+<p>
+    I am not intending to reinvent the wheel here, many scientists had the same questions a long time ago.
+    It is only to give the intuition and motivation behind the conception and definition of the
+    <b>cellular automata</b>.
+</p>
+
+<p>
+    The <a href="https://en.wikipedia.org/wiki/Cellular_automaton" target="_blank" rel="nofollow noopener">cellular automaton</a>
+    relies on and is motivated by the principles of the living organisms in nature.
+    It consists of a grid of cells each having some state. Every cell advances in time according to some
+    mathematical function of the neighboring cells. Thus, the entire automata behave like a living organism.
+</p>
+
+<p>
+    By the end of this blog post, you will be able to understand and see the potential of cellular automata.
+    First, we'll delve into the formal definition and elaborate more on some particular cases. Then to complete
+    the puzzle, we will see how to implement some interesting cellular automata in Python complemented with
+    interesting animated visualizations using Matplotlib. Stay tuned!
+</p>
+
+<h2>Definition of Cellular Automaton</h2>
+
+<p>
+    A cellular automaton is fully defined by three key elements:
+</p>
+
+<ol>
+    <li>Collection of <i>“colored”</i> cells each having a state;</li>
+    <li>The cells are distributed on a grid with a predefined shape and</li>
+    <li>The cells update their state according to a rule-based on the neighboring cells.</li>
+</ol>
+
+<p>
+    For instance, we can take the most simple case when the state of the cell is either on or off,
+    or in other words either 1 or 0.
+</p>
+
+<p>
+    The grid in general is represented as a rectangle with a shape of \( M \times N \), meaning it has
+    M rows and N columns. Then, each cell is represented as a small rectangle on the grid.
+</p>
+
+<p>
+    Knowing all of this, we can define what cells are considered neighbors of a given cell.
+    For a squared grid, the two most common neighborhoods are:
+</p>
+
+<ol>
+    <li>
+        <a href="https://en.wikipedia.org/wiki/Moore_neighborhood" rel="nofollow noopener" target="_blank">Moore neighborhood</a>
+        (squared neighborhood) as shown on the left of Fig. 2;
+    </li>
+
+    <li>
+        <a href="https://en.wikipedia.org/wiki/Von_Neumann_neighborhood" rel="nofollow noopener" target="_blank">von Neumann neighborhood</a>
+        (diamond-shaped) as shown on the right of Fig. 2.
+    </li>
+</ol>
+
+<center>
+    <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/ca_neighborhoods.png" class="lazyload"
+         alt="Types of neighborhoods for cellular automata"/>
+    <br/>
+    <span class="caption text-muted">
+        <i>Fig. 2:</i> Moore vs Von Neumann neighborhoods
+    </span>
+</center>
+<br/>
+
+<p>
+    Now, the update rule is simply a function of the current cell state and the states of the cells
+    in its pre-defined neighborhood. The only missing piece of the puzzle is the initial state of the
+    automaton, which might be deterministic or random.
+</p>
+
+<p>
+    The initial condition, the 2-dimensional grid, the type of neighborhood, and the update rule give
+    rise to infinitely many scenarios that are difficult to analyze. For this reason,
+    we’ll focus only on the most simple case of cellular automata, namely the <b>elementary cellular automata</b>.
+</p>
+
+<h2>Elementary Cellular Automata</h2>
+
+<p>
+    The elementary cellular automata are the simplest non-trivial automata. They are one-dimensional,
+    meaning there is only one row of cells. Each cell is having two possible states (0 or 1), and its
+    neighbors are the adjacent cells on either side of it as shown in the figure below:
+</p>
+
+<center>
+    <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/elementary_ca.png" class="lazyload"
+         alt="Schema for the elementary cellular automata"/>
+    <br/>
+    <span class="caption text-muted">
+        <i>Fig. 3:</i> Elementary cellular automaton
+    </span>
+</center>
+<br/>
+
+<p>
+    Every cell with its two neighboring cells forms a patch of 3 cells, each of which can have 2 states:
+    either 0 or 1. Plugging a simple variation with repetition gives us \( 2^{3} = 8 \) possible options:
+    000, 001, 010, 011, 100, 101, 110, 111 (the numbers from 0 to 7 in binary format).
+</p>
+
+<p>
+    Using these 8 options, we can decide whether the next state of the central cell will take a value of 0 or 1.
+    This is equivalent to asking the question: in how many possible ways one can arrange 8 bits? Same as before,
+    this gives us \( 2^{8} = 256 \) options for an update rule. Following the same analogy, these are the numbers
+    from 0 to 255 in binary format. For this reason, the rules are referred to by their ordering number.
+</p>
+
+<p>
+    For example, since \( 150_{2} = 10010110 \), the update rule number 150 is illustrated in the figure below:
+</p>
+
+<center>
+    <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/example_rule_150.png" class="lazyload"
+         alt="Sketch for the update rule 150 in elementary cellular automata"/>
+    <br/>
+    <span class="caption text-muted">
+        <i>Fig. 4:</i> Update rule 150
+    </span>
+</center>
+<br/>
+
+<p>
+    Next, we’ll see how to turn this into a Python implementation and a visualization using Matplotlib.
+</p>
+
+<h2>Python Implementation</h2>
+
+<p>
+    The first thing to implement is the update rule. Given the state of each cell in the row at some time step
+    <b>T</b> (denoted as <b>x</b>) and the update rule number, we need to derive the state of each cell in
+    the next time step. To do so, we use the following code:
+</p>
+
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td style="border-bottom: none;"><pre style="margin: 0; line-height: 125%"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20</pre></td><td style="border-bottom: none;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">numpy</span> <span style="color: #008800; font-weight: bold">as</span> <span style="color: #0e84b5; font-weight: bold">np</span>
+
+powers_of_two <span style="color: #333333">=</span> np<span style="color: #333333">.</span>array([[<span style="color: #0000DD; font-weight: bold">4</span>], [<span style="color: #0000DD; font-weight: bold">2</span>], [<span style="color: #0000DD; font-weight: bold">1</span>]])  <span style="color: #888888"># shape (3, 1)</span>
+
+<span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">step</span>(x, rule_binary):
+    <span style="color: #DD4422">&quot;&quot;&quot;Makes one step in the cellular automaton.</span>
+
+<span style="color: #DD4422">    Args:</span>
+<span style="color: #DD4422">        x (np.array): current state of the automaton</span>
+<span style="color: #DD4422">        rule_binary (np.array): the update rule</span>
+
+<span style="color: #DD4422">    Returns:</span>
+<span style="color: #DD4422">        np.array: updated state of the automaton</span>
+<span style="color: #DD4422">    &quot;&quot;&quot;</span>
+    x_shift_right <span style="color: #333333">=</span> np<span style="color: #333333">.</span>roll(x, <span style="color: #0000DD; font-weight: bold">1</span>)  <span style="color: #888888"># circular shift to right</span>
+    x_shift_left <span style="color: #333333">=</span> np<span style="color: #333333">.</span>roll(x, <span style="color: #333333">-</span><span style="color: #0000DD; font-weight: bold">1</span>)  <span style="color: #888888"># circular shift to left</span>
+    y <span style="color: #333333">=</span> np<span style="color: #333333">.</span>vstack((x_shift_right, x, x_shift_left))<span style="color: #333333">.</span>astype(np<span style="color: #333333">.</span>int8)  <span style="color: #888888"># stack row-wise, shape (3, cols)</span>
+    z <span style="color: #333333">=</span> np<span style="color: #333333">.</span>sum(powers_of_two <span style="color: #333333">*</span> y, axis<span style="color: #333333">=</span><span style="color: #0000DD; font-weight: bold">0</span>)<span style="color: #333333">.</span>astype(np<span style="color: #333333">.</span>int8)  <span style="color: #888888"># LCR pattern as number</span>
+
+    <span style="color: #008800; font-weight: bold">return</span> rule_binary[<span style="color: #0000DD; font-weight: bold">7</span> <span style="color: #333333">-</span> z]
+</pre></td></tr></table></div>
+<br/>
+
+<p>
+    First, we shift the state of each cell to the right, then to the left in a circular fashion. Next,
+    we stack one upon the other the left shift, the current and the right shift of the cells’ states.
+    This gives us a structure where each column has three elements with a value of either 0 or 1. It means
+    that one column represents one number from 0 to 7 in a binary format. We use this value as an index in
+    the update rule which determines the next state of the central cell. The entire procedure is sketched
+    in the figure below:
+</p>
+
+<center>
+    <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/rule_150_code_explanation.png" class="lazyload"
+         alt="Sketch to explain the code"/>
+    <br/>
+    <span class="caption text-muted">
+        <i>Fig. 5:</i> Explanation of the function <i>step</i>
+    </span>
+</center>
+<br/>
+
+<p>
+    Having the update rule implemented, the rest of the implementation is quite straightforward.
+    We have to initialize the cellular automaton and then run it for a pre-defined number of time steps.
+    The Python implementation is given below:
+</p>
+
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td style="border-bottom: none;"><pre style="margin: 0; line-height: 125%"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43</pre></td><td style="border-bottom: none;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">numpy</span> <span style="color: #008800; font-weight: bold">as</span> <span style="color: #0e84b5; font-weight: bold">np</span>
+
+<span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">cellular_automaton</span>(rule_number, size, steps,
+                       init_cond<span style="color: #333333">=</span><span style="background-color: #fff0f0">&#39;random&#39;</span>, impulse_pos<span style="color: #333333">=</span><span style="background-color: #fff0f0">&#39;center&#39;</span>):
+    <span style="color: #DD4422">&quot;&quot;&quot;Generate the state of an elementary cellular automaton after a pre-determined</span>
+<span style="color: #DD4422">    number of steps starting from some random state.</span>
+
+<span style="color: #DD4422">    Args:</span>
+<span style="color: #DD4422">        rule_number (int): the number of the update rule to use</span>
+<span style="color: #DD4422">        size (int): number of cells in the row</span>
+<span style="color: #DD4422">        steps (int): number of steps to evolve the automaton</span>
+<span style="color: #DD4422">        init_cond (str): either `random` or `impulse`. If `random` every cell</span>
+<span style="color: #DD4422">        in the row is activated with prob. 0.5. If `impulse` only one cell</span>
+<span style="color: #DD4422">        is activated.</span>
+<span style="color: #DD4422">        impulse_pos (str): if `init_cond` is `impulse`, activate the</span>
+<span style="color: #DD4422">        left-most, central or right-most cell.</span>
+
+<span style="color: #DD4422">    Returns:</span>
+<span style="color: #DD4422">        np.array: the final state of the automaton</span>
+<span style="color: #DD4422">    &quot;&quot;&quot;</span>
+    <span style="color: #008800; font-weight: bold">assert</span> <span style="color: #0000DD; font-weight: bold">0</span> <span style="color: #333333">&lt;=</span> rule_number <span style="color: #333333">&lt;=</span> <span style="color: #0000DD; font-weight: bold">255</span>
+    <span style="color: #008800; font-weight: bold">assert</span> init_cond <span style="color: #000000; font-weight: bold">in</span> [<span style="background-color: #fff0f0">&#39;random&#39;</span>, <span style="background-color: #fff0f0">&#39;impulse&#39;</span>]
+    <span style="color: #008800; font-weight: bold">assert</span> impulse_pos <span style="color: #000000; font-weight: bold">in</span> [<span style="background-color: #fff0f0">&#39;left&#39;</span>, <span style="background-color: #fff0f0">&#39;center&#39;</span>, <span style="background-color: #fff0f0">&#39;right&#39;</span>]
+
+    rule_binary_str <span style="color: #333333">=</span> np<span style="color: #333333">.</span>binary_repr(rule_number, width<span style="color: #333333">=</span><span style="color: #0000DD; font-weight: bold">8</span>)
+    rule_binary <span style="color: #333333">=</span> np<span style="color: #333333">.</span>array([<span style="color: #007020">int</span>(ch) <span style="color: #008800; font-weight: bold">for</span> ch <span style="color: #000000; font-weight: bold">in</span> rule_binary_str], dtype<span style="color: #333333">=</span>np<span style="color: #333333">.</span>int8)
+    x <span style="color: #333333">=</span> np<span style="color: #333333">.</span>zeros((steps, size), dtype<span style="color: #333333">=</span>np<span style="color: #333333">.</span>int8)
+
+    <span style="color: #008800; font-weight: bold">if</span> init_cond <span style="color: #333333">==</span> <span style="background-color: #fff0f0">&#39;random&#39;</span>:  <span style="color: #888888"># random init of the first step</span>
+        x[<span style="color: #0000DD; font-weight: bold">0</span>, :] <span style="color: #333333">=</span> np<span style="color: #333333">.</span>array(np<span style="color: #333333">.</span>random<span style="color: #333333">.</span>rand(size) <span style="color: #333333">&lt;</span> <span style="color: #6600EE; font-weight: bold">0.5</span>, dtype<span style="color: #333333">=</span>np<span style="color: #333333">.</span>int8)
+
+    <span style="color: #008800; font-weight: bold">if</span> init_cond <span style="color: #333333">==</span> <span style="background-color: #fff0f0">&#39;impulse&#39;</span>:  <span style="color: #888888"># starting with an initial impulse</span>
+        <span style="color: #008800; font-weight: bold">if</span> impulse_pos <span style="color: #333333">==</span> <span style="background-color: #fff0f0">&#39;left&#39;</span>:
+            x[<span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">0</span>] <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">1</span>
+        <span style="color: #008800; font-weight: bold">elif</span> impulse_pos <span style="color: #333333">==</span> <span style="background-color: #fff0f0">&#39;right&#39;</span>:
+            x[<span style="color: #0000DD; font-weight: bold">0</span>, size <span style="color: #333333">-</span> <span style="color: #0000DD; font-weight: bold">1</span>] <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">1</span>
+        <span style="color: #008800; font-weight: bold">else</span>:
+            x[<span style="color: #0000DD; font-weight: bold">0</span>, size <span style="color: #333333">//</span> <span style="color: #0000DD; font-weight: bold">2</span>] <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">1</span>
+
+    <span style="color: #008800; font-weight: bold">for</span> i <span style="color: #000000; font-weight: bold">in</span> <span style="color: #007020">range</span>(steps <span style="color: #333333">-</span> <span style="color: #0000DD; font-weight: bold">1</span>):
+        x[i <span style="color: #333333">+</span> <span style="color: #0000DD; font-weight: bold">1</span>, :] <span style="color: #333333">=</span> step(x[i, :], rule_binary)
+
+    <span style="color: #008800; font-weight: bold">return</span> x
+</pre></td></tr></table></div>
+<br/>
+
+<p>
+    Now, using this code we can easily plot the evolution of one cellular automaton over time.
+    For a cellular automaton that follows the rule number 60, such that at the beginning only the
+    left-most cell is active, the evolution of the automaton in the first 60 steps is depicted in the figure below:
+</p>
+
+<center>
+    <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/elementary_ca_rule_60.png" class="lazyload"
+         alt="Plot of the evolution of one cellular automaton"/>
+    <br/>
+    <span class="caption text-muted">
+        <i>Fig. 6:</i> Evolution of an elementary cellular automaton
+    </span>
+</center>
+<br/>
+
+<h2>Animated Visualization</h2>
+
+<p>
+    Let’s put one cellular automaton in action and see how it looks like when it evolves in time.
+    In order to do this, we use the Matplotlib Animation API to create an animation of the evolution
+    process. We will use rule number 90 starting with one active cell at the center of the row.
+</p>
+
+<p>
+    If we set a sliding window over which we will observe the evolution over time of the cellular automaton,
+    we get the following animation:
+</p>
+
+<center>
+    <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/elementary_ca_animation.gif" class="lazyload"
+         alt="Animation of the evolution of one cellular automaton"/>
+    <br/>
+    <span class="caption text-muted">
+        <i>Fig. 7:</i>  Animation of the evolution of an elementary cellular automaton
+    </span>
+</center>
+<br/>
+
+<p>
+    The entire source code for the implementation of the elementary cellular automata can be found on
+    <a href="https://github.com/IlievskiV/Amusive-Blogging-N-Coding/blob/master/Cellular%20Automata/cellular_automata.ipynb" target="_blank">GitHub</a>.
+</p>
+
+<p>
+    If this is something you like and would like to receive similar posts, please subscribe to the mailing list below.
+    For more information, please follow me on <a href="https://www.linkedin.com/in/vilievski/" target="_blank" rel="noopener">LinkedIn</a>
+    or <a href="https://twitter.com/VladOsaurus" target="_blank" rel="noopener">Twitter</a>.
+</p>
+
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<link href="/assets/css/mailchimp.css">
+<div id="mc_embed_signup">
+<form action="https://digital.us19.list-manage.com/subscribe/post?u=cb9dbe40387c27177a25de80f&amp;id=08bda6f8e0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	<label for="mce-EMAIL">Join the iSquared mailing list</label>
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_cb9dbe40387c27177a25de80f_08bda6f8e0" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<h2>Summary: Elementary but not simple</h2>
+
+<p>
+    It is interesting to see the repeating pattern of triangles over the evolution of the cellular automaton above.
+    However, this is not always the case. For example, it is proven that by using
+    <a href="https://en.wikipedia.org/wiki/Rule_110" target="_blank" rel="nofollow noopener">rule number 110</a> we can get
+    a <a href="https://en.wikipedia.org/wiki/Turing_completeness" target="_blank" rel="nofollow noopener">Turing-complete machine</a>
+    that is capable of universal computing which is pretty stunning for such a simple system.
+</p>
+
+<p>
+    To conclude, the elementary cellular automata and in general the cellular automata are very interesting phenomenon
+    in the world of computing. With a simple set of rules motivated by the evolution of the living organisms, it
+    is possible to construct universal machines capable of computing everything.
+</p>
+
+<h2>References</h2>
+
+<p>
+    [1] Stephen Wolfram,
+    <a href="https://www.wolframscience.com/nks/" target="_blank" rel="noopener">"A New Kind of Science"</a> (2002), Wolfram Media<br/>
+</p>
