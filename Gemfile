@@ -15,6 +15,8 @@ group :jekyll_plugins do
   gem "jekyll-gist"
   gem "jekyll-redirect-from"
   gem "kramdown", ">= 2.3.1"
+  gem "nokogiri", ">= 1.11.4"
+  gem "addressable", ">= 2.8.0"
 end
 
 install_if -> { RUBY_PLATFORM =~ %r!mingw|mswin|java! } do
