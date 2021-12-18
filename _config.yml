@@ -110,8 +110,8 @@ analytics:
 # Site Author
 author:
   name             : "Vladimir Ilievski"
-  avatar           : "/assets/images/bio_photo.jpg"
-  bio              : "Machine Learning Engineer with Partially Differentiable Ideas"
+  avatar           : "/assets/images/photo_me.webp"
+  bio              : "Data Scientist with Partially Differentiable Ideas"
   location         : "Vaud, Switzerland"
   links:
     - label: "Twitter"
@@ -123,6 +123,9 @@ author:
     - label: "LinkedIn"
       icon: "fab fa-fw fa-linkedin"
       url: "https://www.linkedin.com/in/vilievski/"
+    - label: "Medium"
+      icon: "fab fa-fw fa-medium"
+      url: "https://medium.com/@ilievski.vladimir"
 
 
 # Site Footer
@@ -137,6 +140,9 @@ footer:
     - label: "LinkedIn"
       icon: "fab fa-fw fa-linkedin"
       url: "https://www.linkedin.com/in/vilievski/"
+    - label: "Medium"
+      icon: "fab fa-fw fa-medium"
+      url: "https://medium.com/@ilievski.vladimir"
 
 include: ["_pages"]
 
