@@ -1,24 +1,187 @@
 ---
 layout:      single
-title:       "Fractal Christmas Tree"
+title:       "Sierpiński Triangle: Fractal Christmas Tree"
 excerpt:     "Ho Ho Ho! Mery Christmas!"
-description: ""
+description: "We make an animated visualization of the Sierpinski triangle in Python using the Matplotlib Animation API"
 date:        2021-12-23 09:00:00
 classes:     wide
 author_profile: true
 header:
     teaser: "assets/images/sierpinski_triangle_teaser.gif"
+    image: "assets/images/sierpinski_triangle_top_image.png"
     og_image: "assets/images/sierpinski_triangle.gif"
 ---
 
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
 <p>
-Christmas is nothing without a Christmas tree. To celebrate this year's Christmas here
-is a fractal Christmas tree!
+    The <i>Sierpiński triangle</i> named after the Polish mathematician Wacław Sierpiński), is a fractal with a shape
+    of an equilateral triangle. The triangle is subdivided indefinitely into smaller equilateral triangles resembling exactly 
+    the original triangle. As such, the Sierpiński triangle really resembles a Christmas tree. An infinite Christmas tree!
+    With this fractal, you will never run out of Christmas trees &#128513;
+</p>
+
+<center>
+    <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/sierpinski_triangle_xmas_tree.png" class="lazyload" alt="Sierpinski Triangle as a Christmass Tree">
+    <br/>
+    <span class="caption text-muted">
+        The Sierpiński Triangle as a Christmass Tree
+    </span>
+</center>
+<br/>
+
+
+<p>
+    In this short post, we will see how to create such a fractal in Python. Then, we will
+    create an animated visualization using the Matplotlib Animation API.
+</p>
+
+
+<h2>How to create the triangle?</h2>
+
+<p>
+    There are multiple ways to generate the triangle as summarized in the 
+    <a href="https://en.wikipedia.org/wiki/Sierpi%C5%84ski_triangle" target="_blank" rel="noopener nofollow">Wikipedia article</a>
+    for the Sierpiński triangle. One of the most popular methods is the one based on <i>Chaos Game</i>. Here is how it works in short.
 </p>
 
 <p>
-This fractal is known as <a href="https://en.wikipedia.org/wiki/Sierpi%C5%84ski_triangle" target="_blank" rel="noopener nofollow">Sierpiński triangle</a>
-and it really resembles a Christmas tree. An infinite Christmas tree!
+    First, we need to take any three points in the plane that form an equilateral triangle. Without loss of generality,
+    we can select the points \( A = (0.0, 0.0), B = (0.5, 1.0), C = (1.0, 0.0) \). We don't need to draw these points.
+    Then we randomly select any point inside the triangle, considering it as the <i>current position</i> \( P \). Then, we repeat the
+    following 3 steps over and over:
+</p>
+
+<ol>
+    <li>Randomly select any of the three vertex points \( A, B, C \). Let's denote it as \( R \)</li>
+    <li>Move half the distance from the current position \( P \) to the selected vertex \( R \)</li>
+    <li>Plot the current position</li>
+</ol>
+
+<p>
+    Here is an implementation in Python:
+</p>
+
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td style="border-bottom: none;"><pre style="margin: 0; line-height: 125%">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21</pre></td><td style="border-bottom: none;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">import</span> <span style="color: #bb0066; font-weight: bold">random</span>
+<span style="color: #008800; font-weight: bold">from</span> <span style="color: #bb0066; font-weight: bold">operator</span> <span style="color: #008800; font-weight: bold">import</span> add
+
+<span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066bb; font-weight: bold">generate_sierpinski_triangle</span>(n: <span style="color: #003388">int</span>):
+    sierpinski_triangle = []  <span style="color: #888888"># final list of points</span>
+
+    <span style="color: #888888"># initial points</span>
+    A = (<span style="color: #0000DD; font-weight: bold">0.0</span>, <span style="color: #0000DD; font-weight: bold">0.0</span>)
+    B = (<span style="color: #0000DD; font-weight: bold">0.5</span>, <span style="color: #0000DD; font-weight: bold">1.0</span>)
+    C = (<span style="color: #0000DD; font-weight: bold">1.0</span>, <span style="color: #0000DD; font-weight: bold">0.0</span>)
+    triangle_vertices = [A, B, C]
+
+    <span style="color: #888888"># starting point</span>
+    moving_point = random.choice(triangle_vertices)
+
+    <span style="color: #008800; font-weight: bold">for</span> i <span style="color: #008800">in</span> <span style="color: #003388">range</span>(n):
+        offset_point = random.choice(triangle_vertices)
+        moving_point = <span style="color: #003388">list</span>(<span style="color: #003388">map</span>(<span style="color: #008800; font-weight: bold">lambda</span> x: x / <span style="color: #0000DD; font-weight: bold">2.0</span>, <span style="color: #003388">list</span>(<span style="color: #003388">map</span>(add, moving_point, offset_point))))
+        sierpinski_triangle.append(moving_point.copy())
+    
+    <span style="color: #008800; font-weight: bold">return</span> sierpinski_triangle
+</pre></td></tr></table></div>
+<br/>
+
+<p>
+    Next, we'll see how to make an animation.
+</p>
+
+<h2>Making an animation: triangle within a triangle</h2>
+
+<p>
+    To demonstrate the fractal nature of the triangle we will make an animation by zooming in on
+    one part of the original triangle. For this purpose, we use the <i>Matplotlib Animation API.</i>
+</p>
+
+<p>
+    It is quite straightforward to make such an animation. In each iteration, we draw all the points,
+    but we only reduce the x- and y-axis limits as a function of the iteration number. This creates 
+    a zooming effect. The Python implementation is given below:
+</p>
+
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td style="border-bottom: none;"><pre style="margin: 0; line-height: 125%"> 1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26</pre></td><td style="border-bottom: none;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">import</span> <span style="color: #bb0066; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008800; font-weight: bold">as</span> <span style="color: #bb0066; font-weight: bold">plt</span>
+<span style="color: #008800; font-weight: bold">import</span> <span style="color: #bb0066; font-weight: bold">matplotlib.animation</span> <span style="color: #008800; font-weight: bold">as</span> <span style="color: #bb0066; font-weight: bold">animation</span>
+
+<span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066bb; font-weight: bold">make_animation</span>(sierpinski_triangle: <span style="color: #003388">list</span>):
+    num_points = <span style="color: #003388">len</span>(sierpinski_triangle)
+    points_split = <span style="color: #003388">list</span>(<span style="color: #003388">zip</span>(*sierpinski_triangle))
+    xx, yy = points_split[<span style="color: #0000DD; font-weight: bold">0</span>], points_split[<span style="color: #0000DD; font-weight: bold">1</span>]
+    fig = plt.figure(figsize=(<span style="color: #0000DD; font-weight: bold">10</span>, <span style="color: #0000DD; font-weight: bold">10</span>))
+
+    <span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066bb; font-weight: bold">init</span>():
+        ax = plt.axes(xlim=(<span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">1</span>), ylim=(<span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">1</span>))
+        ax.set_xticks([], [])
+        ax.set_yticks([], [])
+        ax.set_axis_off()
+        <span style="color: #008800; font-weight: bold">return</span> ax.plot(xx, yy, <span style="color: #dd2200; background-color: #fff0f0">&quot;g.&quot;</span>)
+
+    <span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066bb; font-weight: bold">animate</span>(i):
+        scale = <span style="color: #0000DD; font-weight: bold">1</span> - i * <span style="color: #0000DD; font-weight: bold">0.02</span>  <span style="color: #888888"># calculate the new scale</span>
+        ax = plt.axes(xlim=(<span style="color: #0000DD; font-weight: bold">0</span>, scale), ylim=(<span style="color: #0000DD; font-weight: bold">0</span>, scale))
+        ax.set_xticks([], [])
+        ax.set_yticks([], [])
+        ax.set_axis_off()
+        <span style="color: #008800; font-weight: bold">return</span> ax.plot(xx, yy, <span style="color: #dd2200; background-color: #fff0f0">&quot;g.&quot;</span>)
+
+    anim = animation.FuncAnimation(fig, animate, init_func=init, frames=<span style="color: #0000DD; font-weight: bold">50</span>,
+                                interval=<span style="color: #0000DD; font-weight: bold">200</span>, blit=<span style="color: #008800; font-weight: bold">False</span>)
+</pre></td></tr></table></div>
+<br/>
+
+<p>
+    The resulting animation is shown below. As we can see the same structure appears again and again.
+    Because this is a simulation, the number of points is finite, so the pattern will stop appearing
+    at some point. If we were able to generate an infinite number of points, the pattern would never disappear.
 </p>
 
 <center>
@@ -29,7 +192,6 @@ and it really resembles a Christmas tree. An infinite Christmas tree!
     </span>
 </center>
 <br/>
-
 
 <p>
     The source code for this animation of the Sierpiński triangle
@@ -52,6 +214,24 @@ and it really resembles a Christmas tree. An infinite Christmas tree!
     </div>
 </form>
 </div>
+
+<h2>Appendix: Sierpinski triangle from cellular automata</h2>
+<p>
+    In one of the previous blog posts, we covered <a href="{{ site.baseurl }}{% link _blog/2021-05-02-cellular-automata.html %}" target="_blank" rel="dofollow">cellular automata.</a>
+    It is also possible to see the pattern from the Sierpinski triangle, by running the <i>Rule 90</i> as depicted below:
+</p>
+
+
+<center>
+    <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/elementary_ca_animation.gif" class="lazyload"
+         alt="Animation of the evolution of one cellular automaton"/>
+    <br/>
+    <span class="caption text-muted">
+        Animation of Rule 90
+    </span>
+</center>
+<br/>
+
 
 <h2>References</h2>
 
