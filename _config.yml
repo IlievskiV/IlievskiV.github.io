@@ -110,8 +110,8 @@ analytics:
 # Site Author
 author:
   name             : "Vladimir Ilievski"
-  avatar           : "/assets/images/photo_me.webp"
-  bio              : "Data Scientist with Partially Differentiable Ideas"
+  avatar           : "/assets/images/bio_photo.jpg"
+  bio              : "$whoami? Data scientist during the day. Content creator during the night. Author of iSquared bringing the science closer to you."
   location         : "Vaud, Switzerland"
   links:
     - label: "Twitter"
@@ -253,6 +253,9 @@ collections:
     output: true
     permalink: /:collection/:path/
   visualizations:
+    output: true
+    permalink: /:collection/:path/
+  tips:
     output: true
     permalink: /:collection/:path/
 
