@@ -4,6 +4,8 @@ main:
     url: /blog/
   - title: "Visualizations"
     url: /visualizations/
+  - title: "Geeky Tips&Tricks"
+    url: /tips/
   - title: "Get in Touch"
     url: /contactme/
   - title: "$whoami"
