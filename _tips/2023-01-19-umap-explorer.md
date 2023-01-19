@@ -1,8 +1,8 @@
 ---
 layout: single
-title: "I wish every data scientist had interactive data explorers like this one"
+title: "I wish every data scientist had interactive data explorers like this one!"
 excerpt: "This interactive visualization exploring the MNIST data UMAP projections is amazing"
-description: ""
+description: "We learn about the UMAP interactive data explorer of the MNIST dataset"
 date: 2023-01-19 09:00:00
 classes: wide
 author_profile: true
