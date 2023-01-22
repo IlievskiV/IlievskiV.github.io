@@ -18,7 +18,7 @@ header:
 >
 > -- <cite>Niels Bohr</cite>
 
-Just think of the following absurd: we live in a digital era where alsmost everything could be measured and tracked, yet we are
+Just think of the following absurd: we live in a digital era where almost everything could be measured and tracked, yet we are
 struggling to reliably measure the carbon footprint behind the AI computing. There's no need to say that this becomes 
 <a href="https://hai.stanford.edu/news/ais-carbon-footprint-problem" target="_blank" rel="nofollow noopener">especially important</a> 
 with the rising amount of computation.
@@ -36,7 +36,7 @@ Niels Bohr above: the AI computing CO2 emissions will be hidden until we discove
 
 In this blog post we will take a look at the **CodeCarbon** Python library and its importance in the mission to
 track the AI carbon footprint. Finally, we will experiment a bit and make a demonstration of training a toy neural network
-in Keras on the IMDb sentiment analysis dataset in oreder to track the CO2 emissions.
+in Keras on the IMDb sentiment analysis dataset in order to track the CO2 emissions.
 
 
 # What is CodeCarbon?
@@ -52,10 +52,10 @@ To achieve this, it executes the following two tasks:
 The first task is less prone to errors as the environment is predictable. **CodeCarbon** is measuring the energy consumption of the
 *CPU*, *GPU* (if available) and the *RAM* memory by taking samples every 15 seconds by default.
 
-There are a multitude tools to precisely measure the energy consumption of the *CPUs*. This is an [excelent blog](https://luiscruz.github.io/2021/07/20/measuring-energy.html){:target="_blank"}
-that goes over many of them. Currently, **CodeCarbon** is using eiter <a href="https://www.intel.com/content/www/us/en/developer/articles/tool/power-gadget.html" target="_blank" rel="nofollow noopener">Intel Power Gadget</a>
+There are a multitude of tools to precisely measure the energy consumption of the *CPUs*. This is an [excelent blog](https://luiscruz.github.io/2021/07/20/measuring-energy.html){:target="_blank"}
+that goes over many of them. Currently, **CodeCarbon** is using either <a href="https://www.intel.com/content/www/us/en/developer/articles/tool/power-gadget.html" target="_blank" rel="nofollow noopener">Intel Power Gadget</a>
 or <a href="https://01.org/blogs/2014/running-average-power-limit-%E2%80%93-rapl" target="_blank" rel="nofollow noopener">Intel REPL</a>. 
-If none of these energy profilers is available it falls back to handcrafted techniques: using the *CPU* load to estimate the *CPU* Power.
+If none of these energy profilers is available it falls back to handcrafted techniques: using the *CPU* load to estimate the *CPU* power.
 
 For the *GPUs* it uses the well established <a href="https://github.com/gpuopenanalytics/pynvml" target="_blank" rel="nofollow noopener">PyNvml</a> Python library. 
 To track the *RAM* memory energy consumption it uses only handcrafted rules.
@@ -149,7 +149,7 @@ def train_model(model):
 ```
 
 And now it is time to train this toy neural network and track the CO2 emissions. Using **CodeCarbon** this is such a simple task, it's same as we 
-were measring the elapsed training time. All we have to do it to instantiate a `EmissionsTracker` object ans squeeze the training procedure
+were measuring the elapsed training time. All we have to do it to instantiate a `EmissionsTracker` object ans squeeze the training procedure
 between the `start` and `stop` methods. **CodeCarbon** will take care of the rest as shown below:
 
 
@@ -165,7 +165,7 @@ tracker.stop()
 Indeed, **CodeCarbon** tracked and logged many aspects of the training process. The summary of every run is saved as one row in 
 a file named `emissions.csv` by default. My general opinion is that it lacks better techniques to track the CPU consumption.
 
-The library also comes with command line tool named `carbonboard` that produces a dashboard showing equivalents of the carbon emission produced
+The library also comes with a command line tool named `carbonboard` that produces a dashboard showing equivalents of the carbon emission produced
 by the experiment. An example for the experiment we did above is shown below:
 
 <center>
