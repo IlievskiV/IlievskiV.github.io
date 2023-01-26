@@ -2,7 +2,7 @@
 layout: single
 title: "Make the learning curve of an ML model more informative"
 excerpt: "Track the loss per class per epoch when training a machine learning model to reveal the learning curve for different classes."
-description: "We learn how to "
+description: "Learn how to plot the learning curve per class per epoch of a neural network in Keras using the Keras Callbacks API"
 date: 2023-01-22 09:00:00
 classes: wide
 author_profile: true
