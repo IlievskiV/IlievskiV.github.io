@@ -5,12 +5,16 @@ excerpt:     "Ferns can also be fractals. Generate and plot the Barnsley Fern fr
 description: "We learn about and visualize the Barnsley Fern Fractal in Python using Matplotlib"
 date:        2023-01-12 09:00:00
 classes:     wide
+tags: 
+    - fractals
+    - barnsley fern
 author_profile: true
 header:
     teaser: "assets/images/barnsley_fern_teaser.webp"
     image: "assets/images/barnsley_fern_teaser.webp"
     og_image: "assets/images/barnsley_fern_teaser.webp"
 ---
+
 
 
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -58,13 +62,13 @@ s.t. each instance is having a certain probability of being chosen. The original
 In this section we will see how to implement in **Python** the fern fractal generation defined above.
 First we define the data structures we need as `namedtuples`:
 
-```python
+{% highlight python linenos %}
 from collections import namedtuple
 
 transformations = namedtuple("transformations", ["f1", "f2", "f3", "f4"])
 coefficients = namedtuple("coefficients", ["a", "b", "c", "d", "e", "f"])
 fern_settings = namedtuple("fern_settings", ["transformations", "probabilities"])
-```
+{% endhighlight %}
 <br/>
 
 
@@ -72,7 +76,7 @@ fern_settings = namedtuple("fern_settings", ["transformations", "probabilities"]
 The `namedtuples` hold all the coefficients for the affine transformations as well as their assigned probabilities.
 Consequently, we instantiate the settings we need to generate a **Barnsley Fern**:
 
-```python
+{% highlight python linenos %}
 barnsley_fern_coefficients = transformations(
     f1=coefficients(.0, .0, .0, .16, .0, .0),
     f2=coefficients(.85, .04, -.04, .85, 0, 1.6),
@@ -84,13 +88,13 @@ barnsley_fern = fern_settings(
     transformations=barnsley_fern_coefficients,
     probabilities=barnsley_fern_probabilities,
 )
-```
+{% endhighlight %}
 <br/>
 
 In this way the 4 affine transformations are indexed with indexes between 0 and 3. Finally, we pass the `barnsley_fern` `namedtuple` in the following
 function to generate all the points:
 
-```python
+{% highlight python linenos %}
 import numpy as np
 
 def generate_fern(selected_fern_settings: namedtuple, num_points: int) -> list:
@@ -115,7 +119,7 @@ def generate_fern(selected_fern_settings: namedtuple, num_points: int) -> list:
         x, y = coeff.a * x + coeff.b * y + coeff.e, coeff.c * x + coeff.d * y + coeff.f
 
     return fern_points
-```
+{% endhighlight %}
 <br/>
 
 

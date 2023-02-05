@@ -112,23 +112,23 @@ $masthead-link-color: $primary-color !default;
 $masthead-link-color-hover: mix(#000, $primary-color, 25%) !default;
 $navicon-link-color-hover: mix(#fff, $primary-color, 75%) !default;
 
-/* syntax highlighting (base16) */
-$base00: #263238 !default;
-$base01: #2e3c43 !default;
-$base02: #314549 !default;
-$base03: #546e7a !default;
-$base04: #b2ccd6 !default;
-$base05: #eeffff !default;
-$base06: #eeffff !default;
-$base07: #ffffff !default;
-$base08: #f07178 !default;
-$base09: #f78c6c !default;
-$base0a: #ffcb6b !default;
-$base0b: #c3e88d !default;
-$base0c: #89ddff !default;
-$base0d: #82aaff !default;
-$base0e: #c792ea !default;
-$base0f: #ff5370 !default;
+/* solarized light syntax highlighting (base16) */
+$base00: #fafafa;
+$base01: #073642;
+$base02: #586e75;
+$base03: #657b83;
+$base04: #839496;
+$base05: #586e75;
+$base06: #eee8d5;
+$base07: #fdf6e3;
+$base08: #dc322f;
+$base09: #cb4b16;
+$base0a: #b58900;
+$base0b: #859900;
+$base0c: #2aa198;
+$base0d: #268bd2;
+$base0e: #6c71c4;
+$base0f: #d33682;
 
 /*
    Breakpoints

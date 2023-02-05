@@ -48,16 +48,17 @@ The `matplotlib.animation` module provides the tools necessary to create animati
 
 
 First we import all required dependencies:
-```python
+
+{% highlight python linenos %}
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 from scipy.stats import norm, t
-```
+{% endhighlight %}
 
 Then we define the main logic:
 
-```python
+{% highlight python linenos %}
 # Creating a figure and axis
 fig, ax = plt.subplots()
 
@@ -89,7 +90,7 @@ def update(num):
 # Creating the animation object
 ani = FuncAnimation(fig, update, frames=range(0, 30), repeat=True)
 ani.save("student_to_gaussian_animation.gif", writer="pillow")
-```
+{% endhighlight %}
 
 The above program creates an animation that shows how the *Student's T-distribution* with different degrees of freedom $$ \nu $$ converge to the normal distribution (Gaussian distribution) as the degrees of freedom increase. 
 

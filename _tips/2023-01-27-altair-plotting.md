@@ -6,6 +6,11 @@ description: "Learn how to use the Altair Python API"
 date: 2023-01-26 09:00:00
 classes: wide
 author_profile: true
+tags:
+    - altair
+    - plotting
+    - scatter plot
+    - iris
 header:
     teaser: "assets/images/altair_iris_top_image.png"
     image: "assets/images/altair_iris_top_image.png"
@@ -35,7 +40,7 @@ We can [pass various arguments](https://altair-viz.github.io/user_guide/marks.ht
 
 Without any effort, using these 3 calls we can visualze the Iris dataset. The Python code is given below:
 
-```python
+{% highlight python linenos %}
 import altair as alt
 from vega_datasets import data
 
@@ -46,7 +51,7 @@ alt.Chart(df).mark_circle(size=60).encode(
     color='species',
     tooltip=['sepalLength', 'sepalWidth', 'petalLength', 'petalWidth']
 ).interactive()
-```
+{% endhighlight %}
 <br/>
 
 With the call to `interactive()` we make the plot interactive. The resulting interactive plot is shown below:
@@ -63,14 +68,14 @@ With the call to `interactive()` we make the plot interactive. The resulting int
 We can also apply *aggregate* encodings on the data. For instance, we can split the data into bins and apply an `average` aggregation.
 An example in Python is given below:
 
-```python
+{% highlight python linenos %}
 stocks = data.stocks()
 alt.Chart(stocks[stocks["symbol"] != "GOOG"]).mark_line().encode(
     x=alt.X("year(date):T", title="Year", bin=True),
     y="average(price)",
     color="symbol",
 )
-```
+{% endhighlight %}
 
 We make a line chart using `mark_line()`. We split the data into bins by the year. We select the year and make the data of temporal type with `year(date):T`.
 The resulting plot is depicted below:

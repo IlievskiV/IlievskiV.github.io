@@ -19,7 +19,7 @@
 # in the templates via {{ site.myvariable }}.
 
 # Build settings
-remote_theme: "mmistakes/minimal-mistakes@4.24.0"
+theme: "minimal-mistakes-jekyll"
 plugins:
   - jekyll-paginate
   - jekyll-sitemap
@@ -46,17 +46,18 @@ minimal_mistakes_skin: "contrast"
 locale: "en-US"
 title: iSquared
 title_separator: "|"
-subtitle: ""
+subtitle: "Science Explained"
 name: "iSquared"
-description: >- # this means to ignore newlines until "baseurl:"
-  "Explaining science visually"
+description: "Website to perceive science through interesting visualisations. It explains and implements the visualised concepts in Python and Javascript"
 
 url: "https://isquared.digital"
 baseurl: ""
-teaser: # path of fallback teaser image, e.g. "/assets/images/500x300.png"
-logo: "/assets/logos/masthead_logo.png"
-masthead_title: "Home" # overrides the website title displayed in the masthead, use " " for no title
+repository: "IlievskiV/IlievskiV.github.io"  # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
+teaser: "/assets/images/banner_picture.webp" # path of fallback teaser image, e.g. "/assets/images/500x300.png"
+logo: "/assets/logos/masthead_logo.png"  # path of logo image to display in the masthead, e.g. "/assets/images/88x88.png"
+masthead_title: "iSquared" # overrides the website title displayed in the masthead, use " " for no title
 words_per_minute: 200
+
 comments:
   provider               : "disqus" # false (default), "disqus", "discourse", "facebook", "staticman_v2", "staticman", "utterances", "custom"
   disqus:
@@ -81,6 +82,10 @@ exclude: [vendor]
 
 # SEO Related
 google_site_verification : WkO5PFtgHgVvrsY_iwISUHFzKmiblYoC4YFKZoJFzF8
+bing_site_verification   :
+naver_site_verification  :
+yandex_site_verification :
+baidu_site_verification  :
 
 # Social Sharing
 twitter:
@@ -95,10 +100,13 @@ og_image                 : /assets/images/site_logo.png
 # - https://developers.google.com/structured-data/customize/social-profiles
 social:
   type                   : # Person or Organization (defaults to Person)
-  name                   : # If the user or organization name differs from the site's name
+  name                   : "Vladimir Ilievski" # If the user or organization name differs from the site's name
   links: # An array of links to social media profiles
     - "https://twitter.com/VladOsaurus"
     - "https://www.linkedin.com/in/vilievski/"
+    - "https://medium.com/@ilievski.vladimir"
+    - "https://www.reddit.com/user/vladosaurus"
+    - "https://github.com/IlievskiV"
 
 # Analytics
 analytics:
@@ -185,7 +193,6 @@ markdown_ext: "markdown,mkdown,mkdn,mkd,md"
 
 # Conversion
 markdown: kramdown
-highlighter: rouge
 lsi: false
 excerpt_separator: "\n\n"
 incremental: false
@@ -193,6 +200,7 @@ incremental: false
 # Markdown Processing
 kramdown:
   input: GFM
+  syntax_highlighter: rouge
   hard_wrap: false
   auto_ids: true
   footnote_nr: 1
@@ -223,12 +231,11 @@ timezone: Europe/Zurich
 #  - <base_path>/tags/my-awesome-tag/index.html ~> path: /tags/
 #  - <base_path>/categories/my-awesome-category/index.html ~> path: /categories/
 #  - <base_path>/my-awesome-category/index.html ~> path: /
-category_archive:
-  type: liquid
-  path: /categories/
+
 tag_archive:
   type: liquid
   path: /tags/
+
 # https://github.com/jekyll/jekyll-archives
 #jekyll-archives:
 #  enabled:
@@ -240,6 +247,7 @@ tag_archive:
 #  permalinks:
 #    category: /categories/:name/
 #    tag: /tags/:name/
+
 
 # HTML Compression
 # - https://jch.penibelst.de/
@@ -264,8 +272,30 @@ collections:
 defaults:
   # _blog
   - scope:
-      path: ""
+      path: "_blog"
       type: blog
+    values:
+      layout: single
+      author_profile: true
+      read_time: true
+      share: true
+      comments: true
+      related: true
+  # _visualizations
+  - scope:
+      path: "_visualizations"
+      type: visualizations
+    values:
+      layout: single
+      author_profile: true
+      read_time: true
+      share: true
+      comments: true
+      related: true
+  # _tips
+  - scope:
+      path: "_tips"
+      type: tips
     values:
       layout: single
       author_profile: true

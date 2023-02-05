@@ -6,6 +6,10 @@ description: "Discover the bizarre geometry of the fractals and learn how to mak
 marvels using Python and the Matplotlib's Animation API."
 date:        2020-07-04 09:00:00
 classes:     wide
+tags:
+    - fractals
+    - mandelbrot
+    - julia set
 canonical_url: "https://matplotlib.org/matplotblog/posts/animated-fractals/"
 header:
     teaser: "assets/images/animated_fractals_teaser.png"
@@ -71,7 +75,7 @@ seem odd and simple, but in fact, it has some mind-blowing properties.
 
 The *Python* implementation is quite straightforward, as given in the code snippet below:
 
-```python
+{% highlight python linenos %}
 def mandelbrot(x, y, threshold):
     """Calculates whether the number c = x + i*y belongs to the 
     Mandelbrot set. In order to belong, the sequence z[i + 1] = z[i]**2 + c
@@ -92,7 +96,7 @@ def mandelbrot(x, y, threshold):
             return i
         
     return threshold - 1  # it didn't diverge
-```
+{% endhighlight %}
 
 As we can see, we set the maximum number of iterations encoded in the variable `threshold`. If the magnitude of the
 sequence at some iteration exceeds **4**, we consider it as diverged (**c** does not belong to the set) and return the
@@ -108,7 +112,7 @@ One particular and interesting area is the *3x3* lattice starting at position -2
 *imaginary*  axis respectively. We can observe the process of convergence as the number of allowed iterations increases.
 This is easily achieved using the *Matplotlib's* Animation API, as shown with the following code:
 
-```python
+{% highlight python linenos %}
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
@@ -143,7 +147,7 @@ def animate(i):
  
 anim = animation.FuncAnimation(fig, animate, frames=45, interval=120, blit=True)
 anim.save('mandelbrot.gif',writer='imagemagick')
-```
+{% endhighlight %}
 
 We make animations in *Matplotlib* using the `FuncAnimation` function from the *Animation* API. We need to specify
 the `figure` on which we draw a predefined number of consecutive `frames`. A predetermined `interval` expressed in 
@@ -181,7 +185,7 @@ The [Julia Set](https://en.wikipedia.org/wiki/Julia_set){:target="_blank"} is qu
 switch the roles a bit. We fix the value for **c**, we set an arbitrary initial condition **z₀ = x + i\*y**, and we
 observe the convergence of the sequence. The *Python* implementation is given below:
 
-```python
+{% highlight python linenos %}
 def julia_quadratic(zx, zy, cx, cy, threshold):
     """Calculates whether the number z[0] = zx + i*zy with a constant c = x + i*y
     belongs to the Julia set. In order to belong, the sequence 
@@ -204,7 +208,7 @@ def julia_quadratic(zx, zy, cx, cy, threshold):
             return i
         
     return threshold - 1  # it didn't diverge
-```
+{% endhighlight %}
 
 Obviously, the setup is quite similar as the *Mandelbrot Set* implementation. The maximum number of iterations is 
 denoted as `threshold`. If the magnitude of the sequence is never greater than **4**, the number **z₀** belongs to 
@@ -219,7 +223,7 @@ This [ameliorates our visual perception](https://isquared.digital/blog/2020-02-0
 understanding of such abstract phenomena in a captivating manner. To do so, we use the Matplotlib's *Animation API*, as
 demonstrated in the code below:
 
-```python
+{% highlight python linenos %}
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
@@ -261,7 +265,7 @@ def animate(i):
 
 anim = animation.FuncAnimation(fig, animate, frames=frames, interval=50, blit=True)
 anim.save('julia_set.gif', writer='imagemagick')
-```
+{% endhighlight %}
 
 The logic in the `animate` function is very similar to the previous example. We update the number **c** as a function
 of the frame number. Based on that we estimate the convergence of all complex numbers in the defined lattice, given the
