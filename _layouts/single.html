@@ -72,7 +72,7 @@ layout: default
   {% comment %}<!-- show posts by related tags when `related: true` -->{% endcomment %}
   {% if page.related %}
     {% assign maxRelated = 4 %}
-    {% assign minCommonTags =  2 %}
+    {% assign minCommonTags =  1 %}
     {% assign maxRelatedCounter = 0 %}
     {% assign posts = site.blogs | concat: site.visualizations | concat: site.tips %}
 
