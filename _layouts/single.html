@@ -97,11 +97,13 @@ layout: default
         {% include archive-single.html type="grid" %}
         {% assign maxRelatedCounter = maxRelatedCounter | plus: 1 %}
         {% if maxRelatedCounter >= maxRelated %}
-            </div>
-          </div>
           {% break %}
         {% endif %}
       {% endif %}
     {% endfor %}
+    {% if maxRelatedCounter > 0 %}
+        </div>
+      </div>
+    {% endif %}
   {% endif %}
 </div>
