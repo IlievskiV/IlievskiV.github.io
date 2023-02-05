@@ -38,7 +38,7 @@ All this can give us a hint on how the space is divided and whether the features
 
 It is very easy to produce the plots using the Pandas plotting API. We will use the Iris dataset to demonstrate this.
 
-```python
+{% highlight python linenos %}
 import matplotlib.pyplot as plt
 import pandas as pd
 
@@ -52,7 +52,7 @@ plt.figure(figsize=(12, 7))
 pd.plotting.parallel_coordinates(df_iris, class_column="Name")
 
 pd.plotting.scatter_matrix(df_iris.drop("Name", axis=1), figsize=(8, 8), alpha=0.7)
-```
+{% endhighlight %}
 <br/>
 
 The resulting plots are shown below:

@@ -79,7 +79,7 @@ As a first step we load the <a href="https://keras.io/api/datasets/imdb/" target
 It contains two classes: positive and negative sentiment, meaning this is a straightforward binary classification task. To load this dataset is fairly easy,
 as it is part of the Keras built-in datasets:
 
-```python
+{% highlight python linenos %}
 from keras.datasets import imdb
 from keras.utils import pad_sequences
 
@@ -89,12 +89,12 @@ maxlen = 512 # The length of every input sequence
 (x_train, y_train), (x_test, y_test) = imdb.load_data(num_words=max_features)
 x_train = pad_sequences(x_train, maxlen=maxlen)
 x_test = pad_sequences(x_test, maxlen=maxlen)
-```
+{% endhighlight %}
 
 As a second step we build a simple neural network typical for a text classification task. It includes an embedding layer followed by 1D convolution and
 bi-direcional LSTM layer in order to finish with a single neuron predicting the sentiment.
 
-```python
+{% highlight python linenos %}
 from keras.layers import Dense, Dropout, Activation
 from keras.layers import Embedding
 from keras.layers import LSTM, Bidirectional
@@ -123,11 +123,11 @@ def make_model():
     )
 
     return model
-```
+{% endhighlight %}
 
 Finally we define the training procedure specifying the batch size and the number of epochs.
 
-```python
+{% highlight python linenos %}
 def train_model(model):
     h = model.fit(
         x_train,
@@ -146,21 +146,21 @@ def train_model(model):
     print(f"test loss: {test_metrics[0]}")
     print(f"test precision: {test_metrics[1]}")
     print(f"test recall: {test_metrics[2]}")
-```
+{% endhighlight %}
 
 And now it is time to train this toy neural network and track the CO2 emissions. Using **CodeCarbon** this is such a simple task, it's same as we 
 were measuring the elapsed training time. All we have to do it to instantiate a `EmissionsTracker` object ans squeeze the training procedure
 between the `start` and `stop` methods. **CodeCarbon** will take care of the rest as shown below:
 
 
-```python
+{% highlight python linenos %}
 from codecarbon import EmissionsTracker
 
 tracker = EmissionsTracker(project_name="imbd_sentiment_classification")
 tracker.start()
 train_model(make_model())
 tracker.stop()
-```
+{% endhighlight %}
 
 Indeed, **CodeCarbon** tracked and logged many aspects of the training process. The summary of every run is saved as one row in 
 a file named `emissions.csv` by default. My general opinion is that it lacks better techniques to track the CPU consumption.
