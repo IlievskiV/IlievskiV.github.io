@@ -6,6 +6,10 @@ description: "Discover the bizarre geometry of the fractals and learn how to mak
 marvels using Python and the Matplotlib's Animation API."
 date:        2020-07-04 09:00:00
 classes:     wide
+tags:
+    - fractals
+    - mandelbrot
+    - julia set
 canonical_url: "https://matplotlib.org/matplotblog/posts/animated-fractals/"
 header:
     teaser: "assets/images/animated_fractals_teaser.png"
