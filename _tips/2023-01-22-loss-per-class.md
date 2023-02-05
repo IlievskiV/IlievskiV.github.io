@@ -6,6 +6,11 @@ description: "Learn how to plot the learning curve per class per epoch of a neur
 date: 2023-01-22 09:00:00
 classes: wide
 author_profile: true
+tags:
+    - keras
+    - neural networks
+    - machine learning
+    - cifar10
 header:
     teaser: "assets/images/ai_new_normal_teaser.png"
     image: "assets/images/ai_new_normal_teaser.png"

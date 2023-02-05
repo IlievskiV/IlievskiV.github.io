@@ -6,6 +6,9 @@ description: "We learn about the UMAP interactive data explorer of the MNIST dat
 date: 2023-01-19 09:00:00
 classes: wide
 author_profile: true
+tags:
+    - umap
+    - mnist
 header:
     teaser: "assets/images/umap_explorer.png"
     image: "assets/images/umap_explorer.png"

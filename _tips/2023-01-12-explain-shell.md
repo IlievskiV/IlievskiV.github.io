@@ -6,6 +6,10 @@ description: "Learn about the explainshell web app that facilitates the understa
 date: 2023-01-11 09:00:00
 classes: wide
 author_profile: true
+tags:
+    - bash
+    - unix
+    - shell
 header:
     teaser: "assets/images/terminal_sudo_command.jpg"
     image: "assets/images/terminal_sudo_command.jpg"

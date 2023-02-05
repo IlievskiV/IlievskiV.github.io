@@ -6,6 +6,11 @@ description: "Learn how to use the Altair Python API"
 date: 2023-01-26 09:00:00
 classes: wide
 author_profile: true
+tags:
+    - altair
+    - plotting
+    - scatter plot
+    - iris
 header:
     teaser: "assets/images/altair_iris_top_image.png"
     image: "assets/images/altair_iris_top_image.png"

@@ -7,6 +7,12 @@ plot matrix from the Pandas plotting API"
 date: 2023-01-26 09:00:00
 classes: wide
 author_profile: true
+tags:
+    - pandas
+    - plotting
+    - parallel coordinates
+    - scatter plot
+    - iris
 header:
     teaser: "assets/images/pandas_plotting.png"
     image: "assets/images/pandas_plotting.png"
