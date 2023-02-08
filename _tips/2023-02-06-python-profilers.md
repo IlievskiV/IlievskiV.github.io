@@ -35,11 +35,11 @@ inspect every line of a Python program:
 
 
 # Why
-The code ineffciency can be burried down into the layers of programming abstrations. For this reason it
+The code inefficiency can be burried down into the layers of programming abstractions. For this reason it
 might be difficult to spot it.
 
 Nevertheless, code efficiency is always a desired property. Sometimes it could be of paramount importance
-and we need to prevent it.
+and we need to strive for it.
 
 # How
 
