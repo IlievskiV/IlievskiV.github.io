@@ -7,6 +7,11 @@ using the Matplotlib Animation API in Python."
 date:        2023-01-30 09:00:00
 classes:     wide
 author_profile: true
+tags:
+    - ChatGPT
+    - probability
+    - statistics
+    - math
 header:
     teaser: "assets/images/student_to_gaussian_convergence_top_image.png"
     image: "assets/images/student_to_gaussian_convergence_top_image.png"
