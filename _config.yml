@@ -110,9 +110,9 @@ social:
 
 # Analytics
 analytics:
-  provider               : "google-universal"
+  provider               : "google-gtag"
   google:
-    tracking_id          : UA-84543100-2
+    tracking_id          : G-49EPHT6FZ9
     anonymize_ip         : false # true, false (default)
 
 # Site Author
