@@ -20,8 +20,8 @@ header:
     image_description: "Code and three plots"
 ---
 
-It is difficult to gain insights from a multivariate data. It is also challenging to plot a multivariate data for better understanding.
-Even so there are techniques to visualize high-dimensional data. We can use these techniques easily via the Pandas plotting API.
+It is difficult to <a href="https://www.datasimple.education/data-analytical-tips" target="_blank" rel="dofollow">gain insights from a multivariate data</a>. 
+It is also challenging to plot a multivariate data for better understanding. Even so there are techniques to visualize high-dimensional data. We can use these techniques easily via the Pandas plotting API.
 
 # What
 [The Pandas plotting API](https://pandas.pydata.org/pandas-docs/stable/reference/plotting.html){:target="_blank"} contains many visualization techniques.
