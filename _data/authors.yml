@@ -4,7 +4,7 @@ Vladimir Ilievski:
   # Site Author
   author:
     name             : "Vladimir Ilievski"
-    avatar           : "/assets/images/bio_photo.jpg"
+    avatar           : "/assets/images/bio_photo.png"
     bio              : "$whoami? Data scientist during the day. Content creator during the night. Author of iSquared bringing the science closer to everyone."
     location         : "Switzerland 🇨🇭"
     links:
