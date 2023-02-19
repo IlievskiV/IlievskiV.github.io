@@ -79,7 +79,7 @@ body {
 
 .page__lead {
   font-family: $global-font-family;
-  font-size: $type-size-4;
+  font-size: $type-size-3;
 }
 
 .page__content {
@@ -194,9 +194,11 @@ body {
 
     .page__title,
     .page__meta,
-    .page__lead,
-    .btn {
+    .page__lead {
       color: #fff;
+      text-shadow: 1px 1px 4px rgba(#000, 0.5);
+    }
+    .btn {
       text-shadow: 1px 1px 4px rgba(#000, 0.5);
     }
 
@@ -205,7 +207,7 @@ body {
     }
 
     .page__title {
-      font-size: $type-size-2;
+      font-size: $type-size-1;
 
       @include breakpoint($small) {
         font-size: $type-size-1;
@@ -250,9 +252,7 @@ body {
    ========================================================================== */
 
 .page__share {
-  margin-top: 2em;
-  padding-top: 1em;
-  border-top: 1px solid $border-color;
+  padding-bottom: 1em;
 
   @include breakpoint(max-width $small) {
     .btn span {
@@ -269,9 +269,7 @@ body {
 }
 
 .page__share-title {
-  margin-bottom: 10px;
   font-size: $type-size-6;
-  text-transform: uppercase;
 }
 
 /*

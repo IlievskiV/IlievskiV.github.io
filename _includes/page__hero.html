@@ -61,7 +61,7 @@
           {% else %}
             {% assign url = action.url | relative_url %}
           {% endif %}
-          <a href="{{ url }}" class="btn btn--light-outline btn--large">{{ action.label | default: site.data.ui-text[site.locale].more_label | default: "Learn More" }}</a>
+          <a href="{{ url }}" class="btn btn--info btn--large">{{ action.label | default: site.data.ui-text[site.locale].more_label | default: "Learn More" }}</a>
         {% endfor %}
       {% endif %}
     </div>
