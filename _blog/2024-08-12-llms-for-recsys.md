@@ -1,9 +1,9 @@
 ---
 layout: single
 title: "Beyond Personalization: How LLMs are Revolutionizing Recommendation Systems"
-excerpt: ""
+excerpt: "Walkthrough over the recommendation system landscape using LLMs"
 description: "We learn how the large language models (LLMs) are shifting the 
-recommendation systems landscape"
+recommendation systems (RecSys) landscape with a particular attention on the P5 model."
 date: 2024-08-12 09:00:00
 classes: wide
 author_profile: true
@@ -12,28 +12,28 @@ tags:
     - recommendation systems
     - large language models
 header:
-    teaser: ""
-    image: ""
-    og_image: ""
+    teaser: "assets/images/llms_for_recsys/llms_for_recsys_header.jpg"
+    image: "assets/images/llms_for_recsys/llms_for_recsys_header.jpg"
+    og_image: "assets/images/llms_for_recsys/llms_for_recsys_header.jpg"
 ---
 
-Recommendation Systems (RecSys) have become an integral part of our digital lives. These
-intelligent systems are the invisible hand guiding us through a sea of choices. There 
-are countless number of examples, just to mention a few: 
-* E-Commerce: Personalized product suggestions enhance shopping experiences. Think about
+[Recommendation Systems](https://en.wikipedia.org/wiki/Recommender_system){:target="_blank"} (RecSys) 
+have become an integral part of our digital lives. These intelligent systems are the 
+invisible hand guiding us through a sea of choices. There are countless number of examples, 
+just to mention a few: 
+* *E-Commerce*: Personalized product suggestions enhance shopping experiences. Think about
 next time you use Amazon or eBay.
-* Social Networks: Recommended advertisements, friends or content shape our interaction
+* *Social Networks*: Recommended advertisements, friends or content shape our interaction
 patterns on social media. 
 
 This indicates that RecSys are one of the most commercially successful AI applications,
 enhancing user experiences and driving business growth across industries.
 
-On the other hand, the large language models (LLMs) exploded in recent years. Fueled by
-the rise of the LLMs the landscape of recommendation has also seen a shift in this 
-direction These AI powerhouses, with their vast knowledge and impressive language 
-processing capabilities, are poised to unlock a new era of personalization and 
-predictive power in RecSys.
-
+On the other hand, the [large language models](https://en.wikipedia.org/wiki/Large_language_model){:target="_blank"}
+(LLMs) exploded in recent years. Fueled by the rise of the LLMs the landscape of 
+recommendation has also seen a shift in this direction These AI powerhouses, with their 
+vast knowledge and impressive language processing capabilities, are poised to unlock a 
+new era of personalization and predictive power in RecSys.
 
 <center>
     <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/llms_for_recsys/llms_evolution_tree.jpg" class="lazyload" alt="The evolution of the LLMs"/>
@@ -73,7 +73,7 @@ an example of an explicit feedback about movie rating:
 
 Both types of feedback have different properties. The table below compares their properties:
 
-| Property\FeedBack Type | Explicit                    | Implicit |
+| Property\FeedBack Type | Explicit                    | Implicit                            |
 |------------------------|-----------------------------|-------------------------------------|
 | Accuracy               | High                        | Low                                 |
 | Abundance              | Low                         | High                                |
@@ -83,13 +83,14 @@ Both types of feedback have different properties. The table below compares their
 
 # From Shallow Models to the Generative Frontier
 
-The current landscape of recommender systems can be split into traditional systems, 
-modelling the user-item interaction directly and generative systems exploiting the 
+The current landscape of recommender systems can be split into *traditional systems*, 
+modelling the user-item interaction directly and *generative systems* exploiting the 
 generative power of the LLMs.
 
 ## Shallow Models
-Traditionally, recommendation systems relied on *shallow models*, utilizing matrix 
-factorization techniques like LU, QR or SV decomposition to analyze user-item interactions.
+Traditionally, recommendation systems relied on *shallow models*, utilizing [matrix 
+factorization](https://en.wikipedia.org/wiki/Matrix_factorization_(recommender_systems)){:target="_blank"} 
+techniques like *LU*, *QR* or *SV* decomposition to analyze user-item interactions. 
 Thus, the name *shallow* is used to designate this family of models. 
 
 These models aim to decompose the sparse interaction matrix *X* into the product of two 
@@ -151,12 +152,12 @@ and generative pipelines is depcited below:
 The new paradigm to use LLMs for RecSys promises to streamline recommendation processes 
 significantly. As shown in the diagram below LLMs can be integrated into the 
 recommendation pipeline in various ways, including:
-* Scoring/Ranking: Serving as the core model that predicts user preferences and ranks 
+* **Scoring/Ranking**: Serving as the core model that predicts user preferences and ranks 
 items accordingly.
-* Feature Extractor: Extracting meaningful features from user data in order to enrich
+* **Feature Extractor**: Extracting meaningful features from user data in order to enrich
 user profiles.
-* Feature Encoder: encoding user interactions into a format suitable for recommendations.
-* User Behavior Modeling: Understanding and predicting user behavior patterns to 
+* **Feature Encoder**: encoding user interactions into a format suitable for recommendations.
+* **User Behavior Modeling**: Understanding and predicting user behavior patterns to 
 anticipate future needs and desires.
 
 <center>
@@ -168,7 +169,7 @@ anticipate future needs and desires.
 </center>
 <br/>
 
-This blog post explores how LLMs can be employed as scoring models, a concept closely
+This blog post explores how LLMs can be employed as **scoring models**, a concept closely
 aligned with the fundamental goal of recommender systems: ranking items and users.
 
 ## LLMs as Scoring Models
@@ -177,11 +178,11 @@ A key advantage of LLMs as scoring models is their versatility across multiple
 recommendation tasks. This eliminates the need for task-specific models.
 Some common tasks include:
 
-* Rating Prediction: Estimating a user's item rating.
-* Top-K Recommendation: Selecting the top K items to recommend.
-* Sequential Recommendation: Predicting the next item a user is likely to interact with.
-* Explanation Generation: Providing users with transparent recommendation rationales.
-* Review Summarization: Generating concise item reviews based on user profiles.
+* **Rating Prediction**: Estimating a user's item rating.
+* **Top-K Recommendation**: Selecting the top K items to recommend.
+* **Sequential Recommendation**: Predicting the next item a user is likely to interact with.
+* **Explanation Generation**: Providing users with transparent recommendation rationales.
+* **Review Summarization**: Generating concise item reviews based on user profiles.
 
 This blog post focuses primarily on *Rating Prediction* and *Top-K Recommendation*. 
 The figure below demonstrates some of the recommendation tasks:
@@ -449,8 +450,8 @@ models.
 
 # ChatGPT as RecSys 
 
-In a parallel work inspired by the P5 model, a group of authors used ChatGPT as a general 
-purpose RecSys in a few-shot or zero-shot setting.  
+In a parallel work inspired by the P5 model, a group of authors used [ChatGPT](https://en.wikipedia.org/wiki/ChatGPT){:target="_blank"} 
+as a general purpose RecSys in a few-shot or zero-shot setting.  
 
 This approach explores whether extensive linguistic and world knowledge can be 
 effectively transferred to recommendations. In a zero-shot scenario, the model receives 
@@ -547,14 +548,6 @@ sophistication. As these models are further explored and refined, the potential 
 personalized, context-aware recommendations will expand, transforming user experiences 
 across the digital realm.
 
-# References
-1. [Recommendation as Language Processing (RLP): A Unified Pretrain, Personalized Prompt & Predict Paradigm (P5)](https://arxiv.org/pdf/2203.13366){:target="_blank"}  
-2. [Is ChatGPT a Good Recommender? A Preliminary Study](https://arxiv.org/pdf/2304.10149){:target="_blank"}
-3. [Recommender Systems in the Era of Large Language Models (LLMs)](https://arxiv.org/pdf/2307.02046){:target="_blank"} 
-4. [Large Language Models for Generative Recommendation: A Survey and Visionary Discussions](https://arxiv.org/pdf/2309.01157){:target="_blank"} 
-5. [How Can Recommender Systems Benefit from Large Language Models: A Survey](https://arxiv.org/pdf/2306.05817){:target="_blank"}
-6. [Harnessing the Power of LLMs in Practice: A Survey on ChatGPT and Beyond](https://arxiv.org/pdf/2304.13712){:target="_blank"}
-
 For more information, please follow me on 
 <a href="https://www.linkedin.com/in/vilievski/" target="_blank" rel="noopener"><b>LinkedIn</b></a>.
 If you like this content you can subscribe to the mailing list below to get similar updates from time to time.
@@ -572,3 +565,11 @@ If you like this content you can subscribe to the mailing list below to get simi
 </form>
 </div>
 <br/>
+
+# References
+1. [Recommendation as Language Processing (RLP): A Unified Pretrain, Personalized Prompt & Predict Paradigm (P5)](https://arxiv.org/pdf/2203.13366){:target="_blank"}  
+2. [Is ChatGPT a Good Recommender? A Preliminary Study](https://arxiv.org/pdf/2304.10149){:target="_blank"}
+3. [Recommender Systems in the Era of Large Language Models (LLMs)](https://arxiv.org/pdf/2307.02046){:target="_blank"} 
+4. [Large Language Models for Generative Recommendation: A Survey and Visionary Discussions](https://arxiv.org/pdf/2309.01157){:target="_blank"} 
+5. [How Can Recommender Systems Benefit from Large Language Models: A Survey](https://arxiv.org/pdf/2306.05817){:target="_blank"}
+6. [Harnessing the Power of LLMs in Practice: A Survey on ChatGPT and Beyond](https://arxiv.org/pdf/2304.13712){:target="_blank"}
