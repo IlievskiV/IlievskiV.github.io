@@ -39,7 +39,7 @@ predictive power in RecSys.
     <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/llms_for_recsys/llms_evolution_tree.jpg" class="lazyload" alt="The evolution of the LLMs"/>
     <br/>
     <span class="caption text-muted">
-        The evolution of the LLMs [6].
+        The evolution of the LLMs <a href="https://arxiv.org/pdf/2304.13712" target="_blank" rel="noopener nofollow">[6]</a>.
     </span>
 </center>
 <br/>
@@ -73,7 +73,7 @@ an example of an explicit feedback about movie rating:
 
 Both types of feedback have different properties. The table below compares their properties:
 
-| Feedback type\Property | Explicit                    | Implicit |
+| Property\FeedBack Type | Explicit                    | Implicit |
 |------------------------|-----------------------------|-------------------------------------|
 | Accuracy               | High                        | Low                                 |
 | Abundance              | Low                         | High                                |
@@ -119,7 +119,7 @@ the architecture of the RecSys known as [Deep & Wide](https://arxiv.org/pdf/1606
     <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/llms_for_recsys/wide_and_deep_rec_sys.png" class="lazyload" alt="The architecture of the Deep & Wide RecSys"/>
     <br/>
     <span class="caption text-muted">
-        The architecture of the Deep & Wide RecSys.
+        The architecture of the <a href="https://arxiv.org/pdf/1606.07792" target="_blank" rel="noopener nofollow">Deep & Wide RecSys</a>.
     </span>
 </center>
 <br/>
@@ -140,7 +140,7 @@ and generative pipelines is depcited below:
     <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/llms_for_recsys/traditional_vs_generative_recsys_pipeline.png" class="lazyload" alt="Traditional vs Generative RecSys Pipeline"/>
     <br/>
     <span class="caption text-muted">
-        Traditional vs Generative RecSys Pipeline [4].
+        Traditional vs Generative RecSys Pipeline <a href="https://arxiv.org/pdf/2309.01157" target="_blank" rel="noopener nofollow">[4]</a>.
     </span>
 </center>
 <br/>
@@ -163,7 +163,7 @@ anticipate future needs and desires.
     <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/llms_for_recsys/where_and_how_to_use_llms_for_recsys.png" class="lazyload" alt="Diagram sketching where and how LLMs can be used in RecSys"/>
     <br/>
     <span class="caption text-muted">
-        Where and how LLMs can be used in RecSys [5].
+        Where and how LLMs can be used in RecSys <a href="https://arxiv.org/pdf/2306.05817" target="_blank" rel="noopener nofollow">[5]</a>.
     </span>
 </center>
 <br/>
@@ -190,7 +190,7 @@ The figure below demonstrates some of the recommendation tasks:
     <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/llms_for_recsys/recommendation_tasks.png" class="lazyload" alt="Sketch showing an example of the different recommendation tasks"/>
     <br/>
     <span class="caption text-muted">
-       Example of the different recommendation tasks [3].
+       Example of the different recommendation tasks <a href="https://arxiv.org/pdf/2307.02046" target="_blank" rel="noopener nofollow">[3]</a>.
     </span>
 </center>
 <br/>
@@ -218,7 +218,7 @@ The pre-training technique is summarized in the figure below:
     <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/llms_for_recsys/pretraining_llms_for_recsys.png" class="lazyload" alt="Diagram showing how to pretrain LLMs for RecSys"/>
     <br/>
     <span class="caption text-muted">
-       How to pretrain LLMs for RecSys [3].
+       How to pretrain LLMs for RecSys <a href="https://arxiv.org/pdf/2307.02046" target="_blank" rel="noopener nofollow">[3]</a>.
     </span>
 </center>
 <br/>
@@ -242,7 +242,7 @@ employs the [LoRA](https://arxiv.org/pdf/2106.09685){:target="_blank"} adapter w
     <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/llms_for_recsys/finetuning_llms_for_recsys.png" class="lazyload" alt="Diagram showing how to finetune LLMs for RecSys"/>
     <br/>
     <span class="caption text-muted">
-       How to finetune LLMs for RecSys [3].
+       How to finetune LLMs for RecSys <a href="https://arxiv.org/pdf/2307.02046" target="_blank" rel="noopener nofollow">[3]</a>.
     </span>
 </center>
 <br/>
@@ -255,18 +255,18 @@ adapt LLMs to downstream tasks via task-specific prompts. There are three repres
 methods that use prompting techniques to adjust the LLMs as RecSys as summarized in the
 figure below: 
 
-* In-Context Learning: elicit the in-context ability of LLMs to adapt to downstream 
+* **In-Context Learning**: elicit the in-context ability of LLMs to adapt to downstream 
 tasks from context.
-* Prompt Tuning: add new prompt tokens to LLMs and optimizes the prompt based on the 
+* **Prompt Tuning**: add new prompt tokens to LLMs and optimizes the prompt based on the 
 task-specific dataset.
-* Instruction Tuning: LLMs to follow prompts as task instructions, rather than to solve 
+* **Instruction Tuning**: LLMs to follow prompts as task instructions, rather than to solve 
 specific downstream tasks.
 
 <center>
     <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/llms_for_recsys/prompt_tuning_llms_for_recsys.png" class="lazyload" alt="Diagram showing the LLM prompt-tuning techniques for RecSys"/>
     <br/>
     <span class="caption text-muted">
-       LLM prompt-tuning techniques for RecSys [3].
+       LLM prompt-tuning techniques for RecSys <a href="https://arxiv.org/pdf/2307.02046" target="_blank" rel="noopener nofollow">[3]</a>.
     </span>
 </center>
 <br/>
@@ -282,15 +282,14 @@ chart below, captures the diverse landscape of these approaches:
     <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/llms_for_recsys/taxonomy_of_llms_as_recsys.png" class="lazyload" alt="Taxonomy of LLMs used as scoring functions"/>
     <br/>
     <span class="caption text-muted">
-        Taxonomy of LLMs used as scoring functions [5].
+        Taxonomy of LLMs used as scoring functions <a href="https://arxiv.org/pdf/2306.05817" target="_blank" rel="noopener nofollow">[5]</a>.
     </span>
 </center>
 <br/>
 
-The extra dimension is whether we will use conventional recommendation models (CRM) during 
+The extra dimension is whether we will use *conventional recommendation models* (CRM) during 
 the inference phase. Our focus here is on pure generative inference models, i.e. the 
-ones that do not use any conventional recommendation model (CRM) to make any inference. Two noteworthy 
-examples include:
+ones that do not use any CRM to make any inference. Two noteworthy examples include:
 
 * **P5**: A versatile, instruction-based pre-training model demonstrating impressive 
 performance across various recommendation tasks.
@@ -303,7 +302,7 @@ showcasing the flexibility and potential of LLMs in recommendation scenarios.
     <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/llms_for_recsys/p5_multitask_recommendation.png" class="lazyload" alt="Diagram of the P5 model showing how it can perform multi-task recommendation"/>
     <br/>
     <span class="caption text-muted">
-        The P5 model performing multi-task recommendation [1].
+        The P5 model performing multi-task recommendation <a href="https://arxiv.org/pdf/2203.13366" target="_blank" rel="noopener nofollow">[1]</a>.
     </span>
 </center>
 <br/>
@@ -336,7 +335,7 @@ split the word *user_7391* into four tokens *(item, _, 73, 91)*, but then with t
     <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/llms_for_recsys/p5_architecture.png" class="lazyload" alt="Diagram showing the architecture of the P5 model"/>
     <br/>
     <span class="caption text-muted">
-        The P5 model architecture [1].
+        The P5 model architecture <a href="https://arxiv.org/pdf/2203.13366" target="_blank" rel="noopener nofollow">[1]</a>.
     </span>
 </center>
 <br/>
@@ -354,19 +353,19 @@ for each of the tasks. For instance, here are some of the prompts used in the ra
 prediction tasks:
 
 **Prompt ID: 1-1**:
-```jinja
-Input template: Which star rating will user_{{user_id}} give
-item_{{item_id}}? (1 being lowest and 5 being highest)
+```
+Input template: Which star rating will user_{user_id} give
+item_{item_id}? (1 being lowest and 5 being highest)
 
-Target template: {{star_rating}}
+Target template: {star_rating}
 ```
 **Prompt ID: 1-2**:
-```jinja
-Input template: Does user_{{user_id}} like or dislike
-item_{{item_id}}?
+```
+Input template: Does user_{user_id} like or dislike
+item_{item_id}?
 
 Target template:
-{{answer_choices[label]}} (like/dislike) – like (4,5) / dislike
+{answer_choices[label]} (like/dislike) – like (4,5) / dislike
 (1,2,3)
 ```
 
@@ -424,7 +423,7 @@ results and draw some conclusions.
     <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/llms_for_recsys/p5_performance_rating_prediction.png" class="lazyload" alt="Table for the P5 performance on the rating prediction task"/>
     <br/>
     <span class="caption text-muted">
-        P5 performance on the rating prediction task [1].
+        P5 performance on the rating prediction task <a href="https://arxiv.org/pdf/2203.13366" target="_blank" rel="noopener nofollow">[1]</a>.
     </span>
 </center>
 <br/>
@@ -433,7 +432,7 @@ results and draw some conclusions.
     <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/llms_for_recsys/p5_performance_direct_recommendation.png" class="lazyload" alt="Table for the P5 performance on the direct recommendation task"/>
     <br/>
     <span class="caption text-muted">
-        P5 performance on the direct recommendation task [1].
+        P5 performance on the direct recommendation task <a href="https://arxiv.org/pdf/2203.13366" target="_blank" rel="noopener nofollow">[1]</a>.
     </span>
 </center>
 <br/>
@@ -464,7 +463,7 @@ understand user needs. This is illustrated in the image below.
     <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/llms_for_recsys/chatgpt_as_recsys_zero_vs_few_shot.png" class="lazyload" alt="Promts to use ChatGPT as RecSys in a zero and few-shot scenario"/>
     <br/>
     <span class="caption text-muted">
-        Promts to use ChatGPT as RecSys in a zero and few-shot scenario [2].
+        Promts to use ChatGPT as RecSys in a zero and few-shot scenario <a href="https://arxiv.org/pdf/2304.10149" target="_blank" rel="noopener nofollow">[2]</a>.
     </span>
 </center>
 <br/>
@@ -479,7 +478,7 @@ ChatGPT plays the central role of a recommender. There is an additional module c
     <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/llms_for_recsys/chatgpt_as_recsys.png" class="lazyload" alt="ChatGPT as RecSys Scoring Function"/>
     <br/>
     <span class="caption text-muted">
-        ChatGPT as RecSys Scoring Function [2].
+        ChatGPT as RecSys Scoring Function <a href="https://arxiv.org/pdf/2304.10149" target="_blank" rel="noopener nofollow">[2]</a>.
     </span>
 </center>
 <br/>
@@ -494,7 +493,7 @@ introduced for *Explanation Generation* and *Review Summarization* tasks.
     <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/llms_for_recsys/chatgpt_performance_rating_prediction.png" class="lazyload" alt="Table for the ChatGPT performance on the rating prediction task"/>
     <br/>
     <span class="caption text-muted">
-        ChatGPT performance on the Rating Prediction task [2].
+        ChatGPT performance on the Rating Prediction task <a href="https://arxiv.org/pdf/2304.10149" target="_blank" rel="noopener nofollow">[2]</a>.
     </span>
 </center>
 <br/>
@@ -504,7 +503,7 @@ introduced for *Explanation Generation* and *Review Summarization* tasks.
     <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/llms_for_recsys/chatgpt_performance_direct_recommendation.png" class="lazyload" alt="Table for the ChatGPT performance on the direct recommendation task"/>
     <br/>
     <span class="caption text-muted">
-        ChatGPT performance on the Direct Recommendation task [2].
+        ChatGPT performance on the Direct Recommendation task <a href="https://arxiv.org/pdf/2304.10149" target="_blank" rel="noopener nofollow">[2]</a>.
     </span>
 </center>
 <br/>
@@ -521,7 +520,7 @@ However, it’s interesting to note the subjective evaluation of ChatGPT on the
     <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/llms_for_recsys/chatgpt_explanation_generation_subjective_eval.png" class="lazyload" alt="Table for the ChatGPT subjective evaluation on the Explanation Generation task"/>
     <br/>
     <span class="caption text-muted">
-        ChatGPT subjective evaluation on the Explanation Generation task [2].
+        ChatGPT subjective evaluation on the Explanation Generation task <a href="https://arxiv.org/pdf/2304.10149" target="_blank" rel="noopener nofollow">[2]</a>.
     </span>
 </center>
 <br/>
@@ -530,7 +529,7 @@ However, it’s interesting to note the subjective evaluation of ChatGPT on the
     <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/llms_for_recsys/chatgpt_review_summarization_subjective_eval.png" class="lazyload" alt="Table for the ChatGPT subjective evaluation on the Review Summarization task"/>
     <br/>
     <span class="caption text-muted">
-        ChatGPT subjective evaluation on the Review Summarization task [2].
+        ChatGPT subjective evaluation on the Review Summarization task <a href="https://arxiv.org/pdf/2304.10149" target="_blank" rel="noopener nofollow">[2]</a>.
     </span>
 </center>
 <br/>
