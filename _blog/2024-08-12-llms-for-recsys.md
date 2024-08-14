@@ -31,7 +31,7 @@ enhancing user experiences and driving business growth across industries.
 
 On the other hand, the [large language models](https://en.wikipedia.org/wiki/Large_language_model){:target="_blank"}
 (LLMs) exploded in recent years. Fueled by the rise of the LLMs the landscape of 
-recommendation has also seen a shift in this direction These AI powerhouses, with their 
+recommendation has also seen a shift in this direction. These AI powerhouses, with their 
 vast knowledge and impressive language processing capabilities, are poised to unlock a 
 new era of personalization and predictive power in RecSys.
 
@@ -73,12 +73,12 @@ an example of an explicit feedback about movie rating:
 
 Both types of feedback have different properties. The table below compares their properties:
 
-| Property\FeedBack Type | Explicit                    | Implicit                            |
-|------------------------|-----------------------------|-------------------------------------|
-| Accuracy               | High                        | Low                                 |
-| Abundance              | Low                         | High                                |
-| Preference Types       | Positive, Negative, Neutral | Positive only, absence is ambiguous |
-| Example                | Movies rated; items liked   | Items viewed; items purchased       |
+| Property / FeedBack Type | Explicit                    | Implicit                            |
+|--------------------------|-----------------------------|-------------------------------------|
+| Accuracy                 | High                        | Low                                 |
+| Abundance                | Low                         | High                                |
+| Preference Types         | Positive, Negative, Neutral | Positive only, absence is ambiguous |
+| Example                  | Movies rated; items liked   | Items viewed; items purchased       |
 
 
 # From Shallow Models to the Generative Frontier
@@ -156,7 +156,7 @@ recommendation pipeline in various ways, including:
 items accordingly.
 * **Feature Extractor**: Extracting meaningful features from user data in order to enrich
 user profiles.
-* **Feature Encoder**: encoding user interactions into a format suitable for recommendations.
+* **Feature Encoder**: Encoding user interactions into a format suitable for recommendations.
 * **User Behavior Modeling**: Understanding and predicting user behavior patterns to 
 anticipate future needs and desires.
 
@@ -443,9 +443,9 @@ represent evaluation on seen data, where the test data includes entries from pro
 used in training data generation. Orange entries indicate evaluation on unseen data, 
 using test data generated from prompts never used for training.
 
-Results show P5 outperforms BPR-MF and BPR-MLP significantly. While P5 demonstrates 
-strong performance on top-1 metrics compared to SimpleX, it suggests that utilizing
-multi-task LLMs like P5 in recommendation systems is feasible and can surpass traditional 
+Results show *P5* outperforms *BPR-MF* and *BPR-MLP* **significantly**. While *P5* demonstrates 
+strong performance on top-1 metrics compared to *SimpleX*, it suggests that utilizing
+multi-task LLMs like *P5* in recommendation systems is **feasible** and can surpass traditional 
 models.
 
 # ChatGPT as RecSys 
@@ -535,7 +535,7 @@ However, it’s interesting to note the subjective evaluation of ChatGPT on the
 </center>
 <br/>
 
-Although ChatGPT underperforms baseline models on *Rating Prediction* and *Direct Recommendation*,
+Although *ChatGPT* underperforms baseline models on *Rating Prediction* and *Direct Recommendation*,
 its outputs are judged clearer and more reasonable compared to P5 and ground-truth data. 
 This suggests that leveraging more powerful LLMs could lead to better user adoption of 
 recommendation system outputs.
