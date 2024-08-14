@@ -1,7 +1,7 @@
 ---
 layout:      single
 title:       "The Delicacy of Data Augmentation in Natural Language Processing"
-excerpt:     "Explores how to overcome the difficulties of data augmentation in NLP"
+excerpt:     "Explore how to overcome the difficulties of data augmentation in NLP"
 description: "Learn the different techniques on how to augment any NLP data using some
 simple techniques"
 date:        2020-07-07 09:00:00
@@ -15,12 +15,12 @@ header:
     teaser: "assets/images/data_augmentation_for_nlp/data_augmentation_header.png"
     image: "assets/images/data_augmentation_for_nlp/data_augmentation_header.png"
     og_image: "assets/images/data_augmentation_for_nlp/data_augmentation_header.png"
-    caption: "Credit: iGenius"
+    caption: "Credits: iGenius"
 ---
 
-**Disclaimer**: I am the author of this blog that was originally on 
+**Disclaimer**: I am the author of this blog that was originally published on 
 [Medium](https://medium.com/ideas-at-igenius/the-delicacy-of-data-augmentation-in-natural-language-processing-nlp-2ef07e9ad1c0){:target="_blank"} 
-as part of the blog portal of the company I was working for at that time.
+as part of the blog portal of the company I was working for at that time, [iGenius](https://www.igenius.ai){:target="_blank"}.
 
 
 Data is everything in AI.
@@ -68,6 +68,21 @@ technique has its own limitations. First of all, it does not take into considera
 context in which the words appear. Second, it is agnostic to the scope of the dataset. 
 To mitigate these effects, we need context-aware techniques, which we cover in the next 
 section.
+
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<link href="/assets/css/mailchimp.css">
+<div id="mc_embed_signup">
+<form action="https://digital.us19.list-manage.com/subscribe/post?u=cb9dbe40387c27177a25de80f&amp;id=08bda6f8e0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	<label for="mce-EMAIL">Join the iSquared mailing list</label>
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_cb9dbe40387c27177a25de80f_08bda6f8e0" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+<br/>
 
 ## ML-Based Substitution
 
@@ -174,6 +189,25 @@ game-changer in data augmentation for NLP, it is not so trivial to make them wor
 Usually, there are multiple billions of parameter neural networks that require tons of 
 computational resources and manually tuning of many hyperparameter knobs. Moreover, 
 there is high uncertainty in what direction the generated sentence might continue.
+
+For more information, please follow me on 
+<a href="https://www.linkedin.com/in/vilievski/" target="_blank" rel="noopener"><b>LinkedIn</b></a>.
+If you like this content you can subscribe to the mailing list below to get similar updates from time to time.
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<link href="/assets/css/mailchimp.css">
+<div id="mc_embed_signup">
+<form action="https://digital.us19.list-manage.com/subscribe/post?u=cb9dbe40387c27177a25de80f&amp;id=08bda6f8e0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	<label for="mce-EMAIL">Join the iSquared mailing list</label>
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_cb9dbe40387c27177a25de80f_08bda6f8e0" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+<br/>
+
 
 # Conclusion
 
