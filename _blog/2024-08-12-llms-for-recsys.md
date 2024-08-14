@@ -297,6 +297,23 @@ performance across various recommendation tasks.
 * **ChatGPT**: Researchers have explored the use of ChatGPT in a zero-shot configuration, 
 showcasing the flexibility and potential of LLMs in recommendation scenarios.
 
+
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<link href="/assets/css/mailchimp.css">
+<div id="mc_embed_signup">
+<form action="https://digital.us19.list-manage.com/subscribe/post?u=cb9dbe40387c27177a25de80f&amp;id=08bda6f8e0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+	<label for="mce-EMAIL">Join the iSquared mailing list</label>
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_cb9dbe40387c27177a25de80f_08bda6f8e0" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+<br/>
+
+
 # Multi-Task Instruction Pretraining: The P5 Model
 
 <center>
@@ -542,11 +559,26 @@ recommendation system outputs.
 
 # Conclusion
 
-Integrating LLMs into recommendation systems marks a significant advancement, 
-ushering in an era of generative recommendations that promise enhanced efficiency and 
-sophistication. As these models are further explored and refined, the potential for 
-personalized, context-aware recommendations will expand, transforming user experiences 
-across the digital realm.
+In this blog post, we took a brisk trot tour through the RecSys landscape. We began with 
+shallow models and deep learning-based approaches, then shifted to the emerging 
+paradigm of generative recommendations using LLMs. Once again, we briefly covered various 
+techniques to adapt LLMs for recommendations, highlighting two notable models: 
+**P5** and **ChatGPT**.
+
+Evaluating P5 against traditional RecSys models reveals that P5 can outperform them, 
+all while offering multi-tasking capabilities. 
+
+On the other hand, using LLMs like ChatGPT in a zero-shot setting is still not 
+well-suited for direct recommendations. However, their recommendation summarization and 
+explanation capabilities are far more preferred by human subjects compared to other 
+competitors.
+
+Thus we can conclude that integrating LLMs into recommendation systems marks a significant 
+advancement, ushering in an era of generative recommendations that promise enhanced 
+efficiency and sophistication. As these models are further explored and refined, the 
+potential for personalized, context-aware recommendations will expand, transforming user 
+experiences across the digital realm.
+
 
 For more information, please follow me on 
 <a href="https://www.linkedin.com/in/vilievski/" target="_blank" rel="noopener"><b>LinkedIn</b></a>.
@@ -565,6 +597,14 @@ If you like this content you can subscribe to the mailing list below to get simi
 </form>
 </div>
 <br/>
+
+
+# Acknowledgements
+
+I would like to thank my colleagues at Frontiers, [Tommaso Caneva](https://www.linkedin.com/in/tommaso-caneva-68a92940/){:target="_blank"}
+and [Sofya Lipnitskaya](https://www.linkedin.com/in/sofyalipnitskaya/){:target="_blank"}  
+for reviewing the content of this blog post.
+
 
 # References
 1. [Recommendation as Language Processing (RLP): A Unified Pretrain, Personalized Prompt & Predict Paradigm (P5)](https://arxiv.org/pdf/2203.13366){:target="_blank"}  
