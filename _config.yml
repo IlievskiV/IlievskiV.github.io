@@ -50,7 +50,7 @@ subtitle: "Science Explained"
 name: "iSquared"
 description: "Website to perceive science through interesting visualisations. It explains and implements the visualised concepts in Python and Javascript"
 
-url: "https://isquared.digital"
+url: "https://ilievskiv.github.io"
 baseurl: ""
 repository: "IlievskiV/IlievskiV.github.io"  # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
 teaser: "/assets/images/banner_picture.webp" # path of fallback teaser image, e.g. "/assets/images/500x300.png"
@@ -151,8 +151,6 @@ footer:
     - label: "Medium"
       icon: "fab fa-fw fa-medium"
       url: "https://medium.com/@ilievski.vladimir"
-
-include: ["_pages"]
 
 # Reading Files
 include:
