@@ -30,4 +30,4 @@ gem "jekyll-remote-theme"
 gem "faraday", "< 1.0"
 gem "activesupport", ">= 6.0.3.1"
 
-gem "webrick", "~> 1.7"
+gem "webrick", "~> 1.8"
