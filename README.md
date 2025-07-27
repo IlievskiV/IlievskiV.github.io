@@ -1,14 +1,14 @@
 # Welcome to iSquared
 
 
-<a href="https://isquared.digital/" target="_blank">
+<a href="https://ilievskiv.github.io/" target="_blank">
   <img src="./assets/images/site_logo.png" alt="iSquared banner" width="100%"/>
 </a>
 
 
-This is the GitHub repository hosting [iSquared](https://isquared.digital/). **iSquared** 
-is a place to perceive science through interesting visualisations. It explains and 
-implements the visualised concepts. The goal is to make the concepts easy to grasp. 
+This is the GitHub repository hosting [iSquared](https://ilievskiv.github.io).
+**iSquared** is a place to perceive science through interesting visualisations. It explains
+and implements the visualised concepts. The goal is to make the concepts easy to grasp.
 This could serve as an excellent learning and programming resource.
 
 ## The Author

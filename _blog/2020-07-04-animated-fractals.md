@@ -51,7 +51,7 @@ is symmetrical.
 
 In mathematics, this phenomenon is known as [self-similarity](https://en.wikipedia.org/wiki/Self-similarity){:target="_blank"}. It means
 a given object is similar (completely or to some extent) to some smaller part of itself. One remarkable example is the
-[Koch Snowflake](https://isquared.digital/visualizations/2020-06-15-koch-curve/){:target="_blank"} as shown in the image below:
+[Koch Snowflake](https://ilievskiv.github.io/visualizations/2020-06-15-koch-curve/){:target="_blank"} as shown in the image below:
 
 <center>
     <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/snowflake.png" class="lazyload" alt="Sketch showing a snowflake constructed using fractal geometry"/>
@@ -219,7 +219,7 @@ number of maximum iterations is fixed. One interesting range of values for **c**
 such that **r=0.7885** and **α ∈ \[0, 2π\]**.
 
 The best possible way to make this analysis is to create an animated visualization as the number **c** changes.
-This [ameliorates our visual perception](https://isquared.digital/blog/2020-02-08-interactive-dataviz/){:target="_blank"} and 
+This [ameliorates our visual perception](https://ilievskiv.github.io/blog/2020-02-08-interactive-dataviz/){:target="_blank"} and 
 understanding of such abstract phenomena in a captivating manner. To do so, we use the Matplotlib's *Animation API*, as
 demonstrated in the code below:
 
