@@ -5,7 +5,7 @@ gem "github-pages", group: :jekyll_plugins
 
 
 group :jekyll_plugins do
-  gem "jekyll-feed", "~> 0.12"
+  gem "jekyll-feed", "~> 0.17"
   gem "jekyll-seo-tag"
   gem "jekyll-sitemap"
   gem "jekyll-paginate"
@@ -27,7 +27,6 @@ end
 gem "wdm", "~> 0.1.1", :install_if => Gem.win_platform?
 
 gem "jekyll-remote-theme"
-gem "faraday", "< 1.0"
 gem "activesupport", ">= 6.0.3.1"
 
 gem "webrick", "~> 1.8"
