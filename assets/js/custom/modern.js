@@ -519,6 +519,74 @@
     setTimeout(typeChar, 700);
   }
 
+  /* ---------- Whoami page terminal title typewriter ----------
+     Drives the `$ whoami` "terminal session" header rendered at the top
+     of `_pages/whoami.html` (`.whoami-terminal`). Mirrors
+     `initHeroBylineTerminal()` so the two terminals feel like one
+     design language: same per-character base delay (120ms), same jitter
+     window ([-30, +90]ms), same +150ms micro-stutter on `i`/`m`. When
+     the word finishes, we add the `is-done` class which kills the
+     caret via the CSS rule in Section 23 of `_modern.scss`.
+     Idempotent (guarded by `data-whoami-init`); honors
+     `prefers-reduced-motion: reduce` by painting the final state
+     immediately. */
+  function initWhoamiTerminal() {
+    var terminal = document.querySelector('.whoami-terminal');
+    if (!terminal || terminal.dataset.whoamiInit === '1') return;
+    terminal.dataset.whoamiInit = '1';
+
+    var typedEl = terminal.querySelector('.whoami-terminal__typed');
+    if (!typedEl) return;
+
+    var word = typedEl.dataset.text || 'whoami';
+
+    var prefersReducedMotion =
+      window.matchMedia &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (prefersReducedMotion) {
+      typedEl.textContent = word;
+      terminal.classList.add('is-done');
+      return;
+    }
+
+    /* Same tunables as the hero pill so both terminals share a cadence. */
+    var CMD_BASE_MS = 120;
+    var CMD_JITTER_MIN = -30;
+    var CMD_JITTER_MAX = 90;
+    var CMD_STUTTER_LETTERS = { i: true, m: true };
+    var CMD_STUTTER_MS = 150;
+
+    /* Local jitter helper — kept self-contained so this function does
+       not depend on internals of `initHeroBylineTerminal()`. Uniform
+       integer in [min, max] inclusive added to base, floored at 0. */
+    var jitter = function (base, min, max) {
+      var delta = min + Math.floor(Math.random() * (max - min + 1));
+      var t = base + delta;
+      return t < 0 ? 0 : t;
+    };
+
+    typedEl.textContent = '';
+
+    var i = 0;
+    var typeChar = function () {
+      if (i < word.length) {
+        var ch = word.charAt(i);
+        typedEl.textContent += ch;
+        i += 1;
+        var delay = jitter(CMD_BASE_MS, CMD_JITTER_MIN, CMD_JITTER_MAX);
+        if (CMD_STUTTER_LETTERS[ch]) delay += CMD_STUTTER_MS;
+        setTimeout(typeChar, delay);
+      } else {
+        terminal.classList.add('is-done');
+      }
+    };
+
+    /* Small lead-in so the page's own first-paint settles before the
+       cursor starts typing — same beat as the hero chip uses. */
+    setTimeout(typeChar, 350);
+  }
+
   function ready(fn) {
     if (document.readyState !== 'loading') fn();
     else document.addEventListener('DOMContentLoaded', fn);
@@ -532,5 +600,6 @@
     initHeaderLinkIcon();
     initBackToTop();
     initHeroBylineTerminal();
+    initWhoamiTerminal();
   });
 })();

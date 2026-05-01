@@ -3,6 +3,7 @@ layout: single
 permalink: /whoami/
 author_profile: true
 title: "$whoami"
+classes: page-whoami
 toc: true
 toc_label: "$whoami"
 toc_icon: "fingerprint"
@@ -10,6 +11,25 @@ toc_sticky: true
 redirect_from:
 - /about/
 ---
+
+{%- comment -%}
+  Terminal-style page title — mirrors the homepage hero pill chip
+  (`.hero-byline`). The upstream `<h1 id="page-title" class="page__title">`
+  rendered by `_layouts/single.html` is visually hidden via the
+  `body.page-whoami .page__title` rule in `_sass/custom/_modern.scss`
+  (Section 23) so screen-reader users, the breadcrumb's `#page-title`
+  anchor target, and SEO all keep working. The visible "header" is the
+  monospace terminal block below; `initWhoamiTerminal()` in
+  `assets/js/custom/modern.js` streams the prompt + `whoami` characters
+  with the same jitter timings as `initHeroBylineTerminal()`.
+{%- endcomment -%}
+<div class="whoami-terminal" aria-hidden="true">
+  <span class="whoami-terminal__line"
+    ><span class="whoami-terminal__prompt">$&nbsp;</span
+    ><span class="whoami-terminal__typed" data-text="whoami"></span
+    ><span class="whoami-terminal__caret">&#9612;</span
+  ></span>
+</div>
 
 {%- comment -%}
   Inline SVG icon library used throughout this page. Defined once with Liquid

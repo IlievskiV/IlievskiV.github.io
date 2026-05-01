@@ -1,4 +1,5 @@
 ---
+
 layout:      single
 title:       "Convergence of T-distribution to Normal Distribution. Visualized!"
 excerpt:     "How the t-distribution approaches the normal distribution as the degrees of freedom increase."
@@ -15,10 +16,11 @@ tags:
 header:
     teaser: "assets/images/student_to_gaussian_convergence_top_image.png"
     image: "assets/images/student_to_gaussian_convergence_top_image.png"
-    og_image: "assets/images/student_to_gaussian_convergence_top_image.png"
+og_image: "assets/images/student_to_gaussian_convergence_top_image.png"
+
 ---
 
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
 
 **Disclaimer**: This visualization guide was in big part written by [ChatGPT](https://openai.com/blog/chatgpt/){:target="_blank"}
 
@@ -30,7 +32,7 @@ normally distributed populations. The *t-distribution* distribution is character
 As this parameter increases, the *t-distribution* converges to the normal distribution.
 
 In this blog post, we will visually demonstrate how the *Student's T-distribution* converges to the *normal distribution* as the degrees of freedom increase. 
-We will use the `matplotlib.animation` module from the [**Matplotlib Animation API**](https://matplotlib.org/stable/api/animation_api.html){:target="_blank"} in **Python**.
+We will use the `matplotlib.animation` module from the **[Matplotlib Animation API](https://matplotlib.org/stable/api/animation_api.html)**{:target="_blank"} in **Python**.
 
 # Student's T-distribution
 
@@ -51,7 +53,6 @@ To demonstrate the convergence of the *Student's T-distribution* to the *normal 
 The `matplotlib.animation` module provides the tools necessary to create animations in Python. In this demonstration, we will create an animation that shows how the 
 *Student's T-distribution* with different degrees of freedom converges to the normal distribution as the degrees of freedom increase.
 
-
 First we import all required dependencies:
 
 {% highlight python linenos %}
@@ -64,28 +65,36 @@ from scipy.stats import norm, t
 Then we define the main logic:
 
 {% highlight python linenos %}
+
 # Creating a figure and axis
+
 fig, ax = plt.subplots()
 
 # Defining the degrees of freedom for the Student's T-distribution
+
 df = np.linspace(1, 30, 30)
 
 # Defining the x-axis values
+
 x = np.linspace(-4, 4, 100)
 
 # Set the labels
+
 ax.set_xlabel("$x$", fontsize=16)
 ax.set_ylabel("$P(x)$", fontsize=16)
 
 # Creating a line object
-line1, = ax.plot(x, t.pdf(x, df[0]), linestyle='-', lw=2, color="#960019", label="Student\'s T-distribution")
+
+line1, = ax.plot(x, t.pdf(x, df[0]), linestyle='-', lw=2, color="#960019", label="Students T-distribution")
 line2, = ax.plot(x, norm.pdf(x), linestyle='--', lw=2, color="#2CBDFE", label='Normal Distribution')
 
 # Setting the axis limits
+
 ax.set_xlim(-4, 4)
 ax.set_ylim(0, 0.5)
 
 # Defining the update function for the animation
+
 def update(num):
     line1.set_data(x, t.pdf(x, df[num]))
     ax.set_title('Degrees of Freedom: {}'.format(df[num]))
@@ -93,6 +102,7 @@ def update(num):
     return line1, line2,
 
 # Creating the animation object
+
 ani = FuncAnimation(fig, update, frames=range(0, 30), repeat=True)
 ani.save("student_to_gaussian_animation.gif", writer="pillow")
 {% endhighlight %}
@@ -103,26 +113,21 @@ The `FuncAnimation` class is used to update the plot on each frame with a new se
 
 The resulting visualization is shown below:
 
-<center>
-    <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/student_to_gaussian_animation.gif" class="lazyload" alt="Animated Visualization of the Convergence of the Student's T-distribution to normal distribution">
-    <br/>
-    <span class="caption text-muted">
-        <i>Animation: </i> Convergence of the Student's T-distribution to normal distribution
-    </span>
-</center>
-<br/>
+  
+ *Animation:* Convergence of the Student's T-distribution to normal distribution   
 
 
 The source code for this work can be found in this
-<a href="https://github.com/IlievskiV/Amusive-Blogging-N-Coding/blob/master/Visualizations/student_to_gaussian_convergence.ipynb" target="_blank" rel="dofollow noopener">Jupyter Notebook</a>.
+[Jupyter Notebook](https://github.com/IlievskiV/Amusive-Blogging-N-Coding/blob/master/Visualizations/student_to_gaussian_convergence.ipynb).
 It would be very helpful to star the repo to get more easily noticed. For more information, please follow me on
-<a href="https://www.linkedin.com/in/vilievski/" target="_blank" rel="noopener"><b>LinkedIn</b></a>
-or <a href="https://x.com/VladOsaurus" target="_blank" rel="noopener"><b>Twitter</b></a>.
+**[LinkedIn](https://www.linkedin.com/in/vilievski/)**
+or **[Twitter](https://x.com/VladOsaurus)**.
 
 If you like this content you can subscribe to the mailing list below to get similar updates from time to time.
 
 {% include newsletter.html %}
-<br/>
+  
+
 
 # Interesting fact about the Student's T-distribution
 
