@@ -6,7 +6,7 @@ main:
     url: /visualizations/
   - title: "Geeky Coffee Break ☕️"
     url: /tips/
-  - title: "Get in Touch 📬"
-    url: /contactme/
   - title: "$whoami 🪪"
     url: /whoami/
+  - title: "Get in Touch 📬"
+    url: /contactme/

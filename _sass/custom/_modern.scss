@@ -1,0 +1,3033 @@
+/* =============================================================================
+   iSquared — Modern Remodel
+   Layered on top of Minimal Mistakes via a single override partial.
+   Uses CSS custom properties so every component reacts to light / dark mode.
+   ============================================================================= */
+
+/* -----------------------------------------------------------------------------
+   1. Design tokens
+   -------------------------------------------------------------------------- */
+:root {
+  /* Type */
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif;
+  --font-display: "Space Grotesk", "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas,
+    monospace;
+
+  /* Radii & shadows */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+
+  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06),
+    0 1px 3px rgba(15, 23, 42, 0.04);
+  --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.08),
+    0 2px 4px rgba(15, 23, 42, 0.04);
+  --shadow-lg: 0 20px 40px -12px rgba(15, 23, 42, 0.18),
+    0 8px 16px -8px rgba(15, 23, 42, 0.08);
+  --shadow-glow: 0 0 0 1px rgba(99, 102, 241, 0.18),
+    0 12px 32px -8px rgba(99, 102, 241, 0.35);
+
+  /* Motion */
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --t-fast: 0.15s;
+  --t-base: 0.25s;
+  --t-slow: 0.45s;
+
+  /* Layout */
+  --container-max: 1200px;
+  --content-max: 760px;
+  --nav-height: 68px;
+}
+
+/* Light theme tokens (default) */
+:root,
+[data-theme="light"] {
+  --bg: #fbfbfd;
+  --bg-elev: #ffffff;
+  --bg-soft: #f3f4f8;
+  --bg-muted: #eef0f6;
+  --surface: rgba(255, 255, 255, 0.72);
+  --surface-strong: rgba(255, 255, 255, 0.92);
+
+  --text: #0f172a;
+  --text-muted: #4b5563;
+  --text-subtle: #6b7280;
+  --text-inverse: #ffffff;
+
+  --border: rgba(15, 23, 42, 0.08);
+  --border-strong: rgba(15, 23, 42, 0.14);
+
+  --accent: #6366f1;
+  --accent-strong: #4f46e5;
+  --accent-soft: rgba(99, 102, 241, 0.12);
+  --accent-2: #ec4899;
+  --accent-3: #06b6d4;
+
+  --code-bg: #f6f7fb;
+  --code-text: #0f172a;
+  --code-border: rgba(15, 23, 42, 0.08);
+
+  --grad-hero: radial-gradient(
+      1200px 600px at 10% -10%,
+      rgba(99, 102, 241, 0.25),
+      transparent 60%
+    ),
+    radial-gradient(
+      900px 500px at 90% 10%,
+      rgba(236, 72, 153, 0.2),
+      transparent 60%
+    ),
+    radial-gradient(
+      700px 500px at 50% 110%,
+      rgba(6, 182, 212, 0.2),
+      transparent 60%
+    );
+}
+
+/* Dark theme tokens */
+[data-theme="dark"] {
+  --bg: #0b1020;
+  --bg-elev: #111733;
+  --bg-soft: #141a36;
+  --bg-muted: #1a2147;
+  --surface: rgba(17, 23, 51, 0.65);
+  --surface-strong: rgba(17, 23, 51, 0.9);
+
+  --text: #e7ecf5;
+  --text-muted: #b0b7c9;
+  --text-subtle: #8a93ab;
+  --text-inverse: #0b1020;
+
+  --border: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.14);
+
+  --accent: #818cf8;
+  --accent-strong: #a5b4fc;
+  --accent-soft: rgba(129, 140, 248, 0.16);
+  --accent-2: #f472b6;
+  --accent-3: #22d3ee;
+
+  --code-bg: #0d1230;
+  --code-text: #e7ecf5;
+  --code-border: rgba(255, 255, 255, 0.08);
+
+  --grad-hero: radial-gradient(
+      1200px 600px at 10% -10%,
+      rgba(129, 140, 248, 0.35),
+      transparent 60%
+    ),
+    radial-gradient(
+      900px 500px at 90% 10%,
+      rgba(244, 114, 182, 0.28),
+      transparent 60%
+    ),
+    radial-gradient(
+      700px 500px at 50% 110%,
+      rgba(34, 211, 238, 0.22),
+      transparent 60%
+    );
+}
+
+/* Smooth transition between themes */
+html {
+  color-scheme: light dark;
+}
+html[data-theme="dark"] {
+  color-scheme: dark;
+}
+body,
+.masthead,
+.page__footer,
+.archive__item,
+.feature__wrapper,
+.author__avatar,
+.author__content,
+.author__urls {
+  transition: background-color var(--t-base) var(--ease),
+    color var(--t-base) var(--ease), border-color var(--t-base) var(--ease);
+}
+
+/* -----------------------------------------------------------------------------
+   2. Base — body, typography, scrollbars, links, selection
+   -------------------------------------------------------------------------- */
+html,
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+body {
+  font-family: var(--font-sans) !important;
+  font-feature-settings: "ss01", "cv11", "kern";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  line-height: 1.65;
+}
+
+::selection {
+  background: var(--accent-soft);
+  color: var(--text);
+}
+
+/* Custom scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
+}
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 999px;
+  border: 2px solid var(--bg);
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+/* Headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.page__title,
+.archive__item-title,
+.page__hero--overlay .page__title {
+  font-family: var(--font-display) !important;
+  color: var(--text);
+  letter-spacing: -0.02em;
+  font-weight: 700;
+}
+
+h1 {
+  font-size: #{"clamp(2rem, 1.4rem + 2.4vw, 3.25rem)"};
+  line-height: 1.1;
+}
+h2 {
+  font-size: #{"clamp(1.5rem, 1.1rem + 1.4vw, 2.25rem)"};
+  line-height: 1.18;
+  margin-top: 2.25em;
+}
+h3 {
+  font-size: #{"clamp(1.2rem, 1rem + 0.8vw, 1.5rem)"};
+  line-height: 1.25;
+}
+
+p,
+li {
+  color: var(--text);
+}
+
+/* Links */
+a,
+.page__content a {
+  color: var(--accent-strong);
+  text-decoration: none;
+  background-image: linear-gradient(var(--accent), var(--accent));
+  background-size: 0% 1.5px;
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  transition: background-size var(--t-base) var(--ease),
+    color var(--t-fast) var(--ease);
+}
+a:hover,
+.page__content a:hover {
+  color: var(--accent);
+  background-size: 100% 1.5px;
+}
+
+/* Inline code & pre */
+code,
+kbd,
+samp {
+  font-family: var(--font-mono) !important;
+  font-size: 0.9em;
+  background: var(--code-bg);
+  color: var(--code-text);
+  border: 1px solid var(--code-border);
+  border-radius: 6px;
+  padding: 0.12em 0.4em;
+}
+pre,
+div.highlighter-rouge,
+figure.highlight {
+  background: var(--code-bg) !important;
+  border: 1px solid var(--code-border) !important;
+  border-radius: var(--radius-md) !important;
+  box-shadow: var(--shadow-sm);
+}
+pre code,
+.highlight code {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: var(--code-text);
+}
+
+/* Horizontal rule */
+hr {
+  border: 0;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--border-strong),
+    transparent
+  );
+  margin: 2.5rem 0;
+}
+
+/* Tables */
+table {
+  background: var(--bg-elev);
+  border-color: var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+thead {
+  background: var(--bg-soft);
+}
+th,
+td {
+  border-color: var(--border) !important;
+}
+
+/* Blockquote */
+blockquote {
+  border-left: 4px solid var(--accent);
+  background: var(--bg-soft);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  padding: 1rem 1.25rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* Notices (info / warning / etc.) */
+.notice,
+.notice--primary,
+.notice--info,
+.notice--warning,
+.notice--success,
+.notice--danger {
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--bg-soft);
+  color: var(--text);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* -----------------------------------------------------------------------------
+   3. Masthead — sticky, glass, dark-mode toggle, refined nav
+   -------------------------------------------------------------------------- */
+.masthead {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--surface) !important;
+  -webkit-backdrop-filter: saturate(180%) blur(14px);
+  backdrop-filter: saturate(180%) blur(14px);
+  border-bottom: 1px solid var(--border) !important;
+  box-shadow: 0 1px 0 var(--border);
+  transition: box-shadow var(--t-base) var(--ease),
+    background-color var(--t-base) var(--ease);
+}
+.masthead.is-scrolled {
+  box-shadow: 0 6px 24px -12px rgba(15, 23, 42, 0.18),
+    0 1px 0 var(--border);
+}
+
+.masthead__inner-wrap {
+  /* Slightly wider than the global content container so all 5 nav links,
+     the highlighted CTA, search/theme buttons, and the site title/logo
+     fit comfortably on common 1280–1440px laptop widths without being
+     pushed into the greedy-nav overflow menu. */
+  max-width: 1320px;
+  padding: 0.5rem 1rem;
+}
+
+.greedy-nav {
+  background: transparent !important;
+  min-height: var(--nav-height);
+  align-items: center;
+  gap: 0.15rem;
+}
+
+.greedy-nav .site-logo {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 0.55rem;
+  background-image: none;
+}
+.greedy-nav .site-logo img {
+  height: 30px;
+  width: 30px;
+  object-fit: contain;
+  border-radius: 7px;
+  background: var(--bg-soft);
+  padding: 3px;
+  border: 1px solid var(--border);
+  transition: transform var(--t-fast) var(--ease);
+}
+.greedy-nav .site-logo:hover img {
+  transform: scale(1.06) rotate(-2deg);
+}
+
+.greedy-nav .site-title {
+  font-family: var(--font-display) !important;
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--text) !important;
+  letter-spacing: -0.01em;
+  display: inline-flex;
+  align-items: center;
+  background-image: none;
+}
+.greedy-nav .site-subtitle {
+  display: none;
+}
+
+.greedy-nav a {
+  color: var(--text-muted) !important;
+  font-weight: 500;
+  font-size: 0.88rem;
+  padding: 0.4rem 0.75rem !important;
+  border-radius: 999px;
+  background-image: none;
+  transition: color var(--t-fast) var(--ease),
+    background-color var(--t-fast) var(--ease);
+}
+.greedy-nav a:hover {
+  color: var(--text) !important;
+  background-color: var(--bg-soft) !important;
+}
+
+.greedy-nav .visible-links a:before {
+  display: none !important;
+}
+
+/* Search button */
+.greedy-nav button.search__toggle,
+.greedy-nav .search__toggle {
+  color: var(--text-muted);
+  background: transparent;
+  border-radius: 999px;
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 0.35rem;
+  transition: background-color var(--t-fast) var(--ease),
+    color var(--t-fast) var(--ease);
+}
+.greedy-nav button.search__toggle:hover {
+  background: var(--bg-soft);
+  color: var(--text);
+}
+
+.greedy-nav__toggle {
+  color: var(--text);
+  background: transparent;
+  border-radius: 999px;
+}
+
+/* Theme toggle button (injected via JS into masthead) */
+.theme-toggle {
+  appearance: none;
+  border: 1px solid var(--border);
+  background: var(--bg-elev);
+  color: var(--text);
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-left: 0.35rem;
+  transition: transform var(--t-fast) var(--ease),
+    background-color var(--t-fast) var(--ease),
+    border-color var(--t-fast) var(--ease);
+}
+.theme-toggle:hover {
+  transform: rotate(-12deg);
+  background: var(--bg-soft);
+  border-color: var(--border-strong);
+}
+.theme-toggle svg {
+  width: 16px;
+  height: 16px;
+}
+.theme-toggle .icon-moon {
+  display: none;
+}
+[data-theme="dark"] .theme-toggle .icon-moon {
+  display: block;
+}
+[data-theme="dark"] .theme-toggle .icon-sun {
+  display: none;
+}
+
+/* Search overlay */
+.initial-content + .search-content,
+.search-content {
+  background: var(--surface-strong) !important;
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  color: var(--text);
+}
+.search-content input.search-input {
+  color: var(--text) !important;
+  border-bottom-color: var(--border-strong) !important;
+}
+
+/* -----------------------------------------------------------------------------
+   4. Hero (homepage splash + collection page header)
+   -------------------------------------------------------------------------- */
+.page__hero,
+.page__hero--overlay {
+  position: relative;
+  border-radius: 0;
+  padding: #{"clamp(4rem, 8vw, 8rem)"} 0 #{"clamp(3rem, 6vw, 6rem)"} !important;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+}
+
+.page__hero--overlay {
+  background-color: var(--bg) !important;
+  color: var(--text-inverse);
+}
+
+/* Animated gradient overlay layered above the hero image */
+.page__hero--overlay::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--grad-hero);
+  pointer-events: none;
+  animation: heroPulse 14s ease-in-out infinite alternate;
+}
+.page__hero--overlay::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(11, 16, 32, 0.35),
+    rgba(11, 16, 32, 0.55)
+  );
+  pointer-events: none;
+}
+[data-theme="light"] .page__hero--overlay::after {
+  background: linear-gradient(
+    to bottom,
+    rgba(15, 23, 42, 0.45),
+    rgba(15, 23, 42, 0.65)
+  );
+}
+
+@keyframes heroPulse {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  100% {
+    transform: translate3d(0, -2%, 0) scale(1.05);
+  }
+}
+
+.page__hero--overlay .wrapper {
+  position: relative;
+  z-index: 2;
+  max-width: var(--container-max);
+  padding: 0 1.5rem;
+}
+
+.page__hero--overlay .page__title {
+  font-family: var(--font-display) !important;
+  font-size: #{"clamp(2.4rem, 1.8rem + 3vw, 4.5rem)"} !important;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  background: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    rgba(255, 255, 255, 0.85) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1rem;
+  text-shadow: none;
+}
+
+.page__hero--overlay .page__lead {
+  font-size: #{"clamp(1rem, 0.95rem + 0.4vw, 1.25rem)"};
+  color: rgba(255, 255, 255, 0.92);
+  max-width: 680px;
+  font-weight: 400;
+  line-height: 1.55;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.25);
+}
+
+.page__hero--overlay .page__meta {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.page__hero-caption {
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(6px);
+  border-radius: 999px;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+}
+
+/* Hero CTAs */
+.page__hero--overlay .btn {
+  margin: 0.4rem 0.4rem 0.4rem 0;
+}
+
+/* -----------------------------------------------------------------------------
+   5. Buttons — modern pill style
+   -------------------------------------------------------------------------- */
+/* All button rules use !important on background/border/color so they win against
+   the theme's `.page__content .btn` selectors without specificity gymnastics. */
+.btn {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.65rem 1.1rem !important;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 0.92rem;
+  border-radius: 999px !important;
+  border: 1px solid transparent !important;
+  background: var(--bg-elev) !important;
+  color: var(--text) !important;
+  text-decoration: none;
+  background-image: none;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--t-fast) var(--ease),
+    box-shadow var(--t-fast) var(--ease),
+    background-color var(--t-fast) var(--ease),
+    color var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease);
+  line-height: 1.2;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+  background-image: none;
+}
+
+.btn--info,
+.btn--primary {
+  background: linear-gradient(
+    135deg,
+    var(--accent),
+    var(--accent-strong)
+  ) !important;
+  color: #fff !important;
+  border-color: transparent !important;
+  box-shadow: 0 8px 24px -8px rgba(99, 102, 241, 0.55);
+}
+.btn--info:hover,
+.btn--primary:hover {
+  filter: brightness(1.05);
+  box-shadow: 0 12px 28px -8px rgba(99, 102, 241, 0.65);
+  color: #fff !important;
+}
+
+.btn--inverse {
+  background: var(--bg-elev) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--border-strong) !important;
+}
+.btn--inverse:hover {
+  background: var(--bg-soft) !important;
+}
+
+.btn--success {
+  background: linear-gradient(135deg, #10b981, #059669) !important;
+  color: #fff !important;
+  border-color: transparent !important;
+}
+.btn--warning {
+  background: linear-gradient(135deg, #f59e0b, #d97706) !important;
+  color: #fff !important;
+  border-color: transparent !important;
+}
+.btn--danger {
+  background: linear-gradient(135deg, #ef4444, #dc2626) !important;
+  color: #fff !important;
+  border-color: transparent !important;
+}
+
+.btn--light-outline {
+  color: #fff !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(255, 255, 255, 0.4) !important;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+.btn--light-outline:hover {
+  background: rgba(255, 255, 255, 0.18) !important;
+  border-color: rgba(255, 255, 255, 0.6) !important;
+}
+
+.btn--large {
+  padding: 0.85rem 1.4rem !important;
+  font-size: 1rem;
+}
+
+/* -----------------------------------------------------------------------------
+   6. Cards — feature_row & archive grid
+   -------------------------------------------------------------------------- */
+.feature__wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  /* Fluid gap: ~2rem on small screens, scales up to 2.5rem on wide viewports. */
+  gap: #{"clamp(2rem, 1.5rem + 1.5vw, 2.5rem)"} !important;
+  border-bottom: 0;
+  padding-bottom: 0;
+  margin: 1.5rem 0 2.5rem;
+}
+
+.feature__item {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  float: none;
+  display: flex;
+}
+
+.feature__item .archive__item {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  width: 100%;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--t-base) var(--ease),
+    box-shadow var(--t-base) var(--ease),
+    border-color var(--t-base) var(--ease);
+}
+
+.feature__item .archive__item:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--border-strong);
+}
+
+.feature__item .archive__item-teaser {
+  border-radius: 0;
+  margin: 0;
+  background: var(--bg-soft);
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+.feature__item .archive__item-teaser img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s var(--ease);
+}
+.feature__item .archive__item:hover .archive__item-teaser img {
+  transform: scale(1.05);
+}
+
+.feature__item .archive__item-body {
+  padding: 1.25rem 1.4rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.feature__item .archive__item-title {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  line-height: 1.3;
+  margin: 0 0 0.6rem;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+
+.feature__item .archive__item-excerpt {
+  color: var(--text-muted);
+  font-size: 0.94rem;
+  line-height: 1.55;
+  flex: 1;
+}
+
+.feature__item .archive__item-excerpt + p {
+  margin-top: 1rem;
+  margin-bottom: 0;
+}
+
+/* "left" / "right" feature variants — collapse to grid for consistency */
+.feature__item--left,
+.feature__item--right,
+.feature__item--center {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  float: none;
+  clear: none;
+}
+.feature__item--left .archive__item,
+.feature__item--right .archive__item,
+.feature__item--center .archive__item {
+  display: flex;
+  flex-direction: column;
+}
+.feature__item--left .archive__item-teaser,
+.feature__item--right .archive__item-teaser,
+.feature__item--center .archive__item-teaser {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  border-radius: 0;
+}
+.feature__item--left .archive__item-body,
+.feature__item--right .archive__item-body,
+.feature__item--center .archive__item-body {
+  width: 100%;
+  padding: 1.25rem 1.4rem 1.4rem;
+}
+
+/* Archive (collection list) cards — blog/, visualizations/, tips/ */
+.archive {
+  margin-top: 1.5rem;
+}
+
+.grid__wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  /* Match `.feature__wrapper` so blog/visualizations/tips listings breathe equally. */
+  gap: #{"clamp(2rem, 1.5rem + 1.5vw, 2.5rem)"} !important;
+}
+
+.grid__item {
+  margin: 0;
+  width: 100%;
+  float: none;
+}
+
+.grid__item .archive__item {
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--t-base) var(--ease),
+    box-shadow var(--t-base) var(--ease),
+    border-color var(--t-base) var(--ease);
+}
+.grid__item .archive__item:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--border-strong);
+}
+
+.grid__item .archive__item-teaser {
+  background: var(--bg-soft);
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 0;
+  margin: 0;
+}
+.grid__item .archive__item-teaser img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--ease);
+}
+.grid__item .archive__item:hover .archive__item-teaser img {
+  transform: scale(1.05);
+}
+
+.grid__item .archive__item-body {
+  padding: 1.25rem 1.4rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  flex: 1;
+}
+
+.grid__item .archive__item-title {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  line-height: 1.3;
+  margin: 0;
+}
+.grid__item .archive__item-title a {
+  color: var(--text);
+  background-image: none;
+}
+.grid__item .archive__item-title a:hover {
+  color: var(--accent);
+}
+
+.grid__item .archive__item-excerpt {
+  color: var(--text-muted);
+  font-size: 0.92rem;
+}
+
+.archive__item-caption {
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 999px;
+  padding: 0.15rem 0.6rem;
+  font-size: 0.7rem;
+}
+
+/* -----------------------------------------------------------------------------
+   7. Single post layout — sidebar, content, TOC, related
+   -------------------------------------------------------------------------- */
+.layout--single .page,
+.page {
+  padding-top: 1rem;
+}
+
+.page__inner-wrap {
+  max-width: var(--container-max);
+  margin: 0 auto;
+}
+
+.page__content {
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: var(--text);
+}
+
+.page__content figure {
+  background: var(--bg-soft);
+  border-radius: var(--radius-md);
+  padding: 0.5rem;
+  border: 1px solid var(--border);
+}
+.page__content figure img {
+  border-radius: var(--radius-sm);
+}
+.page__content figcaption {
+  color: var(--text-subtle);
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+/* Page meta (date, read time, etc.) */
+.page__meta,
+.page__date {
+  color: var(--text-subtle);
+  font-size: 0.85rem;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+/* Tags & categories chips */
+.page__taxonomy .page__taxonomy-item,
+.page__taxonomy a {
+  background: var(--accent-soft);
+  color: var(--accent-strong) !important;
+  border: 0;
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  background-image: none;
+  margin-right: 0.4rem;
+  text-transform: none;
+}
+.page__taxonomy a:hover {
+  background: var(--accent);
+  color: #fff !important;
+}
+
+/* TOC */
+.toc {
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+.toc .nav__title {
+  background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+  color: #fff;
+  font-family: var(--font-display);
+  letter-spacing: -0.01em;
+  border-radius: 0;
+}
+.toc__menu a {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  background-image: none;
+  border-bottom-color: var(--border) !important;
+  transition: color var(--t-fast) var(--ease),
+    background-color var(--t-fast) var(--ease);
+}
+.toc__menu a:hover,
+.toc__menu .active a {
+  color: var(--accent) !important;
+  background: var(--accent-soft) !important;
+}
+
+/* Sidebar / Author profile */
+.sidebar {
+  font-size: 0.95rem;
+}
+.sidebar .author__avatar img {
+  border-radius: 50% !important;
+  border: 3px solid var(--border) !important;
+  max-width: 120px;
+  box-shadow: var(--shadow-md);
+  transition: transform var(--t-base) var(--ease);
+}
+.sidebar .author__avatar img:hover {
+  transform: scale(1.04);
+}
+.author__name {
+  font-family: var(--font-display);
+  color: var(--text);
+}
+.author__bio {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+/* Hide the legacy theme "Follow" pill — we render our own label below. */
+.author__urls-wrapper > button,
+.author__urls-wrapper button.btn,
+.author__urls-wrapper .btn--inverse {
+  display: none !important;
+}
+
+/* Reset the theme's absolute-positioned urls container; we use our own list. */
+.author__urls,
+.author__urls-wrapper .author__urls {
+  position: static !important;
+  display: block !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+/* Location line — sits directly under the bio with a subtle map-pin. */
+.author__location {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.4rem;
+  color: var(--text-subtle);
+  font-size: 0.85rem;
+  line-height: 1.3;
+}
+.author__location i,
+.author__location svg {
+  font-size: 0.9rem;
+  color: var(--text-subtle);
+  fill: currentColor;
+  flex-shrink: 0;
+}
+
+/* "Follow me" label — small, uppercase, tracked. */
+.author__follow-label {
+  margin: 1rem 0 0.5rem;
+  color: var(--text-subtle);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* Horizontal row of circular icon-only social buttons. */
+.author__socials {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.author__socials li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.author__socials li::before {
+  display: none;
+}
+.author__social {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  color: var(--text-muted) !important;
+  background-image: none;
+  text-decoration: none;
+  font-size: 0.95rem;
+  line-height: 1;
+  box-shadow: none;
+  transition: transform var(--t-fast) var(--ease),
+    background var(--t-fast) var(--ease),
+    border-color var(--t-fast) var(--ease),
+    color var(--t-fast) var(--ease),
+    box-shadow var(--t-fast) var(--ease);
+}
+.author__social:hover,
+.author__social:focus-visible {
+  background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+  border-color: transparent;
+  color: #fff !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px -8px rgba(99, 102, 241, 0.55);
+  outline: none;
+}
+/* Inline-SVG brand icons (Simple Icons paths, emitted by `_includes/author-profile.html`).
+   Fixed pixel size — no Font Awesome kit dependency. `fill: currentColor` makes the
+   icon inherit `.author__social`'s color in both the resting and hover states. */
+.author__social svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+  color: inherit;
+  display: block;
+  flex-shrink: 0;
+}
+/* Defensive: kept in case anything still emits an <i> for this slot. */
+.author__social i {
+  font-size: 1rem;
+  line-height: 1;
+  color: inherit;
+}
+/* Hide the visible text label — accessible name comes from aria-label/title. */
+.author__social-label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Pagination */
+.pagination,
+.pagination--pager {
+  margin-top: 2rem;
+}
+.pagination li a,
+.pagination--pager {
+  border-radius: 999px !important;
+  border: 1px solid var(--border) !important;
+  background: var(--bg-elev) !important;
+  color: var(--text) !important;
+  background-image: none;
+  transition: all var(--t-fast) var(--ease);
+}
+.pagination li a:hover,
+.pagination--pager:hover {
+  background: var(--bg-soft) !important;
+  border-color: var(--border-strong) !important;
+  color: var(--accent) !important;
+}
+.pagination li .current {
+  background: linear-gradient(
+    135deg,
+    var(--accent),
+    var(--accent-strong)
+  ) !important;
+  color: #fff !important;
+  border: 0 !important;
+}
+
+/* Related & comments */
+.page__related-title,
+.page__share-title {
+  font-family: var(--font-display);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.5rem;
+  color: var(--text);
+}
+
+/* -----------------------------------------------------------------------------
+   8. Forms (newsletter, contact, search)
+   -------------------------------------------------------------------------- */
+input[type="text"],
+input[type="email"],
+input[type="search"],
+textarea,
+.form-control {
+  background: var(--bg-elev) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--border-strong) !important;
+  border-radius: var(--radius-md) !important;
+  padding: 0.75rem 1rem !important;
+  font-family: var(--font-sans) !important;
+  font-size: 0.95rem !important;
+  width: 100%;
+  transition: border-color var(--t-fast) var(--ease),
+    box-shadow var(--t-fast) var(--ease);
+  box-shadow: none;
+}
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="search"]:focus,
+textarea:focus,
+.form-control:focus {
+  outline: none;
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 4px var(--accent-soft);
+}
+
+label {
+  color: var(--text);
+  font-weight: 500;
+  margin-bottom: 0.4rem;
+  display: block;
+}
+
+button[type="submit"],
+input[type="submit"],
+.button {
+  background: linear-gradient(
+    135deg,
+    var(--accent),
+    var(--accent-strong)
+  ) !important;
+  color: #fff !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  padding: 0.75rem 1.4rem !important;
+  font-weight: 600 !important;
+  font-family: var(--font-sans) !important;
+  cursor: pointer;
+  box-shadow: 0 8px 24px -8px rgba(99, 102, 241, 0.55) !important;
+  transition: transform var(--t-fast) var(--ease),
+    box-shadow var(--t-fast) var(--ease);
+}
+button[type="submit"]:hover,
+input[type="submit"]:hover,
+.button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 28px -8px rgba(99, 102, 241, 0.65) !important;
+}
+
+/* =============================================================================
+   Newsletter (iss-newsletter)
+   Self-contained block. All rules use very high specificity (id + class + class)
+   plus !important so the global `input` / `.button` rules cannot reach in.
+   ============================================================================= */
+section.iss-newsletter,
+#mc_embed_signup.iss-newsletter {
+  background: var(--bg-elev) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-lg) !important;
+  box-shadow: var(--shadow-sm) !important;
+  padding: 1.75rem 1.5rem !important;
+  margin: 2rem auto !important;
+  width: 100% !important;
+  max-width: 520px !important;
+  text-align: center !important;
+  font-family: var(--font-sans) !important;
+  position: relative !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+  clear: both !important;
+}
+section.iss-newsletter::before,
+#mc_embed_signup.iss-newsletter::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    560px 240px at 100% 0%,
+    var(--accent-soft),
+    transparent 60%
+  );
+  pointer-events: none;
+}
+section.iss-newsletter .iss-newsletter__inner,
+#mc_embed_signup.iss-newsletter .iss-newsletter__inner {
+  position: relative;
+  z-index: 1;
+}
+section.iss-newsletter .iss-newsletter__title,
+#mc_embed_signup.iss-newsletter .iss-newsletter__title {
+  font-family: var(--font-display) !important;
+  font-weight: 700 !important;
+  font-size: 1.25rem !important;
+  color: var(--text) !important;
+  letter-spacing: -0.01em !important;
+  margin: 0 0 0.4rem !important;
+  line-height: 1.2 !important;
+}
+section.iss-newsletter .iss-newsletter__hint,
+#mc_embed_signup.iss-newsletter .iss-newsletter__hint {
+  color: var(--text-muted) !important;
+  font-size: 0.9rem !important;
+  line-height: 1.5 !important;
+  margin: 0 auto 1.25rem !important;
+  max-width: 380px !important;
+}
+section.iss-newsletter .iss-newsletter__form,
+#mc_embed_signup.iss-newsletter .iss-newsletter__form {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 0.5rem !important;
+  align-items: stretch !important;
+  justify-content: center !important;
+  margin: 0 auto !important;
+  max-width: 440px !important;
+}
+section.iss-newsletter .iss-newsletter__sr,
+#mc_embed_signup.iss-newsletter .iss-newsletter__sr {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+}
+
+/* Email input — bulletproof override */
+section.iss-newsletter input.iss-newsletter__input,
+#mc_embed_signup.iss-newsletter input.iss-newsletter__input,
+section.iss-newsletter input[type="email"].iss-newsletter__input,
+#mc_embed_signup.iss-newsletter input[type="email"].iss-newsletter__input {
+  flex: 1 1 200px !important;
+  min-width: 0 !important;
+  width: auto !important;
+  height: 46px !important;
+  padding: 0 0.95rem !important;
+  background: var(--bg) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--border-strong) !important;
+  border-radius: 12px !important;
+  font-family: var(--font-sans) !important;
+  font-size: 0.95rem !important;
+  font-weight: 400 !important;
+  line-height: 46px !important;
+  box-shadow: none !important;
+  outline: none !important;
+  margin: 0 !important;
+  text-align: left !important;
+  -webkit-appearance: none !important;
+          appearance: none !important;
+  transition: border-color var(--t-fast) var(--ease),
+    box-shadow var(--t-fast) var(--ease);
+}
+section.iss-newsletter input.iss-newsletter__input::placeholder,
+#mc_embed_signup.iss-newsletter input.iss-newsletter__input::placeholder {
+  color: var(--text-subtle) !important;
+  opacity: 1 !important;
+}
+section.iss-newsletter input.iss-newsletter__input:focus,
+#mc_embed_signup.iss-newsletter input.iss-newsletter__input:focus {
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 4px var(--accent-soft) !important;
+}
+
+/* Submit button — bulletproof override */
+section.iss-newsletter button.iss-newsletter__btn,
+#mc_embed_signup.iss-newsletter button.iss-newsletter__btn,
+section.iss-newsletter input[type="submit"].iss-newsletter__btn,
+#mc_embed_signup.iss-newsletter input[type="submit"].iss-newsletter__btn {
+  flex: 0 0 auto !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 46px !important;
+  min-width: 130px !important;
+  width: auto !important;
+  padding: 0 1.4rem !important;
+  background: linear-gradient(
+    135deg,
+    var(--accent),
+    var(--accent-strong)
+  ) !important;
+  color: #ffffff !important;
+  border: 0 !important;
+  border-radius: 12px !important;
+  font-family: var(--font-sans) !important;
+  font-size: 0.95rem !important;
+  font-weight: 600 !important;
+  line-height: 1 !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+  white-space: nowrap !important;
+  cursor: pointer !important;
+  margin: 0 !important;
+  -webkit-appearance: none !important;
+          appearance: none !important;
+  box-shadow: 0 8px 22px -8px rgba(99, 102, 241, 0.55) !important;
+  transition: transform var(--t-fast) var(--ease),
+    box-shadow var(--t-fast) var(--ease), filter var(--t-fast) var(--ease);
+  text-shadow: none !important;
+}
+section.iss-newsletter button.iss-newsletter__btn:hover,
+#mc_embed_signup.iss-newsletter button.iss-newsletter__btn:hover {
+  filter: brightness(1.06);
+  transform: translateY(-1px);
+  box-shadow: 0 12px 28px -8px rgba(99, 102, 241, 0.65) !important;
+}
+section.iss-newsletter button.iss-newsletter__btn:active,
+#mc_embed_signup.iss-newsletter button.iss-newsletter__btn:active {
+  transform: translateY(0);
+}
+
+/* Stack on small screens */
+@media (max-width: 480px) {
+  section.iss-newsletter .iss-newsletter__form,
+  #mc_embed_signup.iss-newsletter .iss-newsletter__form {
+    flex-direction: column !important;
+  }
+  section.iss-newsletter button.iss-newsletter__btn,
+  #mc_embed_signup.iss-newsletter button.iss-newsletter__btn {
+    width: 100% !important;
+  }
+}
+
+/* Sidebar variant — narrow column on /blog/, /visualizations/, single posts.
+   Always stacks vertically, smaller paddings, smaller type. */
+section.iss-newsletter--sidebar,
+#mc_embed_signup.iss-newsletter--sidebar {
+  max-width: 100% !important;
+  margin: 1.5rem 0 !important;
+  padding: 1.1rem 1rem !important;
+  text-align: left !important;
+  border-radius: var(--radius-md) !important;
+}
+section.iss-newsletter--sidebar .iss-newsletter__title,
+#mc_embed_signup.iss-newsletter--sidebar .iss-newsletter__title {
+  font-size: 1.05rem !important;
+  margin: 0 0 0.3rem !important;
+}
+section.iss-newsletter--sidebar .iss-newsletter__hint,
+#mc_embed_signup.iss-newsletter--sidebar .iss-newsletter__hint {
+  font-size: 0.82rem !important;
+  margin: 0 0 0.85rem !important;
+  max-width: none !important;
+  text-align: left !important;
+}
+section.iss-newsletter--sidebar .iss-newsletter__form,
+#mc_embed_signup.iss-newsletter--sidebar .iss-newsletter__form {
+  flex-direction: column !important;
+  align-items: stretch !important;
+  justify-content: flex-start !important;
+  gap: 0.45rem !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+}
+section.iss-newsletter--sidebar input.iss-newsletter__input,
+#mc_embed_signup.iss-newsletter--sidebar input.iss-newsletter__input,
+section.iss-newsletter--sidebar input[type="email"].iss-newsletter__input,
+#mc_embed_signup.iss-newsletter--sidebar input[type="email"].iss-newsletter__input {
+  flex: 0 0 auto !important;
+  width: 100% !important;
+  height: 42px !important;
+  line-height: 42px !important;
+  padding: 0 0.8rem !important;
+  font-size: 0.88rem !important;
+  border-radius: 10px !important;
+}
+section.iss-newsletter--sidebar button.iss-newsletter__btn,
+#mc_embed_signup.iss-newsletter--sidebar button.iss-newsletter__btn {
+  width: 100% !important;
+  height: 42px !important;
+  min-width: 0 !important;
+  padding: 0 1rem !important;
+  font-size: 0.9rem !important;
+  border-radius: 10px !important;
+}
+
+/* -----------------------------------------------------------------------------
+   9. Footer
+   -------------------------------------------------------------------------- */
+.page__footer {
+  margin-top: 4rem;
+  background: var(--bg-elev) !important;
+  color: var(--text) !important;
+  border-top: 1px solid var(--border);
+  padding: 2.5rem 1.5rem 2rem;
+}
+.page__footer-follow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+.page__footer-follow .social-icons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.page__footer-follow .social-icons li {
+  list-style: none;
+}
+.page__footer-follow .social-icons strong {
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-right: 0.75rem;
+}
+.page__footer-follow .social-icons a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--bg-soft);
+  color: var(--text-muted) !important;
+  border-radius: 999px;
+  padding: 0.45rem 0.85rem;
+  font-size: 0.85rem;
+  background-image: none;
+  border: 1px solid var(--border);
+  transition: all var(--t-fast) var(--ease);
+}
+.page__footer-follow .social-icons a:hover {
+  background: var(--accent);
+  color: #fff !important;
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+.page__footer-follow .social-icons a svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.page__footer-copyright {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-subtle);
+  border-top: 1px solid var(--border);
+  padding-top: 1.25rem;
+}
+.page__footer-copyright p {
+  max-width: 640px;
+  margin: 0.65rem auto 0;
+  line-height: 1.55;
+}
+.page__footer-copyright a {
+  color: var(--text-muted);
+  background-image: none;
+}
+.page__footer-copyright a:hover {
+  color: var(--accent);
+}
+.page__footer-cc-badge {
+  display: inline-block;
+  background-image: none;
+}
+.page__footer-cc-badge img {
+  display: inline-block;
+  border: 0;
+  border-radius: 4px;
+  background: #fff;
+  padding: 2px;
+  vertical-align: middle;
+  transition: transform var(--t-fast) var(--ease),
+    box-shadow var(--t-fast) var(--ease);
+}
+.page__footer-cc-badge:hover img {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+/* -----------------------------------------------------------------------------
+   10. Misc fixes — overrides for theme defaults that clash with the new look
+   -------------------------------------------------------------------------- */
+/* Page wrapper backgrounds & widths */
+#main {
+  max-width: var(--container-max);
+  padding: 1.5rem 1.25rem;
+}
+
+.page__hero--overlay + .initial-content #main,
+.page__hero--overlay + #main {
+  padding-top: 2rem;
+}
+
+.greedy-nav .hidden-links {
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-md);
+  border-radius: var(--radius-md);
+  padding: 0.5rem;
+}
+.greedy-nav .hidden-links li a {
+  color: var(--text-muted) !important;
+  border-radius: var(--radius-sm);
+}
+.greedy-nav .hidden-links::before,
+.greedy-nav .hidden-links::after {
+  display: none;
+}
+
+/* Algolia search overlay tweaks */
+.ais-SearchBox-input {
+  background: var(--bg-elev) !important;
+  color: var(--text) !important;
+}
+
+/* Splash layout (homepage) */
+.layout--splash .page__hero--overlay {
+  margin-bottom: 0;
+}
+
+/* Section headings on the homepage — give them a small accent bar */
+.layout--splash #main > h1 {
+  position: relative;
+  font-size: #{"clamp(1.6rem, 1.2rem + 1.5vw, 2.25rem)"};
+  margin-top: 3rem;
+  padding-top: 0.5rem;
+}
+.layout--splash #main > h1::before {
+  content: "";
+  display: block;
+  width: 44px;
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  margin-bottom: 0.9rem;
+}
+
+/* Whoami CV tables — soft borders so the rowspan layout still reads,
+   without the heavy theme defaults. */
+.layout--single .page__content table {
+  background: transparent;
+  box-shadow: none;
+  border: 0;
+  border-radius: 0;
+  overflow: visible;
+}
+.layout--single .page__content table td {
+  border: 0 !important;
+  border-bottom: 1px solid var(--border) !important;
+  background: transparent;
+  vertical-align: top;
+  padding: 0.85rem 0.75rem;
+}
+.layout--single .page__content table tr:last-child td {
+  border-bottom: 0 !important;
+}
+.layout--single .page__content table thead {
+  background: transparent;
+}
+.layout--single .page__content table img {
+  border-radius: var(--radius-sm);
+  background: var(--bg-soft);
+  padding: 0.25rem;
+}
+
+/* Whoami chip-style buttons should not look like CTAs */
+.layout--single .page__content a.btn.btn--inverse {
+  padding: 0.25rem 0.65rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  color: var(--text-muted) !important;
+  box-shadow: none;
+  margin: 0.15rem 0.2rem 0.15rem 0;
+}
+
+/* 404 — Not Found page */
+.not-found {
+  max-width: 720px;
+  margin: 4rem auto;
+  text-align: center;
+  padding: 0 1.25rem;
+}
+.not-found__digits {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: #{"clamp(6rem, 5rem + 8vw, 12rem)"};
+  line-height: 0.95;
+  letter-spacing: -0.06em;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.not-found__zero {
+  display: inline-block;
+  animation: notFoundSpin 8s linear infinite;
+  transform-origin: 50% 55%;
+}
+@keyframes notFoundSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.not-found__title {
+  font-family: var(--font-display);
+  font-size: #{"clamp(1.6rem, 1.2rem + 1.5vw, 2.5rem)"};
+  margin: 0 0 0.75rem;
+  color: var(--text);
+}
+.not-found__lead {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin: 0 auto 2rem;
+  max-width: 540px;
+}
+.not-found__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  justify-content: center;
+  margin-bottom: 2.5rem;
+}
+.not-found__suggest {
+  border-top: 1px solid var(--border);
+  padding-top: 1.5rem;
+  margin-top: 1rem;
+}
+.not-found__suggest-title {
+  color: var(--text-subtle);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.75rem;
+}
+.not-found__suggest ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+}
+.not-found__suggest li {
+  list-style: none;
+}
+.not-found__suggest a {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.45rem 0.95rem;
+  border-radius: 999px;
+  background: var(--bg-soft);
+  color: var(--text-muted) !important;
+  border: 1px solid var(--border);
+  font-size: 0.9rem;
+  background-image: none;
+  transition: all var(--t-fast) var(--ease);
+}
+.not-found__suggest a:hover {
+  background: var(--accent);
+  color: #fff !important;
+  border-color: var(--accent);
+}
+
+/* Social pill row (used on /whoami/) */
+.social-pill-row {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.social-pill-row li {
+  list-style: none;
+  margin: 0;
+}
+.social-pill-row a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.95rem;
+  border-radius: 999px;
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  color: var(--text-muted) !important;
+  font-size: 0.9rem;
+  font-weight: 500;
+  background-image: none;
+  text-decoration: none;
+  transition: all var(--t-fast) var(--ease);
+}
+.social-pill-row a:hover {
+  background: var(--accent);
+  color: #fff !important;
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px -8px rgba(99, 102, 241, 0.55);
+}
+.social-pill-row a i {
+  font-size: 1rem;
+}
+/* Inline SVG variant — used in place of the FA <i> when the kit is unavailable.
+   Inherits color from the parent <a> via fill="currentColor", so the hover
+   state (white on accent background) just works. */
+.social-pill-row a svg,
+.social-pill-row svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+  flex-shrink: 0;
+  vertical-align: middle;
+}
+
+/* Reveal-on-scroll animation */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Skip-link */
+.skip-link {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* Comments (Disqus) — give it a card */
+#disqus_thread {
+  margin-top: 2rem;
+  padding: 1.25rem;
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Make the masthead spacing breathe on small screens */
+@media (max-width: 720px) {
+  .greedy-nav .site-title {
+    font-size: 1.05rem;
+  }
+  .masthead__inner-wrap {
+    padding: 0.5rem 0.9rem;
+  }
+  #main {
+    padding: 1rem 0.9rem;
+  }
+}
+
+/* =============================================================================
+   11. Tips listing — vertical list of cards (entries_layout: list)
+   Scoped under `.entries-list` so these styles only apply on pages that opt
+   into Minimal Mistakes' list layout (currently /tips/). They do NOT touch
+   `.grid__*` cards on /blog/ and /visualizations/, nor the search-results
+   template which also emits bare `<div class="list__item">` markup.
+   ============================================================================= */
+.entries-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 820px;
+  margin: 0;
+}
+
+.entries-list .list__item {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  float: none;
+}
+
+.entries-list .list__item .archive__item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 1rem 1.25rem;
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--t-base) var(--ease),
+    box-shadow var(--t-base) var(--ease),
+    border-color var(--t-base) var(--ease);
+}
+.entries-list .list__item .archive__item:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-strong);
+}
+
+/* Tip cards have no teaser; hide defensively if the theme ever emits one. */
+.entries-list .list__item .archive__item-teaser {
+  display: none;
+}
+
+.entries-list .list__item .archive__item-title {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  margin: 0;
+  padding-right: 3.5rem; /* leaves room for the "Tip" chip */
+}
+.entries-list .list__item .archive__item-title a {
+  color: var(--text);
+  background-image: none;
+  transition: color var(--t-fast) var(--ease);
+}
+.entries-list .list__item .archive__item-title a:hover {
+  color: var(--accent);
+}
+
+/* Meta line — clock icon + read time, in a subtle color. */
+.entries-list .list__item .archive__item .page__meta,
+.entries-list .list__item .archive__item .page__date {
+  margin: 0;
+  color: var(--text-subtle);
+  font-size: 0.82rem;
+  line-height: 1.3;
+}
+.entries-list .list__item .archive__item .page__meta i {
+  margin-right: 0.3rem;
+  color: var(--text-subtle);
+}
+
+.entries-list .list__item .archive__item-excerpt {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.93rem;
+  line-height: 1.55;
+}
+.entries-list .list__item .archive__item-excerpt p {
+  margin: 0;
+}
+
+/* Small "Tip" chip anchored to the top-right of each card. */
+.entries-list .list__item .archive__item::before {
+  content: "Tip";
+  position: absolute;
+  top: 0.85rem;
+  right: 1rem;
+  padding: 0.15rem 0.6rem;
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+  border-radius: 999px;
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1.4;
+  pointer-events: none;
+}
+
+@media (max-width: 520px) {
+  .entries-list .list__item .archive__item {
+    padding: 0.9rem 1rem;
+  }
+  .entries-list .list__item .archive__item-title {
+    font-size: 1.05rem;
+    padding-right: 3rem;
+  }
+  .entries-list .list__item .archive__item::before {
+    top: 0.75rem;
+    right: 0.75rem;
+  }
+}
+
+/* =============================================================================
+   12. Feature row — equal-height cards with bottom-pinned CTAs
+   Appended override block. The grid above stretches each `.feature__item`
+   to the row's tallest height (default `align-items: stretch`), but the
+   inner `.archive__item` doesn't fill that height, so cards in the same
+   row end with their CTA buttons at uneven vertical positions.
+
+   Fix:
+   - Force `.archive__item` (and the --left/--right/--center variants) to
+     `height: 100%` so they fill the stretched grid item.
+   - Inside `.archive__item-body`, pin the trailing CTA paragraph to the
+     bottom via `margin-top: auto` so excerpts of different lengths
+     don't shift the buttons. The CTA is rendered as a final
+     `<p><a class="btn ...">…</a></p>` direct child of
+     `.archive__item-body`, so `> p:last-child` is a reliable target.
+   - Selectors are scoped under `.feature__wrapper` so the affected
+     scope matches the homepage rows (and the same wrapper on the
+     "What's here" section), without leaking into other components.
+
+   Zig-zag neutralizer:
+   The upstream theme renders `.feature__item--left/--right/--center` as a
+   magazine-style staggered layout: each item is floated, alternating
+   `nth-child` siblings get `margin-left: gutter(of 12)`, and inside each
+   card the `.archive__item-teaser` is `float: left; width: 5/12` while the
+   `.archive__item-body` is `float: right; width: 7/12`. Inside our CSS
+   Grid this manifests as cards offset horizontally and split internally —
+   the visible zig-zag. The block below forces every variant (and its
+   inner pieces) back to a clean, full-width, non-floated layout so the
+   grid alone controls placement. `!important` is used because several
+   upstream rules use `nth-child` at specificity 0,2,0 which our base
+   selectors cannot beat without it.
+   ============================================================================= */
+.feature__wrapper .feature__item,
+.feature__wrapper .feature__item--left,
+.feature__wrapper .feature__item--right,
+.feature__wrapper .feature__item--center {
+  align-self: stretch;
+  float: none !important;
+  clear: none !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  width: auto !important;
+  padding: 0 !important;
+}
+
+.feature__wrapper .feature__item .archive__item,
+.feature__wrapper .feature__item--left .archive__item,
+.feature__wrapper .feature__item--right .archive__item,
+.feature__wrapper .feature__item--center .archive__item {
+  float: none !important;
+  width: 100% !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.feature__wrapper .feature__item .archive__item-teaser,
+.feature__wrapper .feature__item--left .archive__item-teaser,
+.feature__wrapper .feature__item--right .archive__item-teaser,
+.feature__wrapper .feature__item--center .archive__item-teaser {
+  float: none !important;
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+}
+
+.feature__wrapper .feature__item .archive__item-body,
+.feature__wrapper .feature__item--left .archive__item-body,
+.feature__wrapper .feature__item--right .archive__item-body,
+.feature__wrapper .feature__item--center .archive__item-body {
+  float: none !important;
+  width: 100% !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.feature__wrapper .feature__item .archive__item,
+.feature__wrapper .feature__item--left .archive__item,
+.feature__wrapper .feature__item--right .archive__item,
+.feature__wrapper .feature__item--center .archive__item {
+  height: 100%;
+}
+
+.feature__wrapper .feature__item .archive__item-body,
+.feature__wrapper .feature__item--left .archive__item-body,
+.feature__wrapper .feature__item--right .archive__item-body,
+.feature__wrapper .feature__item--center .archive__item-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+}
+
+.feature__wrapper .feature__item .archive__item-body .archive__item-title,
+.feature__wrapper .feature__item--left .archive__item-body .archive__item-title,
+.feature__wrapper .feature__item--right .archive__item-body .archive__item-title,
+.feature__wrapper .feature__item--center .archive__item-body .archive__item-title {
+  flex: 0 0 auto;
+}
+
+.feature__wrapper .feature__item .archive__item-body .archive__item-excerpt,
+.feature__wrapper .feature__item--left .archive__item-body .archive__item-excerpt,
+.feature__wrapper .feature__item--right .archive__item-body .archive__item-excerpt,
+.feature__wrapper .feature__item--center .archive__item-body .archive__item-excerpt {
+  flex: 1 1 auto;
+}
+
+/* Pin the trailing CTA paragraph to the bottom of the card body. */
+.feature__wrapper .feature__item .archive__item-body > p:last-child,
+.feature__wrapper .feature__item--left .archive__item-body > p:last-child,
+.feature__wrapper .feature__item--right .archive__item-body > p:last-child,
+.feature__wrapper .feature__item--center .archive__item-body > p:last-child {
+  margin-top: auto;
+  margin-bottom: 0;
+}
+
+/* =============================================================================
+   14. CV meta icons — small inline FA icons used inside `/whoami/` CV tables
+   for role / company / dates / location (and accomplishment stars). Each
+   `<li class="cv-meta">` wraps a Font Awesome `<i>` plus a `<span>` with the
+   actual text, so the icon is theme-aware (uses `var(--accent)` instead of a
+   PNG that picks up the global table-image background chip), crisp at any
+   size, and the icon column stays aligned across rows.
+   Scoped tightly to `.cv-meta` so it can't reach into the company-logo
+   `<img>` tags (those keep the soft background chip from rule 10).
+   ============================================================================= */
+.cv-meta {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin: 0;
+  list-style: none;
+}
+.cv-meta::before {
+  display: none;
+}
+.cv-meta i {
+  width: 16px;
+  flex: 0 0 auto;
+  color: var(--accent);
+  font-size: 0.9rem;
+  text-align: center;
+  position: relative;
+  top: 1px;
+}
+/* Inline SVG variant — replaces the FA <i> when the kit is unavailable.
+   Inherits color via fill="currentColor" from the explicit `color` set here. */
+.cv-meta svg {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 auto;
+  flex-shrink: 0;
+  color: var(--accent);
+  fill: currentColor;
+  position: relative;
+  top: 2px;
+}
+.cv-meta strong {
+  font-weight: 600;
+  color: var(--text);
+}
+.cv-meta span,
+.cv-meta a {
+  color: var(--text-muted);
+}
+.cv-meta a:hover {
+  color: var(--accent);
+}
+
+/* =============================================================================
+   15. Code blocks — copy button + language label
+   Targeted enhancements for Rouge / Kramdown code blocks. The header bar is
+   injected at runtime by `initCodeCopy()` in assets/js/custom/modern.js, which
+   adds the `.has-copy-btn` marker class so these rules can out-specify the
+   generic `pre, div.highlighter-rouge, figure.highlight` block above without
+   `!important`.
+
+   Rendered DOM:
+     <div class="language-python highlighter-rouge has-copy-btn">
+       <div class="code-block-header">
+         <span class="code-block-lang">Python</span>
+         <button class="code-copy-btn" type="button" ...>
+           <svg class="icon-copy">…</svg>
+           <svg class="icon-check">…</svg>
+           <span class="sr-only">Copy code</span>
+         </button>
+       </div>
+       <div class="highlight"><pre class="highlight"><code>…</code></pre></div>
+     </div>
+
+   `figure.highlight` (used by `{% highlight %}` blocks) follows the same
+   structure with `figure.highlight.has-copy-btn > .code-block-header + pre`.
+   ============================================================================= */
+div.highlighter-rouge.has-copy-btn,
+figure.highlight.has-copy-btn {
+  position: relative;
+  margin: 1.5rem 0;
+  padding: 0;
+  overflow: hidden;
+  background: var(--code-bg);
+  border: 1px solid var(--code-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--t-base) var(--ease),
+    border-color var(--t-base) var(--ease),
+    transform var(--t-base) var(--ease);
+}
+
+div.highlighter-rouge.has-copy-btn:hover,
+figure.highlight.has-copy-btn:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+
+/* Subtle gradient hairline along the very top of the block. */
+div.highlighter-rouge.has-copy-btn::before,
+figure.highlight.has-copy-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--accent-soft),
+    transparent
+  );
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Header bar — language label (left) + copy button (right). */
+div.highlighter-rouge.has-copy-btn > .code-block-header,
+figure.highlight.has-copy-btn > .code-block-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.45rem 0.75rem 0.45rem 1.05rem;
+  border-bottom: 1px solid var(--code-border);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.02),
+    transparent
+  );
+  font-family: var(--font-sans);
+  user-select: none;
+}
+
+[data-theme="dark"] div.highlighter-rouge.has-copy-btn > .code-block-header,
+[data-theme="dark"] figure.highlight.has-copy-btn > .code-block-header {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.025),
+    transparent
+  );
+}
+
+.code-block-lang {
+  display: inline-block;
+  color: var(--text-subtle);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+.code-copy-btn {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.55rem;
+  width: auto;
+  min-width: 32px;
+  height: 28px;
+  background: var(--bg-elev);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: none;
+  transition: background-color var(--t-fast) var(--ease),
+    color var(--t-fast) var(--ease),
+    border-color var(--t-fast) var(--ease),
+    transform var(--t-fast) var(--ease);
+}
+
+.code-copy-btn:hover {
+  background: var(--bg-soft);
+  color: var(--text);
+  border-color: var(--border-strong);
+}
+
+.code-copy-btn:focus-visible {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.code-copy-btn:active {
+  transform: translateY(1px);
+}
+
+.code-copy-btn svg {
+  width: 14px;
+  height: 14px;
+  flex: 0 0 auto;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Toggle the two icons via the `is-copied` state class. */
+.code-copy-btn .icon-check {
+  display: none;
+}
+.code-copy-btn.is-copied .icon-copy,
+.code-copy-btn.is-error .icon-copy {
+  display: none;
+}
+.code-copy-btn.is-copied .icon-check {
+  display: inline-block;
+}
+
+/* Success state — green pill. */
+.code-copy-btn.is-copied {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: #ffffff;
+  border-color: transparent;
+}
+
+/* Error state — red pill. */
+.code-copy-btn.is-error {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  color: #ffffff;
+  border-color: transparent;
+}
+
+/* Visually-hidden screen-reader label inside the button. */
+.code-copy-btn .sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Inner code body — neutralize the base `pre, div.highlighter-rouge,
+   figure.highlight` rule for outer chrome (we draw it on the wrapper) and
+   tighten the typography of the actual code. */
+div.highlighter-rouge.has-copy-btn > .highlight,
+figure.highlight.has-copy-btn > pre,
+figure.highlight.has-copy-btn > .highlight {
+  margin: 0;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+div.highlighter-rouge.has-copy-btn pre,
+div.highlighter-rouge.has-copy-btn pre.highlight,
+figure.highlight.has-copy-btn pre,
+figure.highlight.has-copy-btn pre.highlight {
+  margin: 0;
+  padding: 1rem 1.1rem;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  font-family: var(--font-mono);
+  font-size: 0.86rem;
+  line-height: 1.6;
+  overflow-x: auto;
+  color: var(--code-text);
+}
+
+div.highlighter-rouge.has-copy-btn pre code,
+figure.highlight.has-copy-btn pre code {
+  display: block;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+}
+
+/* Rouge line-numbers table layout (when used) — remove inner padding so the
+   parent `pre` controls spacing uniformly. */
+div.highlighter-rouge.has-copy-btn table.rouge-table,
+figure.highlight.has-copy-btn table.rouge-table {
+  margin: 0;
+  border: 0;
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+}
+div.highlighter-rouge.has-copy-btn table.rouge-table td,
+figure.highlight.has-copy-btn table.rouge-table td {
+  border: 0 !important;
+  padding: 0 0.5rem;
+  background: transparent;
+}
+div.highlighter-rouge.has-copy-btn td.rouge-gutter,
+div.highlighter-rouge.has-copy-btn td.gutter,
+figure.highlight.has-copy-btn td.rouge-gutter,
+figure.highlight.has-copy-btn td.gutter {
+  color: var(--text-subtle);
+  border-right: 1px solid var(--code-border) !important;
+  padding-right: 0.75rem !important;
+}
+
+/* Make the line-number gutter unselectable, so manual Cmd/Ctrl+C selections
+   yield clean code without numeric prefixes. Also prevents the gutter from
+   sneaking into copy paths that fall back to a wider element's text. */
+.rouge-table .rouge-gutter,
+.rouge-table .rouge-gutter pre,
+.rouge-table .gutter,
+.rouge-table .gutter pre,
+.rouge-table .gl,
+.rouge-table .lineno {
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+}
+
+/* Dark-mode token color boosts — Rouge ships a Pygments-style palette that
+   can lose contrast on the deep `--code-bg` (#0d1230). These overrides nudge
+   a handful of common tokens toward higher-contrast hues without rewriting
+   the full theme. */
+[data-theme="dark"] .highlight .c,
+[data-theme="dark"] .highlight .c1,
+[data-theme="dark"] .highlight .cm,
+[data-theme="dark"] .highlight .cs,
+[data-theme="dark"] .highlight .cp {
+  color: #8a93ab;
+  font-style: italic;
+}
+[data-theme="dark"] .highlight .k,
+[data-theme="dark"] .highlight .kd,
+[data-theme="dark"] .highlight .kn,
+[data-theme="dark"] .highlight .kp,
+[data-theme="dark"] .highlight .kr,
+[data-theme="dark"] .highlight .kt {
+  color: #f472b6;
+  font-weight: 600;
+}
+[data-theme="dark"] .highlight .nf,
+[data-theme="dark"] .highlight .nc,
+[data-theme="dark"] .highlight .nb {
+  color: #a5b4fc;
+}
+[data-theme="dark"] .highlight .nn,
+[data-theme="dark"] .highlight .nd {
+  color: #c4b5fd;
+}
+[data-theme="dark"] .highlight .s,
+[data-theme="dark"] .highlight .s1,
+[data-theme="dark"] .highlight .s2,
+[data-theme="dark"] .highlight .se,
+[data-theme="dark"] .highlight .sb,
+[data-theme="dark"] .highlight .sr {
+  color: #6ee7b7;
+}
+[data-theme="dark"] .highlight .mi,
+[data-theme="dark"] .highlight .mf,
+[data-theme="dark"] .highlight .mh,
+[data-theme="dark"] .highlight .mo,
+[data-theme="dark"] .highlight .il {
+  color: #fbbf24;
+}
+[data-theme="dark"] .highlight .o,
+[data-theme="dark"] .highlight .ow {
+  color: #e7ecf5;
+}
+[data-theme="dark"] .highlight .na,
+[data-theme="dark"] .highlight .nv,
+[data-theme="dark"] .highlight .vi,
+[data-theme="dark"] .highlight .vg {
+  color: #93c5fd;
+}
+[data-theme="dark"] .highlight .err {
+  color: #fca5a5;
+  background: transparent;
+}
+
+@media (max-width: 520px) {
+  div.highlighter-rouge.has-copy-btn > .code-block-header,
+  figure.highlight.has-copy-btn > .code-block-header {
+    padding: 0.4rem 0.55rem 0.4rem 0.85rem;
+  }
+  div.highlighter-rouge.has-copy-btn pre,
+  figure.highlight.has-copy-btn pre {
+    padding: 0.85rem 0.95rem;
+    font-size: 0.82rem;
+  }
+}
+
+/* =============================================================================
+   16. Social-share buttons (`_includes/social-share.html`)
+   The share section at the bottom of every blog post emits a row of brand
+   buttons (X / Facebook / LinkedIn / Bluesky). Each button used to wrap a
+   Font Awesome `<i class="fab fa-...">` glyph; we now render an inline
+   Simple Icons SVG instead so the icons survive without the FA kit.
+   `fill: currentColor` makes the SVG inherit the button's text color,
+   so the brand-tinted button backgrounds (or the default `.btn` style)
+   continue to drive contrast in both light and dark themes.
+   ============================================================================= */
+.page__share .btn svg {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
+  margin-right: 0.4em;
+  fill: currentColor;
+  flex-shrink: 0;
+}
+
+/* =============================================================================
+   17. Heading anchor link (chain) icon
+   Minimal Mistakes' `main.min.js` appends a `.header-link` anchor inside
+   every `.page__content` heading. We swap the legacy "Permalink" text +
+   Font Awesome glyph for an inline SVG chain icon at runtime
+   (`assets/js/custom/modern.js` → `initHeaderLinkIcon`). The base
+   `.header-link` opacity / hover behaviour comes from
+   `_sass/minimal-mistakes/_page.scss`; the rules below just size, align
+   and color the new SVG and visually hide the screen-reader label.
+   ============================================================================= */
+.page__content .header-link {
+  text-decoration: none;
+  color: var(--text-muted);
+  line-height: 1;
+}
+
+.page__content .header-link:hover,
+.page__content .header-link:focus-visible {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.page__content .header-link .icon-link {
+  width: 0.85em;
+  height: 0.85em;
+  vertical-align: -0.1em;
+  fill: none;
+  stroke: currentColor;
+}
+
+/* Visually hide the "Permalink" sr-only label (the project doesn't define
+   `.sr-only` globally; we scope the helper to header-links to avoid
+   colliding with anywhere else the class might appear). */
+.page__content .header-link .sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* =============================================================================
+   18. Contact form (iss-contact)
+   Self-contained card form for `/contactme/`. Mirrors the iss-newsletter
+   visual language (card surface, gradient halo, gradient pill submit button)
+   but adapted for a vertical, multi-field layout. All selectors use very high
+   specificity (`section.iss-contact <type>.iss-contact__<el>`) plus
+   `!important` so the global form rules in section 8 cannot reach in.
+   ============================================================================= */
+section.iss-contact {
+  background: var(--bg-elev) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-lg) !important;
+  box-shadow: var(--shadow-sm) !important;
+  padding: 2rem 1.75rem !important;
+  margin: 2rem auto !important;
+  width: 100% !important;
+  max-width: 640px !important;
+  font-family: var(--font-sans) !important;
+  position: relative !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+  clear: both !important;
+}
+section.iss-contact::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    640px 280px at 100% 0%,
+    var(--accent-soft),
+    transparent 60%
+  );
+  pointer-events: none;
+}
+section.iss-contact .iss-contact__inner {
+  position: relative;
+  z-index: 1;
+}
+section.iss-contact .iss-contact__title {
+  font-family: var(--font-display) !important;
+  font-weight: 700 !important;
+  font-size: 1.6rem !important;
+  color: var(--text) !important;
+  letter-spacing: -0.01em !important;
+  margin: 0 0 0.5rem !important;
+  line-height: 1.2 !important;
+}
+section.iss-contact .iss-contact__hint {
+  color: var(--text-muted) !important;
+  font-size: 0.95rem !important;
+  line-height: 1.55 !important;
+  margin: 0 0 1.5rem !important;
+}
+
+section.iss-contact .iss-contact__form {
+  display: block !important;
+  margin: 0 !important;
+}
+
+section.iss-contact .iss-contact__field {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.4rem !important;
+  margin-bottom: 1rem !important;
+}
+
+section.iss-contact label.iss-contact__label,
+section.iss-contact .iss-contact__field label {
+  font-family: var(--font-sans) !important;
+  font-size: 0.85rem !important;
+  font-weight: 500 !important;
+  color: var(--text-muted) !important;
+  margin: 0 !important;
+  display: block !important;
+}
+section.iss-contact .iss-contact__optional {
+  color: var(--text-subtle) !important;
+  font-weight: 400 !important;
+}
+
+/* Text inputs — bulletproof override */
+section.iss-contact input.iss-contact__input,
+section.iss-contact input[type="text"].iss-contact__input,
+section.iss-contact input[type="email"].iss-contact__input {
+  width: 100% !important;
+  height: 46px !important;
+  padding: 0 0.9rem !important;
+  background: var(--bg-soft) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-md) !important;
+  font-family: var(--font-sans) !important;
+  font-size: 0.95rem !important;
+  font-weight: 400 !important;
+  line-height: 46px !important;
+  box-shadow: none !important;
+  outline: none !important;
+  margin: 0 !important;
+  -webkit-appearance: none !important;
+          appearance: none !important;
+  transition: border-color var(--t-fast) var(--ease),
+    box-shadow var(--t-fast) var(--ease),
+    background-color var(--t-fast) var(--ease);
+}
+
+/* Textarea — bulletproof override */
+section.iss-contact textarea.iss-contact__textarea {
+  width: 100% !important;
+  min-height: 140px !important;
+  padding: 0.75rem 0.9rem !important;
+  background: var(--bg-soft) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-md) !important;
+  font-family: var(--font-sans) !important;
+  font-size: 0.95rem !important;
+  font-weight: 400 !important;
+  line-height: 1.55 !important;
+  box-shadow: none !important;
+  outline: none !important;
+  margin: 0 !important;
+  resize: vertical !important;
+  -webkit-appearance: none !important;
+          appearance: none !important;
+  transition: border-color var(--t-fast) var(--ease),
+    box-shadow var(--t-fast) var(--ease),
+    background-color var(--t-fast) var(--ease);
+}
+
+section.iss-contact input.iss-contact__input::placeholder,
+section.iss-contact textarea.iss-contact__textarea::placeholder {
+  color: var(--text-subtle) !important;
+  opacity: 1 !important;
+}
+
+section.iss-contact input.iss-contact__input:focus,
+section.iss-contact textarea.iss-contact__textarea:focus {
+  border-color: var(--accent) !important;
+  background: var(--bg) !important;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2) !important;
+}
+[data-theme="dark"] section.iss-contact input.iss-contact__input:focus,
+[data-theme="dark"] section.iss-contact textarea.iss-contact__textarea:focus {
+  box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.28) !important;
+}
+
+section.iss-contact .iss-contact__recaptcha {
+  margin: 0.25rem 0 1.25rem !important;
+}
+
+section.iss-contact .iss-contact__actions {
+  display: flex !important;
+  justify-content: flex-end !important;
+  margin-top: 0.25rem !important;
+}
+
+/* Submit button — gradient pill, mirrors `.iss-newsletter__btn`. */
+section.iss-contact button.iss-contact__btn,
+section.iss-contact input[type="submit"].iss-contact__btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 46px !important;
+  min-width: 160px !important;
+  width: auto !important;
+  padding: 0 1.6rem !important;
+  background: linear-gradient(
+    135deg,
+    var(--accent),
+    var(--accent-strong)
+  ) !important;
+  color: #ffffff !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  font-family: var(--font-sans) !important;
+  font-size: 0.95rem !important;
+  font-weight: 600 !important;
+  line-height: 1 !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+  white-space: nowrap !important;
+  cursor: pointer !important;
+  margin: 0 !important;
+  -webkit-appearance: none !important;
+          appearance: none !important;
+  box-shadow: 0 8px 22px -8px rgba(99, 102, 241, 0.55) !important;
+  transition: transform var(--t-fast) var(--ease),
+    box-shadow var(--t-fast) var(--ease),
+    filter var(--t-fast) var(--ease);
+  text-shadow: none !important;
+}
+section.iss-contact button.iss-contact__btn:hover {
+  filter: brightness(1.06);
+  transform: translateY(-1px);
+  box-shadow: 0 12px 28px -8px rgba(99, 102, 241, 0.65) !important;
+}
+section.iss-contact button.iss-contact__btn:active {
+  transform: translateY(0);
+}
+
+/* Mobile — tighter card, full-width submit. */
+@media (max-width: 600px) {
+  section.iss-contact {
+    padding: 1.5rem 1.15rem !important;
+    border-radius: var(--radius-md) !important;
+  }
+  section.iss-contact .iss-contact__title {
+    font-size: 1.35rem !important;
+  }
+  section.iss-contact .iss-contact__actions {
+    justify-content: stretch !important;
+  }
+  section.iss-contact button.iss-contact__btn {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+}
+
+/* ============================================================
+   19. Tag archive page (/tags/)
+   Renders a tag cloud at the top followed by an anchored
+   section per tag listing the posts that carry it.
+   ============================================================ */
+
+.iss-tag-cloud {
+  margin: 2rem 0 3rem;
+  padding: 1.75rem 1.5rem;
+  background: var(--bg-elev, var(--bg-soft));
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.iss-tag-cloud__title {
+  margin: 0 0 1rem;
+  font-family: var(--font-display, var(--font-sans));
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.iss-tag-cloud__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.iss-tag-cloud__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background-color 160ms ease, border-color 160ms ease,
+    color 160ms ease, transform 160ms ease;
+}
+
+.iss-tag-cloud__chip:hover,
+.iss-tag-cloud__chip:focus-visible {
+  background: var(--accent, #6366f1);
+  border-color: var(--accent, #6366f1);
+  color: #fff;
+  text-decoration: none;
+  transform: translateY(-1px);
+}
+
+.iss-tag-cloud__chip-count {
+  display: inline-block;
+  min-width: 1.5em;
+  padding: 0 0.4em;
+  border-radius: 999px;
+  background: var(--bg-soft);
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.iss-tag-cloud__chip:hover .iss-tag-cloud__chip-count,
+.iss-tag-cloud__chip:focus-visible .iss-tag-cloud__chip-count {
+  background: rgba(255, 255, 255, 0.22);
+  color: #fff;
+}
+
+.iss-tag-section {
+  margin: 2.5rem 0;
+  padding-top: 1rem;
+  scroll-margin-top: 5rem;
+}
+
+.iss-tag-section__title {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin: 0 0 1rem;
+  font-family: var(--font-display, var(--font-sans));
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.iss-tag-section__hash {
+  color: var(--accent, #6366f1);
+  font-weight: 800;
+}
+
+.iss-tag-section__count {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  background: var(--bg-soft);
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+}
+
+.iss-tag-section__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.iss-tag-section__item { margin: 0; }
+
+.iss-tag-section__link {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 1rem 1.1rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  color: var(--text);
+  text-decoration: none;
+  transition: border-color 160ms ease, transform 160ms ease,
+    box-shadow 160ms ease;
+  height: 100%;
+}
+
+.iss-tag-section__link:hover,
+.iss-tag-section__link:focus-visible {
+  border-color: var(--accent, #6366f1);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+  text-decoration: none;
+}
+
+.iss-tag-section__post-title {
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--text);
+}
+
+.iss-tag-section__post-excerpt {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.iss-tag-section__post-meta {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: auto;
+}
+
+.iss-tag-section__collection { text-transform: capitalize; }
+
+.iss-tag-section__back {
+  display: inline-block;
+  margin-top: 1rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-decoration: none;
+}
+
+.iss-tag-section__back:hover { color: var(--accent, #6366f1); }
+
+/* -----------------------------------------------------------------------------
+   20. Algolia search overlay
+   The search panel (revealed by the masthead magnifying-glass button) is
+   driven by InstantSearch.js v2.3.3, which renders the input as
+   `.ais-search-box--input` with two absolutely positioned icon buttons:
+   `.ais-search-box--magnifier-wrapper` on the left and
+   `.ais-search-box--reset-wrapper` on the right. The Algolia theme CSS gives
+   the input enough horizontal padding to clear those icons, but the global
+   form rule in Section 8 forces `padding: 0.75rem 1rem !important` on every
+   text input, which strips that padding and lets the typed text slide under
+   the magnifier icon. Restore the horizontal padding (left for the
+   magnifier, right for the reset X) and re-skin the input with our design
+   tokens. The v3 `.ais-SearchBox-*` class names are listed alongside the v2
+   ones so the rules survive a future widget upgrade.
+   -------------------------------------------------------------------------- */
+.search-content .search-searchbar .ais-search-box,
+.search-content .search-searchbar .ais-SearchBox {
+  max-width: 100% !important;
+  margin: 0 0 1.5rem !important;
+}
+
+.search-content input.ais-search-box--input,
+.search-content input.ais-SearchBox-input {
+  display: block;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  padding: 0.75rem 2.6rem !important;
+  font-family: var(--font-sans) !important;
+  font-size: 1rem !important;
+  line-height: 1.4 !important;
+  color: var(--text) !important;
+  background: var(--bg) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-md) !important;
+  box-shadow: none !important;
+  transition: border-color var(--t-fast) var(--ease),
+    box-shadow var(--t-fast) var(--ease);
+}
+
+.search-content input.ais-search-box--input::placeholder,
+.search-content input.ais-SearchBox-input::placeholder {
+  color: var(--text-muted);
+  opacity: 1;
+}
+
+.search-content input.ais-search-box--input:hover,
+.search-content input.ais-SearchBox-input:hover {
+  border-color: var(--border-strong) !important;
+}
+
+.search-content input.ais-search-box--input:focus,
+.search-content input.ais-SearchBox-input:focus {
+  outline: none !important;
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 4px var(--accent-soft) !important;
+}
+
+/* Magnifier and reset icon buttons — neutral muted color, vertically
+   centred inside the input. Their absolute positioning comes from the
+   bundled Algolia theme stylesheet; we only retint them here. */
+.search-content .ais-search-box--magnifier-wrapper,
+.search-content .ais-search-box--reset-wrapper,
+.search-content .ais-SearchBox-submit,
+.search-content .ais-SearchBox-reset {
+  color: var(--text-muted);
+  background: transparent;
+  border: 0;
+}
+
+.search-content .ais-search-box--magnifier,
+.search-content .ais-search-box--reset,
+.search-content .ais-SearchBox-submitIcon,
+.search-content .ais-SearchBox-resetIcon {
+  fill: currentColor;
+}
+
+.search-content .ais-search-box--magnifier-wrapper:hover,
+.search-content .ais-search-box--reset-wrapper:hover,
+.search-content .ais-SearchBox-submit:hover,
+.search-content .ais-SearchBox-reset:hover {
+  color: var(--accent);
+}

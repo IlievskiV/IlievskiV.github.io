@@ -12,6 +12,9 @@
   <script src="https://kit.fontawesome.com/4eee35f757.js" async></script>
 {% endif %}
 
+<!-- iSquared modern remodel script: theme toggle, reveal-on-scroll, nav shadow -->
+<script src="{{ '/assets/js/custom/modern.js' | relative_url }}" defer></script>
+
 {% if site.search == true or page.layout == "search" %}
   {% include_cached search/algolia-search-scripts.html %}
 {% endif %}
