@@ -11,7 +11,7 @@
   Minimal Mistakes Jekyll theme — Michael Rose
   Algolia Search
   Mailchimp
-  Disqus
+  Giscus
 
 /* SITE */
 
