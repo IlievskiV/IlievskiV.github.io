@@ -1,12 +1,12 @@
 # main links
 main:
-  - title: "Blog 📝"
+  - title: "Blog"
     url: /blog/
-  - title: "Visualizations 📊"
+  - title: "Visualizations"
     url: /visualizations/
-  - title: "Geeky Coffee Break ☕️"
+  - title: "Geeky Coffee Break"
     url: /tips/
-  - title: "$whoami 🪪"
+  - title: "$whoami"
     url: /whoami/
-  - title: "Get in Touch 📬"
+  - title: "Get in Touch"
     url: /contactme/
