@@ -1,5 +1,33 @@
 <!-- start custom head snippets -->
-<link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+
+<!-- Theme color (matches modern light/dark navbar).
+     The two media-scoped metas drive the system-preference fallback; the
+     unscoped meta is what the explicit theme toggle in modern.js updates
+     (its selector is meta[name="theme-color"]:not([media])). -->
+<meta name="theme-color" content="#ffffff">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0b1020" media="(prefers-color-scheme: dark)">
+<meta name="color-scheme" content="light dark">
+
+<!-- Apply persisted theme as early as possible to avoid flash -->
+<script>
+  (function () {
+    try {
+      var stored = localStorage.getItem('theme');
+      var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var theme = stored || (prefersDark ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    } catch (e) {}
+  })();
+</script>
+
+<!-- Preconnect to font CDN for snappier loads -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<!-- Modern type stack: Inter (UI/body), Space Grotesk (display), JetBrains Mono (code) -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
 <script src="{{ site.baseurl }}/assets/js/lazysizes.min.js" async></script>
 
 <!-- insert favicons. use https://realfavicongenerator.net/ -->

@@ -1,0 +1,49 @@
+{% comment %}
+  Renders the "You may also enjoy" section using tag overlap.
+
+  Algorithm (no scoring, keeps Liquid simple):
+    1. Build a candidate pool from the blog, visualizations and tips
+       collections (collection names match `_config.yml`).
+    2. Sort reverse-chronologically so the most recent posts win ties.
+    3. Keep any candidate that shares at least one tag with the current
+       page; skip the current page itself; cap at 4 results.
+{% endcomment %}
+
+{% if page.related and page.tags and page.tags.size > 0 %}
+  {% assign current_url = page.url %}
+  {% assign current_tags = page.tags %}
+
+  {% assign candidates = site.blog | concat: site.visualizations | concat: site.tips %}
+  {% assign candidates = candidates | sort: "date" | reverse %}
+
+  {% assign related = "" | split: "" %}
+  {% for doc in candidates %}
+    {% if doc.url == current_url %}{% continue %}{% endif %}
+    {% if doc.tags and doc.tags.size > 0 %}
+      {% assign overlap = false %}
+      {% for t in doc.tags %}
+        {% if current_tags contains t %}
+          {% assign overlap = true %}
+          {% break %}
+        {% endif %}
+      {% endfor %}
+      {% if overlap %}
+        {% assign related = related | push: doc %}
+      {% endif %}
+    {% endif %}
+    {% if related.size >= 4 %}{% break %}{% endif %}
+  {% endfor %}
+
+  {% if related.size > 0 %}
+    <div class="page__related">
+      {% if site.data.ui-text[site.locale].related_label %}
+        <h4 class="page__related-title">{{ site.data.ui-text[site.locale].related_label | default: "You May Also Enjoy" }}</h4>
+      {% endif %}
+      <div class="grid__wrapper">
+        {% for post in related %}
+          {% include archive-single.html type="grid" %}
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+{% endif %}

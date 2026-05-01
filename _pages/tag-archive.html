@@ -1,0 +1,80 @@
+---
+title: "Posts by Tag"
+layout: archive
+permalink: /tags/
+author_profile: true
+---
+
+{% comment %}
+  Aggregate tags across the custom collections (_blog, _visualizations, _tips)
+  since this site does not use the default _posts collection. site.tags would be
+  empty here, so we build our own tag → docs map.
+{% endcomment %}
+
+{% assign all_docs = site.blog | concat: site.visualizations | concat: site.tips %}
+
+{% comment %} Collect every unique tag value across all docs {% endcomment %}
+{% assign all_tags = "" | split: "" %}
+{% for doc in all_docs %}
+  {% if doc.tags %}
+    {% for t in doc.tags %}
+      {% assign all_tags = all_tags | push: t %}
+    {% endfor %}
+  {% endif %}
+{% endfor %}
+
+{% assign unique_tags = all_tags | uniq | sort_natural %}
+
+{% if unique_tags.size > 0 %}
+  <section class="iss-tag-cloud" aria-label="All tags">
+    <h2 class="iss-tag-cloud__title">Browse by tag</h2>
+    <ul class="iss-tag-cloud__list">
+      {% for tag in unique_tags %}
+        {% assign slug = tag | slugify %}
+        {% assign count = 0 %}
+        {% for doc in all_docs %}
+          {% if doc.tags contains tag %}{% assign count = count | plus: 1 %}{% endif %}
+        {% endfor %}
+        <li>
+          <a class="iss-tag-cloud__chip" href="#{{ slug }}">
+            <span class="iss-tag-cloud__chip-name">{{ tag }}</span>
+            <span class="iss-tag-cloud__chip-count">{{ count }}</span>
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </section>
+
+  {% for tag in unique_tags %}
+    {% assign slug = tag | slugify %}
+    {% assign tag_docs = all_docs | where_exp: "doc", "doc.tags contains tag" | sort: "date" | reverse %}
+
+    <section class="iss-tag-section" id="{{ slug }}">
+      <h2 class="iss-tag-section__title">
+        <span class="iss-tag-section__hash">#</span>{{ tag }}
+        <span class="iss-tag-section__count">{{ tag_docs.size }} post{% if tag_docs.size != 1 %}s{% endif %}</span>
+      </h2>
+
+      <ul class="iss-tag-section__list">
+        {% for post in tag_docs %}
+          <li class="iss-tag-section__item">
+            <a class="iss-tag-section__link" href="{{ post.url | relative_url }}">
+              <span class="iss-tag-section__post-title">{{ post.title }}</span>
+              {% if post.excerpt %}
+                <span class="iss-tag-section__post-excerpt">{{ post.excerpt | strip_html | truncate: 140 }}</span>
+              {% endif %}
+              <span class="iss-tag-section__post-meta">
+                {% if post.date %}<time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>{% endif %}
+                <span class="iss-tag-section__collection">· {{ post.collection }}</span>
+              </span>
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+
+      <a class="iss-tag-section__back" href="#page-title">↑ Back to top</a>
+    </section>
+  {% endfor %}
+{% else %}
+  <p>No tagged posts yet.</p>
+{% endif %}

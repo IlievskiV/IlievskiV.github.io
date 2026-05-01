@@ -1,0 +1,44 @@
+{%- comment -%}
+  Modern newsletter signup. Use a unique form id per render so multiple
+  embeds on the same page don't collide. Use {% include newsletter.html variant="sidebar" %}
+  for the narrow sidebar variant.
+{%- endcomment -%}
+{%- assign nl_id = include.id | default: 'iss-nl' -%}
+{%- assign nl_uid = include.uid | default: page.url | append: '-' | append: nl_id | replace: '/', '-' -%}
+{%- if include.variant == 'sidebar' -%}
+  {%- assign nl_extra_class = 'iss-newsletter--sidebar' -%}
+{%- else -%}
+  {%- assign nl_extra_class = '' -%}
+{%- endif -%}
+
+<section class="iss-newsletter {{ nl_extra_class }}" id="mc_embed_signup-{{ nl_uid }}">
+  <div class="iss-newsletter__inner">
+    <h3 class="iss-newsletter__title">{{ include.title | default: "Join the iSquared mailing list" }}</h3>
+    <p class="iss-newsletter__hint">{{ include.hint | default: "New posts, visualizations and tips &mdash; straight to your inbox. No spam, unsubscribe anytime." }}</p>
+
+    <form
+      action="https://digital.us19.list-manage.com/subscribe/post?u=cb9dbe40387c27177a25de80f&amp;id=08bda6f8e0"
+      method="post"
+      name="mc-embedded-subscribe-form"
+      class="iss-newsletter__form validate"
+      target="_blank"
+      novalidate
+    >
+      <label class="iss-newsletter__sr" for="mce-EMAIL-{{ nl_uid }}">Email address</label>
+      <input
+        class="iss-newsletter__input email"
+        type="email"
+        name="EMAIL"
+        id="mce-EMAIL-{{ nl_uid }}"
+        placeholder="you@domain.com"
+        required
+        autocomplete="email"
+      >
+      <button class="iss-newsletter__btn" type="submit" name="subscribe">Subscribe</button>
+
+      <div aria-hidden="true" style="position:absolute;left:-5000px;">
+        <input type="text" name="b_cb9dbe40387c27177a25de80f_08bda6f8e0" tabindex="-1" value="">
+      </div>
+    </form>
+  </div>
+</section>
