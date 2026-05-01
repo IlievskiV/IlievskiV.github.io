@@ -3031,3 +3031,109 @@ section.iss-contact button.iss-contact__btn:active {
 .search-content .ais-SearchBox-reset:hover {
   color: var(--accent);
 }
+
+/* -----------------------------------------------------------------------------
+   21. Back-to-top button
+   A tiny circular floating control anchored to the bottom-right of the
+   viewport. The markup lives in `_includes/scripts.html` and is hidden by
+   default — `assets/js/custom/modern.js` strips the `hidden` attribute on
+   boot and toggles `.is-visible` once the user scrolls past ~600px.
+   `z-index: 90` keeps it BELOW any future modal / drawer UI but well above
+   regular content.
+   -------------------------------------------------------------------------- */
+.back-to-top {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  z-index: 90;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  margin: 0;
+
+  color: var(--text);
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  box-shadow: var(--shadow-md);
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(8px);
+  transition: opacity var(--t-base) var(--ease),
+    transform var(--t-base) var(--ease),
+    color var(--t-fast) var(--ease),
+    border-color var(--t-fast) var(--ease),
+    box-shadow var(--t-fast) var(--ease),
+    background-color var(--t-fast) var(--ease);
+}
+
+.back-to-top svg {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  fill: none;
+  display: block;
+}
+
+.back-to-top.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.back-to-top:hover,
+.back-to-top:focus-visible {
+  color: var(--accent);
+  border-color: var(--accent);
+  box-shadow: var(--shadow-glow);
+  transform: translateY(-2px);
+}
+
+.back-to-top:focus-visible {
+  outline: none;
+}
+
+.back-to-top:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
+
+@media (max-width: 640px) {
+  .back-to-top {
+    right: 1rem;
+    bottom: 1rem;
+    width: 40px;
+    height: 40px;
+  }
+
+  .back-to-top svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .back-to-top {
+    transition: opacity var(--t-base) var(--ease),
+      color var(--t-fast) var(--ease),
+      border-color var(--t-fast) var(--ease),
+      box-shadow var(--t-fast) var(--ease),
+      background-color var(--t-fast) var(--ease);
+    transform: none;
+  }
+
+  .back-to-top.is-visible,
+  .back-to-top:hover,
+  .back-to-top:focus-visible,
+  .back-to-top:active {
+    transform: none;
+  }
+}

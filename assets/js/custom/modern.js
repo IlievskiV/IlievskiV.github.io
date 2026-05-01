@@ -362,6 +362,46 @@
     }, 3000);
   }
 
+  /* ---------- Floating back-to-top button ----------
+     The markup (`<button class="back-to-top" hidden>`) lives in
+     `_includes/scripts.html`. We strip the `hidden` attribute on boot, then
+     toggle an `is-visible` class once the user has scrolled past ~600px.
+     The scroll handler is throttled with `requestAnimationFrame` so it
+     never runs more than once per frame. Click smooth-scrolls to the top
+     (or jumps instantly when the user prefers reduced motion). */
+  function initBackToTop() {
+    var btn = document.querySelector('.back-to-top');
+    if (!btn || btn.getAttribute('data-btt-init') === '1') return;
+    btn.setAttribute('data-btt-init', '1');
+
+    btn.removeAttribute('hidden');
+
+    var THRESHOLD = 600;
+    var ticking = false;
+
+    function update() {
+      ticking = false;
+      if (window.scrollY > THRESHOLD) btn.classList.add('is-visible');
+      else btn.classList.remove('is-visible');
+    }
+
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(update);
+    }
+
+    update();
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    btn.addEventListener('click', function () {
+      var reduceMotion =
+        window.matchMedia &&
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+    });
+  }
+
   function ready(fn) {
     if (document.readyState !== 'loading') fn();
     else document.addEventListener('DOMContentLoaded', fn);
@@ -373,5 +413,6 @@
     initNavShadow();
     initCodeCopy();
     initHeaderLinkIcon();
+    initBackToTop();
   });
 })();
