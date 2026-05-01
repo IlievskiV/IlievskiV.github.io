@@ -35,6 +35,24 @@
 >
   {% if page.header.overlay_color or page.header.overlay_image %}
     <div class="wrapper">
+      {% if page.url == "/" %}
+        <a href="{{ '/whoami/' | relative_url }}" class="hero-byline" aria-label="Hi, I am Vladimir the author of iSquared">
+          <img class="hero-byline__avatar" src="{{ '/assets/images/bio_photo.jpg' | relative_url }}" alt="" width="32" height="32" loading="eager" decoding="async">
+          <span class="hero-byline__terminal" aria-hidden="true">
+            <span class="hero-byline__line hero-byline__line--cmd">
+              <span class="hero-byline__prompt">$&nbsp;</span><span class="hero-byline__typed" data-text="whoami"></span><span class="hero-byline__caret">&#9612;</span>
+            </span>
+            <span class="hero-byline__line hero-byline__line--out">
+              <span class="hero-byline__output-typed" data-text="Vladimir, iSquared author. Learn more"></span>
+              <svg class="hero-byline__arrow" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14">
+                <path d="M5 12h14"/>
+                <path d="m13 5 7 7-7 7"/>
+              </svg>
+            </span>
+          </span>
+          <span class="sr-only">Hi, I am Vladimir, the author of iSquared. Learn more.</span>
+        </a>
+      {% endif %}
       <h1 id="page-title" class="page__title" itemprop="headline">
         {% if paginator and site.paginate_show_page_num %}
           {{ site.title }}{% unless paginator.page == 1 %} {{ site.data.ui-text[site.locale].page | default: "Page" }} {{ paginator.page }}{% endunless %}

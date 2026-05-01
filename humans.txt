@@ -1,0 +1,21 @@
+/* TEAM */
+
+  Author: Vladimir Ilievski
+  Site: https://ilievskiv.github.io
+  Twitter: @VladOsaurus
+  GitHub: @IlievskiV
+  Location: Switzerland
+
+/* THANKS */
+
+  Minimal Mistakes Jekyll theme — Michael Rose
+  Algolia Search
+  Mailchimp
+  Giscus
+
+/* SITE */
+
+  Last update: 2026/05/01
+  Standards: HTML5, CSS3, ES2020+
+  Components: Jekyll, Sass, vanilla JS, inline SVG
+  Software: GitHub Pages

@@ -13,10 +13,24 @@
     }
   }
 
+  /* Tell the Giscus iframe (if mounted) to switch its own theme. The iframe
+     handles its initial render from `data-theme="preferred_color_scheme"`,
+     so this only matters after a manual toggle. No-op when the iframe is
+     not on the page (homepage, /whoami/, etc.) or has not yet loaded. */
+  function syncGiscusTheme(theme) {
+    var iframe = document.querySelector('iframe.giscus-frame');
+    if (!iframe || !iframe.contentWindow) return;
+    iframe.contentWindow.postMessage(
+      { giscus: { setConfig: { theme: theme === 'dark' ? 'dark' : 'light' } } },
+      'https://giscus.app'
+    );
+  }
+
   function applyTheme(theme) {
     document.documentElement.setAttribute('data-theme', theme);
     var meta = document.querySelector('meta[name="theme-color"]:not([media])');
     if (meta) meta.setAttribute('content', theme === 'dark' ? '#0b1020' : '#ffffff');
+    syncGiscusTheme(theme);
   }
 
   function initThemeToggle() {
@@ -362,6 +376,149 @@
     }, 3000);
   }
 
+  /* ---------- Floating back-to-top button ----------
+     The markup (`<button class="back-to-top" hidden>`) lives in
+     `_includes/scripts.html`. We strip the `hidden` attribute on boot, then
+     toggle an `is-visible` class once the user has scrolled past ~600px.
+     The scroll handler is throttled with `requestAnimationFrame` so it
+     never runs more than once per frame. Click smooth-scrolls to the top
+     (or jumps instantly when the user prefers reduced motion). */
+  function initBackToTop() {
+    var btn = document.querySelector('.back-to-top');
+    if (!btn || btn.getAttribute('data-btt-init') === '1') return;
+    btn.setAttribute('data-btt-init', '1');
+
+    btn.removeAttribute('hidden');
+
+    var THRESHOLD = 600;
+    var ticking = false;
+
+    function update() {
+      ticking = false;
+      if (window.scrollY > THRESHOLD) btn.classList.add('is-visible');
+      else btn.classList.remove('is-visible');
+    }
+
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(update);
+    }
+
+    update();
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    btn.addEventListener('click', function () {
+      var reduceMotion =
+        window.matchMedia &&
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+    });
+  }
+
+  /* ---------- Hero byline terminal typewriter ----------
+     Drives the two-line "$ whoami" / output sequence on the homepage hero
+     chip (`.hero-byline`). The static markup ships only the prompt + an
+     empty `.hero-byline__typed` span and an empty
+     `.hero-byline__output-typed` span; this function streams text into
+     both with jittered timing so it feels like a real shell session:
+
+       1. Type `whoami` slowly with per-char jitter (base 120ms, ±range)
+          and an occasional micro-stutter on `i` / `m`.
+       2. Pause ~700ms (as if the user pressed Enter and the shell took a
+          beat to respond).
+       3. Toggle `.is-output-shown` (which kills the caret + flips the
+          output line into the a11y tree) and stream the output text into
+          `.hero-byline__output-typed` at a faster, program-output cadence
+          (base 35ms, smaller jitter).
+
+     Runs once per page load — guarded by a dataset flag so re-entry is a
+     no-op. Honors `prefers-reduced-motion: reduce` by painting the final
+     state immediately (both spans full, no streaming). */
+  function initHeroBylineTerminal() {
+    var byline = document.querySelector('.hero-byline');
+    if (!byline || byline.dataset.terminalInit === '1') return;
+    byline.dataset.terminalInit = '1';
+
+    var typedEl = byline.querySelector('.hero-byline__typed');
+    var outputTypedEl = byline.querySelector('.hero-byline__output-typed');
+    if (!typedEl) return;
+
+    var word = typedEl.dataset.text || 'whoami';
+    var outputText = outputTypedEl
+      ? outputTypedEl.dataset.text || ''
+      : '';
+
+    var prefersReducedMotion =
+      window.matchMedia &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (prefersReducedMotion) {
+      typedEl.textContent = word;
+      if (outputTypedEl) outputTypedEl.textContent = outputText;
+      byline.classList.add('is-output-shown');
+      return;
+    }
+
+    /* Tunable timing — slower than mechanical, with jitter so it doesn't
+       land on the same beat each character. Deltas are in ms. */
+    var CMD_BASE_MS = 120;
+    var CMD_JITTER_MIN = -30;
+    var CMD_JITTER_MAX = 90;
+    var CMD_STUTTER_LETTERS = { i: true, m: true };
+    var CMD_STUTTER_MS = 150;
+
+    var POST_CMD_PAUSE_MS = 700;
+
+    var OUT_BASE_MS = 35;
+    var OUT_JITTER_MIN = -25;
+    var OUT_JITTER_MAX = 50;
+
+    /* Jitter helper — uniform integer in [min, max] inclusive added to base.
+       Floors at 0 so we never schedule a negative timeout. */
+    var jitter = function (base, min, max) {
+      var delta = min + Math.floor(Math.random() * (max - min + 1));
+      var t = base + delta;
+      return t < 0 ? 0 : t;
+    };
+
+    typedEl.textContent = '';
+    if (outputTypedEl) outputTypedEl.textContent = '';
+
+    var streamOutput = function () {
+      if (!outputTypedEl) return;
+      var j = 0;
+      var step = function () {
+        if (j < outputText.length) {
+          outputTypedEl.textContent += outputText.charAt(j);
+          j += 1;
+          setTimeout(step, jitter(OUT_BASE_MS, OUT_JITTER_MIN, OUT_JITTER_MAX));
+        }
+      };
+      step();
+    };
+
+    var i = 0;
+    var typeChar = function () {
+      if (i < word.length) {
+        var ch = word.charAt(i);
+        typedEl.textContent += ch;
+        i += 1;
+        var delay = jitter(CMD_BASE_MS, CMD_JITTER_MIN, CMD_JITTER_MAX);
+        if (CMD_STUTTER_LETTERS[ch]) delay += CMD_STUTTER_MS;
+        setTimeout(typeChar, delay);
+      } else {
+        setTimeout(function () {
+          byline.classList.add('is-output-shown');
+          streamOutput();
+        }, POST_CMD_PAUSE_MS);
+      }
+    };
+
+    /* Defer slightly so the chip's own entry fade plays first. */
+    setTimeout(typeChar, 700);
+  }
+
   function ready(fn) {
     if (document.readyState !== 'loading') fn();
     else document.addEventListener('DOMContentLoaded', fn);
@@ -373,5 +530,7 @@
     initNavShadow();
     initCodeCopy();
     initHeaderLinkIcon();
+    initBackToTop();
+    initHeroBylineTerminal();
   });
 })();

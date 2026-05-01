@@ -12,7 +12,15 @@
   <script src="https://kit.fontawesome.com/4eee35f757.js" async></script>
 {% endif %}
 
-<!-- iSquared modern remodel script: theme toggle, reveal-on-scroll, nav shadow -->
+<!-- Floating back-to-top button (revealed by modern.js once user scrolls past ~600px) -->
+<button type="button" class="back-to-top" aria-label="Back to top" hidden>
+  <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 19V5"/>
+    <path d="m5 12 7-7 7 7"/>
+  </svg>
+</button>
+
+<!-- iSquared modern remodel script: theme toggle, reveal-on-scroll, nav shadow, back-to-top -->
 <script src="{{ '/assets/js/custom/modern.js' | relative_url }}" defer></script>
 
 {% if site.search == true or page.layout == "search" %}

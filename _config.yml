@@ -59,9 +59,7 @@ masthead_title: "iSquared" # overrides the website title displayed in the masthe
 words_per_minute: 200
 
 comments:
-  provider               : "disqus" # false (default), "disqus", "discourse", "facebook", "staticman_v2", "staticman", "utterances", "custom"
-  disqus:
-    shortname            : "https-ilievskiv-github-io"
+  provider               : "custom" # false (default), "disqus", "discourse", "facebook", "staticman_v2", "staticman", "utterances", "custom"
 
 feed:
   collections:
