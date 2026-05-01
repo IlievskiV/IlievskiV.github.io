@@ -3137,3 +3137,124 @@ section.iss-contact button.iss-contact__btn:active {
     transform: none;
   }
 }
+
+/* =============================================================================
+   22. Hero byline pill (whoami promo)
+   A small horizontal "chip" anchored to the top-center of the homepage hero
+   wrapper (rendered inside `.page__hero--overlay > .wrapper`, before the
+   `.page__title` H1, only on `/` via the include guard in
+   `_includes/page__hero.html`). The whole pill is one anchor pointing to
+   `/whoami/` so a single click anywhere on it navigates to the about page.
+   Layout: avatar (32x32 ring) + greeting + role + right-arrow. On phones
+   (<= 540px) the role/sep collapse so the chip stays compact.
+   Auto-flips colors in dark mode via the existing `--bg-elev` / `--border` /
+   `--text-muted` / `--accent` tokens.
+   ============================================================================= */
+.hero-byline {
+  /* Block-level flex with `width: fit-content` so `margin: 0 auto` actually
+     centers the chip above the (left-aligned) hero title — `inline-flex`
+     would collapse the auto margins. Visually identical: the box still
+     shrinks to its content and lays its children out as flex items. */
+  display: flex;
+  width: fit-content;
+  max-width: 100%;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.4rem 0.85rem 0.4rem 0.4rem;
+  margin: 0 auto 1.5rem;
+  border-radius: 999px;
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  color: var(--text);
+  text-decoration: none;
+  background-image: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1;
+  animation: heroBylineIn 700ms ease both 200ms;
+  transition: opacity var(--t-fast) var(--ease),
+    transform var(--t-fast) var(--ease),
+    border-color var(--t-fast) var(--ease),
+    box-shadow var(--t-fast) var(--ease);
+}
+
+.hero-byline:hover,
+.hero-byline:focus-visible {
+  border-color: var(--accent);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+  text-decoration: none;
+  background-image: none;
+  color: var(--text);
+  outline: none;
+}
+
+.hero-byline__avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  object-fit: cover;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 2px var(--bg-elev), 0 0 0 3px var(--border);
+}
+
+.hero-byline__text {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  white-space: nowrap;
+}
+
+.hero-byline__greeting {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.hero-byline__sep,
+.hero-byline__role {
+  color: var(--text-muted);
+}
+
+.hero-byline__arrow {
+  flex-shrink: 0;
+  color: var(--accent);
+  transition: transform var(--t-fast) var(--ease);
+}
+
+.hero-byline:hover .hero-byline__arrow,
+.hero-byline:focus-visible .hero-byline__arrow {
+  transform: translateX(3px);
+}
+
+@keyframes heroBylineIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (max-width: 540px) {
+  .hero-byline__sep,
+  .hero-byline__role {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-byline {
+    animation: none;
+  }
+  .hero-byline:hover,
+  .hero-byline:focus-visible {
+    transform: none;
+  }
+  .hero-byline:hover .hero-byline__arrow,
+  .hero-byline:focus-visible .hero-byline__arrow {
+    transform: none;
+  }
+}
