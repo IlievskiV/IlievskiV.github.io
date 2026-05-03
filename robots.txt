@@ -1,0 +1,48 @@
+---
+permalink: /robots.txt
+sitemap: false
+---
+# https://www.robotstxt.org/
+
+# Default — allow well-behaved crawlers everywhere
+User-agent: *
+Allow: /
+
+# Block internal / non-content paths from indexing
+Disallow: /assets/js/plugins/
+Disallow: /assets/js/vendor/
+Disallow: /assets/js/main.min.js
+Disallow: /404.html
+Disallow: /sitemap/
+
+# Block AI scraping bots that don't respect attribution / consent.
+# Comment any of these out to opt back in.
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: PerplexityBot
+Disallow: /
+
+User-agent: cohere-ai
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+# Sitemap
+Sitemap: {{ site.url }}{{ site.baseurl }}/sitemap.xml
