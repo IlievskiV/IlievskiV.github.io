@@ -11,7 +11,7 @@ tags:
     - fractals
     - mandelbrot
     - julia set
-canonical_url: "[https://matplotlib.org/matplotblog/posts/animated-fractals/](https://matplotlib.org/matplotblog/posts/animated-fractals/)"
+canonical_url: "https://matplotlib.org/matplotblog/posts/animated-fractals/"
 header:
     teaser: "assets/images/animated_fractals_teaser.png"
     image: "assets/images/animated_fractals_teaser.png"

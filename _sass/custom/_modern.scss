@@ -1680,7 +1680,7 @@ section.iss-newsletter--sidebar button.iss-newsletter__btn,
 }
 
 /* Whoami chip-style buttons should not look like CTAs */
-.layout--single .page__content a.btn.btn--inverse {
+.layout--single .page__content .btn.btn--inverse {
   padding: 0.25rem 0.65rem;
   font-size: 0.75rem;
   font-weight: 500;
