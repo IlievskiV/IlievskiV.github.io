@@ -1,0 +1,65 @@
+---
+permalink: /llms-full.txt
+sitemap: false
+layout: none
+---
+# {{ site.name }} — full content dump
+
+> Personal site of Vladimir Ilievski (Vlad), data scientist and creator of iSquared. This file is the long-form companion to /llms.txt: same structure, but each entry includes a truncated plain-text body so an LLM agent can ingest the bulk of the site in a single fetch. Pages with heavy inline scripts (visualizations) are truncated more aggressively — fetch the canonical URL for the live, interactive version.
+
+## About
+
+### [$whoami — Vladimir Ilievski]({{ "/whoami/" | absolute_url }})
+Bio, background, talks, and publications of the author. Data scientist by day, content creator by night; author of iSquared. Heavy interactive HTML page — fetch the canonical URL for the live version.
+
+## Blog posts
+{%- assign blog_posts = site.blog | sort: "date" | reverse -%}
+{%- for post in blog_posts %}
+
+### [{{ post.title | strip_html | strip_newlines | strip }}]({{ post.url | absolute_url }})
+- date: {{ post.date | date: "%Y-%m-%d" }}
+{%- if post.description and post.description != "" %}
+- description: {{ post.description | strip_html | strip_newlines | replace: "  ", " " | strip }}
+{%- endif %}
+{%- if post.tags and post.tags.size > 0 %}
+- tags: {{ post.tags | join: ", " }}
+{%- endif %}
+
+{{ post.content | strip_html | strip_newlines | replace: "  ", " " | truncate: 4000 | strip }}
+{%- endfor %}
+
+## Visualizations
+{%- assign viz_posts = site.visualizations | sort: "date" | reverse -%}
+{%- for post in viz_posts %}
+
+### [{{ post.title | strip_html | strip_newlines | strip }}]({{ post.url | absolute_url }})
+- date: {{ post.date | date: "%Y-%m-%d" }}
+{%- if post.description and post.description != "" %}
+- description: {{ post.description | strip_html | strip_newlines | replace: "  ", " " | strip }}
+{%- endif %}
+{%- if post.tags and post.tags.size > 0 %}
+- tags: {{ post.tags | join: ", " }}
+{%- endif %}
+
+{{ post.content | strip_html | strip_newlines | replace: "  ", " " | truncate: 1500 | strip }}
+{%- endfor %}
+
+## Tips
+{%- assign tip_posts = site.tips | sort: "date" | reverse -%}
+{%- for post in tip_posts %}
+
+### [{{ post.title | strip_html | strip_newlines | strip }}]({{ post.url | absolute_url }})
+- date: {{ post.date | date: "%Y-%m-%d" }}
+{%- if post.description and post.description != "" %}
+- description: {{ post.description | strip_html | strip_newlines | replace: "  ", " " | strip }}
+{%- endif %}
+{%- if post.tags and post.tags.size > 0 %}
+- tags: {{ post.tags | join: ", " }}
+{%- endif %}
+
+{{ post.content | strip_html | strip_newlines | replace: "  ", " " | truncate: 4000 | strip }}
+{%- endfor %}
+
+## Optional
+- [Contact]({{ "/contactme/" | absolute_url }}): Contact form and direct ways to reach Vladimir.
+- [RSS feed]({{ "/feed.xml" | absolute_url }}): Subscribe to new blog posts via RSS/Atom.
