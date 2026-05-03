@@ -182,7 +182,7 @@ on the button below:
 
 For more information, please follow me on 
 <a href="https://www.linkedin.com/in/vilievski/" target="_blank" rel="noopener"><b>LinkedIn</b></a>
-or <a href="https://x.com/VladOsaurus" target="_blank" rel="noopener"><b>Twitter</b></a>.
+or <a href="https://x.com/VladOsaurus" target="_blank" rel="noopener"><b>X</b></a>.
 If you like this content you can subscribe to the mailing list below to get similar updates from time to time.
 
 {% include newsletter.html %}

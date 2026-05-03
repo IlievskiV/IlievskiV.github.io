@@ -121,7 +121,7 @@ The source code for this work can be found in this
 [Jupyter Notebook](https://github.com/IlievskiV/Amusive-Blogging-N-Coding/blob/master/Visualizations/student_to_gaussian_convergence.ipynb).
 It would be very helpful to star the repo to get more easily noticed. For more information, please follow me on
 **[LinkedIn](https://www.linkedin.com/in/vilievski/)**
-or **[Twitter](https://x.com/VladOsaurus)**.
+or **[X](https://x.com/VladOsaurus)**.
 
 If you like this content you can subscribe to the mailing list below to get similar updates from time to time.
 
