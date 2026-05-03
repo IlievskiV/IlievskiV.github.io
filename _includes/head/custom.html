@@ -39,4 +39,13 @@
 <!-- Friendly humans-readable credits file (https://humanstxt.org) -->
 <link rel="author" href="{{ '/humans.txt' | relative_url }}">
 
+<!-- LLM-friendly site map (https://llmstxt.org) -->
+<link rel="llms" href="{{ '/llms.txt' | relative_url }}">
+
+<!-- Rich JSON-LD Article schema for posts in custom collections only -->
+{% assign jsonld_post_collections = "blog,visualizations,tips" | split: "," %}
+{% if jsonld_post_collections contains page.collection %}
+  {% include json-ld-article.html %}
+{% endif %}
+
 <!-- end custom head snippets -->

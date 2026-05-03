@@ -148,7 +148,7 @@ The source code for this work can be found in this
 <a href="https://github.com/IlievskiV/Amusive-Blogging-N-Coding/blob/master/Visualizations/barnsley_fern.ipynb" target="_blank" rel="dofollow noopener">Jupyter Notebook</a>.
 It would be very helpful to star the repo to get more easily noticed. For more information, please follow me on
 <a href="https://www.linkedin.com/in/vilievski/" target="_blank" rel="noopener">LinkedIn</a>
-or <a href="https://x.com/VladOsaurus" target="_blank" rel="noopener">Twitter</a>.
+or <a href="https://x.com/VladOsaurus" target="_blank" rel="noopener">X</a>.
 
 If you like this content you can subscribe to the mailing list below to get similar updates from time to time.
 

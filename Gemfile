@@ -30,3 +30,7 @@ gem "jekyll-remote-theme"
 gem "activesupport", ">= 6.0.3.1"
 
 gem "webrick", "~> 1.8"
+
+group :development, :test do
+  gem "html-proofer", "~> 5.0"
+end

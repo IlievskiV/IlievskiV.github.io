@@ -123,7 +123,7 @@ np.allclose(fp_chatgpt, fp_jax, atol=1.e-5)  # prints True
 
 The source code for this work can be found in this
 <a href="https://github.com/IlievskiV/Amusive-Blogging-N-Coding/blob/master/Differentiation/derivatives_with_chatgpt.ipynb" target="_blank" rel="dofollow noopener">Jupyter Notebook</a>. If this is something you like and would like to see similar content you could follow me on <a href="https://www.linkedin.com/in/vilievski/" target="_blank" rel="noopener"><b>LinkedIn</b></a>
-or <a href="https://x.com/VladOsaurus" target="_blank" rel="noopener"><b>Twitter</b></a>. Additionally, you can subscribe to the mailing list below to get similar updates from time to time.
+or <a href="https://x.com/VladOsaurus" target="_blank" rel="noopener"><b>X</b></a>. Additionally, you can subscribe to the mailing list below to get similar updates from time to time.
 
 
 {% include newsletter.html %}

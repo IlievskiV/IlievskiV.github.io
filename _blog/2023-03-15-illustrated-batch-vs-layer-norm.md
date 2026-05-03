@@ -1,4 +1,5 @@
 ---
+
 layout: single
 title: "Batch vs Layer Normalization in Deep Neural Nets. The Illustrated Way!"
 excerpt: "Intuitive illustration of the batch and layer normalization techniques in neural networks
@@ -16,14 +17,14 @@ tags:
 header:
     teaser: "assets/images/batch_vs_layer_norm_top.png"
     image: "assets/images/batch_vs_layer_norm_top.png"
-    og_image: "assets/images/batch_vs_layer_norm_top.png"
+og_image: "assets/images/batch_vs_layer_norm_top.png"
+
 ---
 
 The [Batch Normalization (BN)](https://arxiv.org/pdf/1502.03167.pdf){:target="_blank"} and 
 [Layer Normalization (LN)](https://arxiv.org/pdf/1607.06450.pdf){:target="_blank"} techniques
 are widely used techniques in deep learning. They ease the optimization process and
 help very deep networks converge faster. 
-
 
 The Batch Normalization (BN) has been successfully applied to the vision tasks while the
 the Layer Normalization (LN) to the sequential tasks, mainly in NLP.
@@ -50,14 +51,9 @@ a sufficiently large batch size.
 To save us the pain of reading the entire paper, without going too much into the details,
 the essential part on how *Batch Normalization* works is illustrated in the image below:
 
-<center>
-    <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/illustrated_batch_norm.png" class="lazyload" alt="Illustrated Batch Normalization"/>
-    <br/>
-    <span class="caption text-muted">
-        Illustrated Batch Normalization
-    </span>
-</center>
-<br/>
+  
+ Illustrated Batch Normalization   
+
 
 In *Batch Normalization* the *mean* and *variance* are calculated for each individual 
 channel across all elements (pixels or tokens) in all batches. 
@@ -78,14 +74,9 @@ It can also help to reduce the vanishing gradient in recurrent neural networks.
 Agian, to save us the the time of reading the entire paper the essential part on how 
 *Layer Normalization* works is illustrated in the image below:
 
-<center>
-    <img data-src="{{ site.url }}{{ site.baseurl }}/assets/images/illustrated_layer_norm.png" class="lazyload" alt="Illustrated Layer Normalization"/>
-    <br/>
-    <span class="caption text-muted">
-        Illustrated Layer Normalization
-    </span>
-</center>
-<br/>
+  
+ Illustrated Layer Normalization   
+
 
 In *Batch Normalization* the *mean* and *variance* are calculated for each individual 
 batch across all elements (pixels or tokens) in all channels.
@@ -111,79 +102,83 @@ Below you can find the *Batch Normalization* implementation in PyTorch:
 
 {% highlight python linenos %}
 class BatchNorm(nn.Module):
-    def __init__(self, num_features: int, training: bool, eps: float=1e-6) -> None:
-        super().__init__()
+    def **init**(self, num_features: int, training: bool, eps: float=1e-6) -> None:
+        super().**init**()
         self.training = training
 
-        # learnable parameters
-        self.gamma = nn.Parameter(torch.ones(num_features))
-        self.beta = nn.Parameter(torch.zeros(num_features))
+```
+    # learnable parameters
+    self.gamma = nn.Parameter(torch.ones(num_features))
+    self.beta = nn.Parameter(torch.zeros(num_features))
 
-        # hyperparams
-        self.eps = eps
-        self.moving_mean = nn.Parameter(torch.zeros(num_features), requires_grad=False)
-        self.moving_var = nn.Parameter(torch.ones(num_features), requires_grad=False)
-        
-    def forward(self, x):
-        if self.training:
-            mean = x.mean(dim=0, keepdim=True)
-            var = x.var(dim=0, keepdim=True)
+    # hyperparams
+    self.eps = eps
+    self.moving_mean = nn.Parameter(torch.zeros(num_features), requires_grad=False)
+    self.moving_var = nn.Parameter(torch.ones(num_features), requires_grad=False)
+    
+def forward(self, x):
+    if self.training:
+        mean = x.mean(dim=0, keepdim=True)
+        var = x.var(dim=0, keepdim=True)
 
-            self.moving_mean = 0.9 * self.moving_mean + 0.1 * mean
-            self.moving_var = 0.9 * self.moving_var + 0.1 * var
-        else:
-            mean = self.moving_mean
-            var = self.moving_var
-        
-        x = (x - mean) / torch.sqrt(var + self.eps)
-        x = self.gamma * x + self.beta
-        return x
+        self.moving_mean = 0.9 * self.moving_mean + 0.1 * mean
+        self.moving_var = 0.9 * self.moving_var + 0.1 * var
+    else:
+        mean = self.moving_mean
+        var = self.moving_var
+    
+    x = (x - mean) / torch.sqrt(var + self.eps)
+    x = self.gamma * x + self.beta
+    return x
+```
+
 {% endhighlight %}
 
 Below you can find the *Layer Normalization* implementation in PyTorch:
 
 {% highlight python linenos %}
 class LayerNorm(nn.Module):
-    def __init__(self, num_features: int, training: bool, eps: float=1e-6) -> None:
-        super().__init__()
+    def **init**(self, num_features: int, training: bool, eps: float=1e-6) -> None:
+        super().**init**()
         self.training = training
 
-        # learnable parameters
-        self.gamma = nn.Parameter(torch.ones(num_features))
-        self.beta = nn.Parameter(torch.zeros(num_features))
+```
+    # learnable parameters
+    self.gamma = nn.Parameter(torch.ones(num_features))
+    self.beta = nn.Parameter(torch.zeros(num_features))
 
-        # hyperparams
-        self.eps = eps
-        self.moving_mean = nn.Parameter(torch.zeros(num_features), requires_grad=False)
-        self.moving_var = nn.Parameter(torch.ones(num_features), requires_grad=False)
-        
-    def forward(self, x):
-        if self.training:
-            mean = x.mean(dim=-1, keepdim=True)
-            var = x.var(dim=-1, keepdim=True)
+    # hyperparams
+    self.eps = eps
+    self.moving_mean = nn.Parameter(torch.zeros(num_features), requires_grad=False)
+    self.moving_var = nn.Parameter(torch.ones(num_features), requires_grad=False)
+    
+def forward(self, x):
+    if self.training:
+        mean = x.mean(dim=-1, keepdim=True)
+        var = x.var(dim=-1, keepdim=True)
 
-            self.moving_mean = 0.9 * self.moving_mean + 0.1 * mean
-            self.moving_var = 0.9 * self.moving_var + 0.1 * var
-        else:
-            mean = self.moving_mean
-            var = self.moving_var
-        
-        x = (x - mean) / torch.sqrt(var + self.eps)
-        x = self.gamma * x + self.beta
-        return x
+        self.moving_mean = 0.9 * self.moving_mean + 0.1 * mean
+        self.moving_var = 0.9 * self.moving_var + 0.1 * var
+    else:
+        mean = self.moving_mean
+        var = self.moving_var
+    
+    x = (x - mean) / torch.sqrt(var + self.eps)
+    x = self.gamma * x + self.beta
+    return x
+```
+
 {% endhighlight %}
-
 
 Take a look and downlaod the PDF document containing the illustrations above by clicking
 on the button below:
 
-<a href="{{ site.url }}{{ site.baseurl }}/assets/pdfs/illustrated_batch_vs_layer_norm.pdf" target="_blank" class="btn btn--primary .btn--small">Downlaod Illustrations</a>
-
+[Downlaod Illustrations]({{ site.url }}{{ site.baseurl }}/assets/pdfs/illustrated_batch_vs_layer_norm.pdf)
 
 For more information, please follow me on 
-<a href="https://www.linkedin.com/in/vilievski/" target="_blank" rel="noopener"><b>LinkedIn</b></a>
-or <a href="https://x.com/VladOsaurus" target="_blank" rel="noopener"><b>Twitter</b></a>.
+**[LinkedIn](https://www.linkedin.com/in/vilievski/)**
+or **[X](https://x.com/VladOsaurus)**.
 If you like this content you can subscribe to the mailing list below to get similar updates from time to time.
 
 {% include newsletter.html %}
-<br/>
+  

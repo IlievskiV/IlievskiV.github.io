@@ -104,7 +104,7 @@ I wish we had more of these interactive data explorers.
 
 If this is something you like and would like to see similar content you could follow me on 
 <a href="https://www.linkedin.com/in/vilievski/" target="_blank" rel="noopener">LinkedIn</a>
-or <a href="https://x.com/VladOsaurus" target="_blank" rel="noopener">Twitter</a>. 
+or <a href="https://x.com/VladOsaurus" target="_blank" rel="noopener">X</a>. 
 Additionally, you can subscribe to the mailing list below to get similar updates from time to time.
 
 {% include newsletter.html %}

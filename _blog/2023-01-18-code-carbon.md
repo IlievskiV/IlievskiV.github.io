@@ -179,7 +179,7 @@ by the experiment. An example for the experiment we did above is shown below:
 
 The source code for the implementation can be found on <a href="https://github.com/IlievskiV/Amusive-Blogging-N-Coding/blob/master/Carbon%20Footprint/codecarbon_experiments.ipynb" target="_blank">GitHub</a>.
 If this is something you like and would like to see similar content you could follow me on <a href="https://www.linkedin.com/in/vilievski/" target="_blank" rel="noopener">LinkedIn</a>
-or <a href="https://x.com/VladOsaurus" target="_blank" rel="noopener">Twitter</a>. Additionally, you can subscribe to the mailing list below to get similar updates from time to time.
+or <a href="https://x.com/VladOsaurus" target="_blank" rel="noopener">X</a>. Additionally, you can subscribe to the mailing list below to get similar updates from time to time.
 
 
 {% include newsletter.html %}

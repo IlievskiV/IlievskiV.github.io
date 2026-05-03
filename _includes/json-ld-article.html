@@ -1,0 +1,118 @@
+{%- comment -%}
+  Rich JSON-LD Article schema for posts in the custom collections
+  (blog, visualizations, tips). Self-gates on page.collection so the
+  include is a no-op when dropped onto pages outside those collections.
+  Coexists with any other JSON-LD blocks on the page; Google merges them.
+{%- endcomment -%}
+{%- assign jsonld_collections = "blog,visualizations,tips" | split: "," -%}
+{%- if jsonld_collections contains page.collection -%}
+{%- if page.collection == "tips" -%}
+  {%- assign jsonld_type = "TechArticle" -%}
+{%- else -%}
+  {%- assign jsonld_type = "BlogPosting" -%}
+{%- endif -%}
+
+{%- assign jsonld_headline = page.title | strip_html | strip_newlines | truncate: 110 -%}
+
+{%- assign jsonld_description_src = page.description | default: page.excerpt -%}
+{%- if jsonld_description_src and jsonld_description_src != "" -%}
+  {%- assign jsonld_description = jsonld_description_src | strip_html | strip_newlines | truncate: 200 -%}
+{%- else -%}
+  {%- assign jsonld_description = site.description | strip_html | strip_newlines | truncate: 200 -%}
+{%- endif -%}
+
+{%- comment -%} Build image candidate list (preserve order, dedup, max 3) {%- endcomment -%}
+{%- assign jsonld_images_raw = "" -%}
+{%- if page.header.og_image -%}
+  {%- assign jsonld_img = page.header.og_image | absolute_url -%}
+  {%- assign jsonld_images_raw = jsonld_images_raw | append: jsonld_img | append: "||" -%}
+{%- endif -%}
+{%- if page.header.teaser -%}
+  {%- assign jsonld_img = page.header.teaser | absolute_url -%}
+  {%- assign jsonld_images_raw = jsonld_images_raw | append: jsonld_img | append: "||" -%}
+{%- endif -%}
+{%- if page.image -%}
+  {%- assign jsonld_img = page.image | absolute_url -%}
+  {%- assign jsonld_images_raw = jsonld_images_raw | append: jsonld_img | append: "||" -%}
+{%- endif -%}
+{%- if jsonld_images_raw == "" and site.og_image -%}
+  {%- assign jsonld_img = site.og_image | absolute_url -%}
+  {%- assign jsonld_images_raw = jsonld_images_raw | append: jsonld_img | append: "||" -%}
+{%- endif -%}
+{%- assign jsonld_images = jsonld_images_raw | split: "||" | uniq | slice: 0, 3 -%}
+
+{%- assign jsonld_published = page.date | date_to_xmlschema -%}
+{%- if page.last_modified_at -%}
+  {%- assign jsonld_modified = page.last_modified_at | date_to_xmlschema -%}
+{%- else -%}
+  {%- assign jsonld_modified = jsonld_published -%}
+{%- endif -%}
+
+{%- comment -%} sameAs from site.author.links (objects with .url) {%- endcomment -%}
+{%- assign jsonld_sameas_raw = "" -%}
+{%- for lnk in site.author.links -%}
+  {%- if lnk.url -%}
+    {%- assign jsonld_sameas_raw = jsonld_sameas_raw | append: lnk.url | append: "||" -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- if jsonld_sameas_raw == "" -%}
+  {%- assign jsonld_sameas = "" | split: "" -%}
+{%- else -%}
+  {%- assign jsonld_sameas = jsonld_sameas_raw | split: "||" | uniq -%}
+{%- endif -%}
+
+{%- assign jsonld_author_url = site.url | append: "/whoami/" -%}
+{%- assign jsonld_author_image = site.author.avatar | absolute_url -%}
+{%- assign jsonld_publisher_logo = site.url | append: site.logo -%}
+{%- assign jsonld_url = page.url | absolute_url -%}
+{%- assign jsonld_section = page.collection | capitalize -%}
+{%- assign jsonld_locale = site.locale | default: "en-US" -%}
+
+{%- assign jsonld_words = page.content | strip_html | number_of_words -%}
+{%- assign jsonld_wpm = site.words_per_minute | default: 200 -%}
+{%- assign jsonld_minutes = jsonld_words | times: 1.0 | divided_by: jsonld_wpm | ceil -%}
+{%- if jsonld_minutes < 1 -%}{%- assign jsonld_minutes = 1 -%}{%- endif -%}
+{%- assign jsonld_time = "PT" | append: jsonld_minutes | append: "M" -%}
+
+{%- assign jsonld_keywords = "" -%}
+{%- if page.tags and page.tags != empty -%}
+  {%- assign jsonld_keywords = page.tags | join: ", " -%}
+{%- endif -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": {{ jsonld_type | jsonify }},
+  "headline": {{ jsonld_headline | jsonify }},
+  "name": {{ jsonld_headline | jsonify }},
+  "description": {{ jsonld_description | jsonify }},
+  "image": {{ jsonld_images | jsonify }},
+  "datePublished": {{ jsonld_published | jsonify }},
+  "dateModified": {{ jsonld_modified | jsonify }},
+  "author": {
+    "@type": "Person",
+    "name": {{ site.author.name | jsonify }},
+    "url": {{ jsonld_author_url | jsonify }},
+    "image": {{ jsonld_author_image | jsonify }},
+    "sameAs": {{ jsonld_sameas | jsonify }}
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": {{ site.title | jsonify }},
+    "url": {{ site.url | jsonify }},
+    "logo": {
+      "@type": "ImageObject",
+      "url": {{ jsonld_publisher_logo | jsonify }}
+    }
+  },
+  "mainEntityOfPage": {{ jsonld_url | jsonify }},
+  "url": {{ jsonld_url | jsonify }},
+  {%- if jsonld_keywords != "" %}
+  "keywords": {{ jsonld_keywords | jsonify }},
+  {%- endif %}
+  "articleSection": {{ jsonld_section | jsonify }},
+  "inLanguage": {{ jsonld_locale | jsonify }},
+  "wordCount": {{ jsonld_words }},
+  "timeRequired": {{ jsonld_time | jsonify }}
+}
+</script>
+{%- endif -%}

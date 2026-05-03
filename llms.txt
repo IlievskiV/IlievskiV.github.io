@@ -1,0 +1,51 @@
+---
+permalink: /llms.txt
+sitemap: false
+layout: none
+---
+# {{ site.name }}
+
+> Personal site of Vladimir Ilievski (Vlad), data scientist and creator of iSquared. In-depth tutorials with interactive visualizations and runnable Python code, focused on machine learning, generative models, stochastic processes (Brownian motion, random walks, fractals), data visualization tooling, and developer productivity tips.
+
+## About
+- [$whoami — Vladimir Ilievski]({{ "/whoami/" | absolute_url }}): Bio, background, talks, and publications of the author. Data scientist by day, content creator by night; author of iSquared.
+
+## Blog posts
+{%- assign blog_posts = site.blog | sort: "date" | reverse -%}
+{%- for post in blog_posts %}
+{%- assign desc = "" -%}
+{%- if post.description and post.description != "" -%}
+{%- assign desc = post.description | strip_html | strip_newlines | replace: "  ", " " | strip -%}
+{%- else -%}
+{%- assign desc = post.excerpt | strip_html | strip_newlines | replace: "  ", " " | truncate: 160 | strip -%}
+{%- endif %}
+- [{{ post.title | strip_html | strip_newlines | strip }}]({{ post.url | absolute_url }}): {{ desc }}
+{%- endfor %}
+
+## Visualizations
+{%- assign viz_posts = site.visualizations | sort: "date" | reverse -%}
+{%- for post in viz_posts %}
+{%- assign desc = "" -%}
+{%- if post.description and post.description != "" -%}
+{%- assign desc = post.description | strip_html | strip_newlines | replace: "  ", " " | strip -%}
+{%- else -%}
+{%- assign desc = post.excerpt | strip_html | strip_newlines | replace: "  ", " " | truncate: 160 | strip -%}
+{%- endif %}
+- [{{ post.title | strip_html | strip_newlines | strip }}]({{ post.url | absolute_url }}): {{ desc }}
+{%- endfor %}
+
+## Tips
+{%- assign tip_posts = site.tips | sort: "date" | reverse -%}
+{%- for post in tip_posts %}
+{%- assign desc = "" -%}
+{%- if post.description and post.description != "" -%}
+{%- assign desc = post.description | strip_html | strip_newlines | replace: "  ", " " | strip -%}
+{%- else -%}
+{%- assign desc = post.excerpt | strip_html | strip_newlines | replace: "  ", " " | truncate: 160 | strip -%}
+{%- endif %}
+- [{{ post.title | strip_html | strip_newlines | strip }}]({{ post.url | absolute_url }}): {{ desc }}
+{%- endfor %}
+
+## Optional
+- [Contact]({{ "/contactme/" | absolute_url }}): Contact form and direct ways to reach Vladimir.
+- [RSS feed]({{ "/feed.xml" | absolute_url }}): Subscribe to new blog posts via RSS/Atom.
