@@ -24,7 +24,8 @@
 <script src="{{ '/assets/js/custom/modern.js' | relative_url }}" defer></script>
 
 {% if site.search == true or page.layout == "search" %}
-  {% include_cached search/pagefind-search-scripts.html %}
+  {% comment %} Avoid include-cache staleness for Pagefind loader URLs. {% endcomment %}
+  {% include search/pagefind-search-scripts.html %}
 {% endif %}
 
 {% include analytics.html %}
