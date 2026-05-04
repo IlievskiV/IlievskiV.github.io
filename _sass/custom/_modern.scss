@@ -1623,12 +1623,6 @@ section.iss-newsletter--sidebar button.iss-newsletter__btn,
   display: none;
 }
 
-/* Algolia search overlay tweaks */
-.ais-SearchBox-input {
-  background: var(--bg-elev) !important;
-  color: var(--text) !important;
-}
-
 /* Splash layout (homepage) */
 .layout--splash .page__hero--overlay {
   margin-bottom: 0;
@@ -2965,86 +2959,349 @@ section.iss-contact button.iss-contact__btn:active {
 .iss-tag-section__back:hover { color: var(--accent, #6366f1); }
 
 /* -----------------------------------------------------------------------------
-   20. Algolia search overlay
-   The search panel (revealed by the masthead magnifying-glass button) is
-   driven by InstantSearch.js v2.3.3, which renders the input as
-   `.ais-search-box--input` with two absolutely positioned icon buttons:
-   `.ais-search-box--magnifier-wrapper` on the left and
-   `.ais-search-box--reset-wrapper` on the right. The Algolia theme CSS gives
-   the input enough horizontal padding to clear those icons, but the global
-   form rule in Section 8 forces `padding: 0.75rem 1rem !important` on every
-   text input, which strips that padding and lets the typed text slide under
-   the magnifier icon. Restore the horizontal padding (left for the
-   magnifier, right for the reset X) and re-skin the input with our design
-   tokens. The v3 `.ais-SearchBox-*` class names are listed alongside the v2
-   ones so the rules survive a future widget upgrade.
+   20. Pagefind search UI
+   The search panel (revealed by the masthead magnifying-glass button, and
+   used standalone on any `layout: search` page) is driven by Pagefind's
+   prebuilt UI. It exposes a small set of CSS custom properties — we map
+   each one onto the site's existing design tokens (`--text`, `--bg-elev`,
+   `--border`, `--accent`, `--bg-soft`) so the panel auto-flips with the
+   global `[data-theme]` toggle. Pagefind's own `prefers-color-scheme`
+   handling would fight that explicit toggle, so it is intentionally
+   bypassed by setting the variables directly on `.pagefind-ui`.
+
+   Cascade note (matters for every per-element rule below):
+   `pagefind-ui.css` is appended to `<head>` by the lazy loader at runtime,
+   i.e. AFTER our compiled `main.css`. That means every rule we write here
+   that overlaps a Pagefind selector at equal specificity loses the cascade
+   unless it carries `!important` — hence the heavy `!important` usage. We
+   also boost specificity to (.pagefind-ui .pagefind-ui__X) form so we beat
+   the Pagefind UI's Svelte-scoped `.pagefind-ui__X.svelte-XXXXXX` (0,3,0)
+   selectors without relying on which scoped hash a future build emits.
+
+   Custom-element treatments on top of the variable map:
+   - The search input is a plain `<input type="text">`, which means the
+     Section 8 global form rule (`!important` on every text input) reaches
+     in and strips Pagefind's icon-aware padding. We restore the metrics
+     declared by Pagefind's own stylesheet via a higher-specificity rule
+     that also carries `!important`.
+   - The magnifier glyph (`.pagefind-ui__form::before`) is a CSS-mask icon
+     coloured by `--pagefind-ui-text`. Pagefind anchors it to `top: 23px`
+     and runs it at 70% opacity, which reads as a muddy off-position blob
+     against the dark overlay. We re-centre it vertically and re-tint to
+     `--text-muted` at full opacity for a clean static glyph.
+   - The clear button (`.pagefind-ui__search-clear`) defaults to the literal
+     word "Clear" inside a chunky pill anchored to the input's right edge —
+     visually awful inside a sleek input. We hide the text and render a
+     small round × icon via a `::after` pseudo so it reads as a proper
+     close affordance.
+   - `<mark>` highlights inside excerpts default to bright browser yellow
+     and become unreadable over the dark glassy overlay; retinted to the
+     accent palette so they work in both themes.
+   - "Load more", status message, tag chips, result link/excerpt all get
+     explicit token-driven colors so they don't inherit unhelpful default
+     greys when the panel sits over the translucent dark surface.
    -------------------------------------------------------------------------- */
-.search-content .search-searchbar .ais-search-box,
-.search-content .search-searchbar .ais-SearchBox {
-  max-width: 100% !important;
-  margin: 0 0 1.5rem !important;
+
+/* -- Variable map (no cascade fight: variables resolve per element). ------- */
+.pagefind-ui {
+  --pagefind-ui-scale: 1;
+  --pagefind-ui-primary: var(--accent);
+  --pagefind-ui-text: var(--text);
+  --pagefind-ui-background: var(--bg-elev);
+  --pagefind-ui-border: var(--border);
+  --pagefind-ui-tag: var(--bg-soft);
+  --pagefind-ui-border-width: 1px;
+  --pagefind-ui-border-radius: 12px;
+  --pagefind-ui-image-border-radius: 8px;
+  --pagefind-ui-image-box-ratio: 16 / 9;
+  --pagefind-ui-font: var(--font-sans);
 }
 
-.search-content input.ais-search-box--input,
-.search-content input.ais-SearchBox-input {
-  display: block;
-  width: 100% !important;
-  box-sizing: border-box !important;
-  padding: 0.75rem 2.6rem !important;
-  font-family: var(--font-sans) !important;
-  font-size: 1rem !important;
-  line-height: 1.4 !important;
-  color: var(--text) !important;
-  background: var(--bg) !important;
-  border: 1px solid var(--border) !important;
-  border-radius: var(--radius-md) !important;
-  box-shadow: none !important;
+/* -- Hide Pagefind's accessibility chrome.
+   Pagefind renders a visually-hidden `<label>` next to the search input and
+   a `<legend>` inside the filter `<fieldset>`. Section 8's global rules
+   (`label { display: block; margin-bottom: ... }` and the default browser
+   `fieldset` border) un-hide them, which pushes the form taller and breaks
+   the magnifier / clear-button positioning. Send them back to sr-only and
+   strip the fieldset chrome. ----------------------------------------------- */
+.pagefind-ui label,
+.pagefind-ui legend {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+.pagefind-ui fieldset {
+  border: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  min-width: 0 !important;
+}
+
+/* -- Search input ---------------------------------------------------------- */
+/* Plain px padding (not scaled by Pagefind’s default `--pagefind-ui-scale`
+   on `:root`) so the typed query stays well clear of the icons. `html`
+   prefix + !important beats Pagefind’s late-loaded `.svelte-*` rules. */
+html .pagefind-ui input.pagefind-ui__search-input {
+  height: calc(64px * var(--pagefind-ui-scale)) !important;
+  /* Room only for the clear (×) on the right; no magnifier on the left. */
+  padding: 0 7rem 0 1.25rem !important;
+  background-color: var(--pagefind-ui-background) !important;
+  color: var(--pagefind-ui-text) !important;
+  border: var(--pagefind-ui-border-width) solid var(--pagefind-ui-border) !important;
+  border-radius: var(--pagefind-ui-border-radius) !important;
+  font-family: var(--pagefind-ui-font) !important;
+  font-size: calc(20px * var(--pagefind-ui-scale)) !important;
+  font-weight: 600 !important;
+  line-height: 1.2 !important;
+  box-shadow: var(--shadow-sm) !important;
   transition: border-color var(--t-fast) var(--ease),
-    box-shadow var(--t-fast) var(--ease);
+    box-shadow var(--t-fast) var(--ease) !important;
 }
-
-.search-content input.ais-search-box--input::placeholder,
-.search-content input.ais-SearchBox-input::placeholder {
-  color: var(--text-muted);
-  opacity: 1;
+html .pagefind-ui input.pagefind-ui__search-input::placeholder {
+  color: var(--text-subtle) !important;
+  opacity: 1 !important;
+  font-weight: 400 !important;
 }
-
-.search-content input.ais-search-box--input:hover,
-.search-content input.ais-SearchBox-input:hover {
-  border-color: var(--border-strong) !important;
-}
-
-.search-content input.ais-search-box--input:focus,
-.search-content input.ais-SearchBox-input:focus {
+html .pagefind-ui input.pagefind-ui__search-input:focus {
   outline: none !important;
   border-color: var(--accent) !important;
   box-shadow: 0 0 0 4px var(--accent-soft) !important;
 }
 
-/* Magnifier and reset icon buttons — neutral muted color, vertically
-   centred inside the input. Their absolute positioning comes from the
-   bundled Algolia theme stylesheet; we only retint them here. */
-.search-content .ais-search-box--magnifier-wrapper,
-.search-content .ais-search-box--reset-wrapper,
-.search-content .ais-SearchBox-submit,
-.search-content .ais-SearchBox-reset {
+/* Pagefind paints a magnifier as `.pagefind-ui__form::before`; hide it so
+   only the clear (×) remains. Must beat Pagefind’s bundled styles. */
+html .pagefind-ui .pagefind-ui__form {
+  position: relative;
+}
+
+html .pagefind-ui .pagefind-ui__form::before {
+  display: none !important;
+  content: none !important;
+}
+
+/* -- Clear button — replace "Clear" pill with a small round × icon.
+   Same fixed-offset reasoning as the magnifier above: anchor to the input's
+   top-right corner, don't chase form height. ----------------------------- */
+html .pagefind-ui .pagefind-ui__search-clear {
+  position: absolute !important;
+  top: calc(14px * var(--pagefind-ui-scale)) !important;
+  right: 0.5rem !important;
+  bottom: auto !important;
+  transform: none !important;
+  width: calc(40px * var(--pagefind-ui-scale)) !important;
+  height: calc(40px * var(--pagefind-ui-scale)) !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  color: transparent !important; /* hide the literal "Clear" text */
+  font-size: 0 !important;
+  line-height: 0 !important;
+  cursor: pointer !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: background-color var(--t-fast) var(--ease) !important;
+}
+html .pagefind-ui .pagefind-ui__search-clear::after {
+  content: "\00d7"; /* multiplication sign — visually a clean × */
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1;
   color: var(--text-muted);
-  background: transparent;
-  border: 0;
+  transition: color var(--t-fast) var(--ease);
 }
-
-.search-content .ais-search-box--magnifier,
-.search-content .ais-search-box--reset,
-.search-content .ais-SearchBox-submitIcon,
-.search-content .ais-SearchBox-resetIcon {
-  fill: currentColor;
+html .pagefind-ui .pagefind-ui__search-clear:hover {
+  background: var(--bg-soft) !important;
 }
-
-.search-content .ais-search-box--magnifier-wrapper:hover,
-.search-content .ais-search-box--reset-wrapper:hover,
-.search-content .ais-SearchBox-submit:hover,
-.search-content .ais-SearchBox-reset:hover {
+html .pagefind-ui .pagefind-ui__search-clear:hover::after {
   color: var(--accent);
+}
+html .pagefind-ui .pagefind-ui__search-clear:focus-visible {
+  outline: none !important;
+  background: var(--bg-soft) !important;
+  box-shadow: 0 0 0 3px var(--accent-soft) !important;
+}
+
+/* -- Status message ("Showing N of M results", "No results for...") ------- */
+.pagefind-ui .pagefind-ui__message {
+  color: var(--text-muted) !important;
+  font-weight: 600 !important;
+  font-size: calc(15px * var(--pagefind-ui-scale)) !important;
+  letter-spacing: 0.02em;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.4rem !important;
+  margin-bottom: 0.4rem !important;
+}
+
+html[data-theme="dark"] .pagefind-ui .pagefind-ui__message {
+  color: #0f172a !important;
+}
+
+/* -- Result list ----------------------------------------------------------- */
+.pagefind-ui .pagefind-ui__results {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+.pagefind-ui .pagefind-ui__result {
+  padding: calc(20px * var(--pagefind-ui-scale)) 0
+    calc(22px * var(--pagefind-ui-scale)) !important;
+  border-top: 1px solid var(--border) !important;
+}
+.pagefind-ui .pagefind-ui__result:last-of-type {
+  border-bottom: 1px solid var(--border) !important;
+}
+
+/* -- Result title (and any other link inside the panel — sub-result links
+   live under `.pagefind-ui__result-nested`, not `.pagefind-ui__result-title`,
+   so we target both with a broad `.pagefind-ui a` plus the explicit
+   `.pagefind-ui__result-link` for safety). The global `a` rule in Section 2
+   sets `color: var(--accent-strong)` directly on `<a>`, which beats any
+   inherited color regardless of specificity — so we have to override the
+   color on the link element itself, not just the parent. ------------------ */
+.pagefind-ui .pagefind-ui__result-title {
+  font-family: var(--font-display) !important;
+  font-weight: 700 !important;
+  font-size: calc(18px * var(--pagefind-ui-scale)) !important;
+  line-height: 1.3 !important;
+}
+/* `html` prefix bumps specificity to (0,1,2)/(0,2,2) so we win unambiguously
+   against (a) Pagefind's `.pagefind-ui__result-title.svelte-XXX
+   .pagefind-ui__result-link.svelte-XXX` rules, and (b) Section 2's global
+   `a, .page__content a { color: var(--accent-strong) }` rule that otherwise
+   paints every link in this site that desaturated indigo. */
+html .pagefind-ui a,
+html .pagefind-ui .pagefind-ui__result-link {
+  color: var(--text) !important;
+  text-decoration: none !important;
+  background-image: none !important;
+  background-size: 0 0 !important;
+  transition: color var(--t-fast) var(--ease) !important;
+}
+html .pagefind-ui a:hover,
+html .pagefind-ui a:focus-visible,
+html .pagefind-ui .pagefind-ui__result-link:hover,
+html .pagefind-ui .pagefind-ui__result-link:focus-visible {
+  color: var(--accent) !important;
+  text-decoration: none !important;
+  background-image: none !important;
+}
+
+/* -- Result excerpt — full text color (not muted) so it stays legible on
+   the dark glass overlay. The visual hierarchy with the title is carried
+   by font weight / family / size instead of by greying out the body text. */
+html .pagefind-ui .pagefind-ui__result-excerpt {
+  color: var(--text) !important;
+  font-family: var(--font-sans) !important;
+  font-weight: 400 !important;
+  font-size: calc(15px * var(--pagefind-ui-scale)) !important;
+  line-height: 1.6 !important;
+  margin-top: 0.4rem !important;
+}
+
+/* Dark mode: snippet strip reads on a light ground — paint the full excerpt
+   (every word in the sentence, not only <mark>) in the same near-black as
+   the match highlights. Sub-result lines use the same typography. */
+html[data-theme="dark"] .pagefind-ui .pagefind-ui__result-excerpt {
+  color: #0f172a !important;
+}
+
+html[data-theme="dark"]
+  .pagefind-ui
+  .pagefind-ui__result-nested
+  .pagefind-ui__result-link {
+  color: #0f172a !important;
+}
+
+/* Primary hit title (page name) — same near-black on the light results band. */
+html[data-theme="dark"]
+  .pagefind-ui
+  .pagefind-ui__result-title
+  .pagefind-ui__result-link {
+  color: #0f172a !important;
+}
+
+html[data-theme="dark"]
+  .pagefind-ui
+  .pagefind-ui__result-title
+  .pagefind-ui__result-link:hover,
+html[data-theme="dark"]
+  .pagefind-ui
+  .pagefind-ui__result-title
+  .pagefind-ui__result-link:focus-visible {
+  color: var(--accent) !important;
+}
+
+/* -- Highlighted matches (Pagefind renders <mark> elements inside excerpts).
+   With our `resetStyles: false` init the `mark { all: revert }` reset does
+   not apply, so we just need higher-specificity tinted styles. ------------ */
+.pagefind-ui .pagefind-ui__result-excerpt mark,
+.pagefind-ui mark {
+  background: var(--accent-soft) !important;
+  color: var(--text) !important;
+  padding: 0 0.22em !important;
+  border-radius: 4px !important;
+  font-weight: 800 !important;
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.35) !important;
+}
+
+/* Dark mode: match pills sit on Pagefind’s light excerpt band — use black on
+   white for contrast; hover mirrors link hovers (purple) while keeping the
+   light ground so legibility stays stable. */
+html[data-theme="dark"] .pagefind-ui .pagefind-ui__result-excerpt mark,
+html[data-theme="dark"] .pagefind-ui mark {
+  background: #ffffff !important;
+  color: #0f172a !important;
+  font-weight: 800 !important;
+  box-shadow: 0 0 0 2px rgba(15, 23, 42, 0.28) !important;
+}
+
+html[data-theme="dark"] .pagefind-ui .pagefind-ui__result-excerpt mark:hover,
+html[data-theme="dark"] .pagefind-ui mark:hover {
+  background: #ffffff !important;
+  color: var(--accent) !important;
+  font-weight: 800 !important;
+  box-shadow: 0 0 0 3px var(--accent) !important;
+}
+
+/* -- "Load more" button — soft pill matching the rest of the site --------- */
+.pagefind-ui .pagefind-ui__button {
+  background: var(--bg-soft) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 999px !important;
+  font-family: var(--font-sans) !important;
+  font-weight: 600 !important;
+  font-size: calc(15px * var(--pagefind-ui-scale)) !important;
+  height: calc(44px * var(--pagefind-ui-scale)) !important;
+  margin-top: calc(20px * var(--pagefind-ui-scale)) !important;
+  cursor: pointer;
+  transition: background-color var(--t-fast) var(--ease),
+    border-color var(--t-fast) var(--ease),
+    color var(--t-fast) var(--ease) !important;
+}
+.pagefind-ui .pagefind-ui__button:hover {
+  background: var(--accent-soft) !important;
+  border-color: var(--accent) !important;
+  color: var(--accent-strong) !important;
+}
+
+/* -- Tag chips inside result rows ----------------------------------------- */
+.pagefind-ui .pagefind-ui__result-tag {
+  background: var(--pagefind-ui-tag) !important;
+  color: var(--text-muted) !important;
+  font-weight: 500 !important;
+  font-size: calc(13px * var(--pagefind-ui-scale)) !important;
 }
 
 /* -----------------------------------------------------------------------------

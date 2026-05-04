@@ -1,34 +1,36 @@
 {
-  "name": "minimal-mistakes",
-  "version": "4.17.2",
-  "description": "Minimal Mistakes 2 column Jekyll theme.",
+  "name": "isquared-site",
+  "version": "1.0.0",
+  "description": "iSquared Jekyll site. Uses the Minimal Mistakes theme (mmistakes/minimal-mistakes, v4.17.2) by Michael Rose, MIT License — see https://github.com/mmistakes/minimal-mistakes. This repo adds Pagefind search scripts on top of `bundle exec jekyll build`.",
+  "private": true,
+  "author": "Vladimir Ilievski (site); Jekyll theme: Michael Rose <https://mademistakes.com> (Minimal Mistakes)",
+  "homepage": "https://ilievskiv.github.io",
   "repository": {
     "type": "git",
-    "url": "git://github.com/mmistakes/minimal-mistakes.git"
+    "url": "https://github.com/IlievskiV/IlievskiV.github.io.git"
+  },
+  "bugs": {
+    "url": "https://github.com/IlievskiV/IlievskiV.github.io/issues"
   },
   "keywords": [
     "jekyll",
-    "theme",
-    "minimal"
+    "github-pages",
+    "minimal-mistakes",
+    "minimal mistakes",
+    "mmistakes",
+    "pagefind"
   ],
-  "author": "Michael Rose",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/mmistakes/minimal-mistakes/issues"
-  },
-  "homepage": "https://mmistakes.github.io/minimal-mistakes/",
   "engines": {
-    "node": ">= 0.10.0"
-  },
-  "devDependencies": {
-    "npm-run-all": "^4.1.5",
-    "onchange": "^6.0.0",
-    "uglify-js": "^3.4.9"
+    "node": ">=18"
   },
   "scripts": {
-    "uglify": "uglifyjs assets/js/vendor/jquery/jquery-3.4.1.js assets/js/plugins/jquery.fitvids.js assets/js/plugins/jquery.greedy-navigation.js assets/js/plugins/jquery.magnific-popup.js assets/js/plugins/jquery.ba-throttle-debounce.js assets/js/plugins/smooth-scroll.js assets/js/plugins/gumshoe.js assets/js/_main.js -c -m -o assets/js/main.min.js",
-    "add-banner": "node banner.js",
-    "watch:js": "onchange \"assets/js/**/*.js\" -e \"assets/js/main.min.js\" -- npm run build:js",
-    "build:js": "npm run uglify && npm run add-banner"
+    "build:jekyll": "bundle exec jekyll build --trace",
+    "build:search": "npx --yes pagefind@^1.1.1 --site _site",
+    "build": "npm run build:jekyll && npm run build:search",
+    "serve": "npx --yes pagefind@^1.1.1 --site _site --serve",
+    "dev": "npm run build && npm run serve"
+  },
+  "devDependencies": {
+    "pagefind": "^1.1.1"
   }
 }
