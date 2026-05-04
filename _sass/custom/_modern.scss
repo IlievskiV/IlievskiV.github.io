@@ -1426,15 +1426,28 @@ section.iss-newsletter button.iss-newsletter__btn:active,
   transform: translateY(0);
 }
 
-/* Stack on small screens */
+/* Stack on small screens.
+   When flex-direction is column, flex-basis applies to HEIGHT, so
+   `flex: 1 1 200px` on the input would make a ~200px-tall field. Reset flex
+   and width so the field stays a normal single-line height. */
 @media (max-width: 480px) {
   section.iss-newsletter .iss-newsletter__form,
   #mc_embed_signup.iss-newsletter .iss-newsletter__form {
     flex-direction: column !important;
+    align-items: stretch !important;
+  }
+  section.iss-newsletter input.iss-newsletter__input,
+  #mc_embed_signup.iss-newsletter input.iss-newsletter__input,
+  section.iss-newsletter input[type="email"].iss-newsletter__input,
+  #mc_embed_signup.iss-newsletter input[type="email"].iss-newsletter__input {
+    flex: 0 0 auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
   }
   section.iss-newsletter button.iss-newsletter__btn,
   #mc_embed_signup.iss-newsletter button.iss-newsletter__btn {
     width: 100% !important;
+    min-width: 0 !important;
   }
 }
 
