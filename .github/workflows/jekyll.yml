@@ -1,9 +1,22 @@
+# Build Jekyll + Pagefind, then (on main) deploy the full _site/ to GitHub Pages.
+# Repository → Settings → Pages: set Source to "GitHub Actions" (not a branch build),
+# or the live site will be built by GitHub’s Jekyll and will not include /pagefind/.
+
 name: Jekyll build
 
 on:
   push:
     branches: [main]
   pull_request:
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
   build:
@@ -27,3 +40,20 @@ jobs:
         run: bundle exec jekyll build --trace
       - name: Build Pagefind search index
         run: npx --yes pagefind@^1.1.1 --site _site
+      - name: Upload site for GitHub Pages
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
