@@ -11,11 +11,19 @@ jobs:
     env:
       LANG: en_US.UTF-8
       LC_ALL: en_US.UTF-8
+      # GitHub Actions: JS-based actions move from Node 20 → 24 (see 2025–2026
+      # changelog). Ensures checkout/setup-node and similar run on Node 24.
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: .ruby-version
           bundler-cache: true
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
       - name: Build site
         run: bundle exec jekyll build --trace
+      - name: Build Pagefind search index
+        run: npx --yes pagefind@^1.1.1 --site _site
