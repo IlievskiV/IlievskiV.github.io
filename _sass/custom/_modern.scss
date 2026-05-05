@@ -1451,6 +1451,12 @@ section.iss-newsletter button.iss-newsletter__btn:active,
   }
 }
 
+/* `/whoami/` — less empty space between the inline signup and the Experience heading */
+body.page-whoami section.iss-newsletter,
+body.page-whoami #mc_embed_signup.iss-newsletter {
+  margin-bottom: 1rem !important;
+}
+
 /* Sidebar variant — narrow column on /blog/, /visualizations/, single posts.
    Always stacks vertically, smaller paddings, smaller type. */
 section.iss-newsletter--sidebar,
