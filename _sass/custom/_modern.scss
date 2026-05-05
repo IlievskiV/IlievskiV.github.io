@@ -1692,6 +1692,15 @@ section.iss-newsletter--sidebar button.iss-newsletter__btn,
   padding: 0.25rem;
 }
 
+/* Dark mode: a few employer marks are dark-on-dark on --bg-soft; give them a
+   light backing tile so PNGs with dark fills stay legible (see /whoami/). */
+[data-theme="dark"] .layout--single .page__content table img[src*="swisscom_logo"],
+[data-theme="dark"] .layout--single .page__content table img[src*="brainster-logo"] {
+  background: #eef1f6;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+  padding: 0.4rem 0.5rem;
+}
+
 /* Whoami chip-style buttons should not look like CTAs */
 .layout--single .page__content .btn.btn--inverse {
   padding: 0.25rem 0.65rem;
